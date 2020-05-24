@@ -12,13 +12,13 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = "GitOPENLib"
+NAME = "gitopenlib"
 DESCRIPTION = "GitOPEN的常用工具库"
-URL = "https://github.com/opengit/GitOPENLib.git"
+URL = "https://github.com/opengit/gitopenlib.git"
 EMAIL = "gitopen@gmail.com"
 AUTHOR = "gitopen"
 REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "0.1.2"
+VERSION = "0.1.3"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -105,7 +105,7 @@ setup(
     url=URL,
     packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
     # If your package is a single module, use this instead of 'packages':
-    # py_modules=['GitOPENLib'],
+    # py_modules=['gitopenlib'],
 
     # entry_points={
     #     'console_scripts': ['mycli=mymodule:cli'],
