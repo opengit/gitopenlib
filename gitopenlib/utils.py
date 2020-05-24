@@ -5,6 +5,7 @@ __version__ = "0.1.1"
 """
 import json
 from pathlib import Path, PosixPath
+import math
 
 
 def get_paths_from_dir(dirs: str or list, types: str or list):
@@ -73,6 +74,20 @@ def remove_0_str(data: list):
     """
 
     return [item for item in data if len(str(item)) != 0]
+
+
+def chunks(arr, m):
+    """分割列表，但是子list元素个数尽可能平均
+
+    Args:
+        arr (list): 待分割的list
+        m (int): 每个子list的元素个数
+
+    Returns:
+        list: 分割后的每个子list都是返回结果list的一个元素
+    """
+    n = int(math.ceil(len(arr) / float(m)))
+    return [arr[i : i + n] for i in range(0, len(arr), n)]
 
 
 if __name__ == "__main__":
