@@ -1,4 +1,4 @@
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 """
 存放工具函数
@@ -12,7 +12,7 @@ def get_paths_from_dir(dirs: str or list, types: str or list):
     从指定目录下获取所有指定扩展名文件的路径，不递归子文件夹
 
     Args:
-        dirs(list): 文件夹路径，单个用str表示，多个用list
+        dirs(list): 文件夹路径（绝对路径），单个用str表示，多个用list
         types(types): 指定文件的扩展名，单个用str表示，多个用list
 
     Returns:
