@@ -1,11 +1,48 @@
-__version__ = "0.1.1"
-
+__version__ = "0.1.3"
 """
 存放工具函数
 """
 import json
-from pathlib import Path, PosixPath
 import math
+from pathlib import Path, PosixPath
+
+
+def sort_list(
+    data: list, ascending: bool = True, flag: int = 0, position: int = 0, key: str = ""
+):
+    """
+    对 list 进行排序
+
+    Args:
+        data(list): list 类型数据，item 为 dict 或者 basic type
+        ascending(bool): 默认为 True，表示升序；False 表示降序
+        flag(int): 0 表示元素为基本类型，1 表示元素为 dict，2 表示元素为 tuple
+        position(int): 如果元素为 basic type，position 保持默认即可；
+            如果元素为 tuple，position 的数值表示以哪个 index 位置的值排序
+        key(str): 如果元素为 dict，key 表示按照哪个 key 的 value 进行排序
+    """
+    if flag == 0:
+        # basic type
+        data.sort(reverse=not ascending)
+    elif flag == 1:
+        # dict type
+        if key == "":
+            key, _ = data[0].items()[0]
+        data.sort(key=lambda x: x.get(key, 0), reverse=not ascending)
+    elif flag == 2:
+        # tuple type
+        if position < 0 or position >= len(data[0]):
+            position = 0
+        data.sort(key=lambda x: x[position], reverse=not ascending)
+
+    return data
+
+
+def strips(string: str):
+    """
+    去除字符串两端的空格符和换行符，并且去除中间的换行符
+    """
+    return string.strip().replace("\n", "").replace("\r", "").replace("\r\n", "")
 
 
 def get_paths_from_dir(dirs: str or list, types: str or list):
@@ -91,5 +128,34 @@ def chunks(arr, m):
 
 
 if __name__ == "__main__":
-    result = get_paths_from_dir("/Users/sunjiajia/Downloads", "py")
-    print(result)
+    # #### get_paths_from_dir测试
+    # result = get_paths_from_dir("/Users/sunjiajia/Downloads", "py")
+    # print(result)
+
+    # #### sort_list测试
+    # alist = [
+    #     {"level": 19, "star": 36, "time": 1},
+    #     {"level": 20, "star": 40, "time": 2},
+    #     {"level": 20, "star": 40, "time": 3},
+    #     {"level": 20, "star": 40, "time": 4},
+    #     {"level": 20, "star": 40, "time": 5},
+    #     {"level": 20, "star": 40},
+    #     {"level": 18, "star": 40, "time": 1},
+    # ]
+    # result = sort_list(alist, ascending=False, flag=1, key="time")
+    #
+    # alist = [
+    #     (1, 2, 3),
+    #     (0, 1, 2),
+    #     (3, 4),
+    #     (2, 3, 4),
+    # ]
+    # result = sort_list(data=alist, ascending=False, flag=2, position=1)
+    #
+    # alist = [6, 4, 9, 10, 0]
+    # alist = ["acc", "cdef", "xyz", "0234", "123"]
+    # result = sort_list(data=alist, ascending=False)
+    #
+    # print(result)
+
+    pass
