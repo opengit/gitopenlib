@@ -1,15 +1,24 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# -*- coding:utf-8 -*-
+
+# Copyright (c) 2020
+# @Author :  GitOPEN
+# @Email  :  gitopen@gmail.com
+# @Date   :  2020-05-30 23:00:43
+# @Description :  Powered by GitOPEN
+
 
 # Note: To use the 'upload' functionality of this file, you must:
 #   $ pipenv install twine --dev
+# Usage: python setup.py sdist
+#        python setup.py upload
 
 import io
 import os
 import sys
 from shutil import rmtree
 
-from setuptools import find_packages, setup, Command
+from setuptools import Command, find_packages, setup
 
 # Package meta-data.
 NAME = "gitopenlib"
@@ -18,7 +27,7 @@ URL = "https://github.com/opengit/gitopenlib.git"
 EMAIL = "gitopen@gmail.com"
 AUTHOR = "gitopen"
 REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "0.1.5"
+VERSION = "0.1.6"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -80,7 +89,8 @@ class UploadCommand(Command):
             pass
 
         self.status('Building Source and Wheel (universal) distribution…')
-        os.system('{0} setup.py sdist bdist_wheel --universal'.format(sys.executable))
+        os.system(
+            '{0} setup.py sdist bdist_wheel --universal'.format(sys.executable))
 
         self.status('Uploading the package to PyPI via Twine…')
         os.system('twine upload dist/*')
@@ -103,7 +113,8 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
+    packages=find_packages(
+        exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
     # If your package is a single module, use this instead of 'packages':
     # py_modules=['gitopenlib'],
 
