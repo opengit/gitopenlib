@@ -1,8 +1,14 @@
-__version__ = "0.1.0"
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
 
-# -*- coding: utf-8 -*-
-# @Author  : GitOPEN (gitopen@gmail.com)
-# @Desc    : 基于Liu Huan进行简单的改写，改写为类。感谢Liu Huan（liuhuan@mail.las.ac.cn)
+# Copyright (c) 2020
+# @Author :  GitOPEN
+# @Email  :  gitopen@gmail.com
+# @Date   :  2020-05-30 22:52:49
+# @Description :  基于Liu Huan进行简单的改写，改写为类。感谢Liu Huan（liuhuan@mail.las.ac.cn)
+
+
+__version__ = "0.1.0"
 
 
 import numpy as np
@@ -91,3 +97,5 @@ if __name__ == "__main__":
     kws = ["a,b,c", "123,123,456"]
     cm = CoMatrix(target=kws, normal=True)
     cm.run()
+
+

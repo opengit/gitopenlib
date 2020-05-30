@@ -1,15 +1,23 @@
-__version__ = "0.1.3"
-"""
-存放工具函数
-"""
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+# Copyright (c) 2020
+# @Author :  GitOPEN
+# @Email  :  gitopen@gmail.com
+# @Date   :  2020-05-30 22:51:45
+# @Description :  Powered by GitOPEN
+
+
+__version__ = "0.1.3.1"
+
+
 import json
 import math
+import os
 from pathlib import Path, PosixPath
 
 
-def sort_list(
-    data: list, ascending: bool = True, flag: int = 0, position: int = 0, key: str = ""
-):
+def sort_list(data: list, ascending: bool = True, flag: int = 0, position: int = 0, key: str = ""):
     """
     对 list 进行排序
 
@@ -45,13 +53,14 @@ def strips(string: str):
     return string.strip().replace("\n", "").replace("\r", "").replace("\r\n", "")
 
 
-def get_paths_from_dir(dirs: str or list, types: str or list):
+def get_paths_from_dir(dirs: str or list, types: str or list, recusive: bool = False):
     """
     从指定目录下获取所有指定扩展名文件的路径，不递归子文件夹
 
     Args:
         dirs(list): 文件夹路径（绝对路径），单个用str表示，多个用list
         types(types): 指定文件的扩展名，单个用str表示，多个用list
+        recusive(bool): 是否递归子文件，默认为False
 
     Returns:
         list: 文件路径字符串列表
@@ -62,12 +71,15 @@ def get_paths_from_dir(dirs: str or list, types: str or list):
     if isinstance(types, str):
         types = [types]
 
+    rule = "**/*." if recusive else "*."
     result = []
     for d in dirs:
+        path = Path(d).resolve()
         for t in types:
-            res = Path(d).glob("*." + t)
+            res = path.glob(rule + t)
             result.extend(list(res))
-    return result
+
+    return [str(item) for item in result]
 
 
 def read_content(file_path: str or PosixPath):
@@ -124,13 +136,13 @@ def chunks(arr, m):
         list: 分割后的每个子list都是返回结果list的一个元素
     """
     n = int(math.ceil(len(arr) / float(m)))
-    return [arr[i : i + n] for i in range(0, len(arr), n)]
+    return [arr[i: i + n] for i in range(0, len(arr), n)]
 
 
 if __name__ == "__main__":
-    # #### get_paths_from_dir测试
-    # result = get_paths_from_dir("/Users/sunjiajia/Downloads", "py")
-    # print(result)
+    # get_paths_from_dir测试
+    #  result = get_paths_from_dir("../", "py", recusive=True)
+    #  print(result)
 
     # #### sort_list测试
     # alist = [

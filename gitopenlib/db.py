@@ -1,7 +1,15 @@
-#  Copyright (c) 2020.
-#
-#  @author: GitOPEN
-#  @email: gitopen@gmail.com
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+# Copyright (c) 2020
+# @Author :  GitOPEN
+# @Email  :  gitopen@gmail.com
+# @Date   :  2020-05-30 22:49:57
+# @Description :  Powered by GitOPEN
+
+
+__version__ = "0.1.0"
+
 
 import pymongo
 from bson.objectid import ObjectId
@@ -35,7 +43,7 @@ def find_by_page(coll, page_size, parse_func):
     find the data by page and process it through the parse function.
 
     Args:
-    
+
         coll:   collection object.
         page_size:  the page size.
         parse_func: A handler function, with a parameter of type list, implemented by itself.
