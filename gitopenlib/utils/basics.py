@@ -5,19 +5,20 @@
 # @Author :  GitOPEN
 # @Email  :  gitopen@gmail.com
 # @Date   :  2020-05-30 22:51:45
-# @Description :  Powered by GitOPEN
+# @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.1.3.1"
+__version__ = "0.1.4"
 
 
 import json
 import math
-import os
 from pathlib import Path, PosixPath
 
 
-def sort_list(data: list, ascending: bool = True, flag: int = 0, position: int = 0, key: str = ""):
+def sort_list(
+    data: list, ascending: bool = True, flag: int = 0, position: int = 0, key: str = ""
+):
     """
     对 list 进行排序
 
@@ -136,7 +137,7 @@ def chunks(arr, m):
         list: 分割后的每个子list都是返回结果list的一个元素
     """
     n = int(math.ceil(len(arr) / float(m)))
-    return [arr[i: i + n] for i in range(0, len(arr), n)]
+    return [arr[i : i + n] for i in range(0, len(arr), n)]
 
 
 if __name__ == "__main__":
