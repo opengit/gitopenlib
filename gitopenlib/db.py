@@ -8,7 +8,7 @@
 # @Description :  Powered by GitOPEN
 
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
 import pymongo
@@ -61,7 +61,7 @@ def find_by_page(coll, page_size, parse_func):
         print("processing the page : {}".format(current_page))
         # 查询
         condition = {"_id": {"$gt": current_last_id}}
-        data = list(coll.find(condition).sort("_id", 1).limit(page_size))
+        data = list(coll.find(condition).limit(page_size))
         # 更新 current_last_id
         current_last_id = data[-1]["_id"]
         print("current_last_id --> {}".format(current_last_id))
