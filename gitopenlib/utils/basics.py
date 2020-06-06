@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.1.4"
+__version__ = "0.1.4.1"
 
 
 import json
@@ -131,7 +131,7 @@ def chunks(arr, m):
 
     Args:
         arr (list): 待分割的list
-        m (int): 每个子list的元素个数
+        m (int): 分成几份
 
     Returns:
         list: 分割后的每个子list都是返回结果list的一个元素
