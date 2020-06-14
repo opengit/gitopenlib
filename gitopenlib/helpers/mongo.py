@@ -8,7 +8,7 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2.1"
+__version__ = "0.1.2.2"
 
 
 import time
@@ -83,6 +83,7 @@ def aggregate_by_page(
     coll,
     start_id: ObjectId = ObjectId("000000000000000000000000"),
     pipeline: list = [],
+    options: dict = None,
     page_size: int = 100,
     parse_func: FunctionType = None,
 ):
@@ -93,6 +94,7 @@ def aggregate_by_page(
         coll(Collection): 目标Collection，要查询的Collection对象。
         start_id(ObjectId): 起始ObjectId。
         pipeline(list): 管道命令list。
+        options(dict): aggregate的options选项设置。eg: {"allowDiskUse": True}
         page_size(int): 每页的数据条目数。
         parse_func(FunctionType): 每一个page的数据的处理函数。需要自己实现。
 
@@ -118,7 +120,9 @@ def aggregate_by_page(
             {"$limit": page_size},
         ]
         condition.extend(pipeline)
-        cursor = coll.aggregate(condition)
+        cursor = (
+            coll.aggregate(condition, options) if options else coll.aggregate(condition)
+        )
         data = [x for x in cursor]
         # 更新 current_last_id
         current_last_id = data[-1]["_id"]
