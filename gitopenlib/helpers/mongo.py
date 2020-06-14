@@ -8,7 +8,7 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2"
+__version__ = "0.1.2.1"
 
 
 import time
@@ -101,11 +101,14 @@ def aggregate_by_page(
     """
     current_last_id = start_id
     current_page = 0
-    page_total = int(coll.find({"_id": {"$gt": current_last_id}}).count() / page_size)
+    count = coll.find({"_id": {"$gt": current_last_id}}).count()
+    page_total = (
+        int(count / page_size) if count % page_size == 0 else int(count / page_size) + 1
+    )
     print("# the total page : {}".format(page_total))
     data_size = 0
 
-    while current_page <= page_total:
+    while current_page < page_total:
         start_time = time.time()
         print("# processing the page : {}".format(current_page))
         # 查询
