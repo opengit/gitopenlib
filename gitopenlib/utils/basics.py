@@ -8,12 +8,17 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.1.4.1"
+__version__ = "0.1.4.2"
 
 
 import json
 import math
 from pathlib import Path, PosixPath
+
+
+def list_deduplicate(alist: list):
+    """列表项为dict类型的去重"""
+    return [dict(t) for t in set([tuple(d.items()) for d in alist])]
 
 
 def sort_list(
