@@ -8,7 +8,7 @@
 # @Description :  some useful functions of indexes or indicators that measure
 #                   the degree of diversity.
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 import math
 
@@ -79,7 +79,10 @@ def shannon_index(data: list):
         Returns:
             float: 相对丰度值
         """
-        ratio = float(n) / N
+        if n == 0:
+            ratio = 0
+        else:
+            ratio = float(n) / N
         return ratio * math.log(ratio)
 
     N = sum(data)
