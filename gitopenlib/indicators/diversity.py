@@ -25,16 +25,16 @@ def category_count(data: list):
     return len(data)
 
 
-def disparity(data: list):
-    """学科差异度，（Weizman(1992a)、Solow & Polasky(1994a)
-
-    Args:
-        data(list): 列表中存放不同（物种）分类的出现次数
-
-    Returns:
-        int: 返回差异性指标
-    """
-    pass
+# def disparity(data: list):
+#     """学科差异度，（Weizman(1992a)、Solow & Polasky(1994a)
+#
+#     Args:
+#         data(list): 列表中存放不同（物种）分类的出现次数
+#
+#     Returns:
+#         int: 返回差异性指标
+#     """
+#     pass
 
 
 def shannon_evenness(data: list):
@@ -139,7 +139,7 @@ def gini_simpson_index(data: list):
     return 1 - simpson_index(data)
 
 
-def brillouin_diveresity_index(data: list):
+def brillouin_diversity_index(data: list):
     """计算布里渊多样性指数。如，计算作者A的BI指数，传入[30,20,10,10]，
     表示该作者在4个学科领域上的reference次数
 
