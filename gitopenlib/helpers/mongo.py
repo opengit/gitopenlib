@@ -8,7 +8,7 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2.4"
+__version__ = "0.1.2.5"
 
 
 import time
@@ -138,6 +138,7 @@ def aggregate_by_page(
         parse_func(data)
         data_size += len(data)
         print("# elapsed time: {}s".format(time.time() - start_time))
+        print("*" * 36)
 
     print("# the size of all processed data : --> {}".format(data_size))
     print("# done.")
