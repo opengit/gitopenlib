@@ -52,7 +52,7 @@ def shannon_evenness(data: list):
     # Maximum diversity possible
     h_max = math.log(category_count(data))
 
-    return float(si) / h_max
+    return float(si) / h_max if h_max != 0 else 0
 
 
 def shannon_index(data: list):
@@ -79,11 +79,11 @@ def shannon_index(data: list):
         Returns:
             float: 相对丰度值
         """
-        if n == 0:
+        if N == 0:
             ratio = 0
         else:
             ratio = float(n) / N
-        return ratio * math.log(ratio)
+        return ratio * math.log(ratio) if ratio != 0 else 0
 
     N = sum(data)
     return -sum(p(n, N) for n in data)
@@ -104,7 +104,7 @@ def simpson_index(data: list):
         float: Simpson Index 的数值
     """
     N = sum(data)
-    si = sum((float(n) / N) ** 2 for n in data)
+    si = sum((float(n) / N if N != 0 else 0) ** 2 for n in data)
     return si
 
 
@@ -120,7 +120,8 @@ def inverse_simpson_index(data: list):
     Returns:
         float: Inverse Simpson Index 的数值
     """
-    return float(1) / simpson_index(data)
+    si = simpson_index(data)
+    return float(1) / si if si != 0 else 0
 
 
 def gini_simpson_index(data: list):
@@ -156,23 +157,21 @@ def brillouin_diversity_index(data: list):
     bs = [math.log10(math.factorial(n)) for n in data]
     B = sum(bs)
 
-    H = (A - B) / sum_
+    H = (A - B) / sum_ if sum_ != 0 else 0
 
     return H
 
 
 if __name__ == "__main__":
-    # 测试BI指数
-    #  H = brillouin_diveresity_index([30, 10, 10])
-    #  print(H)
 
-    # 测试shannon index
-    #  SI = shannon_index([10, 20, 30])
-    #  print(SI)
+    data = [10, 20, 30]
+    data = [10, 20, 30, 0]
 
-    # 测试simpson index
-    # SI = simpson_index([10, 20, 30])
-    # inverse_SI = inverse_simpson_index([10, 20, 30])
-    # print(SI)
-    # print(inverse_SI)
+    print(category_count(data))
+    print(shannon_evenness(data))
+    print(shannon_index(data))
+    print(simpson_index(data))
+    print(inverse_simpson_index(data))
+    print(gini_simpson_index(data))
+    print(brillouin_diversity_index(data))
     pass
