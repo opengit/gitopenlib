@@ -8,7 +8,7 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2.5"
+__version__ = "0.1.2.6"
 
 
 import time
@@ -88,6 +88,7 @@ def aggregate_by_page(
     options: dict = None,
     page_size: int = 100,
     parse_func: FunctionType = None,
+    open_log: bool = False,
 ):
     """mongodb的聚合查询，具备分页查询功能。
 
@@ -100,22 +101,34 @@ def aggregate_by_page(
         options(dict): aggregate的options选项设置。eg: {"allowDiskUse": True}
         page_size(int): 每页的数据条目数。
         parse_func(FunctionType): 每一个page的数据的处理函数。需要自己实现。
+        open_log(bool): 是否开启日志，记录当前的 Current ObjectId。
 
     Returns:
         None
     """
+
+    def wprint(log_msg):
+        print(log_msg)
+        if open_log:
+            log_file.write(log_msg + "\n")
+
+    if open_log:
+        log_file = open("aggregate_by_page.log", "a+")
+
     current_last_id = start_id
     current_page = 0
     count = coll.find({"_id": {"$gt": current_last_id}}).count()
     page_total = (
         int(count / page_size) if count % page_size == 0 else int(count / page_size) + 1
     )
-    print("# the total page : {}".format(page_total))
+    log_msg = "# the total page : {}".format(page_total)
+    print(log_msg)
     data_size = 0
 
     while current_page < page_total:
         start_time = time.time()
-        print("# processing the page : {}".format(current_page))
+        log_msg = "# processing the page : {}".format(current_page)
+        wprint(log_msg)
         # 查询
         condition = [
             {"$sort": {"_id": 1}},
@@ -131,14 +144,20 @@ def aggregate_by_page(
         data = [x for x in cursor]
         # 更新 current_last_id
         current_last_id = data[-1]["_id"]
-        print("# current_last_id --> {}".format(current_last_id))
+        log_msg = "# current_last_id --> {}".format(current_last_id)
+        wprint(log_msg)
         # 翻页
         current_page += 1
         # 处理数据
         parse_func(data)
         data_size += len(data)
-        print("# elapsed time: {}s".format(time.time() - start_time))
-        print("*" * 36)
+        log_msg = "# elapsed time: {}s".format(time.time() - start_time)
+        wprint(log_msg)
+        log_msg = "*" * 36
+        wprint(log_msg)
 
-    print("# the size of all processed data : --> {}".format(data_size))
-    print("# done.")
+    log_msg = "# the size of all processed data : --> {}".format(data_size)
+    wprint(log_msg)
+    log_msg = "# done."
+    wprint(log_msg)
+    log_file.close()
