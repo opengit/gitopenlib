@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.1.6"
+__version__ = "0.1.7"
 
 
 import json
@@ -113,7 +113,7 @@ def get_paths_from_dir(dirs: str or list, types: str or list, recusive: bool = F
     return [str(item) for item in result]
 
 
-def read_content(file_path: str or PosixPath):
+def read_content(file_path: str or PosixPath, encoding: str = "utf-8"):
     """
     从文本文件中读取内容，将内容转换为list，list的元素为每行的字符串
 
@@ -126,7 +126,7 @@ def read_content(file_path: str or PosixPath):
     if isinstance(file_path, str):
         file_path = Path(file_path)
     return remove_0_str(
-        [line.strip() for line in file_path.read_text(encoding="utf-8").split("\n")]
+        [line.strip() for line in file_path.read_text(encoding=encoding).split("\n")]
     )
 
 
