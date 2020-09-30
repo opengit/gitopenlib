@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.1.5"
+__version__ = "0.1.6"
 
 
 import json
@@ -28,9 +28,7 @@ def dict_sorted(data: dict, flag: int = 0, ascending: bool = True):
     Returns:
         dict: 排序后的数据
     """
-    return dict(
-        sorted(data.items(), key=lambda x: x[flag], reverse=not ascending)
-    )
+    return dict(sorted(data.items(), key=lambda x: x[flag], reverse=not ascending))
 
 
 def list_deduplicate(data: list):
@@ -46,11 +44,7 @@ def list_deduplicate(data: list):
 
 
 def sort_list(
-    data: list,
-    ascending: bool = True,
-    flag: int = 0,
-    position: int = 0,
-    key: str = "",
+    data: list, ascending: bool = True, flag: int = 0, position: int = 0, key: str = "",
 ):
     """
     对 list 进行排序
@@ -87,14 +81,10 @@ def strips(string: str):
     """
     去除字符串两端的空格符和换行符，并且去除中间的换行符
     """
-    return (
-        string.strip().replace("\n", "").replace("\r", "").replace("\r\n", "")
-    )
+    return string.strip().replace("\n", "").replace("\r", "").replace("\r\n", "")
 
 
-def get_paths_from_dir(
-    dirs: str or list, types: str or list, recusive: bool = False
-):
+def get_paths_from_dir(dirs: str or list, types: str or list, recusive: bool = False):
     """
     从指定目录下获取所有指定扩展名文件的路径，不递归子文件夹
 
@@ -136,14 +126,11 @@ def read_content(file_path: str or PosixPath):
     if isinstance(file_path, str):
         file_path = Path(file_path)
     return remove_0_str(
-        [
-            line.strip()
-            for line in file_path.read_text(encoding="utf-8").split("\n")
-        ]
+        [line.strip() for line in file_path.read_text(encoding="utf-8").split("\n")]
     )
 
 
-def read_jsons(file_path: str or PosixPath):
+def read_jsons(file_path: str or PosixPath, encoding: str = "utf-8"):
     """
     从文本文件中读取内容，并转化为dict组成的list
     Args:
@@ -155,10 +142,7 @@ def read_jsons(file_path: str or PosixPath):
     if isinstance(file_path, str):
         file_path = Path(file_path)
     result = remove_0_str(
-        [
-            line.strip()
-            for line in file_path.read_text(encoding="utf-8").split("\n")
-        ]
+        [line.strip() for line in file_path.read_text(encoding=encoding).split("\n")]
     )
 
     return [json.loads(item) for item in result]
