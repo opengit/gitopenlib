@@ -8,7 +8,7 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2.6"
+__version__ = "0.1.2.7"
 
 
 import time
@@ -160,4 +160,6 @@ def aggregate_by_page(
     wprint(log_msg)
     log_msg = "# done."
     wprint(log_msg)
-    log_file.close()
+    if open_log:
+        log_file.close()
+    pass
