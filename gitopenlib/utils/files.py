@@ -7,14 +7,14 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  Powered by GitOPEN
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 import json
 import time
 from pathlib import Path, PosixPath
 from types import FunctionType
 
-from basics import remove_0_str
+from gitopenlib.utils.basics import remove_0_str
 
 
 def read_txt_by_page(
@@ -100,10 +100,10 @@ def read_jsons(file_path: str or PosixPath, encoding: str = "utf-8"):
     return [json.loads(item) for item in result]
 
 
-if __name__ == "__main__":
-
-    def parse(data):
-        time.sleep(0.5)
-
-    file_path = "/Users/sunjiajia/Works/Projects/PycharmProjects/interdisciplinary2/output/results/test_cits_10000.txt"
-    read_txt_by_page(file_path=file_path, parse_func=parse, page_size=1000)
+#  if __name__ == "__main__":
+#
+#      def parse(data):
+#          time.sleep(0.5)
+#
+#      file_path = "/Users/sunjiajia/Works/Projects/PycharmProjects/interdisciplinary2/output/results/test_cits_10000.txt"
+#      read_txt_by_page(file_path=file_path, parse_func=parse, page_size=1000)
