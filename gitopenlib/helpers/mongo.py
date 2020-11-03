@@ -8,7 +8,7 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2.12"
+__version__ = "0.1.2.13"
 
 
 import asyncio
@@ -106,7 +106,7 @@ def aggregate_by_page_asyncio(
         session(ClientSession): ClientSession对象。
         options(dict): aggregate的options选项设置。eg: {"allowDiskUse": True}
         page_size(int): 每页的数据条目数。
-        parse_func(FunctionType): 每一个page的数据的处理函数。需要自己实现。
+        parse_func(Callable): 每一个page的数据的处理函数。需要自己实现。
         open_log(bool): 是否开启日志，记录当前的Current ObjectId，方便打断任务后，再次运行时扔给start_id。
         log_file(str): 日志文件完整路径，open_log为True时需要填写，False可不填写。
         open_async(bool): 是否开启异步io处理数据，默认不开启。
@@ -122,8 +122,8 @@ def aggregate_by_page_asyncio(
             log_file.write(log_msg + "\n")
 
     @asyncio.coroutine
-    def parse_(data):
-        parse_func(data)
+    def parse_(chunk):
+        parse_func(chunk)
 
     if open_log:
         log_file = open(log_file, "a+")
@@ -196,6 +196,7 @@ def aggregate_by_page(
     page_size: int = 100,
     parse_func: Callable[[list], None] = None,
     open_log: bool = False,
+    log_file: str = "./aggregate_by_page.log",
 ):
     """mongodb的聚合查询，具备分页查询功能。
 
@@ -207,8 +208,9 @@ def aggregate_by_page(
         session(ClientSession): ClientSession对象。
         options(dict): aggregate的options选项设置。eg: {"allowDiskUse": True}
         page_size(int): 每页的数据条目数。
-        parse_func(FunctionType): 每一个page的数据的处理函数。需要自己实现。
-        open_log(bool): 是否开启日志，记录当前的 Current ObjectId。
+        parse_func(Callable): 每一个page的数据的处理函数。需要自己实现。
+        open_log(bool): 是否开启日志，记录当前的Current ObjectId，方便打断任务后，再次运行时扔给start_id。
+        log_file(str): 日志文件完整路径，open_log为True时需要填写，False可不填写。
 
     Returns:
         None
@@ -230,7 +232,9 @@ def aggregate_by_page(
     )
     log_msg = "# the total page : {}".format(page_total)
     print(log_msg)
+
     data_size = 0
+    total_time = time.time()
 
     while current_page < page_total:
         start_time = time.time()
@@ -263,9 +267,9 @@ def aggregate_by_page(
         log_msg = "*" * 36
         wprint(log_msg)
 
-    log_msg = "# the size of all processed data : --> {}".format(data_size)
-    wprint(log_msg)
-    log_msg = "# done."
+    log_msg = "# the size of all processed data : --> {}\n".format(data_size)
+    log_msg += "# total time cost is : --> {}\n".format(time.time() - total_time)
+    log_msg += "# done."
     wprint(log_msg)
     if open_log:
         log_file.close()
