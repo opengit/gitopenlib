@@ -8,7 +8,7 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2.10"
+__version__ = "0.1.2.11"
 
 
 import asyncio
@@ -90,7 +90,7 @@ def aggregate_by_page_asyncio(
     session: ClientSession = None,
     options: dict = None,
     page_size: int = 100,
-    parse_func: Callable = None,
+    parse_func: Callable[[list], None] = None,
     open_log: bool = False,
     log_file: str = "./aggregate_by_page.log",
     open_async: bool = False,
@@ -194,7 +194,7 @@ def aggregate_by_page(
     session: ClientSession = None,
     options: dict = None,
     page_size: int = 100,
-    parse_func: FunctionType = None,
+    parse_func: Callable[[list], None] = None,
     open_log: bool = False,
 ):
     """mongodb的聚合查询，具备分页查询功能。
