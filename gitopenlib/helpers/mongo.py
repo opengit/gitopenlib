@@ -8,14 +8,16 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2.7"
+__version__ = "0.1.2.8"
 
 
+import asyncio
 import time
-from types import FunctionType
+from typing import FunctionType
 
 import pymongo
 from bson.objectid import ObjectId
+from gitopenlib.utils import basics as gb
 from pymongo.client_session import ClientSession
 from pymongo.collection import Collection
 
@@ -78,6 +80,109 @@ def find_by_page(coll, page_size, parse_func):
 
     print("the size of all processed data : --> {}".format(data_size))
     print("done.")
+
+
+def aggregate_by_page_asyncio(
+    coll,
+    start_id: ObjectId = ObjectId("000000000000000000000000"),
+    pipeline: list = [],
+    session: ClientSession = None,
+    options: dict = None,
+    page_size: int = 100,
+    parse_func: FunctionType = None,
+    open_log: bool = False,
+    log_file: str = "./aggregate_by_page.log",
+    open_async: bool = False,
+    slave_num: int = 4,
+):
+    """mongodb的聚合查询，具备分页查询、异步io处理数据功能。
+
+    Args:
+
+        coll(Collection): 目标Collection，要查询的Collection对象。
+        start_id(ObjectId): 起始ObjectId。
+        pipeline(list): 管道命令list。
+        session(ClientSession): ClientSession对象。
+        options(dict): aggregate的options选项设置。eg: {"allowDiskUse": True}
+        page_size(int): 每页的数据条目数。
+        parse_func(FunctionType): 每一个page的数据的处理函数。需要自己实现。
+        open_log(bool): 是否开启日志，记录当前的Current ObjectId，方便打断任务后，再次运行时扔给start_id。
+        log_file(str): 日志文件完整路径，open_log为True时需要填写，False可不填写。
+        open_async(bool): 是否开启异步io处理数据，默认不开启。
+        slave_num(int): 执行任务的协程数目，默认为4。
+
+    Returns:
+        None
+    """
+
+    def wprint(log_msg):
+        print(log_msg)
+        if open_log:
+            log_file.write(log_msg + "\n")
+
+    @asyncio.coroutine
+    def parse_(data):
+        parse_func(data)
+
+    if open_log:
+        log_file = open("aggregate_by_page.log", "a+")
+
+    current_last_id = start_id
+    current_page = 0
+    count = coll.find({"_id": {"$gt": current_last_id}}).count()
+    page_total = (
+        int(count / page_size) if count % page_size == 0 else int(count / page_size) + 1
+    )
+    log_msg = "# the total page : {}".format(page_total)
+    print(log_msg)
+    data_size = 0
+
+    while current_page < page_total:
+        start_time = time.time()
+        log_msg = "# processing the page : {}".format(current_page)
+        wprint(log_msg)
+        # 查询
+        condition = [
+            {"$sort": {"_id": 1}},
+            {"$match": {"_id": {"$gt": current_last_id}}},
+            {"$limit": page_size},
+        ]
+        condition.extend(pipeline)
+        cursor = (
+            coll.aggregate(pipeline=condition, session=session, **options)
+            if options
+            else coll.aggregate(pipeline=condition, session=session)
+        )
+        data = [x for x in cursor]
+        # 更新 current_last_id
+        current_last_id = data[-1]["_id"]
+        log_msg = "# current_last_id --> {}".format(current_last_id)
+        wprint(log_msg)
+        # 翻页
+        current_page += 1
+        # 处理数据
+        if open_async:
+            loop = asyncio.get_event_loop()
+            chunks = gb.chunks(data, slave_num)
+            tasks = list()
+            for chunk in chunks:
+                tasks.append(asyncio.coroutine(asyncio.ensure_future(parse_(chunk))))
+            loop.run_until_complete(asyncio.wait(tasks))
+        else:
+            parse_func(data)
+        data_size += len(data)
+        log_msg = "# elapsed time: {}s".format(time.time() - start_time)
+        wprint(log_msg)
+        log_msg = "*" * 36
+        wprint(log_msg)
+
+    log_msg = "# the size of all processed data : --> {}".format(data_size)
+    wprint(log_msg)
+    log_msg = "# done."
+    wprint(log_msg)
+    if open_log:
+        log_file.close()
+    pass
 
 
 def aggregate_by_page(
