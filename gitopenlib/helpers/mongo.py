@@ -8,12 +8,12 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2.9"
+__version__ = "0.1.2.10"
 
 
 import asyncio
 import time
-from typing import FunctionType
+from typing import Callable
 
 import pymongo
 from bson.objectid import ObjectId
@@ -90,7 +90,7 @@ def aggregate_by_page_asyncio(
     session: ClientSession = None,
     options: dict = None,
     page_size: int = 100,
-    parse_func: FunctionType = None,
+    parse_func: Callable = None,
     open_log: bool = False,
     log_file: str = "./aggregate_by_page.log",
     open_async: bool = False,
