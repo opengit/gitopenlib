@@ -8,7 +8,7 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2.8"
+__version__ = "0.1.2.9"
 
 
 import asyncio
@@ -17,9 +17,10 @@ from typing import FunctionType
 
 import pymongo
 from bson.objectid import ObjectId
-from gitopenlib.utils import basics as gb
 from pymongo.client_session import ClientSession
 from pymongo.collection import Collection
+
+from gitopenlib.utils import basics as gb
 
 
 class ManageDB:
@@ -125,7 +126,7 @@ def aggregate_by_page_asyncio(
         parse_func(data)
 
     if open_log:
-        log_file = open("aggregate_by_page.log", "a+")
+        log_file = open(log_file, "a+")
 
     current_last_id = start_id
     current_page = 0
@@ -135,8 +136,9 @@ def aggregate_by_page_asyncio(
     )
     log_msg = "# the total page : {}".format(page_total)
     print(log_msg)
-    data_size = 0
 
+    data_size = 0
+    total_time = time.time()
     while current_page < page_total:
         start_time = time.time()
         log_msg = "# processing the page : {}".format(current_page)
@@ -176,9 +178,9 @@ def aggregate_by_page_asyncio(
         log_msg = "*" * 36
         wprint(log_msg)
 
-    log_msg = "# the size of all processed data : --> {}".format(data_size)
-    wprint(log_msg)
-    log_msg = "# done."
+    log_msg = "# the size of all processed data : --> {}\n".format(data_size)
+    log_msg += "# total time cost is : --> {}\n".format(time.time() - total_time)
+    log_msg += "# done."
     wprint(log_msg)
     if open_log:
         log_file.close()
