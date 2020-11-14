@@ -9,7 +9,7 @@
 
 import numpy as np
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 
 
 def smooth_ma(data: list or np.array, window_size=3):
@@ -62,7 +62,7 @@ def normalization(data: list or np.array, decimals: None or int = None):
         decimals(None or int): 归一化后，数值保留的精度（小数位数），默认为None，不开启
 
     Returns:
-        ndarray: 处理后的数据
+        np.array: 处理后的数据
     """
     _range = np.max(data) - np.min(data)
     ret = (data - np.min(data)) / _range
@@ -79,9 +79,26 @@ def standardization(data: list or np.array, decimals: None or int = None):
         decimals(None or int): 归一化后，数值保留的精度（小数位数），默认为None，不开启
 
     Returns:
-        ndarray: 处理后的数据
+        np.array: 处理后的数据
     """
     mu = np.mean(data, axis=0)
     sigma = np.std(data, axis=0)
     ret = (data - mu) / sigma
+    return ret if decimals is None else np.around(ret, decimals=decimals)
+
+
+def zero_centered(data: list or np.array, decimals: None or int = None):
+    """
+    对一系列数据进行零均值化，即zero-centered。对数据的平移的一个过程，之后数据的中心点为(0,0)。
+
+    Args:
+
+        data(list or np.array): 需要被零均值化的数据。
+        decimals(None or int): 数值保留的精度（小数位数），默认为None，不开启
+
+    Returns:
+        np.array: 处理后的数据
+    """
+    mu = np.mean(data, axis=0)
+    ret = data - mu
     return ret if decimals is None else np.around(ret, decimals=decimals)
