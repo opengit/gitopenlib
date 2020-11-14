@@ -9,7 +9,7 @@
 
 import numpy as np
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 
 def smooth_ma(data: list or np.array, window_size=3):
@@ -52,32 +52,36 @@ def smooth_matlab(data: list or np.array, window_size: int = 3):
     return np.concatenate((start, out0, stop))
 
 
-def normalization(data: list or np.array):
+def normalization(data: list or np.array, decimals: None or int = None):
     """
     对一系列数据进行归一化处理，对原始数据进行线性变换把数据映射到[0,1]之间。
 
     Args:
 
         data(list or np.array): 需要被归一化的数据。
+        decimals(None or int): 归一化后，数值保留的精度（小数位数），默认为None，不开启
 
     Returns:
         ndarray: 处理后的数据
     """
     _range = np.max(data) - np.min(data)
-    return (data - np.min(data)) / _range
+    ret = (data - np.min(data)) / _range
+    return ret if decimals is None else np.around(ret, decimals=decimals)
 
 
-def standardization(data: list or np.array):
+def standardization(data: list or np.array, decimals: None or int = None):
     """
     对一系列数据进行标准化处理，常用的方法是z-score标准化，处理后数据均值为0，标准差为1。
 
     Args:
 
         data(list or np.array): 需要被标准化的数据。
+        decimals(None or int): 归一化后，数值保留的精度（小数位数），默认为None，不开启
 
     Returns:
         ndarray: 处理后的数据
     """
     mu = np.mean(data, axis=0)
     sigma = np.std(data, axis=0)
-    return (data - mu) / sigma
+    ret = (data - mu) / sigma
+    return ret if decimals is None else np.around(ret, decimals=decimals)
