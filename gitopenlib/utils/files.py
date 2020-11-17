@@ -7,14 +7,54 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  Powered by GitOPEN
 
-__version__ = "0.1.1"
+__version__ = "0.2.1"
 
 import json
+import os
 import time
 from pathlib import Path, PosixPath
 from types import FunctionType
 
 from gitopenlib.utils.basics import remove_0_str
+
+
+def file_writer(
+    lines: str or list,
+    dir_path: str or Path,
+    file_name: str = "file_writer.txt",
+    mode: str = "a+",
+    separator: str = "\n",
+    encoding: str = "utf-8",
+):
+    """
+    向文件中写内容
+
+    Args:
+        file_path(str or Path): 文件路径
+        lines(str or list): 可以是单个字符串或者
+    """
+    dir_path: Path = Path(dir_path) if isinstance(dir_path, str) else dir_path
+    if not dir_path.exists():
+        print(
+            "## Warning: The dir path you submit is not exist, "
+            + "it will be created automatically."
+        )
+        dir_path.mkdir(parents=True, exist_ok=True)
+
+    file_path = dir_path / file_name
+
+    if isinstance(lines, str):
+        lines = [lines]
+
+    with open(file_path, mode=mode, encoding=encoding) as file:
+        for line in lines:
+            if separator != "":
+                file.write(f"{line}{separator}")
+            else:
+                file.write(line)
+
+    print("## file_writer done...")
+    pass
 
 
 def read_txt_by_page(
@@ -101,9 +141,16 @@ def read_jsons(file_path: str or PosixPath, encoding: str = "utf-8"):
 
 
 #  if __name__ == "__main__":
+
+#  def parse(data):
+#      time.sleep(0.5)
 #
-#      def parse(data):
-#          time.sleep(0.5)
-#
-#      file_path = "/Users/sunjiajia/Works/Projects/PycharmProjects/interdisciplinary2/output/results/test_cits_10000.txt"
-#      read_txt_by_page(file_path=file_path, parse_func=parse, page_size=1000)
+#  file_path = "/Users/sunjiajia/Works/Projects/PycharmProjects/interdisciplinary2/output/results/test_cits_10000.txt"
+#  read_txt_by_page(file_path=file_path, parse_func=parse, page_size=1000)
+
+#  file_writer(
+#      lines=["1", "adb", "sdf"],
+#      dir_path="/Users/sunjiajia/Downloads/test9919/tere",
+#      file_name="xxx.txt",
+#      separator="",
+#  )
