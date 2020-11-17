@@ -26,12 +26,18 @@ def file_writer(
     separator: str = "\n",
     encoding: str = "utf-8",
 ):
-    """
-    向文件中写内容
+    """向文件中写内容
 
     Args:
-        file_path(str or Path): 文件路径
-        lines(str or list): 可以是单个字符串或者
+        lines (str or list): 可以是单个字符串或者
+        dir_path (str or Path): 文件路径
+        file_name (str): 文件名称，有默认值
+        mode (str): 写文件的的模式，默认为 a+
+        separator (str): 每一行末尾的分隔符，有默认值
+        encoding (str): 文件的编码格式，默认为utf-8
+
+    Returns:
+        None: 无返回值
     """
     dir_path: Path = Path(dir_path) if isinstance(dir_path, str) else dir_path
     if not dir_path.exists():
