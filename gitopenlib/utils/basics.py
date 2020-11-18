@@ -8,12 +8,14 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.1.7"
+__version__ = "0.1.8"
 
 
 import json
 import math
 from pathlib import Path, PosixPath
+
+from gitopenlib.utils import files as gf
 
 
 def dict_sorted(data: dict, flag: int = 0, ascending: bool = True):
@@ -44,7 +46,11 @@ def list_deduplicate(data: list):
 
 
 def sort_list(
-    data: list, ascending: bool = True, flag: int = 0, position: int = 0, key: str = "",
+    data: list,
+    ascending: bool = True,
+    flag: int = 0,
+    position: int = 0,
+    key: str = "",
 ):
     """
     对 list 进行排序
@@ -85,67 +91,15 @@ def strips(string: str):
 
 
 def get_paths_from_dir(dirs: str or list, types: str or list, recusive: bool = False):
-    """
-    从指定目录下获取所有指定扩展名文件的路径，不递归子文件夹
-
-    Args:
-        dirs(list): 文件夹路径（绝对路径），单个用str表示，多个用list
-        types(types): 指定文件的扩展名，单个用str表示，多个用list
-        recusive(bool): 是否递归子文件，默认为False
-
-    Returns:
-        list: 文件路径字符串列表
-    """
-
-    if isinstance(dirs, str):
-        dirs = [dirs]
-    if isinstance(types, str):
-        types = [types]
-
-    rule = "**/*." if recusive else "*."
-    result = []
-    for d in dirs:
-        path = Path(d).resolve()
-        for t in types:
-            res = path.glob(rule + t)
-            result.extend(list(res))
-
-    return [str(item) for item in result]
+    gf.get_paths_from_dir(dirs, types, recusive)
 
 
 def read_content(file_path: str or PosixPath, encoding: str = "utf-8"):
-    """
-    从文本文件中读取内容，将内容转换为list，list的元素为每行的字符串
-
-    Args:
-        file_path(str or PosixPath): 文件路径
-
-    return:
-        list: 每行字符串组成的列表
-    """
-    if isinstance(file_path, str):
-        file_path = Path(file_path)
-    return remove_0_str(
-        [line.strip() for line in file_path.read_text(encoding=encoding).split("\n")]
-    )
+    gf.read_content(file_path, encoding)
 
 
 def read_jsons(file_path: str or PosixPath, encoding: str = "utf-8"):
-    """
-    从文本文件中读取内容，并转化为dict组成的list
-    Args:
-        file_path: 文件路径
-
-    Returns:
-        list: dict组成的list
-    """
-    if isinstance(file_path, str):
-        file_path = Path(file_path)
-    result = remove_0_str(
-        [line.strip() for line in file_path.read_text(encoding=encoding).split("\n")]
-    )
-
-    return [json.loads(item) for item in result]
+    gf.read_jsons(file_path, encoding)
 
 
 def remove_0_str(data: list):
@@ -170,39 +124,39 @@ def chunks(arr, m):
     return [arr[i : i + n] for i in range(0, len(arr), n)]
 
 
-if __name__ == "__main__":
-    # get_paths_from_dir测试
-    #  result = get_paths_from_dir("../", "py", recusive=True)
-    #  print(result)
-
-    # #### sort_list测试
-    # alist = [
-    #     {"level": 19, "star": 36, "time": 1},
-    #     {"level": 20, "star": 40, "time": 2},
-    #     {"level": 20, "star": 40, "time": 3},
-    #     {"level": 20, "star": 40, "time": 4},
-    #     {"level": 20, "star": 40, "time": 5},
-    #     {"level": 20, "star": 40},
-    #     {"level": 18, "star": 40, "time": 1},
-    # ]
-    # result = sort_list(alist, ascending=False, flag=1, key="time")
-    #
-    # alist = [
-    #     (1, 2, 3),
-    #     (0, 1, 2),
-    #     (3, 4),
-    #     (2, 3, 4),
-    # ]
-    # result = sort_list(data=alist, ascending=False, flag=2, position=1)
-    #
-    # alist = [6, 4, 9, 10, 0]
-    # alist = ["acc", "cdef", "xyz", "0234", "123"]
-    # result = sort_list(data=alist, ascending=False)
-    #
-    # print(result)
-
-    # data = {"b": 1, "a": 2}
-    # res = dict_sorted(data, flag=1, ascending=True)
-    # print(res)
-
-    pass
+#  if __name__ == "__main__":
+#      # get_paths_from_dir测试
+#      #  result = get_paths_from_dir("../", "py", recusive=True)
+#      #  print(result)
+#
+#      # #### sort_list测试
+#      # alist = [
+#      #     {"level": 19, "star": 36, "time": 1},
+#      #     {"level": 20, "star": 40, "time": 2},
+#      #     {"level": 20, "star": 40, "time": 3},
+#      #     {"level": 20, "star": 40, "time": 4},
+#      #     {"level": 20, "star": 40, "time": 5},
+#      #     {"level": 20, "star": 40},
+#      #     {"level": 18, "star": 40, "time": 1},
+#      # ]
+#      # result = sort_list(alist, ascending=False, flag=1, key="time")
+#      #
+#      # alist = [
+#      #     (1, 2, 3),
+#      #     (0, 1, 2),
+#      #     (3, 4),
+#      #     (2, 3, 4),
+#      # ]
+#      # result = sort_list(data=alist, ascending=False, flag=2, position=1)
+#      #
+#      # alist = [6, 4, 9, 10, 0]
+#      # alist = ["acc", "cdef", "xyz", "0234", "123"]
+#      # result = sort_list(data=alist, ascending=False)
+#      #
+#      # print(result)
+#
+#      # data = {"b": 1, "a": 2}
+#      # res = dict_sorted(data, flag=1, ascending=True)
+#      # print(res)
+#
+#      pass
