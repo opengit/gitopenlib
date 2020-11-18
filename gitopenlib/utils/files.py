@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  Powered by GitOPEN
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 
 import json
 import os
@@ -25,6 +25,7 @@ def file_writer(
     mode: str = "a+",
     separator: str = "\n",
     encoding: str = "utf-8",
+    backup: bool = True,
 ):
     """向文件中写内容
 
@@ -35,6 +36,7 @@ def file_writer(
         mode (str): 写文件的的模式，默认为 a+
         separator (str): 每一行末尾的分隔符，有默认值
         encoding (str): 文件的编码格式，默认为utf-8
+        backup (bool): 如果文件已经存在，是否对原文件进行备份，默认为True
 
     Returns:
         None: 无返回值
@@ -48,6 +50,14 @@ def file_writer(
         dir_path.mkdir(parents=True, exist_ok=True)
 
     file_path = dir_path / file_name
+
+    if backup:
+        if file_path.exists():
+            file_path.rename(
+                file_path.with_suffix(
+                    f'.{str(time.strftime("%Y%m%d_%H%M%S",time.localtime()))}{file_path.suffix}'
+                )
+            )
 
     if isinstance(lines, str):
         lines = [lines]
@@ -147,16 +157,18 @@ def read_jsons(file_path: str or PosixPath, encoding: str = "utf-8"):
 
 
 #  if __name__ == "__main__":
-
-#  def parse(data):
-#      time.sleep(0.5)
 #
-#  file_path = "/Users/sunjiajia/Works/Projects/PycharmProjects/interdisciplinary2/output/results/test_cits_10000.txt"
-#  read_txt_by_page(file_path=file_path, parse_func=parse, page_size=1000)
-
-#  file_writer(
-#      lines=["1", "adb", "sdf"],
-#      dir_path="/Users/sunjiajia/Downloads/test9919/tere",
-#      file_name="xxx.txt",
-#      separator="",
-#  )
+#      #  def parse(data):
+#      #      time.sleep(0.5)
+#      #
+#      #  file_path = "/Users/sunjiajia/Works/Projects/PycharmProjects/interdisciplinary2/output/results/test_cits_10000.txt"
+#      #  read_txt_by_page(file_path=file_path, parse_func=parse, page_size=1000)
+#
+#      #  file_writer(
+#      #      lines=["1", "adb", "sdf"],
+#      #      dir_path="/Users/sunjiajia/Downloads/test9919/tere",
+#      #      file_name="xxx.txt",
+#      #      separator="\n",
+#      #      backup=False,
+#      #  )
+#      pass
