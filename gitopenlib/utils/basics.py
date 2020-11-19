@@ -8,14 +8,12 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.1.8"
+__version__ = "0.1.9"
 
 
-import json
 import math
-from pathlib import Path, PosixPath
 
-from gitopenlib.utils import files as gf
+import files as gf
 
 
 def dict_sorted(data: dict, flag: int = 0, ascending: bool = True):
@@ -106,7 +104,6 @@ def remove_0_str(data: list):
     """
     去除list列表中为长度为0的字符串，用于字符串split后，列表中出现长度为0字符串的去除
     """
-
     return [item for item in data if len(str(item)) != 0]
 
 

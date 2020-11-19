@@ -7,15 +7,14 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  Powered by GitOPEN
 
-__version__ = "0.2.3"
+__version__ = "0.2.4"
 
 import json
-import os
 import time
 from pathlib import Path, PosixPath
 from types import FunctionType
 
-from gitopenlib.utils.basics import remove_0_str
+from basics import remove_0_str
 
 
 def get_paths_from_dir(dirs: str or list, types: str or list, recusive: bool = False):
