@@ -93,9 +93,7 @@ class CoMatrix:
         print(f"the {file_name}.tsv is saved..")
 
 
-if __name__ == "__main__":
-    kws = ["a,b,c", "123,123,456"]
-    cm = CoMatrix(target=kws, normal=True)
-    cm.run()
-
-
+#  if __name__ == "__main__":
+#      kws = ["a,b,c", "123,123,456"]
+#      cm = CoMatrix(target=kws, normal=True)
+#      cm.run()

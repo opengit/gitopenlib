@@ -13,8 +13,6 @@ __version__ = "0.1.9"
 
 import math
 
-import files as gf
-
 
 def dict_sorted(data: dict, flag: int = 0, ascending: bool = True):
     """
@@ -86,18 +84,6 @@ def strips(string: str):
     去除字符串两端的空格符和换行符，并且去除中间的换行符
     """
     return string.strip().replace("\n", "").replace("\r", "").replace("\r\n", "")
-
-
-def get_paths_from_dir(dirs: str or list, types: str or list, recusive: bool = False):
-    gf.get_paths_from_dir(dirs, types, recusive)
-
-
-def read_content(file_path: str or PosixPath, encoding: str = "utf-8"):
-    gf.read_content(file_path, encoding)
-
-
-def read_jsons(file_path: str or PosixPath, encoding: str = "utf-8"):
-    gf.read_jsons(file_path, encoding)
 
 
 def remove_0_str(data: list):

@@ -14,7 +14,7 @@ import time
 from pathlib import Path, PosixPath
 from types import FunctionType
 
-from basics import remove_0_str
+from gitopenlib.utils import basics as gb
 
 
 def get_paths_from_dir(dirs: str or list, types: str or list, recusive: bool = False):
@@ -161,7 +161,7 @@ def read_content(file_path: str or PosixPath, encoding: str = "utf-8"):
     """
     if isinstance(file_path, str):
         file_path = Path(file_path)
-    return remove_0_str(
+    return gb.remove_0_str(
         [line.strip() for line in file_path.read_text(encoding=encoding).split("\n")]
     )
 

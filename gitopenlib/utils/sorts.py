@@ -251,35 +251,35 @@ def radix_sort(alist):
 
 
 # def test(arr, func):
-    # """
-    # 测试排序函数的时间效率
-    # """
-    # start_time = time.time()
-    # if func.__name__ == "quick_sort":
-    #   func(arr, 0, 1000)
-    # else:
-    #   func(arr)
-    # end_time = time.time()
-    # print(
-    #   "{} 耗时：{} 毫秒".format(func.__name__, int(round((end_time - start_time) * 1000)))
-    # )
-    # print("-" * 128)
+# """
+# 测试排序函数的时间效率
+# """
+# start_time = time.time()
+# if func.__name__ == "quick_sort":
+#   func(arr, 0, 1000)
+# else:
+#   func(arr)
+# end_time = time.time()
+# print(
+#   "{} 耗时：{} 毫秒".format(func.__name__, int(round((end_time - start_time) * 1000)))
+# )
+# print("-" * 128)
 
 
-if __name__ == "__main__":
-    # import nump as np
-    # import time
-
-    # arr = list(np.random.randint(1, 100000, (50000)))
-    # test(arr, bubble_sort)
-    # test(arr, bucket_sort)
-    # test(arr, count_sort)
-    # test(arr, heap_sort)
-    # test(arr, insert_sort)
-    # test(arr, merge_sort)
-    # test(arr, quick_sort)
-    # test(arr, radix_sort)
-    # test(arr, select_sort)
-    # test(arr, shell_sort)
-
-    pass
+#  if __name__ == "__main__":
+#      # import nump as np
+#      # import time
+#
+#      # arr = list(np.random.randint(1, 100000, (50000)))
+#      # test(arr, bubble_sort)
+#      # test(arr, bucket_sort)
+#      # test(arr, count_sort)
+#      # test(arr, heap_sort)
+#      # test(arr, insert_sort)
+#      # test(arr, merge_sort)
+#      # test(arr, quick_sort)
+#      # test(arr, radix_sort)
+#      # test(arr, select_sort)
+#      # test(arr, shell_sort)
+#
+#      pass
