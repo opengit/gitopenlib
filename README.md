@@ -1,3 +1,6 @@
 # GitOPENLib
 
-这里是我自用的常用工具库/函数
+There is a library for my own use.
+
+Powered by GitOPEN.
+

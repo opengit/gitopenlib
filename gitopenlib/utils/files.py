@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  Powered by GitOPEN
 
-__version__ = "0.2.4"
+__version__ = "0.2.5"
 
 import json
 import time
@@ -58,7 +58,7 @@ def file_writer(
     """向文件中写内容
 
     Args:
-        lines (str or list): 可以是单个字符串或者
+        lines (str or list): 可以是单个字符串或者字符串的列表
         dir_path (str or Path): 文件路径
         file_name (str): 文件名称，有默认值
         mode (str): 写文件的的模式，默认为 a+
@@ -168,7 +168,7 @@ def read_content(file_path: str or PosixPath, encoding: str = "utf-8"):
 
 def read_jsons(file_path: str or PosixPath, encoding: str = "utf-8"):
     """
-    从文本文件中读取内容，并转化为dict组成的list
+    从存放json的文本文件中读取内容，并转化为dict组成的list
     Args:
         file_path: 文件路径
 
@@ -177,7 +177,7 @@ def read_jsons(file_path: str or PosixPath, encoding: str = "utf-8"):
     """
     if isinstance(file_path, str):
         file_path = Path(file_path)
-    result = remove_0_str(
+    result = gb.remove_0_str(
         [line.strip() for line in file_path.read_text(encoding=encoding).split("\n")]
     )
 
