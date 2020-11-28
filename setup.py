@@ -22,12 +22,12 @@ from setuptools import Command, find_packages, setup
 
 # Package meta-data.
 NAME = "gitopenlib"
-DESCRIPTION = "GitOPEN的常用工具库，Powered by GitOPEN."
+DESCRIPTION = "A library containing some useful functions. Powered by GitOPEN."
 URL = "https://github.com/opengit/gitopenlib.git"
 EMAIL = "gitopen@gmail.com"
 AUTHOR = "gitopen"
 REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "0.1.16.0"
+VERSION = "0.1.16.1"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -133,7 +133,5 @@ setup(
         "Programming Language :: Python :: Implementation :: PyPy",
     ],
     # $ setup.py publish support.
-    cmdclass={
-        "upload": UploadCommand,
-    },
+    cmdclass={"upload": UploadCommand,},
 )

@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  Powered by GitOPEN
 
-__version__ = "0.2.5"
+__version__ = "0.2.6"
 
 import json
 import time
@@ -22,9 +22,9 @@ def get_paths_from_dir(dirs: str or list, types: str or list, recusive: bool = F
     从指定目录下获取所有指定扩展名文件的路径，不递归子文件夹
 
     Args:
-        dirs(list): 文件夹路径（绝对路径），单个用str表示，多个用list
-        types(types): 指定文件的扩展名，单个用str表示，多个用list
-        recusive(bool): 是否递归子文件，默认为False
+        dirs (list): 文件夹路径（绝对路径），单个用str表示，多个用list
+        types (types): 指定文件的扩展名，单个用str表示，多个用list
+        recusive (bool): 是否递归子文件，默认为False
 
     Returns:
         list: 文件路径字符串列表
@@ -111,10 +111,10 @@ def read_txt_by_page(
     从文本文件中分页读取内容
 
     Args:
-        file_path(str): 文件路径
-        parse_func(FunctionType): 每一页数据处理函数，必须定义
-        page_size(int): 每一页数据量
-        encoding(str): 文本文件的编码格式
+        file_path (str): 文件路径
+        parse_func (FunctionType): 每一页数据处理函数，必须定义
+        page_size (int): 每一页数据量
+        encoding (str): 文本文件的编码格式
 
     Returns:
         None: 在parse_func已经处理好数据，不用返回值
@@ -154,9 +154,10 @@ def read_content(file_path: str or PosixPath, encoding: str = "utf-8"):
     从文本文件中读取内容，将内容转换为list，list的元素为每行的字符串
 
     Args:
-        file_path(str or PosixPath): 文件路径
+        file_path (str or PosixPath): 文件路径
+        encoding (str): 文件的编码方式
 
-    return:
+    Returns:
         list: 每行字符串组成的列表
     """
     if isinstance(file_path, str):
@@ -169,8 +170,10 @@ def read_content(file_path: str or PosixPath, encoding: str = "utf-8"):
 def read_jsons(file_path: str or PosixPath, encoding: str = "utf-8"):
     """
     从存放json的文本文件中读取内容，并转化为dict组成的list
+
     Args:
-        file_path: 文件路径
+        file_path (str): 文件路径
+        encoding (str): 文件的编码方式
 
     Returns:
         list: dict组成的list

@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.1.9"
+__version__ = "0.1.10"
 
 
 import math
@@ -19,9 +19,9 @@ def dict_sorted(data: dict, flag: int = 0, ascending: bool = True):
     对dict排序
 
     Args:
-        data(dict): 目标数据dict类型
-        flat(int):  默认为0，表示按照字典的key进行排序；1表示按照value进行排序
-        ascending(bool): 默认为True，表示按照升序排序；False表示降序排序
+        data (dict): 目标数据dict类型
+        flag (int): 默认为0，表示按照字典的key进行排序；1表示按照value进行排序
+        ascending (bool): 默认为True，表示按照升序排序；False表示降序排序
 
     Returns:
         dict: 排序后的数据
@@ -33,7 +33,7 @@ def list_deduplicate(data: list):
     """列表项为dict类型的去重
 
     Args:
-        data(list): 目标数据，list类型
+        data (list): 目标数据，list类型
 
     Returns:
         list: 去重后的数据
@@ -42,22 +42,18 @@ def list_deduplicate(data: list):
 
 
 def sort_list(
-    data: list,
-    ascending: bool = True,
-    flag: int = 0,
-    position: int = 0,
-    key: str = "",
+    data: list, ascending: bool = True, flag: int = 0, position: int = 0, key: str = "",
 ):
     """
     对 list 进行排序
 
     Args:
-        data(list): list 类型数据，item 为 dict 或者 basic type
-        ascending(bool): 默认为 True，表示升序；False 表示降序
-        flag(int): 0 表示元素为基本类型，1 表示元素为 dict，2 表示元素为 tuple
-        position(int): 如果元素为 basic type，position 保持默认即可；
+        data (list): list 类型数据，item 为 dict 或者 basic type
+        ascending (bool): 默认为 True，表示升序；False 表示降序
+        flag (int): 0 表示元素为基本类型，1 表示元素为 dict，2 表示元素为 tuple
+        position (int): 如果元素为 basic type，position 保持默认即可；
             如果元素为 tuple，position 的数值表示以哪个 index 位置的值排序
-        key(str): 如果元素为 dict，key 表示按照哪个 key 的 value 进行排序
+        key (str): 如果元素为 dict，key 表示按照哪个 key 的 value 进行排序
 
     Returns:
         list: 排序后的数据
@@ -105,41 +101,3 @@ def chunks(arr, m):
     """
     n = int(math.ceil(len(arr) / float(m)))
     return [arr[i : i + n] for i in range(0, len(arr), n)]
-
-
-#  if __name__ == "__main__":
-#      # get_paths_from_dir测试
-#      #  result = get_paths_from_dir("../", "py", recusive=True)
-#      #  print(result)
-#
-#      # #### sort_list测试
-#      # alist = [
-#      #     {"level": 19, "star": 36, "time": 1},
-#      #     {"level": 20, "star": 40, "time": 2},
-#      #     {"level": 20, "star": 40, "time": 3},
-#      #     {"level": 20, "star": 40, "time": 4},
-#      #     {"level": 20, "star": 40, "time": 5},
-#      #     {"level": 20, "star": 40},
-#      #     {"level": 18, "star": 40, "time": 1},
-#      # ]
-#      # result = sort_list(alist, ascending=False, flag=1, key="time")
-#      #
-#      # alist = [
-#      #     (1, 2, 3),
-#      #     (0, 1, 2),
-#      #     (3, 4),
-#      #     (2, 3, 4),
-#      # ]
-#      # result = sort_list(data=alist, ascending=False, flag=2, position=1)
-#      #
-#      # alist = [6, 4, 9, 10, 0]
-#      # alist = ["acc", "cdef", "xyz", "0234", "123"]
-#      # result = sort_list(data=alist, ascending=False)
-#      #
-#      # print(result)
-#
-#      # data = {"b": 1, "a": 2}
-#      # res = dict_sorted(data, flag=1, ascending=True)
-#      # print(res)
-#
-#      pass
