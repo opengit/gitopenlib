@@ -8,10 +8,59 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.1.10"
+__version__ = "0.2.0"
 
 
+import json
 import math
+
+
+def ele2dict(data: list):
+    """把元素为json字符串的list数据，转为，元素为dict类型的list数据
+
+    Args:
+        data (list): list类型的数据，元素为json字符串类型
+
+    Returns:
+        list : 转换后的list数据
+    """
+    return [json2dict(item) for item in data]
+
+
+def ele2json(data: list):
+    """把元素为dict类型的list数据，转为，元素为json字符串的list数据
+
+    Args:
+        data (list): list类型的数据，元素为dict类型
+
+    Returns:
+        list : 转换后的list数据
+    """
+    return [dict2json(item) for item in data]
+
+
+def dict2json(data: dict):
+    """将dict转为json字符串
+
+    Args:
+        data (dict): dict类型的数据
+
+    Returns:
+        str : 返回json字符串
+    """
+    return json.dumps(data, ensure_ascii=False)
+
+
+def json2dict(astr: str):
+    """将json字符串转为dict类型的数据对象
+
+    Args:
+        astr (str): json字符串转为dict类型的数据对象
+
+    Returns:
+        str : 返回dict类型数据对象
+    """
+    return json.loads(astr)
 
 
 def dict_sorted(data: dict, flag: int = 0, ascending: bool = True):
@@ -42,7 +91,11 @@ def list_deduplicate(data: list):
 
 
 def sort_list(
-    data: list, ascending: bool = True, flag: int = 0, position: int = 0, key: str = "",
+    data: list,
+    ascending: bool = True,
+    flag: int = 0,
+    position: int = 0,
+    key: str = "",
 ):
     """
     对 list 进行排序
