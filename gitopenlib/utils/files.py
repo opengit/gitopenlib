@@ -7,9 +7,10 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  Powered by GitOPEN
 
-__version__ = "0.2.6"
+__version__ = "0.2.7"
 
 import json
+import os
 import time
 from pathlib import Path, PosixPath
 from types import FunctionType
@@ -59,17 +60,19 @@ def file_writer(
 
     Args:
         lines (str or list): 可以是单个字符串或者字符串的列表
-        dir_path (str or Path): 文件路径
+        dir_path (str or Path): 文件的绝对路径
         file_name (str): 文件名称，有默认值
         mode (str): 写文件的的模式，默认为 a+
         separator (str): 每一行末尾的分隔符，有默认值
         encoding (str): 文件的编码格式，默认为utf-8
-        backup (bool): 如果文件已经存在，是否对原文件进行备份，默认为True
+        backup (bool): 如果文件已经存在，是否对原文件进行备份，默认为True；
+            如果为False，当文件已经存在的情况下，会追加到存在的文件中。
 
     Returns:
         None: 无返回值
     """
     dir_path: Path = Path(dir_path) if isinstance(dir_path, str) else dir_path
+
     if not dir_path.exists():
         print(
             "## Warning: The dir path you submit is not exist, "
