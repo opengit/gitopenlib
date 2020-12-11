@@ -190,19 +190,18 @@ def read_jsons(file_path: str or PosixPath, encoding: str = "utf-8"):
     return [json.loads(item) for item in result]
 
 
-#  if __name__ == "__main__":
-#
-#      #  def parse(data):
-#      #      time.sleep(0.5)
-#      #
-#      #  file_path = "/Users/sunjiajia/Works/Projects/PycharmProjects/interdisciplinary2/output/results/test_cits_10000.txt"
-#      #  read_txt_by_page(file_path=file_path, parse_func=parse, page_size=1000)
-#
-#      #  file_writer(
-#      #      lines=["1", "adb", "sdf"],
-#      #      dir_path="/Users/sunjiajia/Downloads/test9919/tere",
-#      #      file_name="xxx.txt",
-#      #      separator="\n",
-#      #      backup=False,
-#      #  )
-#      pass
+if __name__ == "__main__":
+
+    #  def parse(data):
+    #      time.sleep(0.5)
+    #
+    #  file_path = "/Users/sunjiajia/Works/Projects/PycharmProjects/interdisciplinary2/output/results/test_cits_10000.txt"
+    #  read_txt_by_page(file_path=file_path, parse_func=parse, page_size=1000)
+
+    file_writer(
+        lines=["1", "adb", "sdf"],
+        dir_path="~/Downloads/test9919/tere",
+        file_name="xxx.txt",
+        backup=False,
+    )
+    pass
