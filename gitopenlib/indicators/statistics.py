@@ -11,7 +11,82 @@ from collections import Counter
 
 import numpy as np
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
+
+
+def calculate_IQR(data: list, k: float = 1.5):
+    """计算四分位距（IQR, Interquartile range）
+
+    Args:
+        data (list): list类型的数据，每个元素为 int 或 float 类型。
+        k (float): 表示异常系数，k = 1.5表示中度异常，k = 3表示极度异常。
+
+    Returns:
+        tuple: 顺序为：upper whisker, upper quartile, median, lower quartile, lower whisker, IQR
+    """
+    Percentile = np.percentile(data, [0, 25, 50, 75, 100])
+    upper_quartile = Percentile[3]
+    lower_quartile = Percentile[1]
+    IQR = upper_quartile - lower_quartile
+    upper_whisker = upper_quartile + IQR * k
+    lower_whisker = lower_quartile - IQR * k
+    median = Percentile[2]
+
+    return upper_whisker, upper_quartile, median, lower_quartile, lower_whisker, IQR
+
+
+def filter_outliers_by_IQR(data: list, k: float = 1.5):
+    """
+    使用IQR对异常值进行检测，又称为 Tukey's test。
+
+    Args:
+        data (list): list类型的数据，每个元素为 int 或 float 类型。
+        k (float): 表示异常系数，k = 1.5表示中度异常，k = 3表示极度异常。
+
+    Returns:
+        tuple: upper outliers, lower outliers
+
+    """
+    (
+        upper_whisker,
+        upper_quartile,
+        median,
+        lower_quartile,
+        lower_whisker,
+        IQR,
+    ) = calculate_IQR(data, k=k)
+    print(" upper_whisker : ", upper_whisker)
+    print(" lower_whisker : ", lower_whisker)
+    upper_outliers = [item for item in data if item > upper_whisker]
+    lower_outliers = [item for item in data if item < lower_whisker]
+
+    return upper_outliers, lower_outliers
+
+
+def remove_outliers_by_IQR(data: list, k: float = 1.5):
+    """
+    使用IQR从数据中移除异常值，返回移除异常值的数据
+
+    Args:
+        data (list): list类型的数据，每个元素为 int 或 float 类型。
+        k (float): 表示异常系数，k = 1.5表示中度异常，k = 3表示极度异常。
+
+    Returns:
+        list: 移除异常值后的数据
+    """
+    (
+        upper_whisker,
+        upper_quartile,
+        median,
+        lower_quartile,
+        lower_whisker,
+        IQR,
+    ) = calculate_IQR(data, k=k)
+
+    new_data = [
+        item for item in data if item <= upper_whisker and item >= lower_whisker
+    ]
+    return new_data
 
 
 def calculate_list_count_percent(data: list, decimals: None or int = None):
@@ -19,8 +94,7 @@ def calculate_list_count_percent(data: list, decimals: None or int = None):
 
     Args:
         data (list): list类型数据。
-        decimals (None or int): 保留的小数位数，默认为None，则不进行位数操作；
-            如果>=0，则保留相应的小数位数。
+        decimals (None or int): 保留的小数位数，默认为None，则不进行位数操作；如果>=0，则保留相应的小数位数。
 
     Returns:
         tuple: 元组第一个元素为次数统计结果，第二个元素为百分比统计结果。
@@ -89,7 +163,6 @@ def normalization(data: list or np.array, decimals: None or int = None):
     对一系列数据进行归一化处理，对原始数据进行线性变换把数据映射到[0,1]之间。
 
     Args:
-
         data (list or np.array): 需要被归一化的数据。
         decimals (None or int): 归一化后，数值保留的精度（小数位数），默认为None，不开启
 
@@ -106,7 +179,6 @@ def standardization(data: list or np.array, decimals: None or int = None):
     对一系列数据进行标准化处理，常用的方法是z-score标准化，处理后数据均值为0，标准差为1。
 
     Args:
-
         data (list or np.array): 需要被标准化的数据。
         decimals (None or int): 归一化后，数值保留的精度（小数位数），默认为None，不开启
 
@@ -124,7 +196,6 @@ def zero_centered(data: list or np.array, decimals: None or int = None):
     对一系列数据进行零均值化，即zero-centered。对数据的平移的一个过程，之后数据的中心点为(0,0)。
 
     Args:
-
         data (list or np.array): 需要被零均值化的数据。
         decimals (None or int): 数值保留的精度（小数位数），默认为None，不开启
 
