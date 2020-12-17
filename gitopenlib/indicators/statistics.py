@@ -11,7 +11,24 @@ from collections import Counter
 
 import numpy as np
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
+
+
+def counter2percenter(data: dict):
+    """convert counter dict to percenter dict.
+
+    将 key/value 分别为数值、数值频次的字典类型数据，
+    转换为，key/value 分别为数值、数值频次百分比的字典类型数据。
+
+    Args:
+        data (dict): dict类型的数据，key/value分别为数值、数值频次。
+
+    Returns:
+        dict: dict类型的数据，key/value分别为数值、数值频次百分比。
+    """
+    sum_ = sum(list(data.values()))
+
+    return dict([(key, value / sum_) for key, value in data.items()])
 
 
 def calculate_IQR(data: list, k: float = 1.5):
