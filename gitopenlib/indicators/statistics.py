@@ -11,7 +11,27 @@ from collections import Counter
 
 import numpy as np
 
-__version__ = "0.5.0"
+__version__ = "0.6.0"
+
+
+def hist_bins(N: int, mode: int = 0):
+    """计算柱状图的bins，依据 Sturges' rule 和 Rice's rule 两种方法。
+
+    参见 http://onlinestatbook.com/2/graphing_distributions/histograms.html
+
+    Args:
+        N (int): 数据的数目
+        mode (int): Sturges' rule 的计算方法选择，0 是 1+log2(N)，1 是 1+3.3log10(N)
+
+    Returns:
+        tuple: 由
+
+    """
+
+    s_rule = (1 + np.log2(N)) if mode == 0 else (1 + 3.3 * np.log10(N))
+    r_rule = 2 * np.power(N, 1 / 3)
+
+    return round(s_rule), round(r_rule)
 
 
 def counter2percenter(data: dict):
