@@ -11,13 +11,17 @@ from collections import Counter
 
 import numpy as np
 import scipy
-from numpy import ndarray
 
-__version__ = "0.7.0"
+__version__ = "0.7.1"
 
 
 def KL_divergence(p: list, q: list):
-    """计算KL散度"""
+    """计算KL散度，两者越相似，KL散度越小。
+
+    KL散度满足非负性
+    KL散度是不对称的，交换P、Q的位置将得到不同结果。
+
+    """
     p_arr = np.asarray(p)
     q_arr = np.asarray(q)
 
@@ -25,11 +29,17 @@ def KL_divergence(p: list, q: list):
 
 
 def JS_divergence(p: list, q: list):
-    """计算JS散度"""
+    """计算JS散度，两者越相似，JS散度越小。
+
+    JS散度的取值范围在0-1之间，完全相同时为0
+    JS散度是对称的
+
+    """
     p_arr = np.asarray(p)
     q_arr = np.asarray(q)
 
     M = (p_arr + q_arr) / 2
+
     return 0.5 * scipy.stats.entropy(p, M) + 0.5 * scipy.stats.entropy(q, M)
 
 
