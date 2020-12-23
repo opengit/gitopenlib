@@ -10,8 +10,27 @@
 from collections import Counter
 
 import numpy as np
+import scipy
+from numpy import ndarray
 
-__version__ = "0.6.0"
+__version__ = "0.7.0"
+
+
+def KL_divergence(p: list, q: list):
+    """计算KL散度"""
+    p_arr = np.asarray(p)
+    q_arr = np.asarray(q)
+
+    return scipy.stats.entropy(p_arr, q_arr)
+
+
+def JS_divergence(p: list, q: list):
+    """计算JS散度"""
+    p_arr = np.asarray(p)
+    q_arr = np.asarray(q)
+
+    M = (p_arr + q_arr) / 2
+    return 0.5 * scipy.stats.entropy(p, M) + 0.5 * scipy.stats.entropy(q, M)
 
 
 def hist_bins(N: int, mode: int = 0):
