@@ -12,7 +12,40 @@ from collections import Counter
 import numpy as np
 import scipy
 
-__version__ = "0.7.1"
+__version__ = "0.8.0"
+
+
+def coefficient_of_variation(data: list):
+    """计算变异系数，又称离散系数，是一个衡量数据离散程度的、没有量纲的统计量。
+
+    通常用来比较两组量纲差异明显的数据的离散程度，例如粉丝数量差距显著的社交媒体帐号的推文点赞量的离散程度。
+
+    """
+    mean = np.mean(data)  # 计算平均值
+    std = np.std(data, ddof=0)  # 计算标准差
+    cv = std / mean
+    return cv
+
+
+def kurtosis_skewness(data: list):
+    """求一组数据的峰度 kurtosis 和 偏度 Skewness。
+
+    正态分布的峰度为3，若峰度大于0，则说明该组数据的分布曲线相较于正态分布更加陡峭；若峰度小于0，则说明该组数据的分布曲线相较于正态分布更加平缓。换言之，峰度越大，则数据在靠近均值的部分分布得越多，在距离均值较远的部分分布得较少。
+    峰度可以用来衡量风险，同样的方差下，峰度越高，越容易取极端值，风险越大。
+    峰度可以帮助衡量众数的统计学意义，峰度越高，众数在描述该组数据的集中趋势的作用就越高。
+
+    正态分布的偏度为0，用来衡量数据分布的对称性，
+    当偏度小于0时，称为 Negative Skew，出现左侧长尾，
+    当偏度大于0时，称为 Positive Skew，出现右侧长尾，
+    当偏度的绝对值过大时，长尾一侧出现极端值的可能性较高。
+
+    """
+    arr_ = np.asarray(data)
+
+    k_ = scipy.stats.kurtosis(arr_)
+    s_ = scipy.stats.skew(arr_)
+
+    return k_, s_
 
 
 def KL_divergence(p: list, q: list):
