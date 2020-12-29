@@ -8,11 +8,49 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 
 import json
 import math
+
+
+def filter_by_thresholds(data: list, thresholds: list, threshold_closed: str = None):
+    """依据阈值范围对数据进行过滤
+
+    依据 threshold 中的规则对 data 数据进行过滤，threshold_closed
+    规定区间规则的闭合状态，rl/lr 表示区间两端闭合，r表示右闭合，l表示左闭合
+
+    Args:
+        data (list): list类型的数据；
+        thresholds (list): list类型的参数，元素为tuple类型；
+        threshold_closed (str): str类型的参数，rl/lr
+            表示区间两端闭合，r 表示右闭合，l 表示左闭合，None 表示两端开区间。
+
+    Returns:
+        list : 按照区间保留下来的数据。
+    """
+    for th in thresholds:
+        for index, value in enumerate(data):
+            if threshold_closed == "rl" or threshold_closed == "lr":
+                # 闭合区间，保留区间内的所有值，排除区间外的值
+                if value < th[0] or value > th[1]:
+                    data[index] = ""
+            if threshold_closed == "r":
+                # 左开右闭
+                if value <= th[0] or value > th[1]:
+                    data[index] = ""
+            if threshold_closed == "l":
+                # 左闭右开
+                if value < th[0] or value >= th[1]:
+                    data[index] = ""
+            if threshold_closed is None:
+                # 两端开区间
+                if value <= th[0] or value >= th[1]:
+                    data[index] = ""
+        data = remove_0_str(data)
+
+    return data
 
 
 def ele2dict(data: list):
