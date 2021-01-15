@@ -12,7 +12,36 @@ from collections import Counter
 import numpy as np
 import scipy
 
-__version__ = "0.8.0"
+__version__ = "0.9.0"
+
+
+def get_extremum(data: dict or list, type: str = "max"):
+    """获取最大值和最小值"""
+    if isinstance(data, dict):
+        keys, values = list(data.keys()), list(data.values())
+    elif isinstance(data, list):
+        keys, values = [key for key in range(len(data))], data
+    else:
+        raise Exception("please check the data parameter and its type.")
+
+    if type == "max":
+        extremum = max(values)
+    elif type == "min":
+        extremum = min(values)
+    else:
+        raise Exception("please check the type parameter.")
+
+    res_keys, res_values = list(), list()
+    for k, v in zip(keys, values):
+        if type == "max":
+            if v >= extremum:
+                res_keys.append(k)
+                res_values.append(v)
+        elif type == "min":
+            if v <= extremum:
+                res_keys.append(k)
+                res_values.append(v)
+    return res_keys, res_values
 
 
 def coefficient_of_variation(data: list):
