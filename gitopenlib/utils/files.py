@@ -7,24 +7,26 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  Powered by GitOPEN
 
-__version__ = "0.2.7"
+__version__ = "0.2.7.1"
 
 import json
-import os
 import time
 from pathlib import Path, PosixPath
 from types import FunctionType
+from typing import Optional
 
 from gitopenlib.utils import basics as gb
 
 
-def get_paths_from_dir(dirs: str or list, types: str or list, recusive: bool = False):
+def get_paths_from_dir(
+    dirs: str or list, types: Optional[str or list] = None, recusive: bool = False
+):
     """
     从指定目录下获取所有指定扩展名文件的路径，不递归子文件夹
 
     Args:
         dirs (list): 文件夹路径（绝对路径），单个用str表示，多个用list
-        types (types): 指定文件的扩展名，单个用str表示，多个用list
+        types (types): 指定文件的扩展名，单个用str表示，多个用list，默认为None，表示所有类型文件
         recusive (bool): 是否递归子文件，默认为False
 
     Returns:
@@ -33,10 +35,14 @@ def get_paths_from_dir(dirs: str or list, types: str or list, recusive: bool = F
 
     if isinstance(dirs, str):
         dirs = [dirs]
-    if isinstance(types, str):
-        types = [types]
+    if types is not None:
+        if isinstance(types, str):
+            types = [types]
+        rule = "**/*." if recusive else "*."
+    else:
+        rule = "**/*" if recusive else "*"
+        types = [""]
 
-    rule = "**/*." if recusive else "*."
     result = []
     for d in dirs:
         path = Path(d).resolve()
@@ -188,20 +194,3 @@ def read_jsons(file_path: str or PosixPath, encoding: str = "utf-8"):
     )
 
     return [json.loads(item) for item in result]
-
-
-if __name__ == "__main__":
-
-    #  def parse(data):
-    #      time.sleep(0.5)
-    #
-    #  file_path = "/Users/sunjiajia/Works/Projects/PycharmProjects/interdisciplinary2/output/results/test_cits_10000.txt"
-    #  read_txt_by_page(file_path=file_path, parse_func=parse, page_size=1000)
-
-    file_writer(
-        lines=["1", "adb", "sdf"],
-        dir_path="~/Downloads/test9919/tere",
-        file_name="xxx.txt",
-        backup=False,
-    )
-    pass
