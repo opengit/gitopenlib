@@ -192,3 +192,33 @@ def chunks(arr, m):
     """
     n = int(math.ceil(len(arr) / float(m)))
     return [arr[i : i + n] for i in range(0, len(arr), n)]
+
+
+def time_formatter(seconds: int, show: bool = True):
+    """将以秒为单位的时间转化为相应的分钟、小时、天。
+
+    Args:
+        seconds (int): 秒数
+        show (bool): 是否打印显示信息，默认为True，那么没有返回值，设置为False，不打印信息，但返回值
+    Returns:
+        tuple: 若show为False，则有返回值，tuple中值的为天，小时，分钟，秒
+    """
+    d = int(seconds // 86400)
+    h = int(seconds // 3600 % 24)
+    m = int((seconds % 3600) // 60)
+    s = round(seconds % 60, 3)
+
+    msg = ""
+    if d > 0:
+        msg += f"{d} days, "
+    if h > 0:
+        msg += f"{h} hours, "
+    if m > 0:
+        msg += f"{m} minutes, "
+    if s > 0:
+        msg += f"{s} seconds."
+
+    if show:
+        print(msg)
+    else:
+        return d, h, m, s
