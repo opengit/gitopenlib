@@ -27,7 +27,9 @@ def timing(f: Callable):
         start_ = time()
         result = f(*args, **kwargs)
         end_ = time()
-        print(f"Elapsed time #{f.__name__}# : {gb.time_formatter(end_ - start_)}")
+        print(
+            f"Elapsed time #{f.__name__}# : {gb.time_formatter(end_ - start_, False)}"
+        )
         return result
 
     return wrapper

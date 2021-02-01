@@ -221,4 +221,4 @@ def time_formatter(seconds: int, show: bool = True):
     if show:
         print(msg)
     else:
-        return d, h, m, s
+        return msg
