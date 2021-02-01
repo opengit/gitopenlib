@@ -12,7 +12,7 @@ from functools import wraps
 from time import time
 from typing import Callable
 
-from basics import time_formatter
+from gitopenlib.utils import basics as gb
 
 
 def timing(f: Callable):
@@ -27,7 +27,7 @@ def timing(f: Callable):
         start_ = time()
         result = f(*args, **kwargs)
         end_ = time()
-        print(f"Elapsed time #{f.__name__}# : {time_formatter(end_ - start_)}")
+        print(f"Elapsed time #{f.__name__}# : {gb.time_formatter(end_ - start_)}")
         return result
 
     return wrapper
