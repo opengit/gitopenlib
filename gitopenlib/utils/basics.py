@@ -8,11 +8,53 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 
 
 import json
 import math
+import random
+
+
+def random_color(n: int = 1):
+    """
+    随机生成颜色代码
+
+    Args:
+        n (int): 生成颜色代码的数目。
+
+    Returns:
+        str or list: n为1时返回一个颜色代码字符串，n不为1时返回颜色代码列表。
+    """
+    if n <= 0:
+        raise Exception(
+            "Invalid param 'n' you provided, which sholud be equal or greater than 1."
+        )
+    colorArr = [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+    ]
+    colors = list()
+    for i in range(n):
+        color = ""
+        for i in range(6):
+            color += colorArr[random.randint(0, 14)]
+        colors.append("#" + color)
+
+    return colors if n > 1 else colors[0]
 
 
 def filter_by_thresholds(data: list, thresholds: list, threshold_closed: str = None):
