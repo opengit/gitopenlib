@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  Powered by GitOPEN
 
-__version__ = "0.2.7.1"
+__version__ = "0.2.8.0"
 
 import json
 import time
@@ -16,6 +16,23 @@ from types import FunctionType
 from typing import Optional
 
 from gitopenlib.utils import basics as gb
+
+
+def new_dirs(dir_paths: str or list):
+    """
+    初始化文件夹，检验文件夹的存在状态，并返回准备好的文件夹路径。
+
+    Args:
+        dir_paths (str or list): 字符串类型的全路径，可以为单个路径，也可以放入列表中，批量创建。
+    """
+    if isinstance(dir_paths, str):
+        dir_paths = [dir_paths]
+
+    for dir in dir_paths:
+        dir_path = Path(dir)
+        dir_path.mkdir(parents=True, exist_ok=True)
+
+    return dir_paths
 
 
 def get_paths_from_dir(

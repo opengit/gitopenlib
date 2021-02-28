@@ -5,7 +5,7 @@
 # @Author :  GitOPEN
 # @Email  :  gitopen@gmail.com
 # @Date   :  2021-02-01 10:25:51
-# @Description :  一些”魔术“方法，即装饰器
+# @Description :  一些”魔术“方法
 
 
 from functools import wraps
