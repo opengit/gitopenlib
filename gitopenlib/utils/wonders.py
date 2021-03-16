@@ -7,6 +7,7 @@
 # @Date   :  2021-02-01 10:25:51
 # @Description :  一些”魔术“方法
 
+__version__ = "0.2.0"
 
 from functools import wraps
 from time import time

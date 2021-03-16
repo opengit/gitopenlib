@@ -5,95 +5,180 @@
 # @Author :  GitOPEN
 # @Email  :  gitopen@gmail.com
 # @Date   :  2020-05-30 22:52:49
-# @Description :  基于Liu Huan进行简单的改写，改写为类。感谢Liu Huan（liuhuan@mail.las.ac.cn)
+# @Description :  求解共现矩阵
 
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
+
+import csv
+import math
+from collections import defaultdict
+from itertools import product
+
+from gitopenlib.utils import basics as gb
+from gitopenlib.utils import files as gf
+from gitopenlib.utils import wonders
+from sklearn.metrics.pairwise import cosine_distances, cosine_similarity
 
 
-import numpy as np
-import pandas as pd
+@wonders.timing
+def generate_CoMatrix(
+    dir_path: str, data: list, filter_num: int = 1, filter_tags: list = None
+):
+    """
+    生成共现矩阵。
 
+    Args:
+        dir_path (str): 工作目录，生成文件的位置。
+        data (list): tags的列表，格式为 [["abc","bcd","cde"],["abc","cde","def"]]。
+        filter_num (int): 计算时只包含出现次数大于等于这个数值的tag。
+        filter_tags (list): 默认为None，只计算列表中包含的tag的共现矩阵；["abc", "cde"]表示只计算"abc","cde"的矩阵
 
-class CoMatrix:
-    def __init__(self, target: list, normal=True):
-        self.target = target
-        self.normal = normal
+    Returns:
+        (tuple): (tags, frequency_vector, ochiia_correlation_vector, cosine_similarity_vector, cosine_distances_vector)，分别表示：标签list，共现矩阵，相关矩阵，余弦相似度矩阵，余弦距离矩阵
 
-    def authors_stat(self, target):
-        au_dict = {}  # 单个关键词频次统计
-        au_group = {}  # 两两关键词合作
-        for authors in target:
-            authors = authors.split(",")  # 按照逗号分开每个关键词
-            authors_co = authors  # 合关键词同样构建一个样本
-            for au in authors:
-                # 统计单个关键词出现的频次
-                if au not in au_dict:
-                    au_dict[au] = 1
-                else:
-                    au_dict[au] += 1
-                # 统计合作的频次
-                authors_co = authors_co[1:]  # 去掉当前关键词
-                for au_c in authors_co:
-                    A, B = au, au_c  # 不能用本来的名字，否则会改变au自身
-                    if A > B:
-                        A, B = B, A  # 保持两个关键词名字顺序一致
-                    co_au = A + "," + B  # 将两个关键词合并起来，依然以逗号隔开
-                    if co_au not in au_group:
-                        au_group[co_au] = 1
-                    else:
-                        au_group[co_au] += 1
-        return au_group, au_dict
+    """
 
-    def generate_matrix(self, au_group, au_dict):
-        # 取出所有单个关键词
-        au_list = list(au_dict.keys())
-        # 新建一个空矩阵
-        matrix = pd.DataFrame(np.identity(len(au_list)), columns=au_list, index=au_list)
-        for key, value in au_group.items():
-            A = key.split(",")[0]
-            B = key.split(",")[1]
-            Fi = au_dict[A]
-            Fj = au_dict[B]
-            if self.normal:
-                Eij = value * value / (Fi * Fj)
-            else:
-                Eij = value
-            # 按照关键词进行索引，更新矩阵
-            matrix.loc[A, B] = Eij
-            matrix.loc[B, A] = Eij
-        return matrix
+    def save_matrix(path: str, labels: list, data: list):
+        """
+        保存到 csv
+        """
+        with open(path, "a+") as f:
+            #  tsv_writer = csv.writer(f, delimiter="\t")
+            tsv_writer = csv.writer(f)
+            tsv_writer.writerow(["index"] + labels)
+            for idx, item in enumerate(data):
+                row_ = list()
+                row_.append(labels[idx])
+                row_.extend(item)
+                tsv_writer.writerow(row_)
 
-    def to_tsv(self, path_csv, path_tsv):
-        csv_file = open(path_csv, "r")
-        tsv_file = open(path_tsv, "w+")
-        for index, line in enumerate(csv_file):
-            if index == 0:
-                line = "*" + line
-            line = line.replace(",", "\t")
-            tsv_file.write(line)
-        tsv_file.close()
-        csv_file.close()
+    # 工作目录
+    BASE_DIR = gf.new_dirs(dir_path)[0]
 
-    def run(self):
-        au_group, au_dict = self.authors_stat(self.target)
-        # print("au_group:", au_group)
-        # print("au_dict:", au_dict)
-        matrix = self.generate_matrix(au_group, au_dict)
-        # print(matrix)
-        # 相关系数
-        # print(matrix.corr())
-        if self.normal:
-            file_name = "matrix_normal"
-        else:
-            file_name = "matrix"
-        matrix.to_csv(f"{file_name}.csv", index_label="id")
-        print(f"the {file_name}.csv is saved..")
-        self.to_tsv(f"{file_name}.csv", f"{file_name}.tsv")
-        print(f"the {file_name}.tsv is saved..")
+    # kw 出现的次数统计
+    kw_num_dict = defaultdict(int)
+    for item in data:
+        for kw in item:
+            kw_num_dict[kw] += 1
+    #  print(kw_num_dict)
+
+    # 依据频次对关键词进行过滤
+    kw_num_filter_dict = defaultdict(int)
+    for kw, num in kw_num_dict.items():
+        if num >= filter_num:
+            kw_num_filter_dict[kw] = num
+
+    kw_num_dict = kw_num_filter_dict
+
+    # 关键词列表
+    kws = list(kw_num_dict.keys())
+
+    # 如果同时指定了 filter_num 和 filter_kws ，
+    # 那么需要对两种情况下的关键词列表取交集
+    if filter_tags:
+        kws = list(set(kws).intersection(set(filter_tags)))
+    kws = sorted(kws)
+
+    # 两两组合出现的次数
+    pair_count_dict = defaultdict(int)
+    for item in data:
+        pairs = list(product(item, item))
+        for pair in pairs:
+            if pair[0] in set(kws) and pair[1] in set(kws):
+                pair_count_dict[pair] += 1
+
+    # 若 pair 中的两个词汇一样，那么共现次数设置为0
+    pair_count_dict = dict(
+        [
+            (pair, 0 if pair[0] == pair[1] else count)
+            for pair, count in pair_count_dict.items()
+        ]
+    )
+
+    # 转换为数据结构，因为每个词汇可能和多个词汇组成pair
+    # 转换为以 {'kw1':{'kw2':2,'kw3':4}}的结构，
+    # 表示 kw1 和 kw2 共现 2 次，和 kw3 共现4 次。
+    kw_kw_dict = defaultdict(dict)
+    for pair, count in pair_count_dict.items():
+        kw_kw_dict[pair[0]][pair[1]] = count
+
+    # 补全，有的kw之间共现为0，补全一下
+    for kw, kw_count in kw_kw_dict.items():
+        already_kws = set(kw_count.keys())
+        diffs = set(kws).difference(already_kws)
+        for diff in diffs:
+            kw_kw_dict[kw][diff] = 0
+
+    # 对 kw_kw_dict 排序，以及对kw的kw_dict排序
+    kw_kw_dict = gb.dict_sorted(kw_kw_dict, 0)
+    kw_kw_dict = dict(
+        [(kw, gb.dict_sorted(kw_count, 0)) for kw, kw_count in kw_kw_dict.items()]
+    )
+
+    # 转为向量的格式
+    kw_vector_dict = dict()
+    for kw, kw_count in kw_kw_dict.items():
+        kw_vector_dict[kw] = list(kw_count.values())
+
+    # 共现频次 矩阵
+    frequency_vector = list()
+
+    # Ochiia系数将共词矩阵转换为相关矩阵
+    # ochiia = kw1_kw2共现次数 / ( kw2频次平方根*kw2频次平方根 )
+    correlation_matrix_dict = defaultdict(dict)
+    for kw, kw_count in kw_kw_dict.items():
+        frequency_vector.append(list(kw_count.values()))
+        for kw_sub, count in kw_count.items():
+            ochiia = count / (
+                math.sqrt(kw_num_dict[kw]) * math.sqrt(kw_num_dict[kw_sub])
+            )
+            correlation_matrix_dict[kw][kw_sub] = ochiia
+
+    # 相关矩阵
+    ochiia_correlation_vector = [
+        list(val.values()) for kw, val in correlation_matrix_dict.items()
+    ]
+
+    # 计算余弦相似度
+    cosine_similarity_vector = cosine_similarity(frequency_vector)
+
+    # 计算余弦距离
+    cosine_distances_vector = cosine_distances(frequency_vector)
+
+    # 保存为 csv 矩阵格式
+    for vector, name in zip(
+        [
+            frequency_vector,
+            ochiia_correlation_vector,
+            cosine_similarity_vector,
+            cosine_distances_vector,
+        ],
+        [
+            "frequency_vector",
+            "ochiia_correlation_vector",
+            "cosine_similarity_vector",
+            "cosine_distances_vector",
+        ],
+    ):
+        save_matrix(
+            "{}/{}.csv".format(BASE_DIR, name).replace("_vector", "_matrix"),
+            kws,
+            vector,
+        )
+
+    print("...done...")
+
+    return (
+        kws,
+        frequency_vector,
+        ochiia_correlation_vector,
+        cosine_similarity_vector,
+        cosine_distances_vector,
+    )
 
 
 #  if __name__ == "__main__":
-#      kws = ["a,b,c", "123,123,456"]
-#      cm = CoMatrix(target=kws, normal=True)
-#      cm.run()
+#      data = [["abc", "bcd", "cde"], ["abc", "cde", "def"]]
+#      generate_CoMatrix(dir_path="./", data=data, filter_num=1, filter_tags=None)
+#      pass
