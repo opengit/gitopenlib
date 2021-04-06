@@ -8,12 +8,26 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.4.0"
+__version__ = "0.6.0"
 
 
 import json
 import math
 import random
+
+from gitopenlib.utils import basics as gb
+
+
+def split_strip(strings: str or list, sep: str, maxsplit: int = -1):
+    return gb.remove_0_str([it.strip() for it in strings.split(sep, maxsplit)])
+
+
+def printj(msg: dict, beautify: bool = True, ensure_ascii: bool = False):
+    print(
+        json.dumps(msg, sort_keys=True, indent=4, ensure_ascii=ensure_ascii)
+        if beautify
+        else json.dumps(msg, ensure_ascii=ensure_ascii)
+    )
 
 
 def random_color(n: int = 1):
