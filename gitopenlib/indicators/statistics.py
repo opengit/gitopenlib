@@ -7,12 +7,27 @@
 # @Date   :  2020-11-05 10:23:57
 # @Description :  一系列统计学相关的计算函数
 
+import math
 from collections import Counter
 
 import numpy as np
 import scipy
 
-__version__ = "0.9.0"
+__version__ = "0.10.0"
+
+
+def get_high_low_threshold(minimum_count: int):
+    """
+    获取关键词的高低频临界值
+    文献：
+
+    Args:
+        minimum_count (int): 频次为1的关键词的数量。
+
+    Returns:
+        float : 临界值是浮点型。
+    """
+    return (-1 + math.sqrt(1 + 8 * minimum_count)) / 2
 
 
 def get_extremum(data: dict or list, type: str = "max"):
