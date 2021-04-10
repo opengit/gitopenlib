@@ -7,7 +7,7 @@
 # @Date   :  2021-02-01 10:25:51
 # @Description :  一些”魔术“方法
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 from functools import wraps
 from time import time
@@ -29,7 +29,7 @@ def timing(f: Callable):
         result = f(*args, **kwargs)
         end_ = time()
         print(
-            f"Elapsed time #{f.__name__}# : {gb.time_formatter(end_ - start_, False)}"
+            f"Elapsed time # {f.__name__} # : {gb.time_formatter(end_ - start_, False)}"
         )
         return result
 

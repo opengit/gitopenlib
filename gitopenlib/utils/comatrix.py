@@ -8,31 +8,37 @@
 # @Description :  求解共现矩阵
 
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 import csv
 import math
 from collections import defaultdict
 from itertools import product
 
+from sklearn.metrics.pairwise import cosine_distances, cosine_similarity
+
 from gitopenlib.utils import basics as gb
 from gitopenlib.utils import files as gf
 from gitopenlib.utils import wonders
-from sklearn.metrics.pairwise import cosine_distances, cosine_similarity
 
 
 @wonders.timing
 def generate_CoMatrix(
-    dir_path: str, data: list, filter_num: int = 1, filter_tags: list = None
+    dir_path: str,
+    data: list,
+    filter_num: int = 1,
+    filter_tags: list = None,
+    save: bool = False,
 ):
     """
     生成共现矩阵。
 
     Args:
-        dir_path (str): 工作目录，生成文件的位置。
-        data (list): tags的列表，格式为 [["abc","bcd","cde"],["abc","cde","def"]]。
-        filter_num (int): 计算时只包含出现次数大于等于这个数值的tag。
+        dir_path (str): 工作目录，生成文件的位置
+        data (list): tags的列表，格式为 [["abc","bcd","cde"],["abc","cde","def"]]
+        filter_num (int): 计算时只包含出现次数大于等于这个数值的tag
         filter_tags (list): 默认为None，只计算列表中包含的tag的共现矩阵；["abc", "cde"]表示只计算"abc","cde"的矩阵
+        save (True): 默认为 False，不把向量保存到文件
 
     Returns:
         (tuple): (tags, frequency_vector, ochiia_correlation_vector, cosine_similarity_vector, cosine_distances_vector)，分别表示：标签list，共现矩阵，相关矩阵，余弦相似度矩阵，余弦距离矩阵
@@ -147,25 +153,26 @@ def generate_CoMatrix(
     cosine_distances_vector = cosine_distances(frequency_vector)
 
     # 保存为 csv 矩阵格式
-    for vector, name in zip(
-        [
-            frequency_vector,
-            ochiia_correlation_vector,
-            cosine_similarity_vector,
-            cosine_distances_vector,
-        ],
-        [
-            "frequency_vector",
-            "ochiia_correlation_vector",
-            "cosine_similarity_vector",
-            "cosine_distances_vector",
-        ],
-    ):
-        save_matrix(
-            "{}/{}.csv".format(BASE_DIR, name).replace("_vector", "_matrix"),
-            kws,
-            vector,
-        )
+    if save:
+        for vector, name in zip(
+            [
+                frequency_vector,
+                ochiia_correlation_vector,
+                cosine_similarity_vector,
+                cosine_distances_vector,
+            ],
+            [
+                "frequency_vector",
+                "ochiia_correlation_vector",
+                "cosine_similarity_vector",
+                "cosine_distances_vector",
+            ],
+        ):
+            save_matrix(
+                "{}/{}.csv".format(BASE_DIR, name).replace("_vector", "_matrix"),
+                kws,
+                vector,
+            )
 
     print("...done...")
 

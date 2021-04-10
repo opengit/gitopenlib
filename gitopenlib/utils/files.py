@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  Powered by GitOPEN
 
-__version__ = "0.2.8.0"
+__version__ = "0.2.9"
 
 import json
 import time
@@ -39,12 +39,12 @@ def get_paths_from_dir(
     dirs: str or list, types: Optional[str or list] = None, recusive: bool = False
 ):
     """
-    从指定目录下获取所有指定扩展名文件的路径，不递归子文件夹
+    从指定目录下获取所有指定扩展名文件的路径
 
     Args:
         dirs (list): 文件夹路径（绝对路径），单个用str表示，多个用list
         types (types): 指定文件的扩展名，单个用str表示，多个用list，默认为None，表示所有类型文件
-        recusive (bool): 是否递归子文件，默认为False
+        recusive (bool): 默认为False，不递归子文件夹
 
     Returns:
         list: 文件路径字符串列表
