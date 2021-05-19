@@ -8,7 +8,7 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2.18"
+__version__ = "0.1.2.19"
 
 
 import asyncio
@@ -123,7 +123,7 @@ def aggregate_by_page_asyncio(
     chunks = list()
 
     async def parse_(chunk):
-        await parse_func(chunk)
+        parse_func(chunk)
 
     async def parse_main():
         await asyncio.gather(*[parse_(chunk) for chunk in chunks])
