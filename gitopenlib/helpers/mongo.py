@@ -144,7 +144,7 @@ def aggregate_by_page_asyncio(
         wprint(log_msg)
         # 查询
         condition = [
-            {"$sort": {"_id": 1}},
+            #  {"$sort": {"_id": 1}},
             {"$match": {"_id": {"$gt": current_last_id}}},
             {"$limit": page_size},
         ]
@@ -178,9 +178,13 @@ def aggregate_by_page_asyncio(
         if open_async:
             loop = asyncio.get_event_loop()
             chunks = gb.chunks(data, slave_num)
-            loop.run_until_complete(
-                asyncio.gather(*[parse_(loop, chunk) for chunk in chunks])
-            )
+            try:
+                loop.run_until_complete(
+                    asyncio.gather(*[parse_(loop, chunk) for chunk in chunks])
+                )
+            finally:
+                loop.close()
+                chunks.clear()
         else:
             parse_func(data)
 
