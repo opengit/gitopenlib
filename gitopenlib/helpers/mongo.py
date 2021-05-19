@@ -131,7 +131,8 @@ def aggregate_by_page_asyncio(
     current_page = 0
 
     start_time = time.time()
-    count = coll.find({"_id": {"$gt": current_last_id}}).count()
+    #  count = coll.find({"_id": {"$gt": current_last_id}}).count()
+    count = coll.find().count()
     log_msg = "# find this page data cost time: {}s".format(time.time() - start_time)
     wprint(log_msg)
 
