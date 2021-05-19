@@ -123,6 +123,9 @@ def aggregate_by_page_asyncio(
     if open_log:
         log_file = open(log_file, "a+")
 
+    async def parse_(chunk):
+        await parse_func(chunk)
+
     current_last_id = start_id
     current_page = 0
     count = coll.find({"_id": {"$gt": current_last_id}}).count()
@@ -151,26 +154,39 @@ def aggregate_by_page_asyncio(
             else coll.aggregate(pipeline=condition, session=session)
         )
 
-        find_cost_time = time.time() - start_time
-        log_msg = "# find this page data cost time: {}s".format(find_cost_time)
+        data = [x for x in cursor]
+
+        log_msg = "# find this page data cost time: {}s".format(
+            time.time() - start_time
+        )
         wprint(log_msg)
 
-        data = [x for x in cursor]
         # 更新 current_last_id
         current_last_id = data[-1]["_id"]
         log_msg = "# current_last_id --> {}".format(current_last_id)
         wprint(log_msg)
+
+        log_msg = "# find this page data cost time: {}s".format(
+            time.time() - start_time
+        )
+        wprint(log_msg)
+
         # 翻页
         current_page += 1
         # 处理数据
         if open_async:
             loop = asyncio.get_event_loop()
             chunks = gb.chunks(data, slave_num)
-            #  coroutines = [parse_func(chunk) for chunk in chunks]
-            tasks = [asyncio.ensure_future(parse_func(chunk)) for chunk in chunks]
+            tasks = [asyncio.ensure_future(parse_(chunk)) for chunk in chunks]
             loop.run_until_complete(asyncio.wait(tasks))
         else:
             parse_func(data)
+
+        log_msg = "# find this page data cost time: {}s".format(
+            time.time() - start_time
+        )
+        wprint(log_msg)
+
         data_size += len(data)
         log_msg = "# elapsed time: {}s".format(time.time() - start_time)
         wprint(log_msg)
