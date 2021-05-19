@@ -8,7 +8,7 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2.14"
+__version__ = "0.1.2.15"
 
 
 import asyncio
@@ -165,7 +165,7 @@ def aggregate_by_page_asyncio(
             loop = asyncio.get_event_loop()
             chunks = gb.chunks(data, slave_num)
             try:
-                loop.run_until_complete(parse_(chunks))
+                loop.run_until_complete(await parse_(chunks))
             finally:
                 loop.close()
         else:
