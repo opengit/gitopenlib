@@ -8,7 +8,7 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2.13"
+__version__ = "0.1.2.14"
 
 
 import asyncio
@@ -17,10 +17,9 @@ from typing import Callable
 
 import pymongo
 from bson.objectid import ObjectId
+from gitopenlib.utils import basics as gb
 from pymongo.client_session import ClientSession
 from pymongo.collection import Collection
-
-from gitopenlib.utils import basics as gb
 
 
 class ManageDB:
@@ -121,9 +120,8 @@ def aggregate_by_page_asyncio(
         if open_log:
             log_file.write(log_msg + "\n")
 
-    @asyncio.coroutine
-    def parse_(chunk):
-        parse_func(chunk)
+    async def parse_(chunks: list):
+        await asyncio.gather(*[parse_func(chunk) for chunk in chunks])
 
     if open_log:
         log_file = open(log_file, "a+")
@@ -166,10 +164,10 @@ def aggregate_by_page_asyncio(
         if open_async:
             loop = asyncio.get_event_loop()
             chunks = gb.chunks(data, slave_num)
-            tasks = list()
-            for chunk in chunks:
-                tasks.append(asyncio.ensure_future(parse_(chunk)))
-            loop.run_until_complete(asyncio.wait(tasks))
+            try:
+                loop.run_until_complete(parse_(chunks))
+            finally:
+                loop.close()
         else:
             parse_func(data)
         data_size += len(data)
