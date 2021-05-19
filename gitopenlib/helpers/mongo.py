@@ -120,14 +120,6 @@ def aggregate_by_page_asyncio(
         if open_log:
             log_file.write(log_msg + "\n")
 
-    chunks = list()
-
-    async def parse_(chunk):
-        await parse_func(chunk)
-
-    async def parse_main():
-        await asyncio.gather(*[parse_(chunk) for chunk in chunks])
-
     if open_log:
         log_file = open(log_file, "a+")
 
@@ -158,6 +150,11 @@ def aggregate_by_page_asyncio(
             if options
             else coll.aggregate(pipeline=condition, session=session)
         )
+
+        find_cost_time = time.time() - start_time
+        log_msg = "# find this page data cost time: {}s".format(find_cost_time)
+        wprint(log_msg)
+
         data = [x for x in cursor]
         # 更新 current_last_id
         current_last_id = data[-1]["_id"]
@@ -169,8 +166,9 @@ def aggregate_by_page_asyncio(
         if open_async:
             loop = asyncio.get_event_loop()
             chunks = gb.chunks(data, slave_num)
-            loop.run_until_complete(parse_main())
-            chunks.clear()
+            #  coroutines = [parse_func(chunk) for chunk in chunks]
+            tasks = [asyncio.ensure_future(parse_func(chunk)) for chunk in chunks]
+            loop.run_until_complete(asyncio.wait(tasks))
         else:
             parse_func(data)
         data_size += len(data)
