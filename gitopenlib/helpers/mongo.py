@@ -130,11 +130,7 @@ def aggregate_by_page_asyncio(
     current_last_id = start_id
     current_page = 0
 
-    start_time = time.time()
-    #  count = coll.find({"_id": {"$gt": current_last_id}}).count()
     count = coll.find().count()
-    log_msg = "# find this page data cost time: {}s".format(time.time() - start_time)
-    wprint(log_msg)
 
     page_total = (
         int(count / page_size) if count % page_size == 0 else int(count / page_size) + 1
@@ -173,11 +169,6 @@ def aggregate_by_page_asyncio(
         log_msg = "# current_last_id --> {}".format(current_last_id)
         wprint(log_msg)
 
-        log_msg = "# find this page data cost time: {}s".format(
-            time.time() - start_time
-        )
-        wprint(log_msg)
-
         # 翻页
         current_page += 1
         # 处理数据
@@ -191,17 +182,12 @@ def aggregate_by_page_asyncio(
         else:
             parse_func(data)
 
-        log_msg = "# find this page data cost time: {}s".format(
-            time.time() - start_time
-        )
-        wprint(log_msg)
-
         data_size += len(data)
+        data.clear()
         log_msg = "# elapsed time: {}s".format(time.time() - start_time)
         wprint(log_msg)
         log_msg = "*" * 36
         wprint(log_msg)
-        data.clear()
 
     log_msg = "# the size of all processed data : --> {}\n".format(data_size)
     log_msg += "# total time cost is : --> {}\n".format(time.time() - total_time)
@@ -251,7 +237,8 @@ def aggregate_by_page(
 
     current_last_id = start_id
     current_page = 0
-    count = coll.find({"_id": {"$gt": current_last_id}}).count()
+    #  count = coll.find({"_id": {"$gt": current_last_id}}).count()
+    count = coll.find().count()
     page_total = (
         int(count / page_size) if count % page_size == 0 else int(count / page_size) + 1
     )
@@ -267,7 +254,7 @@ def aggregate_by_page(
         wprint(log_msg)
         # 查询
         condition = [
-            {"$sort": {"_id": 1}},
+            #  {"$sort": {"_id": 1}},
             {"$match": {"_id": {"$gt": current_last_id}}},
             {"$limit": page_size},
         ]
@@ -287,6 +274,7 @@ def aggregate_by_page(
         # 处理数据
         parse_func(data)
         data_size += len(data)
+        data.clear()
         log_msg = "# elapsed time: {}s".format(time.time() - start_time)
         wprint(log_msg)
         log_msg = "*" * 36
