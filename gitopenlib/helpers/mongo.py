@@ -123,8 +123,9 @@ def aggregate_by_page_asyncio(
     if open_log:
         log_file = open(log_file, "a+")
 
-    async def parse_(chunk):
-        await parse_func(chunk)
+    async def parse_(loop, chunk):
+        run_func = lambda: parse_func(chunk)
+        await loop.run_in_executor(None, run_func)
 
     current_last_id = start_id
     current_page = 0
@@ -177,8 +178,9 @@ def aggregate_by_page_asyncio(
         if open_async:
             loop = asyncio.get_event_loop()
             chunks = gb.chunks(data, slave_num)
-            tasks = [asyncio.ensure_future(parse_(chunk)) for chunk in chunks]
-            loop.run_until_complete(asyncio.wait(tasks))
+            loop.run_until_complete(
+                asyncio.gather(*[parse_(loop, chunk) for chunk in chunks])
+            )
         else:
             parse_func(data)
 
