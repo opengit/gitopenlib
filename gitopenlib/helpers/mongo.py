@@ -129,7 +129,12 @@ def aggregate_by_page_asyncio(
 
     current_last_id = start_id
     current_page = 0
+
+    start_time = time.time()
     count = coll.find({"_id": {"$gt": current_last_id}}).count()
+    log_msg = "# find this page data cost time: {}s".format(time.time() - start_time)
+    wprint(log_msg)
+
     page_total = (
         int(count / page_size) if count % page_size == 0 else int(count / page_size) + 1
     )
@@ -178,13 +183,10 @@ def aggregate_by_page_asyncio(
         if open_async:
             loop = asyncio.get_event_loop()
             chunks = gb.chunks(data, slave_num)
-            try:
-                loop.run_until_complete(
-                    asyncio.gather(*[parse_(loop, chunk) for chunk in chunks])
-                )
-            finally:
-                loop.close()
-                chunks.clear()
+            loop.run_until_complete(
+                asyncio.gather(*[parse_(loop, chunk) for chunk in chunks])
+            )
+            chunks.clear()
         else:
             parse_func(data)
 
@@ -198,6 +200,7 @@ def aggregate_by_page_asyncio(
         wprint(log_msg)
         log_msg = "*" * 36
         wprint(log_msg)
+        data.clear()
 
     log_msg = "# the size of all processed data : --> {}\n".format(data_size)
     log_msg += "# total time cost is : --> {}\n".format(time.time() - total_time)
