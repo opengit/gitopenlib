@@ -50,10 +50,10 @@ def set_font(fname="SimHei"):
     plt.rcParams["axes.unicode_minus"] = False
 
 
-if __name__ == "__main__":
-    at = legend_text(plt.gca(), "Line 2\nLine 2", loc=2)
-    at = legend_text(plt.gca(), "Line 3\nLine 3", loc=3)
-    at = legend_text(plt.gca(), "Line 1\nLine 1", loc=1, fontsize=8, fontcolor="green")
-    at = legend_text(plt.gca(), "Line 4\nLine 4", loc=4, fontsize=55)
-    plt.gcf().show()
-    input("pause")
+#  if __name__ == "__main__":
+#      at = legend_text(plt.gca(), "Line 2\nLine 2", loc=2)
+#      at = legend_text(plt.gca(), "Line 3\nLine 3", loc=3)
+#      at = legend_text(plt.gca(), "Line 1\nLine 1", loc=1, fontsize=8, fontcolor="green")
+#      at = legend_text(plt.gca(), "Line 4\nLine 4", loc=4, fontsize=55)
+#      plt.gcf().show()
+#      input("pause")
