@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.6.3"
+__version__ = "0.7.3"
 
 
 import json
@@ -16,6 +16,58 @@ import math
 import random
 
 from gitopenlib.utils import basics as gb
+
+
+def dict_extremum(data: dict, type=0):
+    """
+    找到dict中value的极值，并返回key，若极值有多个，则返回多个key
+
+    Args:
+        data (dict): dict数据，且value必须为数值类型
+        type (int): 1表示执行最大值操作，0表示最小值操作
+
+    Returns:
+        tuple: 极值，键的列表
+    """
+    values = list(data.values())
+    if type == 1:
+        # 极大值
+        ex = max(values)
+    elif type == 0:
+        # 极小值
+        ex = min(values)
+    else:
+        raise Exception("The value of 'type' should only be 0 or 1.")
+
+    # 拿到所有的key
+    keys_ = [k for k, v in data.items() if v == ex]
+
+    return ex, keys_
+
+
+def list_extremum(data: list, type=0):
+    """
+    找到list中的极值，并返回索引，若极值有多个，则返回多个索引
+
+    Args:
+        data (list): list数据
+        type (int): 1表示执行最大值操作，0表示最小值操作
+
+    Returns:
+        tuple: 极值，索引的列表
+    """
+    if type == 1:
+        # 极大值
+        ex = max(data)
+    elif type == 0:
+        # 极小值
+        ex = min(data)
+    else:
+        raise Exception("The value of 'type' should only be 0 or 1.")
+    # 拿到所有索引
+    idx = [id for id, item in enumerate(data) if item == ex]
+
+    return ex, idx
 
 
 def split_strip(strings: str or list, sep: str, maxsplit: int = -1):
