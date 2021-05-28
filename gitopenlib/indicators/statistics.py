@@ -13,13 +13,101 @@ from collections import Counter
 import numpy as np
 import scipy
 
-__version__ = "0.10.0"
+__version__ = "0.11.0"
+
+
+def normal_distribution_values(u: int or float, std: int or float):
+    """生成均值为u标准差为std的正态分布数据
+
+    用处：当样本数据集确定（list），可以求出均值、标准差，
+    生成相应的符合正态分布的y值，画出正态分布曲线，
+    用于比较样本集与正态分布的区别，帮助判断
+
+    """
+    x = np.linspace(u - 3 * std, u + 3 * std, 100)
+    y = np.exp(-((x - u) ** 2) / (2 * std ** 2)) / (math.sqrt(2 * math.pi) * std)
+    return x, y
+
+
+def Cdf(t, x):
+    """累计分布函数，就是值到其在分布中百分等级的映射。
+
+    计算给定x的CDF(x)，就是计算样本中小于等于x的值的比例。
+    在画图时，样本的CDF是一个阶跃函数（图形形状类似向上的阶梯）。
+
+    Args:
+        t (list): 样本集
+        x (int or float): 给定值
+
+    Returns:
+        (float): 概率，小于等于x的值的概率
+
+    """
+    count = 0.0
+    for value in t:
+        if value <= x:
+            count += 1.0
+    prob = count / len(t)
+    return prob
+
+
+def percentile_rank(scores: list, your_score: int or float):
+    """获取百分等级
+
+    百分等级就是原始分数不 高于你的人在全部考试人数中所占的比例再乘以100。
+    如果你 在 90 百分位数，那就是说你比 90% 的人成绩好，或者至少不比 90% 的考试人员差。
+
+    Args:
+        scores (list): 分数列表
+        your_score (int or float): 考察对象的分数
+
+    Returns:
+        (int or float): 百分位数
+    """
+    count = 0
+    for score in scores:
+        if score <= your_score:
+            count += 1
+    percentile_rank = 100.0 * count / len(scores)
+    return percentile_rank
+
+
+def percentile(scores, prank):
+    """根据百分等级，找到百分位数
+
+    Args:
+        scores (list): 分数列表
+        prank (list): 百分等级
+
+    Returns:
+        (int or float): 百分位数
+
+    """
+    scores.sort()
+    for score in scores:
+        if percentile_rank(scores, score) >= prank:
+            return score
+
+
+def percentile2(scores, prank):
+    """根据百分等级，找到百分位数，优化版
+
+    Args:
+        scores (list): 分数列表
+        prank (list): 百分等级
+
+    Returns:
+        (int or float): 百分位数
+
+    """
+    scores.sort()
+    index = percentile_rank * (len(scores) - 1) / 100
+    return scores[index]
 
 
 def get_high_low_threshold(minimum_count: int):
     """
     获取关键词的高低频临界值
-    文献：
 
     Args:
         minimum_count (int): 频次为1的关键词的数量。
