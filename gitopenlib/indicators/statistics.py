@@ -13,7 +13,51 @@ from collections import Counter
 import numpy as np
 import scipy
 
-__version__ = "0.11.0"
+__version__ = "0.12.0"
+
+
+def curve_fit(x: np.array, y: np.array, deg: int):
+    """
+    对x,y进行曲线拟合。
+
+    使用方法：
+    1. 先画出散点图，观察数据的大致形状（如3次函数）；
+    2. 使用该函数进行拟合，deg设置为3；
+    3. 得到拟合后的x对应的y_fit值、R^2、已经方程。
+
+    Args:
+        x (np.array): 自变量x的值，可用list数据转为np.array。
+        y (np.array): 因变量y的值，可用list数据转为np.array。
+
+    Returns:
+        y_fit (np.array): 拟合曲线对应的y值。
+        r2 (np.float64): 拟合效果评价指标。
+        aa (str): 方程的表现形式。
+    """
+    parameter = np.polyfit(x, y, deg)
+    p = np.poly1d(parameter)
+    print(p)
+    aa = ""
+    for i in range(deg + 1):
+
+        bb = round(parameter[i], 5)
+
+        sup = deg - i
+        if i != 0:
+            if bb < 0:
+                aa = list(aa)
+                aa[-1] = "-"
+                aa = "".join(aa)
+                bb = 0 - bb
+        if sup != 0:
+            aa += "{:.3g}".format(bb) + " $x^{" + str(sup) + "}$ " + "+"
+        else:
+            aa += "{:.3g}".format(bb)
+
+    r2 = round(np.corrcoef(y, p(x))[0, 1] ** 2, 3)
+    y_fit = p(x)
+    aa = "$y_{fit}$ = " + aa
+    return y_fit, r2, aa
 
 
 def normal_distribution_values(u: int or float, std: int or float):
