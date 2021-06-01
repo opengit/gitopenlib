@@ -13,7 +13,7 @@ from collections import Counter
 import numpy as np
 import scipy
 
-__version__ = "0.12.0"
+__version__ = "0.12.1"
 
 
 def curve_fit(x: np.array, y: np.array, deg: int):
@@ -40,7 +40,7 @@ def curve_fit(x: np.array, y: np.array, deg: int):
     aa = ""
     for i in range(deg + 1):
 
-        bb = round(parameter[i], 5)
+        bb = parameter[i]
 
         sup = deg - i
         if i != 0:
