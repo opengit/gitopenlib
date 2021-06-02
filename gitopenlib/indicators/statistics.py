@@ -12,8 +12,31 @@ from collections import Counter
 
 import numpy as np
 import scipy
+from gitopenlib.utils import basics as gb
 
-__version__ = "0.12.1"
+__version__ = "0.13.1"
+
+
+def calculate_percent(data: dict):
+    """
+    对数值型字典，计算比例。{key:count,...,...}，key为int或float，count为int或list(int)。
+    计算每个key(int)对应的count(list or int)的数目占总体的比例。
+    将结果打印到控制台。
+    """
+    data = gb.dict_sorted(data)
+    x = list(data.keys())
+    y = list(data.values())
+    if isinstance(y[0], list):
+        y = [sum(v) for v in y]
+    total_count = sum(y)
+
+    for flag in x:
+        count = 0
+        for i, k in enumerate(x):
+            if k >= flag:
+                count += y[i]
+        msg = f"key->{flag}->count->{count}->percent->{round(count/total_count,5)*100}%"
+        print(msg)
 
 
 def curve_fit(x: np.array, y: np.array, deg: int):
