@@ -8,7 +8,7 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2.22"
+__version__ = "0.1.2.23"
 
 
 import asyncio
@@ -50,13 +50,12 @@ def find_by_page(coll, page_size, parse_func):
     find the data by page and process it through the parse function.
 
     Args:
+        coll(Collection): collection object.
+        page_size(int): the page size.
+        parse_func: A handler function, with a parameter of type list,
+            implemented by itself.
 
-        coll(Collection):   collection object.
-        page_size(int):  the page size.
-        parse_func: A handler function, with a parameter of type list, implemented by itself.
-
-    Returns:    None.
-
+    Returns: None.
     """
 
     current_last_id = ObjectId("000000000000000000000000")
@@ -80,7 +79,6 @@ def find_by_page(coll, page_size, parse_func):
 
     print("the size of all processed data : --> {}".format(data_size))
     print("done.")
-    coll.close()
 
 
 def aggregate_by_page_asyncio(
@@ -99,7 +97,6 @@ def aggregate_by_page_asyncio(
     """mongodb的聚合查询，具备分页查询、异步io处理数据功能。
 
     Args:
-
         coll(Collection): 目标Collection，要查询的Collection对象。
         start_id(ObjectId): 起始ObjectId。
         pipeline(list): 管道命令list。
@@ -107,7 +104,8 @@ def aggregate_by_page_asyncio(
         options(dict): aggregate的options选项设置。eg: {"allowDiskUse": True}
         page_size(int): 每页的数据条目数。
         parse_func(Callable): 每一个page的数据的处理函数。需要自己实现。
-        open_log(bool): 是否开启日志，记录当前的Current ObjectId，方便打断任务后，再次运行时扔给start_id。
+        open_log(bool): 是否开启日志，记录当前的Current ObjectId，
+           方便打断任务后，再次运行时扔给start_id。
         log_file(str): 日志文件完整路径，open_log为True时需要填写，False可不填写。
         open_async(bool): 是否开启异步io处理数据，默认不开启。
         slave_num(int): 执行任务的协程数目，默认为4。
@@ -197,8 +195,6 @@ def aggregate_by_page_asyncio(
     if open_log:
         log_file.close()
 
-    coll.close()
-
 
 def aggregate_by_page(
     coll,
@@ -214,7 +210,6 @@ def aggregate_by_page(
     """mongodb的聚合查询，具备分页查询功能。
 
     Args:
-
         coll(Collection): 目标Collection，要查询的Collection对象。
         start_id(ObjectId): 起始ObjectId。
         pipeline(list): 管道命令list。
@@ -222,7 +217,8 @@ def aggregate_by_page(
         options(dict): aggregate的options选项设置。eg: {"allowDiskUse": True}
         page_size(int): 每页的数据条目数。
         parse_func(Callable): 每一个page的数据的处理函数。需要自己实现。
-        open_log(bool): 是否开启日志，记录当前的Current ObjectId，方便打断任务后，再次运行时扔给start_id。
+        open_log(bool): 是否开启日志，记录当前的Current ObjectId，
+            方便打断任务后，再次运行时扔给start_id。
         log_file(str): 日志文件完整路径，open_log为True时需要填写，False可不填写。
 
     Returns:
@@ -288,4 +284,3 @@ def aggregate_by_page(
     wprint(log_msg)
     if open_log:
         log_file.close()
-    coll.close()
