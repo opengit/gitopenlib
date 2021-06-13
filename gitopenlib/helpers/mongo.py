@@ -8,7 +8,7 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2.21"
+__version__ = "0.1.2.22"
 
 
 import asyncio
@@ -80,6 +80,7 @@ def find_by_page(coll, page_size, parse_func):
 
     print("the size of all processed data : --> {}".format(data_size))
     print("done.")
+    coll.close()
 
 
 def aggregate_by_page_asyncio(
@@ -195,7 +196,8 @@ def aggregate_by_page_asyncio(
     wprint(log_msg)
     if open_log:
         log_file.close()
-    pass
+
+    coll.close()
 
 
 def aggregate_by_page(
@@ -286,4 +288,4 @@ def aggregate_by_page(
     wprint(log_msg)
     if open_log:
         log_file.close()
-    pass
+    coll.close()
