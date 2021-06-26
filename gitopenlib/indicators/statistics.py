@@ -9,17 +9,18 @@
 
 import math
 from collections import Counter
+from typing import Optional
 
 import numpy as np
 import scipy
 from gitopenlib.utils import basics as gb
 
-__version__ = "0.13.1"
+__version__ = "0.13.2"
 
 
 def calculate_percent(data: dict):
     """
-    对数值型字典，计算比例。{key:count,...,...}，key为int或float，count为int或list(int)。
+    对数值型字典，计算比例。{key:count}，key为int或float，count为int或list(int)。
     计算每个key(int)对应的count(list or int)的数目占总体的比例。
     将结果打印到控制台。
     """
@@ -83,7 +84,7 @@ def curve_fit(x: np.array, y: np.array, deg: int):
     return y_fit, r2, aa
 
 
-def normal_distribution_values(u: int or float, std: int or float):
+def normal_distribution_values(u: Optional[int or float], std: Optional[int or float]):
     """生成均值为u标准差为std的正态分布数据
 
     用处：当样本数据集确定（list），可以求出均值、标准差，
@@ -118,7 +119,7 @@ def Cdf(t, x):
     return prob
 
 
-def percentile_rank(scores: list, your_score: int or float):
+def percentile_rank(scores: list, your_score: Optional[int or float]):
     """获取百分等级
 
     百分等级就是原始分数不 高于你的人在全部考试人数中所占的比例再乘以100。
@@ -185,7 +186,7 @@ def get_high_low_threshold(minimum_count: int):
     return (-1 + math.sqrt(1 + 8 * minimum_count)) / 2
 
 
-def get_extremum(data: dict or list, type: str = "max"):
+def get_extremum(data: Optional[dict or list], type: str = "max"):
     """获取最大值和最小值"""
     if isinstance(data, dict):
         keys, values = list(data.keys()), list(data.values())
@@ -387,7 +388,7 @@ def remove_outliers_by_IQR(data: list, k: float = 1.5):
     return new_data
 
 
-def calculate_list_count_percent(data: list, decimals: None or int = None):
+def calculate_list_count_percent(data: list, decimals: Optional[None or int] = None):
     """计算list中元素的次数和百分比
 
     Args:
@@ -416,7 +417,7 @@ def calculate_list_count_percent(data: list, decimals: None or int = None):
     return counter, percenter
 
 
-def smooth_ma(data: list or np.array, window_size=3):
+def smooth_ma(data: Optional[list or np.array], window_size=3):
     """
     平滑后的数组的长度为：len(data) - window_size + 1
 
@@ -432,7 +433,7 @@ def smooth_ma(data: list or np.array, window_size=3):
     return ma_vec
 
 
-def smooth_matlab(data: list or np.array, window_size: int = 3):
+def smooth_matlab(data: Optional[list or np.array], window_size: int = 3):
     """
     这个方法是matlab中平滑函数的python实现。它的窗口只能为奇数。
     平滑后的数组的长度为：len(data)
@@ -442,7 +443,7 @@ def smooth_matlab(data: list or np.array, window_size: int = 3):
         window_size (int): 窗口大小。
 
     Returns:
-        np.array: 平滑后的数组
+        np.array: 平滑后的数组。
 
     """
 
@@ -456,7 +457,7 @@ def smooth_matlab(data: list or np.array, window_size: int = 3):
     return np.concatenate((start, out0, stop))
 
 
-def normalization(data: list or np.array, decimals: None or int = None):
+def normalization(data: Optional[list or np.array], decimals: None or int = None):
     """
     对一系列数据进行归一化处理，对原始数据进行线性变换把数据映射到[0,1]之间。
 
@@ -472,7 +473,7 @@ def normalization(data: list or np.array, decimals: None or int = None):
     return ret if decimals is None else np.around(ret, decimals=decimals)
 
 
-def standardization(data: list or np.array, decimals: None or int = None):
+def standardization(data: Optional[list or np.array], decimals: None or int = None):
     """
     对一系列数据进行标准化处理，常用的方法是z-score标准化，处理后数据均值为0，标准差为1。
 
@@ -489,7 +490,7 @@ def standardization(data: list or np.array, decimals: None or int = None):
     return ret if decimals is None else np.around(ret, decimals=decimals)
 
 
-def zero_centered(data: list or np.array, decimals: None or int = None):
+def zero_centered(data: Optional[list or np.array], decimals: None or int = None):
     """
     对一系列数据进行零均值化，即zero-centered。对数据的平移的一个过程，之后数据的中心点为(0,0)。
 
