@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 
 import matplotlib.pyplot as plt
@@ -40,12 +40,21 @@ def legend_text(
     return at
 
 
-def set_font(fname="SimHei"):
+def set_font(fname: str = "SimHei", fsize: int = 10):
     """
-    设置中文字体
+    设置字体
+
+    Args:
+        fname (str): 字体的名称。
+        fsize (int): 字体的大小。
+
+    Returns:
+        None
     """
     # 用来正常显示中文标签
     plt.rcParams["font.sans-serif"] = [fname]
+    # 用来设置字体大小
+    plt.rcParams["font.size"] = fsize
     # 用来正常显示负号
     plt.rcParams["axes.unicode_minus"] = False
 
