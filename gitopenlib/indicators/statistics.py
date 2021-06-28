@@ -15,14 +15,74 @@ import numpy as np
 import scipy
 from gitopenlib.utils import basics as gb
 
-__version__ = "0.13.2"
+__version__ = "0.15.3"
 
 
-def calculate_percent(data: dict):
+def calculate_CDF(data: Optional[list or dict]):
+    """计算 Cumulative Distribution Function (CDF)
+
+    Args:
+        data: 数据。
+
+    Returns:
+        dict: 每个key对应计算的累计频率。
+
     """
-    对数值型字典，计算比例。{key:count}，key为int或float，count为int或list(int)。
-    计算每个key(int)对应的count(list or int)的数目占总体的比例。
+
+    if isinstance(data, list):
+        data = dict(Counter(data))
+
+    data = gb.dict_sorted(data)
+
+    keys = list(data.keys())
+    values = list(data.values())
+    sum_ = sum(values)
+
+    new_values = list()
+    for index, item in enumerate(data):
+        new_values.append(sum(values[: index + 1]) / sum_)
+
+    return dict(zip(keys, new_values))
+
+
+def calculate_PMF(data: Optional[list or dict]):
+    """计算 Probability Mass Function (PMF)
+
+    Args:
+        data: 数据。
+
+    Returns:
+        dict: 每个key对应计算的单个频率。
+
+    """
+
+    if isinstance(data, list):
+        data = dict(Counter(data))
+
+    data = gb.dict_sorted(data)
+
+    keys = list(data.keys())
+    values = list(data.values())
+    sum_ = sum(values)
+
+    new_values = [it / sum_ for it in values]
+
+    return dict(zip(keys, new_values))
+
+
+def calculate_percent(data: dict, mode: str = "gte"):
+    """计算Counter形式的百分比。
+
+    当 mode 为 gte 时，计算 大于等于 key 的占比；
+    当 mode 为 lte 时，计算 小于等于 key 的占比。
     将结果打印到控制台。
+
+    Args:
+        data: Counter形式的数据；
+        mode: 可选值为 gte 和 lte。
+
+    Returns:
+        None
     """
     data = gb.dict_sorted(data)
     x = list(data.keys())
@@ -31,13 +91,21 @@ def calculate_percent(data: dict):
         y = [sum(v) for v in y]
     total_count = sum(y)
 
-    for flag in x:
-        count = 0
-        for i, k in enumerate(x):
-            if k >= flag:
-                count += y[i]
-        msg = f"key->{flag}->count->{count}->percent->{round(count/total_count,5)*100}%"
-        print(msg)
+    if mode == "gte":
+        for flag in x:
+            count = 0
+            for i, k in enumerate(x):
+                if k >= flag:
+                    count += y[i]
+            msg = f"key->{flag}->count->{count}->gte percent->{round(count/total_count,5)*100}%"
+            print(msg)
+    elif mode == "lte":
+        res = calculate_CDF(data)
+        for key, value in res.items():
+            msg = f"key->{key}->count->{data[key]}->lte percent->{round(value,5)*100}%"
+            print(msg)
+    else:
+        raise Exception("This operation has not been implemented.")
 
 
 def curve_fit(x: np.array, y: np.array, deg: int):
@@ -504,3 +572,10 @@ def zero_centered(data: Optional[list or np.array], decimals: None or int = None
     mu = np.mean(data, axis=0)
     ret = data - mu
     return ret if decimals is None else np.around(ret, decimals=decimals)
+
+
+if __name__ == "__main__":
+    a = [1, 1, 2, 3, 4, 5, 5]
+    print(gb.dict_sorted(Counter(a)))
+    print(calculate_CDF(a))
+    print(calculate_PMF(a))
