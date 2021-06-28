@@ -15,7 +15,7 @@ import numpy as np
 import scipy
 from gitopenlib.utils import basics as gb
 
-__version__ = "0.15.3"
+__version__ = "0.16.4"
 
 
 def calculate_CDF(data: Optional[list or dict]):
@@ -43,6 +43,19 @@ def calculate_CDF(data: Optional[list or dict]):
         new_values.append(sum(values[: index + 1]) / sum_)
 
     return dict(zip(keys, new_values))
+
+
+def calculate_CCDF(data: Optional[list or dict]):
+    """计算 Complementary Cumulative Distribution Function (CCDF)
+
+    Args:
+        data: 数据。
+
+    Returns:
+        dict: 每个key对应计算的互补累计频率。
+
+    """
+    return {k: 1 - v for k, v in calculate_CDF(data).items()}
 
 
 def calculate_PMF(data: Optional[list or dict]):
@@ -572,10 +585,3 @@ def zero_centered(data: Optional[list or np.array], decimals: None or int = None
     mu = np.mean(data, axis=0)
     ret = data - mu
     return ret if decimals is None else np.around(ret, decimals=decimals)
-
-
-if __name__ == "__main__":
-    a = [1, 1, 2, 3, 4, 5, 5]
-    print(gb.dict_sorted(Counter(a)))
-    print(calculate_CDF(a))
-    print(calculate_PMF(a))
