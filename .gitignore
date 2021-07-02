@@ -3,6 +3,7 @@
 **/.idea
 .idea
 .vscode
+.vim
 **/.vscode
 **/__pycache__
 output

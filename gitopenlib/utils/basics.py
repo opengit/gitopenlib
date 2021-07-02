@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.7.3"
+__version__ = "0.7.4"
 
 
 import json
@@ -205,7 +205,7 @@ def dict2json(data: dict):
     Returns:
         str : 返回json字符串
     """
-    return json.dumps(data, ensure_ascii=False)
+    return json.dumps(data, ensure_ascii=False, separators=[",", ":"])
 
 
 def json2dict(astr: str):
