@@ -7,8 +7,9 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  Powered by GitOPEN
 
-__version__ = "0.2.10"
+__version__ = "0.3.10"
 
+import asyncio
 import json
 import time
 from pathlib import Path, PosixPath
@@ -168,6 +169,81 @@ def read_txt_by_page(
             pass
         if len(data) > 0:
             parse_func(data)
+            end_time = time.time()
+            cost_time = float(end_time - start_time)
+            total_time += cost_time
+            start_time = end_time
+            print(f"## -{curr_page_id}- page parsed done...{[cost_time]}s")
+            curr_page_id += 1
+    print(f"## All done. Total pages: {curr_page_id}. Elapsed time: {total_time}s")
+
+
+def read_txt_by_page_asyncio(
+    file_path: str,
+    parse_func: FunctionType,
+    page_size: int = 100,
+    encoding: str = "utf-8",
+    open_async: bool = False,
+    slave_num: int = 4,
+):
+    """
+    从文本文件中分页读取内容，具备异步io处理功能
+
+    Args:
+        file_path (str): 文件路径
+        parse_func (FunctionType): 每一页数据处理函数，必须定义
+        page_size (int): 每一页数据量
+        encoding (str): 文本文件的编码格式
+        open_async(bool): 是否开启异步io处理数据，默认不开启
+        slave_num(int): 执行任务的协程数目，默认为4
+
+    Returns:
+        None: 在parse_func已经处理好数据，不用返回值
+    """
+
+    async def parse_(loop, chunk):
+        run_func = lambda: parse_func(chunk)
+        await loop.run_in_executor(None, run_func)
+
+    with open(file=file_path, encoding=encoding, mode="r") as file:
+        data = list()
+        curr_page_id = 0
+        start_time = time.time()
+        total_time = 0.0
+        print("## read_txt_by_page is starting parse the data...")
+        for line in file:
+            data.append(line.strip())
+            if len(data) == page_size:
+                if open_async:
+                    loop = asyncio.get_event_loop()
+                    chunks = gb.chunks(data, slave_num)
+                    loop.run_until_complete(
+                        asyncio.gather(*[parse_(loop, chunk) for chunk in chunks])
+                    )
+                    chunks.clear()
+                else:
+                    parse_func(data)
+                # parse_func(data)
+                data.clear()
+                end_time = time.time()
+                cost_time = float(end_time - start_time)
+                total_time += cost_time
+                start_time = end_time
+                print(f"## -{curr_page_id}- page parsed done...{[cost_time]}s")
+                curr_page_id += 1
+
+            pass
+        if len(data) > 0:
+            if open_async:
+                loop = asyncio.get_event_loop()
+                chunks = gb.chunks(data, slave_num)
+                loop.run_until_complete(
+                    asyncio.gather(*[parse_(loop, chunk) for chunk in chunks])
+                )
+                chunks.clear()
+            else:
+                parse_func(data)
+            # parse_func(data)
             end_time = time.time()
             cost_time = float(end_time - start_time)
             total_time += cost_time
