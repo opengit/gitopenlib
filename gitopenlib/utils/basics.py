@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.7.5"
+__version__ = "0.7.6"
 
 
 import json
@@ -72,7 +72,7 @@ def list_extremum(data: list, type=0) -> tuple:
 
 
 def split_strip(
-    strings: Union[str, List(str)],
+    strings: Union[str, List[str]],
     sep: str,
     maxsplit: int = -1,
 ) -> List[str]:
