@@ -11,9 +11,10 @@ __version__ = "0.1.0"
 
 
 import math
+from typing import List
 
 
-def softmax(data: list, decimal: int = None):
+def softmax(data: list, decimal: int = None) -> List[float]:
     """
     归一化指数函数softmax，将一个任意实数的K维向量，压缩到另一个K维向量中，使得每一个元素
     的范围都在(0,1)之间，并且所有元素的和为1。
@@ -26,10 +27,3 @@ def softmax(data: list, decimal: int = None):
         for i in z_exp
     ]
     return softmax
-
-
-#  if __name__ == "__main__":
-#      data = [1.0, 2.0, 3.0, 4.0, 1.0, 2.0, 3.0]
-#      print(softmax(data))
-#      print(softmax(data, 0))
-#      print(softmax(data, 3))

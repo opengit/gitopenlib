@@ -8,26 +8,27 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.7.4"
+__version__ = "0.7.5"
 
 
 import json
 import math
 import random
+from typing import List, Union
 
 from gitopenlib.utils import basics as gb
 
 
-def dict_extremum(data: dict, type=0):
+def dict_extremum(data: dict, type=0) -> tuple:
     """
     找到dict中value的极值，并返回key，若极值有多个，则返回多个key
 
     Args:
-        data (dict): dict数据，且value必须为数值类型
-        type (int): 1表示执行最大值操作，0表示最小值操作
+        data: dict数据，且value必须为数值类型
+        type: 1表示执行最大值操作，0表示最小值操作
 
     Returns:
-        tuple: 极值，键的列表
+        极值，键的列表
     """
     values = list(data.values())
     if type == 1:
@@ -45,16 +46,16 @@ def dict_extremum(data: dict, type=0):
     return ex, keys_
 
 
-def list_extremum(data: list, type=0):
+def list_extremum(data: list, type=0) -> tuple:
     """
     找到list中的极值，并返回索引，若极值有多个，则返回多个索引
 
     Args:
-        data (list): list数据
-        type (int): 1表示执行最大值操作，0表示最小值操作
+        data: list数据
+        type: 1表示执行最大值操作，0表示最小值操作
 
     Returns:
-        tuple: 极值，索引的列表
+        极值，索引的列表
     """
     if type == 1:
         # 极大值
@@ -70,11 +71,24 @@ def list_extremum(data: list, type=0):
     return ex, idx
 
 
-def split_strip(strings: str or list, sep: str, maxsplit: int = -1):
+def split_strip(
+    strings: Union[str, List(str)],
+    sep: str,
+    maxsplit: int = -1,
+) -> List[str]:
     """
-    拆分字符串，并strip。
+    拆分字符串，并对列表中的元素进行 strip、去除空字符串。
     """
-    return gb.remove_0_str([it.strip() for it in strings.split(sep, maxsplit)])
+    if isinstance(strings, str):
+        return gb.remove_0_str([it.strip() for it in strings.split(sep, maxsplit)])
+    elif isinstance(strings, list):
+        result = []
+        for item in strings:
+            item = str(item).strip()
+            result.append(
+                gb.remove_0_str([it.strip() for it in item.split(sep, maxsplit)])
+            )
+        return result
 
 
 def printj(
@@ -82,7 +96,7 @@ def printj(
     sort_keys: bool = False,
     beautify: bool = True,
     ensure_ascii: bool = False,
-):
+) -> None:
     """
     把dict类型的数据，格式化为json字符串输出显示。
     """
@@ -93,15 +107,15 @@ def printj(
     )
 
 
-def random_color(n: int = 1):
+def random_color(n: int = 1) -> Union[str, List]:
     """
     随机生成颜色代码
 
     Args:
-        n (int): 生成颜色代码的数目。
+        n: 生成颜色代码的数目。
 
     Returns:
-        str or list: n为1时返回一个颜色代码字符串，n不为1时返回颜色代码列表。
+        n为1时返回一个颜色代码字符串，n不为1时返回颜色代码列表。
     """
     if n <= 0:
         raise Exception(
@@ -134,20 +148,22 @@ def random_color(n: int = 1):
     return colors if n > 1 else colors[0]
 
 
-def filter_by_thresholds(data: list, thresholds: list, threshold_closed: str = None):
+def filter_by_thresholds(
+    data: list, thresholds: list, threshold_closed: str = None
+) -> List:
     """依据阈值范围对数据进行过滤
 
     依据 threshold 中的规则对 data 数据进行过滤，threshold_closed
     规定区间规则的闭合状态，rl/lr 表示区间两端闭合，r表示右闭合，l表示左闭合
 
     Args:
-        data (list): list类型的数据；
-        thresholds (list): list类型的参数，元素为tuple类型；
-        threshold_closed (str): str类型的参数，rl/lr
+        data: list类型的数据；
+        thresholds: list类型的参数，元素为tuple类型；
+        threshold_closed: str类型的参数，rl/lr
             表示区间两端闭合，r 表示右闭合，l 表示左闭合，None 表示两端开区间。
 
     Returns:
-        list : 按照区间保留下来的数据。
+        按照区间保留下来的数据。
     """
     for th in thresholds:
         for index, value in enumerate(data):
@@ -172,77 +188,77 @@ def filter_by_thresholds(data: list, thresholds: list, threshold_closed: str = N
     return data
 
 
-def ele2dict(data: list):
+def ele2dict(data: list) -> List[dict]:
     """把元素为json字符串的list数据，转为，元素为dict类型的list数据
 
     Args:
-        data (list): list类型的数据，元素为json字符串类型
+        data: list类型的数据，元素为json字符串类型
 
     Returns:
-        list : 转换后的list数据
+        转换后的list数据
     """
     return [json2dict(item) for item in data]
 
 
-def ele2json(data: list):
+def ele2json(data: list) -> List[str]:
     """把元素为dict类型的list数据，转为，元素为json字符串的list数据
 
     Args:
-        data (list): list类型的数据，元素为dict类型
+        data: list类型的数据，元素为dict类型
 
     Returns:
-        list : 转换后的list数据
+        转换后的list数据
     """
     return [dict2json(item) for item in data]
 
 
-def dict2json(data: dict):
+def dict2json(data: dict) -> str:
     """将dict转为json字符串
 
     Args:
-        data (dict): dict类型的数据
+        data: dict类型的数据
 
     Returns:
-        str : 返回json字符串
+        返回json字符串
     """
     return json.dumps(data, ensure_ascii=False, separators=[",", ":"])
 
 
-def json2dict(astr: str):
+def json2dict(astr: str) -> dict:
     """将json字符串转为dict类型的数据对象
 
     Args:
-        astr (str): json字符串转为dict类型的数据对象
+        astr: json字符串转为dict类型的数据对象
 
     Returns:
-        str : 返回dict类型数据对象
+        返回dict类型数据对象
     """
     return json.loads(astr)
 
 
-def dict_sorted(data: dict, flag: int = 0, ascending: bool = True):
+def dict_sorted(data: dict, flag: int = 0, ascending: bool = True) -> dict:
     """
     对dict排序
 
     Args:
-        data (dict): 目标数据dict类型
-        flag (int): 默认为0，表示按照字典的key进行排序；1表示按照value进行排序
-        ascending (bool): 默认为True，表示按照升序排序；False表示降序排序
+        data: 目标数据dict类型
+        flag: 默认为0，表示按照字典的key进行排序；1表示按照value进行排序
+        ascending: 默认为True，表示按照升序排序；False表示降序排序
 
     Returns:
-        dict: 排序后的数据
+        排序后的数据
     """
     return dict(sorted(data.items(), key=lambda x: x[flag], reverse=not ascending))
 
 
-def list_deduplicate(data: list):
+def list_deduplicate(data: list) -> List:
     """列表项为dict类型的去重
 
     Args:
-        data (list): 目标数据，list类型
+        data: 目标数据，list类型
 
     Returns:
-        list: 去重后的数据
+        去重后的数据
     """
     return [dict(t) for t in set([tuple(d.items()) for d in data])]
 
@@ -253,20 +269,20 @@ def sort_list(
     flag: int = 0,
     position: int = 0,
     key: str = "",
-):
+) -> List:
     """
     对 list 进行排序
 
     Args:
-        data (list): list 类型数据，item 为 dict 或者 basic type
-        ascending (bool): 默认为 True，表示升序；False 表示降序
-        flag (int): 0 表示元素为基本类型，1 表示元素为 dict，2 表示元素为 tuple
-        position (int): 如果元素为 basic type，position 保持默认即可；
+        data: list 类型数据，item 为 dict 或者 basic type
+        ascending: 默认为 True，表示升序；False 表示降序
+        flag: 0 表示元素为基本类型，1 表示元素为 dict，2 表示元素为 tuple
+        position: 如果元素为 basic type，position 保持默认即可；
             如果元素为 tuple，position 的数值表示以哪个 index 位置的值排序
-        key (str): 如果元素为 dict，key 表示按照哪个 key 的 value 进行排序
+        key: 如果元素为 dict，key 表示按照哪个 key 的 value 进行排序
 
     Returns:
-        list: 排序后的数据
+        排序后的数据
     """
     if flag == 0:
         # basic type
@@ -285,29 +301,29 @@ def sort_list(
     return data
 
 
-def strips(string: str):
+def strips(string: str) -> str:
     """
     去除字符串两端的空格符和换行符，并且去除中间的换行符
     """
     return string.strip().replace("\n", "").replace("\r", "").replace("\r\n", "")
 
 
-def remove_0_str(data: list):
+def remove_0_str(data: list) -> List:
     """
     去除list列表中为长度为0的字符串，用于字符串split后，列表中出现长度为0字符串的去除
     """
     return [item for item in data if len(str(item)) != 0]
 
 
-def chunks(arr, m):
+def chunks(arr, m) -> List[list]:
     """分割列表，但是子list元素个数尽可能平均
 
     Args:
-        arr (list): 待分割的list
-        m (int): 分成几份
+        arr: 待分割的list
+        m: 分成几份
 
     Returns:
-        list: 分割后的每个子list都是返回结果list的一个元素
+        分割后的每个子list都是返回结果list的一个元素
     """
     n = int(math.ceil(len(arr) / float(m)))
     return [arr[i : i + n] for i in range(0, len(arr), n)]
@@ -317,10 +333,10 @@ def time_formatter(seconds: int, show: bool = True):
     """将以秒为单位的时间转化为相应的分钟、小时、天。
 
     Args:
-        seconds (int): 秒数
-        show (bool): 是否打印显示信息，默认为True，那么没有返回值，设置为False，不打印信息，但返回值
+        seconds: 秒数
+        show: 是否打印显示信息，默认为True，那么没有返回值，设置为False，不打印信息，但返回值
     Returns:
-        tuple: 若show为False，则有返回值，tuple中值的为天，小时，分钟，秒
+        若show为False，则有返回值，tuple中值的为天，小时，分钟，秒
     """
     d = int(seconds // 86400)
     h = int(seconds // 3600 % 24)
