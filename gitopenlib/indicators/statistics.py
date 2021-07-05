@@ -9,23 +9,31 @@
 
 import math
 from collections import Counter
-from typing import Optional
+from typing import Optional, Union
 
 import numpy as np
 import scipy
 from gitopenlib.utils import basics as gb
 
-__version__ = "0.16.4"
+__version__ = "0.17.5"
 
 
-def calculate_CDF(data: Optional[list or dict]):
+def calculate_hist_bins2(data: list, k: float = 1.5) -> float:
+    """求解画柱状图时的 bins 的数值，原理是 Freedman–Diaconis rule。"""
+    iqr = calculate_IQR(data, k)[-1]
+    bin_with = 2 * iqr * (1 / math.pow(len(data), 1 / 3))
+    bins = (max(data) - min(data)) / bin_with
+    return bins
+
+
+def calculate_CDF(data: Union[list, dict]) -> dict:
     """计算 Cumulative Distribution Function (CDF)
 
     Args:
         data: 数据。
 
     Returns:
-        dict: 每个key对应计算的累计频率。
+        每个key对应计算的累计频率。
 
     """
 
@@ -45,27 +53,27 @@ def calculate_CDF(data: Optional[list or dict]):
     return dict(zip(keys, new_values))
 
 
-def calculate_CCDF(data: Optional[list or dict]):
+def calculate_CCDF(data: Union[list, dict]) -> dict:
     """计算 Complementary Cumulative Distribution Function (CCDF)
 
     Args:
         data: 数据。
 
     Returns:
-        dict: 每个key对应计算的互补累计频率。
+        每个key对应计算的互补累计频率。
 
     """
     return {k: 1 - v for k, v in calculate_CDF(data).items()}
 
 
-def calculate_PMF(data: Optional[list or dict]):
+def calculate_PMF(data: Union[list, dict]) -> dict:
     """计算 Probability Mass Function (PMF)
 
     Args:
         data: 数据。
 
     Returns:
-        dict: 每个key对应计算的单个频率。
+        每个key对应计算的单个频率。
 
     """
 
@@ -83,7 +91,7 @@ def calculate_PMF(data: Optional[list or dict]):
     return dict(zip(keys, new_values))
 
 
-def calculate_percent(data: dict, mode: str = "gte"):
+def calculate_percent(data: dict, mode: str = "gte") -> None:
     """计算Counter形式的百分比。
 
     当 mode 为 gte 时，计算 大于等于 key 的占比；
@@ -121,7 +129,7 @@ def calculate_percent(data: dict, mode: str = "gte"):
         raise Exception("This operation has not been implemented.")
 
 
-def curve_fit(x: np.array, y: np.array, deg: int):
+def curve_fit(x: np.array, y: np.array, deg: int) -> tuple:
     """
     对x,y进行曲线拟合。
 
@@ -165,7 +173,7 @@ def curve_fit(x: np.array, y: np.array, deg: int):
     return y_fit, r2, aa
 
 
-def normal_distribution_values(u: Optional[int or float], std: Optional[int or float]):
+def normal_distribution_values(u: Union[int, float], std: Union[int, float]) -> tuple:
     """生成均值为u标准差为std的正态分布数据
 
     用处：当样本数据集确定（list），可以求出均值、标准差，
@@ -178,7 +186,7 @@ def normal_distribution_values(u: Optional[int or float], std: Optional[int or f
     return x, y
 
 
-def Cdf(t, x):
+def Cdf(t, x) -> float:
     """累计分布函数，就是值到其在分布中百分等级的映射。
 
     计算给定x的CDF(x)，就是计算样本中小于等于x的值的比例。
@@ -200,7 +208,7 @@ def Cdf(t, x):
     return prob
 
 
-def percentile_rank(scores: list, your_score: Optional[int or float]):
+def percentile_rank(scores: list, your_score: Union[int, float]) -> Union[int, float]:
     """获取百分等级
 
     百分等级就是原始分数不 高于你的人在全部考试人数中所占的比例再乘以100。
@@ -221,7 +229,7 @@ def percentile_rank(scores: list, your_score: Optional[int or float]):
     return percentile_rank
 
 
-def percentile(scores, prank):
+def percentile(scores, prank) -> Union[int, float]:
     """根据百分等级，找到百分位数
 
     Args:
@@ -238,7 +246,7 @@ def percentile(scores, prank):
             return score
 
 
-def percentile2(scores, prank):
+def percentile2(scores, prank) -> Union[int, float]:
     """根据百分等级，找到百分位数，优化版
 
     Args:
@@ -254,7 +262,7 @@ def percentile2(scores, prank):
     return scores[index]
 
 
-def get_high_low_threshold(minimum_count: int):
+def get_high_low_threshold(minimum_count: int) -> float:
     """
     获取关键词的高低频临界值
 
@@ -357,7 +365,7 @@ def JS_divergence(p: list, q: list):
     return 0.5 * scipy.stats.entropy(p, M) + 0.5 * scipy.stats.entropy(q, M)
 
 
-def hist_bins(N: int, mode: int = 0):
+def calculate_hist_bins1(N: int, mode: int = 0) -> tuple:
     """计算柱状图的bins，依据 Sturges' rule 和 Rice's rule 两种方法。
 
     参见 http://onlinestatbook.com/2/graphing_distributions/histograms.html
@@ -367,7 +375,7 @@ def hist_bins(N: int, mode: int = 0):
         mode (int): Sturges' rule 的计算方法选择，0 是 1+log2(N)，1 是 1+3.3log10(N)
 
     Returns:
-        tuple: 由
+        两种方法求 hist bins 的值
 
     """
 
@@ -377,7 +385,7 @@ def hist_bins(N: int, mode: int = 0):
     return round(s_rule), round(r_rule)
 
 
-def counter2percenter(data: dict):
+def counter2percenter(data: dict) -> dict:
     """convert counter dict to percenter dict.
 
     将 key/value 分别为数值、数值频次的字典类型数据，
@@ -394,7 +402,7 @@ def counter2percenter(data: dict):
     return dict([(key, value / sum_) for key, value in data.items()])
 
 
-def calculate_IQR(data: list, k: float = 1.5):
+def calculate_IQR(data: list, k: float = 1.5) -> tuple:
     """计算四分位距（IQR, Interquartile range）
 
     Args:
@@ -415,7 +423,7 @@ def calculate_IQR(data: list, k: float = 1.5):
     return upper_whisker, upper_quartile, median, lower_quartile, lower_whisker, IQR
 
 
-def filter_outliers_by_IQR(data: list, k: float = 1.5):
+def filter_outliers_by_IQR(data: list, k: float = 1.5) -> tuple:
     """
     使用IQR对异常值进行检测，又称为 Tukey's test。
 
@@ -443,7 +451,7 @@ def filter_outliers_by_IQR(data: list, k: float = 1.5):
     return upper_outliers, lower_outliers
 
 
-def remove_outliers_by_IQR(data: list, k: float = 1.5):
+def remove_outliers_by_IQR(data: list, k: float = 1.5) -> list:
     """
     使用IQR从数据中移除异常值，返回移除异常值的数据
 
@@ -469,7 +477,7 @@ def remove_outliers_by_IQR(data: list, k: float = 1.5):
     return new_data
 
 
-def calculate_list_count_percent(data: list, decimals: Optional[None or int] = None):
+def calculate_list_count_percent(data: list, decimals: Optional[int] = None) -> tuple:
     """计算list中元素的次数和百分比
 
     Args:
