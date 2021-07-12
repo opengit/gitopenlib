@@ -9,13 +9,51 @@
 
 import math
 from collections import Counter
-from typing import Optional, Union
+from typing import Optional, Union, List
 
 import numpy as np
 import scipy
 from gitopenlib.utils import basics as gb
 
-__version__ = "0.17.5"
+__version__ = "0.18.5"
+
+
+def divide_interval(
+    data: List[Union[int, float]], number: int, decimal: int = 2
+) -> List[list]:
+    """把列表中数据，划分为区间
+
+    Args:
+        data: 列表类型数据，元素为整型或者浮点型。
+        number: 划分的区间数目，整数类型。
+        decimal: 区间端点的小数位数，默认保留2位小数。
+
+    Returns:
+        返回值为列表类型，元素为划分的区间，tuple类型。
+
+    """
+    if number == 0:
+        raise Exception("the number of interval can't be 0.")
+    max_, min_ = max(data), min(data)
+    poor = max_ - min_
+    width = poor / number
+
+    result = []
+    interval = list()
+
+    for i in range(number + 1):
+        right = round(min_ + width * i, decimal)
+        interval.append(right)
+        if len(interval) == 2:
+            result.append(tuple(interval))
+            temp = tuple(interval)[-1]
+            interval.clear()
+            interval.append(temp)
+    # last = result[-1][-1]
+    # if last < max_:
+    #     result.append(tuple([last, max_]))
+
+    return result
 
 
 def calculate_hist_bins2(data: list, k: float = 1.5) -> float:
