@@ -8,12 +8,24 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 
 
 import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
 from matplotlib.offsetbox import AnchoredText
+from matplotlib import ticker
+
+
+def set_axis_tick(ax: Axes, axis: str = "y", format="%.2f"):
+    """
+    横轴或者纵轴的刻度标签的格式，例如，%.2f 表示两位小数；
+    %.2e 科学计数法
+    """
+    if axis == "x":
+        ax.xaxis.set_major_formatter(ticker.FormatStrFormatter(format))
+    if axis == "y":
+        ax.yaxis.set_major_formatter(ticker.FormatStrFormatter(format))
 
 
 def legend_text(
