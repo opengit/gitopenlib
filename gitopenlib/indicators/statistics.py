@@ -9,7 +9,7 @@
 
 import math
 from collections import Counter
-from typing import Optional, Union, List
+from typing import List, Optional, Union
 
 import numpy as np
 import scipy

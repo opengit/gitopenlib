@@ -8,9 +8,24 @@
 # @Description :  some useful functions of indexes or indicators that measure
 #                   the degree of diversity.
 
-__version__ = "0.1.1"
+__version__ = "0.2.1"
 
 import math
+from typing import List, Union
+
+import numpy as np
+
+
+def gini_coefficient(data: Union[List, np.array]):
+    """计算 Gini Coefficient"""
+
+    sorted_list = sorted(data)
+    height, area = 0, 0
+    for value in sorted_list:
+        height += value
+        area += height - value / 2.0
+    fair_area = height * len(data) / 2.0
+    return (fair_area - area) / fair_area
 
 
 def category_count(data: list):
