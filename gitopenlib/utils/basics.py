@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.7.6"
+__version__ = "0.9.6"
 
 
 import json
@@ -17,6 +17,24 @@ import random
 from typing import List, Union
 
 from gitopenlib.utils import basics as gb
+
+
+def is_all_chinese(strs: str):
+    """
+    检验是否全是中文字符
+    """
+    for _char in strs:
+        if not "\u4e00" <= _char <= "\u9fa5":
+            return False
+    return True
+
+
+def is_contains_chinese(strs: str):
+    """检验是否含有中文字符"""
+    for _char in strs:
+        if "\u4e00" <= _char <= "\u9fa5":
+            return True
+    return False
 
 
 def dict_extremum(data: dict, type=0) -> tuple:
