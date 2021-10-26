@@ -8,7 +8,7 @@
 # @Description :  存放一些其他工具函数
 
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 import time
 from email.mime.text import MIMEText
@@ -18,7 +18,7 @@ from smtplib import SMTP_SSL
 def sendTaskOK(
     to_addr="sunjiajiacn@qq.com",
     username="gitopen@sina.cn",
-    password="d4bcd572ea388881",
+    password=None,
     message=None,
     subject=None,
 ):
