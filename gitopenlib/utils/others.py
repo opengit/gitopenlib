@@ -8,17 +8,17 @@
 # @Description :  存放一些其他工具函数
 
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 import time
 from email.mime.text import MIMEText
 from smtplib import SMTP_SSL
 
 
-def sendMail(
-    to_addrs="sunjiajiacn@qq.com",
-    username="sunjiajiacn@qq.com",
-    password=None,
+def sendTaskOK(
+    to_addr="sunjiajiacn@qq.com",
+    username="gitopen@sina.cn",
+    password="d4bcd572ea388881",
     message=None,
     subject=None,
 ):
@@ -42,12 +42,12 @@ def sendMail(
     if subject is None or len(subject) == 0:
         subject = "【任务执行完毕】({})".format(now_time)
     msg["Subject"] = subject
+    msg["From"] = username
+    msg["To"] = to_addr
 
     # 发送邮件
-    with SMTP_SSL(host="smtp.qq.com", port=465) as smtp:
+    with SMTP_SSL(host="smtp.sina.cn", port=465) as smtp:
         # 登录发送邮件服务器
         smtp.login(user=username, password=password)
         # 实际发送、接收邮件配置
-        smtp.sendmail(
-            from_addr=username, to_addrs=to_addrs.split(","), msg=msg.as_string()
-        )
+        smtp.sendmail(from_addr=username, to_addrs=to_addr, msg=msg.as_string())

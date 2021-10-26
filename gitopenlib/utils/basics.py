@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.9.6"
+__version__ = "0.10.6"
 
 
 import json
@@ -17,6 +17,14 @@ import random
 from typing import List, Union
 
 from gitopenlib.utils import basics as gb
+
+
+def list_intersection(listA: list, listB: list):
+    """
+    求两个list的交集，listA中的哪些元素，在listB中出现了。
+    注意，listA和listB的顺序不一样，交集结果不一样。
+    """
+    return [it for it in listA if it in listB]
 
 
 def is_all_chinese(strs: str):
