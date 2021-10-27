@@ -7,7 +7,7 @@
 # @Date   :  2021-02-01 10:25:51
 # @Description :  一些高级功能用法
 
-__version__ = "0.3.1"
+__version__ = "0.3.2"
 
 import asyncio
 from functools import wraps
@@ -15,10 +15,28 @@ from time import time
 from typing import Callable
 
 from gitopenlib.utils import basics as gb
-from gitopenlib.utils import wonders as gw
 
 
-@gw.timing
+def timing(f: Callable):
+    """A simple timer decorator.
+
+    装饰器，用于统计函数的运行时间。
+    """
+
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        start_ = time()
+        result = f(*args, **kwargs)
+        end_ = time()
+        print(
+            f"Elapsed time # {f.__name__} # : {gb.time_formatter(end_ - start_, False)}"
+        )
+        return result
+
+    return wrapper
+
+
+@timing
 def run_tasks_parallel(
     data: list,
     parse_func: Callable[[list], None],
@@ -39,22 +57,3 @@ def run_tasks_parallel(
     loop = asyncio.get_event_loop()
     chunks = gb.chunks(data, slave_num)
     loop.run_until_complete(asyncio.gather(*[parse_(loop, chunk) for chunk in chunks]))
-
-
-def timing(f: Callable):
-    """A simple timer decorator.
-
-    装饰器，用于统计函数的运行时间。
-    """
-
-    @wraps(f)
-    def wrapper(*args, **kwargs):
-        start_ = time()
-        result = f(*args, **kwargs)
-        end_ = time()
-        print(
-            f"Elapsed time # {f.__name__} # : {gb.time_formatter(end_ - start_, False)}"
-        )
-        return result
-
-    return wrapper
