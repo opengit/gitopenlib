@@ -177,16 +177,16 @@ def brillouin_diversity_index(data: list):
     return H
 
 
-if __name__ == "__main__":
-
-    data = [10, 20, 30]
-    data = [10, 20, 30, 0]
-
-    print(category_count(data))
-    print(shannon_evenness(data))
-    print(shannon_index(data))
-    print(simpson_index(data))
-    print(inverse_simpson_index(data))
-    print(gini_simpson_index(data))
-    print(brillouin_diversity_index(data))
-    pass
+#  if __name__ == "__main__":
+#
+#      data = [10, 20, 30]
+#      data = [10, 20, 30, 0]
+#
+#      print(category_count(data))
+#      print(shannon_evenness(data))
+#      print(shannon_index(data))
+#      print(simpson_index(data))
+#      print(inverse_simpson_index(data))
+#      print(gini_simpson_index(data))
+#      print(brillouin_diversity_index(data))
+#      pass
