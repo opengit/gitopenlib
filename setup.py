@@ -26,8 +26,8 @@ DESCRIPTION = "A library containing some useful functions. Powered by GitOPEN."
 URL = "https://github.com/opengit/gitopenlib.git"
 EMAIL = "gitopen@gmail.com"
 AUTHOR = "gitopen"
-REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "0.1.58.2"
+REQUIRES_PYTHON = ">=3.3.0"
+VERSION = "0.1.58.3"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
