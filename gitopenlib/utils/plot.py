@@ -8,13 +8,21 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.2.2"
+__version__ = "0.3.2"
 
 
 import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
 from matplotlib.offsetbox import AnchoredText
 from matplotlib import ticker
+
+
+def set_legend_outside(ax: Axes):
+    """
+    把图例放到图片的右下角
+    """
+    ax.legend_.remove()
+    ax.legend(bbox_to_anchor=(1.05, 0), loc=3, borderaxespad=0)
 
 
 def set_axis_tick(ax: Axes, axis: str = "y", format="%.2f"):
