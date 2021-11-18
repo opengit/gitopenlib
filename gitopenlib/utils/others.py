@@ -8,9 +8,11 @@
 # @Description :  存放一些其他工具函数
 
 
-__version__ = "0.0.4"
+__version__ = "0.1.5"
 
+import sys
 import time
+import traceback
 from email.mime.text import MIMEText
 from smtplib import SMTP_SSL
 
@@ -55,32 +57,48 @@ def sendTaskOK(
         msg["To"] = to_addr
 
     else:
+        is_success = True
         start_time = time.time()
         start_ftime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        # 执行回调主函数
-        func_main()
+        # 执行回调主函数，也可能报错，但是报错的话，也算任务执行完毕，因此也要发送邮件，
+        # 不过是通知任务失败的邮件
+        try:
+            func_main()
+        except Exception as e:
+            is_success = False
+            traceback.print_exc()
+            error_info = traceback.format_exc()
         spend_time = time.time() - start_time
+        spend_time = round(spend_time, 3)
         end_ftime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
         # 邮件内容
         if message is None or len(message) == 0:
             message = (
-                "<p>任务开始时间：</p>"
+                "<p><h2>任务成功！</h2></p>"
+                + "<p>任务开始时间：</p>"
                 + "<p>{}</p>".format(start_ftime)
                 + "<p>任务结束时间：</p>"
                 + "<p>{}</p>".format(end_ftime)
                 + "<p>任务耗时：</p>"
-                + "<p>{}</p>".format(spend_time)
+                + "<p>{}秒</p>".format(spend_time)
             )
+            if not is_success:
+                message = message.replace(
+                    "<p><h2>任务成功！</h2></p>",
+                    "<p><h2>任务失败！</h2></p><p><b>错误信息：{}</b></p>".format(error_info),
+                )
 
         msg = MIMEText(message, "html", _charset="utf-8")
 
         # 邮件主题描述
         if subject is None or len(subject) == 0:
             #  subject = "【任务执行完毕】({})".format(now_time)
-            subject = "【任务】开始：{}，结束：{}，耗时：{}秒".format(
+            subject = "【任务成功】开始：{}，结束：{}，耗时：{}秒".format(
                 start_ftime, end_ftime, spend_time
             )
+            if not is_success:
+                subject = subject.replace("成功", "失败")
         msg["Subject"] = subject
         msg["From"] = username
         msg["To"] = to_addr
