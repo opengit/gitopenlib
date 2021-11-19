@@ -15,9 +15,18 @@ import json
 import math
 import random
 import string
+import time
 from typing import List, Union
 
 from gitopenlib.utils import basics as gb
+
+
+def fmt_seconds(seconds: int or float, lang: str = "zh"):
+    """把秒转换为小时分钟秒。"""
+    if lang == "zh":
+        return time.strftime("%H小时%M分钟%S秒", time.gmtime(seconds))
+    else:
+        return time.strftime("%H:%M:%S", time.gmtime(seconds))
 
 
 def generate_random_strs(length: int):

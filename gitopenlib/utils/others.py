@@ -16,6 +16,8 @@ import traceback
 from email.mime.text import MIMEText
 from smtplib import SMTP_SSL
 
+from gitopenlib.utils import basics as gb
+
 
 def sendTaskOK(
     to_addr="sunjiajiacn@qq.com",
@@ -81,7 +83,7 @@ def sendTaskOK(
                 + "<p>任务结束时间：</p>"
                 + "<p>{}</p>".format(end_ftime)
                 + "<p>任务耗时：</p>"
-                + "<p>{}秒</p>".format(spend_time)
+                + "<p>{}</p>".format(gb.fmt_seconds(spend_time))
             )
             if not is_success:
                 message = message.replace(
@@ -94,8 +96,8 @@ def sendTaskOK(
         # 邮件主题描述
         if subject is None or len(subject) == 0:
             #  subject = "【任务执行完毕】({})".format(now_time)
-            subject = "【任务成功】开始：{}，结束：{}，耗时：{}秒".format(
-                start_ftime, end_ftime, spend_time
+            subject = "【任务成功】开始：{}，结束：{}，耗时：{}".format(
+                start_ftime, end_ftime, gb.fmt_seconds(spend_time)
             )
             if not is_success:
                 subject = subject.replace("成功", "失败")
