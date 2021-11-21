@@ -7,16 +7,16 @@
 # @Date   :  2020-11-05 10:23:57
 # @Description :  一系列统计学相关的计算函数
 
-import copy
+
+__version__ = "0.19.5"
+
 import math
-from collections import Counter, defaultdict
+from collections import Counter
 from typing import List, Optional, Union
 
 import numpy as np
 import scipy
 from gitopenlib.utils import basics as gb
-
-__version__ = "0.19.4"
 
 
 def divide_bins(data: list, bins: int = 30, fmt: str = "count"):
@@ -84,7 +84,7 @@ def divide_interval(
     Args:
         data: 列表类型数据，元素为整型或者浮点型。
         number: 划分的区间数目，整数类型。
-        decimal: 区间端点的小数位数，默认保留2位小数。
+        decimal: 区间端点的小数位数，默认不保留小数。
 
     Returns:
         返回值为列表类型，元素为划分的区间，tuple类型。
