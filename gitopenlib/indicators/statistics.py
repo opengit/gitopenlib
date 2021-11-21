@@ -7,15 +7,67 @@
 # @Date   :  2020-11-05 10:23:57
 # @Description :  一系列统计学相关的计算函数
 
+import copy
 import math
-from collections import Counter
+from collections import Counter, defaultdict
 from typing import List, Optional, Union
 
 import numpy as np
 import scipy
 from gitopenlib.utils import basics as gb
 
-__version__ = "0.18.5"
+__version__ = "0.19.5"
+
+
+def divide_bins(data: list, bins: int = 30, fmt: str = "count"):
+    """
+    把一个数据列表，分成多少个区间，并统计落在每个区间中的数值数目或百分比。
+
+    Args:
+        data: 数据列表
+        bins: 区间格式
+        fmt: count表示统计区间数值的数目，percent表示统计区间数值数目的百分比
+    Returns:
+        返回值有两个，第一个是区间列表，第二个是统计结果列表
+    """
+    min_ = min(data)
+    max_ = max(data)
+    width_ = (max_ - min_) / bins
+
+    edges1 = list()
+    for i in range(bins - 1):
+        if i == 0:
+            edges1.append(min_)
+        elif i < bins - 2:
+            edges1.append(edges1[-1] + width_)
+        elif i == bins - 2:
+            edges1.append(max_)
+
+    edges2 = copy.deepcopy(edges1)[:-1]
+    edges3 = edges1[1:]
+
+    bin_edges = list(zip(edges2, edges3))
+
+    res_dict = defaultdict(int)
+    for it in data:
+        for idx, bin in enumerate(bin_edges):
+            if idx == len(bin_edges) - 1:
+                if it >= bin[0] and it <= bin[1]:
+                    res_dict[bin[0]] += 1
+            else:
+                if it >= bin[0] and it < bin[1]:
+                    res_dict[bin[0]] += 1
+
+    res_dict = gb.dict_sorted(res_dict)
+    if fmt == "count":
+        counts = list(res_dict.values())
+        return bin_edges, counts
+    elif fmt == "percent":
+        data_len = len(data)
+        percents = [round(it / data_len, 5) for it in res_dict.values()]
+        return bin_edges, percents
+    else:
+        raise Exception("fmt's value should be 'count' or 'percent'.")
 
 
 def divide_interval(
@@ -49,9 +101,6 @@ def divide_interval(
             temp = tuple(interval)[-1]
             interval.clear()
             interval.append(temp)
-    # last = result[-1][-1]
-    # if last < max_:
-    #     result.append(tuple([last, max_]))
 
     return result
 
