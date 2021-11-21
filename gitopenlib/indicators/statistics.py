@@ -16,41 +16,47 @@ import numpy as np
 import scipy
 from gitopenlib.utils import basics as gb
 
-__version__ = "0.19.5"
+__version__ = "0.19.4"
 
 
 def divide_bins(data: list, bins: int = 30, fmt: str = "count"):
     """
     把一个数据列表，分成多少个区间，并统计落在每个区间中的数值数目或百分比。
 
+    主要用于手动画直方图，例如：
+
+    ```
+    color = ["#FFFFFF"] * len(bins)
+    plt.bar(
+        [it[0] for it in bins],
+        percents,
+        width=bins[1][1] - bins[1][0],
+        align="edge",
+        color=color,
+        alpha=1,
+        edgecolor="#4D79C8",
+    )
+    ```
+
+
     Args:
         data: 数据列表
         bins: 区间格式
         fmt: count表示统计区间数值的数目，percent表示统计区间数值数目的百分比
+
     Returns:
         返回值有两个，第一个是区间列表，第二个是统计结果列表
     """
-    min_ = min(data)
-    max_ = max(data)
-    width_ = (max_ - min_) / bins
+    # 划分为区间
+    bin_edges = divide_interval(data, bins)
 
-    edges1 = list()
-    for i in range(bins - 1):
-        if i == 0:
-            edges1.append(min_)
-        elif i < bins - 2:
-            edges1.append(edges1[-1] + width_)
-        elif i == bins - 2:
-            edges1.append(max_)
+    # 在判断值属于某个区间的时候，采取与python区间相同的方法：前闭后开
+    res_dict = dict()
 
-    edges2 = copy.deepcopy(edges1)[:-1]
-    edges3 = edges1[1:]
-
-    bin_edges = list(zip(edges2, edges3))
-
-    res_dict = defaultdict(int)
     for it in data:
         for idx, bin in enumerate(bin_edges):
+            if bin[0] not in res_dict:
+                res_dict[bin[0]] = 0
             if idx == len(bin_edges) - 1:
                 if it >= bin[0] and it <= bin[1]:
                     res_dict[bin[0]] += 1
@@ -71,7 +77,7 @@ def divide_bins(data: list, bins: int = 30, fmt: str = "count"):
 
 
 def divide_interval(
-    data: List[Union[int, float]], number: int, decimal: int = 2
+    data: List[Union[int, float]], number: int, decimal: int = None
 ) -> List[list]:
     """把列表中数据，划分为区间
 
@@ -94,7 +100,9 @@ def divide_interval(
     interval = list()
 
     for i in range(number + 1):
-        right = round(min_ + width * i, decimal)
+        right = min_ + width * i
+        if decimal:
+            right = round(right, decimal)
         interval.append(right)
         if len(interval) == 2:
             result.append(tuple(interval))
