@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.11.6"
+__version__ = "0.11.8"
 
 
 import json
@@ -22,11 +22,11 @@ from gitopenlib.utils import basics as gb
 
 
 def fmt_seconds(seconds: int or float, lang: str = "zh"):
-    """把秒转换为小时分钟秒。"""
+    """把秒转换为年月日小时分钟秒。"""
     if lang == "zh":
-        return time.strftime("%H小时%M分钟%S秒", time.gmtime(seconds))
+        return time.strftime("%Y年%m月%d日 %H小时%M分钟%S秒", time.gmtime(seconds))
     else:
-        return time.strftime("%H:%M:%S", time.gmtime(seconds))
+        return time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(seconds))
 
 
 def generate_random_strs(length: int):
