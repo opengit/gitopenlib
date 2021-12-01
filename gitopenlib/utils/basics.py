@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.11.8"
+__version__ = "0.13.8"
 
 
 import json
@@ -18,7 +18,21 @@ import string
 import time
 from typing import List, Union
 
+import emoji
 from gitopenlib.utils import basics as gb
+
+
+def char_is_emoji(character):
+    """判断字符是否是emoji"""
+    return character in emoji.UNICODE_EMOJI
+
+
+def text_has_emoji(text):
+    """判断文本中是否包含emoji"""
+    for character in text:
+        if character in emoji.UNICODE_EMOJI:
+            return True
+    return False
 
 
 def fmt_seconds(seconds: int or float, lang: str = "zh"):

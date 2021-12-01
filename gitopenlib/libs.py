@@ -10,7 +10,7 @@
 @Desc    :   用于快捷导入常用的包，注意这个文件不要格式化！
 """
 
-__version__ = "0.2.4"
+__version__ = "0.2.5"
 
 
 # #######################################################
@@ -39,6 +39,7 @@ import os
 import time
 import sys
 from collections import defaultdict
+from tqdm import tqdm
 
 # ## 科学计算常用包
 import pandas as pd
