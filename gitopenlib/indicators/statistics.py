@@ -8,14 +8,14 @@
 # @Description :  一系列统计学相关的计算函数
 
 
-__version__ = "0.19.5"
+__version__ = "0.19.7"
 
 import math
 from collections import Counter
 from typing import List, Optional, Union
 
 import numpy as np
-import scipy
+from scipy import stats
 from gitopenlib.utils import basics as gb
 
 
@@ -275,6 +275,15 @@ def normal_distribution_values(u: Union[int, float], std: Union[int, float]) -> 
     生成相应的符合正态分布的y值，画出正态分布曲线，
     用于比较样本集与正态分布的区别，帮助判断
 
+
+    Args:
+        u: 平均值。
+        std: 标准差。
+
+    Returns:
+        x (list): x轴的数据
+        y (list): y轴的数据
+
     """
     x = np.linspace(u - 3 * std, u + 3 * std, 100)
     y = np.exp(-((x - u) ** 2) / (2 * std ** 2)) / (math.sqrt(2 * math.pi) * std)
@@ -399,7 +408,7 @@ def get_extremum(data: Optional[dict or list], type: str = "max"):
     return res_keys, res_values
 
 
-def coefficient_of_variation(data: list):
+def coefficient_of_variation(data: list) -> float:
     """计算变异系数，又称离散系数，是一个衡量数据离散程度的、没有量纲的统计量。
 
     通常用来比较两组量纲差异明显的数据的离散程度，例如粉丝数量差距显著的社交媒体帐号的推文点赞量的离散程度。
@@ -426,8 +435,8 @@ def kurtosis_skewness(data: list):
     """
     arr_ = np.asarray(data)
 
-    k_ = scipy.stats.kurtosis(arr_)
-    s_ = scipy.stats.skew(arr_)
+    k_ = stats.kurtosis(arr_)
+    s_ = stats.skew(arr_)
 
     return k_, s_
 
@@ -442,7 +451,7 @@ def KL_divergence(p: list, q: list):
     p_arr = np.asarray(p)
     q_arr = np.asarray(q)
 
-    return scipy.stats.entropy(p_arr, q_arr)
+    return stats.entropy(p_arr, q_arr)
 
 
 def JS_divergence(p: list, q: list):
@@ -457,7 +466,7 @@ def JS_divergence(p: list, q: list):
 
     M = (p_arr + q_arr) / 2
 
-    return 0.5 * scipy.stats.entropy(p, M) + 0.5 * scipy.stats.entropy(q, M)
+    return 0.5 * stats.entropy(p, M) + 0.5 * stats.entropy(q, M)
 
 
 def calculate_hist_bins1(N: int, mode: int = 0) -> tuple:
