@@ -15,8 +15,8 @@ from collections import Counter
 from typing import List, Optional, Union
 
 import numpy as np
-from scipy import stats
 from gitopenlib.utils import basics as gb
+from scipy import stats
 
 
 def divide_bins(data: list, bins: int = 30, fmt: str = "count"):
@@ -368,7 +368,9 @@ def percentile2(scores, prank) -> Union[int, float]:
 
 def get_high_low_threshold(minimum_count: int) -> float:
     """
-    获取关键词的高低频临界值
+    获取关键词的高低频临界值。高频低频词界分公式是 Donohue 根据齐普夫第二定律。
+    依据的论文：
+    Donohue J C. Understanding Scientific Literatures—A Bibliometric Approach [ M] . Cambridge:The MIT Press, 1973 :49 –50 .
 
     Args:
         minimum_count (int): 频次为1的关键词的数量。
