@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.13.8"
+__version__ = "0.14.8"
 
 
 import json
@@ -20,6 +20,11 @@ from typing import List, Union
 
 import emoji
 from gitopenlib.utils import basics as gb
+
+
+def list_item_getter(data: list, index: list):
+    """按照index索引列表从data中拿出相应元素组成新的list"""
+    return [data[idx] for idx in index]
 
 
 def char_is_emoji(character):
