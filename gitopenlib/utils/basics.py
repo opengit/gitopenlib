@@ -8,18 +8,24 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.14.8"
+__version__ = "0.15.8"
 
 
 import json
 import math
 import random
+import re
 import string
 import time
 from typing import List, Union
 
 import emoji
 from gitopenlib.utils import basics as gb
+
+
+def text_purify(string: str) -> str:
+    """对字符串进行净化，去除字符串中的标点符号、特殊符号等符号"""
+    return re.sub("\\W+", "", string).replace("_", "")
 
 
 def list_item_getter(data: list, index: list):
