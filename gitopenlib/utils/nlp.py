@@ -7,10 +7,13 @@
 # @Date   :  2022-01-15 22:47:56
 # @Description :  Powered by 存放NLP常用的一些工具函数
 
+__version__ = "0.1.0"
+
+import random
 import re
+import string
 
 import emoji
-import random
 
 
 def is_all_chinese(strs: str):
