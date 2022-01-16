@@ -14,36 +14,16 @@ __version__ = "0.15.8"
 import json
 import math
 import random
-import re
-import string
 import time
 from typing import List, Union
 
-import emoji
+
 from gitopenlib.utils import basics as gb
-
-
-def text_purify(string: str) -> str:
-    """对字符串进行净化，去除字符串中的标点符号、特殊符号等符号"""
-    return re.sub("\\W+", "", string).replace("_", "")
 
 
 def list_item_getter(data: list, index: list):
     """按照index索引列表从data中拿出相应元素组成新的list"""
     return [data[idx] for idx in index]
-
-
-def char_is_emoji(character):
-    """判断字符是否是emoji"""
-    return character in emoji.UNICODE_EMOJI
-
-
-def text_has_emoji(text):
-    """判断文本中是否包含emoji"""
-    for character in text:
-        if character in emoji.UNICODE_EMOJI:
-            return True
-    return False
 
 
 def fmt_seconds(seconds: int or float, lang: str = "zh"):
@@ -54,35 +34,12 @@ def fmt_seconds(seconds: int or float, lang: str = "zh"):
         return time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(seconds))
 
 
-def generate_random_strs(length: int):
-    """生成随机字符串"""
-    return "".join(random.sample(string.digits * 5 + string.ascii_letters * 4, length))
-
-
 def list_intersection(listA: list, listB: list):
     """
     求两个list的交集，listA中的哪些元素，在listB中出现了。
     注意，listA和listB的顺序不一样，交集结果不一样。
     """
     return [it for it in listA if it in listB]
-
-
-def is_all_chinese(strs: str):
-    """
-    检验是否全是中文字符
-    """
-    for _char in strs:
-        if not "\u4e00" <= _char <= "\u9fa5":
-            return False
-    return True
-
-
-def is_contains_chinese(strs: str):
-    """检验是否含有中文字符"""
-    for _char in strs:
-        if "\u4e00" <= _char <= "\u9fa5":
-            return True
-    return False
 
 
 def dict_extremum(data: dict, type=0) -> tuple:

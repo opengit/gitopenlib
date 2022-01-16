@@ -5,9 +5,9 @@
 # @Author :  GitOPEN
 # @Email  :  gitopen@gmail.com
 # @Date   :  2021-03-18 10:54:33
-# @Description :  一些常用的有关 机器学习、深度学习 的函数
+# @Description :  一些常用的有关 机器学习、深度学习 的通用函数
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
 import math
