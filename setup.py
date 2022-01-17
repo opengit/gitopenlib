@@ -27,7 +27,7 @@ URL = "https://github.com/opengit/gitopenlib.git"
 EMAIL = "gitopen@gmail.com"
 AUTHOR = "gitopen"
 REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "0.1.68.17"
+VERSION = "0.1.69.17"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
