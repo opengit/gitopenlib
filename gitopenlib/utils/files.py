@@ -7,15 +7,42 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  Powered by GitOPEN
 
-__version__ = "0.3.11"
+__version__ = "0.4.11"
 
 import asyncio
 import json
-import time
 from pathlib import Path
+import time
 from typing import Callable, Iterable, List, Optional, Union
 
 from gitopenlib.utils import basics as gb
+
+
+def if_path_exist_then_backup(pathes: Union[str, List[str]]) -> bool:
+    """
+    检查路径是否存在，如路径存在，则备份。
+
+    Args:
+        pathes: 路径，可以是单个字符串或者字符串的列表。
+
+    Returns:
+        bool: 如果有文件被备份了，则为True，否则为False
+    """
+    if isinstance(pathes, str):
+        pathes = [pathes]
+
+    has_backup_files = False
+    for path in pathes:
+        path = Path(path)
+        if path.exists():
+            path.rename(
+                path.with_suffix(
+                    ("-" if path.is_dir() else ".")
+                    + f'{str(time.strftime("%Y%m%d_%H%M%S",time.localtime()))}{path.suffix}'
+                )
+            )
+            has_backup_files = True
+    return has_backup_files
 
 
 def new_dirs(dir_paths: Union[str, List[str]]) -> List[str]:
