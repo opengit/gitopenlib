@@ -37,8 +37,7 @@ def if_path_exist_then_backup(pathes: Union[str, List[str]]) -> bool:
         if path.exists():
             path.rename(
                 path.with_suffix(
-                    ("-" if path.is_dir() else ".")
-                    + f'{str(time.strftime("%Y%m%d_%H%M%S",time.localtime()))}{path.suffix}'
+                    f'.{str(time.strftime("%Y%m%d_%H%M%S",time.localtime()))}{path.suffix}'
                 )
             )
             has_backup_files = True

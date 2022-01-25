@@ -95,7 +95,7 @@ Union	gitopenlib/utils/files.py	/^from typing import Callable, Iterable, List, O
 UploadCommand	setup.py	/^class UploadCommand(Command):$/;"	c
 UserAgent	build/lib/gitopenlib/utils/crawler.py	/^from fake_useragent import UserAgent$/;"	i
 UserAgent	gitopenlib/utils/crawler.py	/^from fake_useragent import UserAgent$/;"	i
-VERSION	setup.py	/^VERSION = "0.1.70.17"$/;"	v
+VERSION	setup.py	/^VERSION = "0.1.70.18"$/;"	v
 __init__	build/lib/gitopenlib/helpers/mongo.py	/^    def __init__($/;"	m	class:ManageDB
 __init__	gitopenlib/helpers/mongo.py	/^    def __init__($/;"	m	class:ManageDB
 __ror__	build/lib/gitopenlib/utils/clazz.py	/^    def __ror__(self, other):$/;"	m	class:F	file:
@@ -110,7 +110,7 @@ __version__	build/lib/gitopenlib/utils/basics.py	/^__version__ = "0.15.8"$/;"	v
 __version__	build/lib/gitopenlib/utils/clazz.py	/^__version__ = "0.1.0"$/;"	v
 __version__	build/lib/gitopenlib/utils/comatrix.py	/^__version__ = "0.2.1"$/;"	v
 __version__	build/lib/gitopenlib/utils/crawler.py	/^__version__ = "0.0.1"$/;"	v
-__version__	build/lib/gitopenlib/utils/files.py	/^__version__ = "0.3.11"$/;"	v
+__version__	build/lib/gitopenlib/utils/files.py	/^__version__ = "0.4.11"$/;"	v
 __version__	build/lib/gitopenlib/utils/glog.py	/^__version__ = "0.1.0"$/;"	v
 __version__	build/lib/gitopenlib/utils/k_cluster.py	/^__version__ = "0.1.0"$/;"	v
 __version__	build/lib/gitopenlib/utils/nlp.py	/^__version__ = "0.2.0"$/;"	v
@@ -309,6 +309,7 @@ gw	gitopenlib/libs.py	/^from gitopenlib.utils import wonders as gw$/;"	i
 heap_sort	build/lib/gitopenlib/utils/sorts.py	/^def heap_sort(heap):$/;"	f
 heap_sort	gitopenlib/utils/sorts.py	/^def heap_sort(heap):$/;"	f
 here	setup.py	/^here = os.path.abspath(os.path.dirname(__file__))$/;"	v
+if_path_exist_then_backup	build/lib/gitopenlib/utils/files.py	/^def if_path_exist_then_backup(pathes: Union[str, List[str]]) -> bool:$/;"	f
 if_path_exist_then_backup	gitopenlib/utils/files.py	/^def if_path_exist_then_backup(pathes: Union[str, List[str]]) -> bool:$/;"	f
 include_package_data	setup.py	/^    include_package_data=True,$/;"	v
 initialize_options	setup.py	/^    def initialize_options(self):$/;"	m	class:UploadCommand
