@@ -8,17 +8,27 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.15.8"
+__version__ = "0.17.8"
 
 
 import json
 import math
 import random
 import time
-from typing import List, Union
-
+from typing import Any, Iterable, List, Union
 
 from gitopenlib.utils import basics as gb
+
+
+def is_subset(a: Iterable, b: Iterable) -> bool:
+    """判断a是否是b的子集，顺序不敏感"""
+    return set(a).issubset(set(b))
+
+
+def is_sublist(a: List, b: List) -> bool:
+    """判断a是否是b的子集，顺序敏感"""
+    b = iter(b)
+    return all(i in b for i in a)
 
 
 def list_item_getter(data: list, index: list):
