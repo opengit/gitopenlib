@@ -8,13 +8,13 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.3.2"
+__version__ = "0.4.2"
 
 
-import matplotlib.pyplot as plt
+from matplotlib import ticker
 from matplotlib.axes import Axes
 from matplotlib.offsetbox import AnchoredText
-from matplotlib import ticker
+import matplotlib.pyplot as plt
 
 
 def set_legend_outside(ax: Axes):
@@ -60,7 +60,7 @@ def legend_text(
     return at
 
 
-def set_font(fname: str = "SimHei", fsize: int = 10):
+def set_font(fname: str = "SimHei", fsize: int = 12):
     """
     设置字体
 
@@ -72,17 +72,9 @@ def set_font(fname: str = "SimHei", fsize: int = 10):
         None
     """
     # 用来正常显示中文标签
-    plt.rcParams["font.sans-serif"] = [fname]
+    plt.rcParams["font.sans-serif"].insert(0, fname)
     # 用来设置字体大小
     plt.rcParams["font.size"] = fsize
     # 用来正常显示负号
     plt.rcParams["axes.unicode_minus"] = False
-
-
-#  if __name__ == "__main__":
-#      at = legend_text(plt.gca(), "Line 2\nLine 2", loc=2)
-#      at = legend_text(plt.gca(), "Line 3\nLine 3", loc=3)
-#      at = legend_text(plt.gca(), "Line 1\nLine 1", loc=1, fontsize=8, fontcolor="green")
-#      at = legend_text(plt.gca(), "Line 4\nLine 4", loc=4, fontsize=55)
-#      plt.gcf().show()
-#      input("pause")
+    plt.rcParams["mathtext.fontset"] = "cm"
