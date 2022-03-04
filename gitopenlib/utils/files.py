@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  Powered by GitOPEN
 
-__version__ = "0.4.11"
+__version__ = "0.4.12"
 
 import asyncio
 import json
@@ -150,8 +150,6 @@ def file_writer(
                 file.write(f"{line}{separator}")
             else:
                 file.write(line)
-
-    print("## file_writer done...")
 
 
 def read_txt_by_page(
