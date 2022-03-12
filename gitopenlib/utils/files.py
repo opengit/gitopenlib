@@ -110,7 +110,7 @@ def file_writer(
     encoding: str = "utf-8",
     backup: bool = True,
 ) -> None:
-    r"""向文件中写内容
+    """向文件中写内容
 
     Args:
         lines: 可以是单个字符串或者字符串的列表
