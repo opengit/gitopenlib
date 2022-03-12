@@ -8,16 +8,34 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.17.8"
+__version__ = "0.18.9"
 
 
 import json
 import math
 import random
 import time
-from typing import Any, Iterable, List, Union
+from typing import Any, Dict, Iterable, List, Union
 
 from gitopenlib.utils import basics as gb
+
+
+def get_keys_from_dict(adict: Dict[Any, Any]) -> List[Any]:
+    """获取dict中的所有key，包括嵌套dict中的key"""
+    keys = set()
+
+    def get_keys(bdict: dict, keys: set):
+        keys_ = list(bdict.keys())
+        keys.update(keys_)
+        values_ = list(bdict.values())
+        for val in values_:
+            if isinstance(val, dict):
+                get_keys(val, keys)
+
+    get_keys(adict, keys)
+    keys = list(keys)
+    keys.sort()
+    return keys
 
 
 def is_subset(a: Iterable, b: Iterable) -> bool:
