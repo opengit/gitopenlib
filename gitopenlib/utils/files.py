@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  Powered by GitOPEN
 
-__version__ = "0.5.00"
+__version__ = "0.5.01"
 
 import asyncio
 import json
@@ -292,7 +292,7 @@ def read_content(
 
 
 def read_contents(
-    file_pathes: List[Union[str, Path]],
+    file_pathes: List,
     encoding: str = "utf-8",
 ) -> List[str]:
     """
