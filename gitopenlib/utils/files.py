@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  Powered by GitOPEN
 
-__version__ = "0.4.12"
+__version__ = "0.5.00"
 
 import asyncio
 import json
@@ -269,22 +269,46 @@ def read_txt_by_page_asyncio(
     print(f"## All done. Total pages: {curr_page_id}. Elapsed time: {total_time}s")
 
 
-def read_content(file_path: Union[str, Path], encoding: str = "utf-8") -> List[dict]:
+def read_content(
+    file_path: Union[str, Path],
+    encoding: str = "utf-8",
+) -> List[str]:
     """
     从文本文件中读取内容，将内容转换为list，list的元素为每行的字符串
 
     Args:
-        file_path: 文件路径
-        encoding: 文件的编码方式
+        file_path : 文件路径
+        encoding : 文件的编码方式
 
     Returns:
         每行字符串组成的list
     """
     if isinstance(file_path, str):
         file_path = Path(file_path)
-    return gb.remove_0_str(
+    result = gb.remove_0_str(
         [line.strip() for line in file_path.read_text(encoding=encoding).split("\n")]
     )
+    return result
+
+
+def read_contents(
+    file_pathes: List[Union[str, Path]],
+    encoding: str = "utf-8",
+) -> List[str]:
+    """
+    从[多个]文本文件中读取内容，将[所有]内容转换为list，list的元素为每行的字符串
+
+    Args:
+        file_pathes : 文件路径列表
+        encoding : 文件的编码方式
+
+    Returns:
+        每行字符串组成的list
+    """
+    result = []
+    for path in file_pathes:
+        result.extend(read_content(path, encoding))
+    return result
 
 
 def read_jsons(file_path: Union[str, Path], encoding: str = "utf-8") -> List[dict]:
