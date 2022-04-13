@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.4.2"
+__version__ = "0.4.3"
 
 
 from matplotlib import ticker
@@ -17,12 +17,11 @@ from matplotlib.offsetbox import AnchoredText
 import matplotlib.pyplot as plt
 
 
-def set_legend_outside(ax: Axes):
-    """
-    把图例放到图片的右下角
-    """
+def set_legend_outside(ax: Axes, loc: int = 3, ncol: int = 1, alpha: float = 1.0):
+    """把图例放到图片的右下角；也可以调整一些参数，例如透明度，列数。"""
     ax.legend_.remove()
-    ax.legend(bbox_to_anchor=(1.05, 0), loc=3, borderaxespad=0)
+    legend = ax.legend(bbox_to_anchor=(1.05, 0), loc=loc, ncol=ncol, borderaxespad=0)
+    legend.get_frame().set_alpha(alpha)
 
 
 def set_axis_tick(ax: Axes, axis: str = "y", format="%.2f"):
