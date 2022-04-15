@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.18.9"
+__version__ = "0.19.0"
 
 
 import json
@@ -18,6 +18,16 @@ import time
 from typing import Any, Dict, Iterable, List, Union
 
 from gitopenlib.utils import basics as gb
+
+
+def dict2object(adict: dict) -> object:
+    """把dict转为类对象，实现属性的快速访问"""
+
+    class Struct:
+        def __init__(self, **entries):
+            self.__dict__.update(entries)
+
+    return Struct(**adict)
 
 
 def get_keys_from_dict(adict: Dict[Any, Any]) -> List[Any]:
