@@ -8,13 +8,74 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.4.3"
+__version__ = "0.7.3"
 
 
 from matplotlib import ticker
 from matplotlib.axes import Axes
 from matplotlib.offsetbox import AnchoredText
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
+
+from gitopenlib.utils import files as gf
+
+
+def save_svg(plt, path: str, dpi: int = 350, backup: bool = True):
+    """保存为svg格式的矢量图。
+
+    Parameters
+    ----------
+    plt : pyplot
+        pyplot别名。
+    path : str
+        图片路径。
+    dpi : int
+        dpi大小，默认350。
+    backup : bool
+        默认为True，表示如果path存在，则备份之前的文件。
+    """
+    if backup:
+        gf.if_path_exist_then_backup(path)
+    plt.savefig(path, dpi=dpi)
+
+
+def set_ax_space(plt, w: float = 0.2, h: float = 0.2):
+    """设置子图间距
+
+    Parameters
+    ----------
+    plt : pyplot
+        pyplot别名。
+    w : float
+        横向的间距，值为小数，表示横向间距是子图平均宽度的百分比。
+    h : float
+        纵向的间距，值为小数，表示纵向间距是子图平均高度的百分比。
+    """
+    plt.tight_layout()
+    plt.subplots_adjust(wspace=w, hspace=h)
+
+
+def set_tick_integer(ax: Axes, axis: str = "both"):
+    """设置横纵轴刻度值为整数
+
+    Parameters
+    ----------
+    ax : Axes
+        轴，可以理解为某个子图存放的位置。
+
+    axis : str
+        默认值为'both'，表示横纵轴的刻度都设置为整数；可选值维'x'或'y'。
+
+    """
+    if axis == "both":
+        ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+        ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+    elif axis == "x":
+        ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+    elif axis == "y":
+        ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+    else:
+        pass
 
 
 def set_legend_outside(ax: Axes, loc: int = 3, ncol: int = 1, alpha: float = 1.0):
