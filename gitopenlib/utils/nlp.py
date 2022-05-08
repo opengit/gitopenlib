@@ -6,7 +6,7 @@
 # @Date   :  2022-01-15 22:47:56
 # @Description :  Powered by 存放NLP常用的一些工具函数
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 import random
 import re
@@ -100,6 +100,8 @@ def chinese_word_cut(
     for seg_word in seg_list:
         if remove_punc:
             word = gn.remove_punc(seg_word.word)
+            if len(word) == 0:
+                continue
         else:
             word = seg_word.word
         find = 0
