@@ -15,8 +15,8 @@
 
 import io
 import os
-from shutil import rmtree
 import sys
+from shutil import rmtree
 
 from setuptools import Command, find_packages, setup
 
@@ -27,7 +27,7 @@ URL = "https://github.com/opengit/gitopenlib.git"
 EMAIL = "gitopen@gmail.com"
 AUTHOR = "gitopen"
 REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "0.1.80.01"
+VERSION = "0.1.81.01"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
