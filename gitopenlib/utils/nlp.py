@@ -6,7 +6,7 @@
 # @Date   :  2022-01-15 22:47:56
 # @Description :  Powered by 存放NLP常用的一些工具函数
 
-__version__ = "0.4.2"
+__version__ = "0.4.3"
 
 import random
 import re
@@ -60,7 +60,6 @@ class CutTFIDF(TFIDF):
             freq[w] = freq.get(w, 0.0) + 1.0
             flag[w] = f
 
-        print("freq->\n", freq)
         total = sum(freq.values())
         for k in freq:
             kw = k.word if allowPOS else k
