@@ -5,17 +5,39 @@
 # @Author :  GitOPEN
 # @Email  :  gitopen@gmail.com
 # @Date   :  2020-10-29 13:38:36
-# @Description :  Powered by GitOPEN
+# @Description :  有关文件操作的相关工具函数
 
-__version__ = "0.5.01"
+__version__ = "0.6.01"
 
 import asyncio
 import json
-from pathlib import Path
+import pickle
 import time
+from pathlib import Path
 from typing import Callable, Iterable, List, Optional, Union
 
 from gitopenlib.utils import basics as gb
+
+
+def save_pkl(obj, path: str):
+    """序列化对象并保存到磁盘。
+
+    Args:
+        object: 序列化对象
+        path: 目标路径
+
+    Returns:
+        bool: 保存成功，返回 True，保存失败，返回 False，抛出异常。
+    """
+    if_path_exist_then_backup(path)
+    file = open(path, mode="wb")
+    pickle.dump(obj, file)
+    file.close()
+
+
+def read_pkl(path: str):
+    """从磁盘读取序列化对象"""
+    return pickle.load(open(path, "rb"))
 
 
 def if_path_exist_then_backup(pathes: Union[str, List[str]]) -> bool:
