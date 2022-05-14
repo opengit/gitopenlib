@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "0.7.04"
+__version__ = "0.7.06"
 
 import asyncio
 import json
@@ -25,6 +25,7 @@ def save_df(
     path: str,
     format: str = "xlsx|pkl",
     encoding="utf-8-sig",
+    backup: bool = True,
 ) -> None:
     """把 pandas 的 Dataframe 保存为 xlsx(csv) 和 pkl 。
 
@@ -35,6 +36,7 @@ def save_df(
             默认为`xlsx|pkl`。
         encoding: `xlsx(csv)`的编码格式，`utf-8-sig`方便 windows
             系统打开它时不乱码。
+        backup: `True`表示文件存在时进行备份(推荐)，`False`表示不备份。
     Returns:
         None.
     """
@@ -43,29 +45,34 @@ def save_df(
     path = path + ".{}"
 
     def to_file(ft):
+        file_path = path.format(ft)
+        if backup:
+            if_path_exist_then_backup(file_path)
         if ft == "xlsx":
-            df.to_excel(path.format(ft), encoding=encoding, index=False)
+            df.to_excel(file_path, encoding=encoding, index=False)
         if ft == "csv":
-            df.to_csv(path.format(ft), encoding=encoding, index=False)
+            df.to_csv(file_path, encoding=encoding, index=False)
         if ft == "pkl":
-            save_pkl(df, path.format(ft))
+            save_pkl(df, file_path)
 
     fts = format.split("|")
     for ft in fts:
         to_file(ft)
 
 
-def save_pkl(obj, path: str):
+def save_pkl(obj, path: str, backup: bool = True):
     """序列化对象并保存到磁盘。
 
     Args:
         object: 序列化对象
         path: 目标路径
+        backup: `True`表示文件存在时进行备份(推荐)，`False`表示不备份。
 
     Returns:
         bool: 保存成功，返回 True，保存失败，返回 False，抛出异常。
     """
-    if_path_exist_then_backup(path)
+    if backup:
+        if_path_exist_then_backup(path)
     file = open(path, mode="wb")
     pickle.dump(obj, file)
     file.close()
@@ -272,7 +279,7 @@ def read_txt_by_page_asyncio(
         page_size: 每一页数据量
         encoding: 文本文件的编码格式
         open_async: 是否开启异步io处理数据�������������默认不开启
-        slave_num: 执行�����务的协程数目，默认为4
+        slave_num: �������行�������务的���程数目，默认为4
     """
 
     async def parse_(loop, chunk):
