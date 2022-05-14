@@ -7,7 +7,7 @@
 # @Date   :  2021-02-01 10:25:51
 # @Description :  一些高级功能用法
 
-__version__ = "0.5.2"
+__version__ = "0.5.3"
 
 import asyncio
 from functools import wraps
@@ -92,7 +92,7 @@ def run_tasks_by_multiprocess(
     """
     使用多进程并行执行。
     **注意**：使用多进程时，parse_func需要放在py文件的顶级缩进（顶着行首），
-    即，不能放到任何其他块体类。
+    即，不能放到任何其他块体内。
 
     Args:
         data: list类型，需要被处理的数据。
