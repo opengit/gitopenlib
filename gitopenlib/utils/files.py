@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "0.6.01"
+__version__ = "0.7.04"
 
 import asyncio
 import json
@@ -17,6 +17,42 @@ from pathlib import Path
 from typing import Callable, Iterable, List, Optional, Union
 
 from gitopenlib.utils import basics as gb
+from pandas import DataFrame
+
+
+def save_df(
+    df: DataFrame,
+    path: str,
+    format: str = "xlsx|pkl",
+    encoding="utf-8-sig",
+) -> None:
+    """把 pandas 的 Dataframe 保存为 xlsx(csv) 和 pkl 。
+
+    Args:
+        df: `DataFrame`数据。
+        path: 文件路径，给出一个文件路径即可。
+        format: 可选格式包括`xlsx|pkl'、`csv|pkl`、`pkl`、`xlsx`、`csv`；
+            默认为`xlsx|pkl`。
+        encoding: `xlsx(csv)`的编码格式，`utf-8-sig`方便 windows
+            系统打开它时不乱码。
+    Returns:
+        None.
+    """
+
+    path = path.replace(".xlsx", "").replace(".csv", "").replace(".pkl", "")
+    path = path + ".{}"
+
+    def to_file(ft):
+        if ft == "xlsx":
+            df.to_excel(path.format(ft), encoding=encoding, index=False)
+        if ft == "csv":
+            df.to_csv(path.format(ft), encoding=encoding, index=False)
+        if ft == "pkl":
+            save_pkl(df, path.format(ft))
+
+    fts = format.split("|")
+    for ft in fts:
+        to_file(ft)
 
 
 def save_pkl(obj, path: str):
@@ -235,8 +271,8 @@ def read_txt_by_page_asyncio(
         parse_func: 每一页数据处理函数，必须定义
         page_size: 每一页数据量
         encoding: 文本文件的编码格式
-        open_async: 是否开启异步io处理数据，默认不开启
-        slave_num: 执行任务的协程数目，默认为4
+        open_async: 是否开启异步io处理数据�������������默认不开启
+        slave_num: 执行�����务的协程数目，默认为4
     """
 
     async def parse_(loop, chunk):
@@ -288,7 +324,7 @@ def read_txt_by_page_asyncio(
             start_time = end_time
             print(f"## -{curr_page_id}- page parsed done...{[cost_time]}s")
             curr_page_id += 1
-    print(f"## All done. Total pages: {curr_page_id}. Elapsed time: {total_time}s")
+    print(f"## All done.Total pages: {curr_page_id}.Cost time: {total_time}s")
 
 
 def read_content(
@@ -307,9 +343,8 @@ def read_content(
     """
     if isinstance(file_path, str):
         file_path = Path(file_path)
-    result = gb.remove_0_str(
-        [line.strip() for line in file_path.read_text(encoding=encoding).split("\n")]
-    )
+    lines = file_path.read_text(encoding=encoding).split("\n")
+    result = gb.remove_0_str([line.strip() for line in lines])
     return result
 
 
@@ -333,7 +368,10 @@ def read_contents(
     return result
 
 
-def read_jsons(file_path: Union[str, Path], encoding: str = "utf-8") -> List[dict]:
+def read_jsons(
+    file_path: Union[str, Path],
+    encoding: str = "utf-8",
+) -> List[dict]:
     """
     从存放json的文本文件中读取内容，并转化为dict组成的list
 
@@ -346,8 +384,7 @@ def read_jsons(file_path: Union[str, Path], encoding: str = "utf-8") -> List[dic
     """
     if isinstance(file_path, str):
         file_path = Path(file_path)
-    result = gb.remove_0_str(
-        [line.strip() for line in file_path.read_text(encoding=encoding).split("\n")]
-    )
+    lines = file_path.read_text(encoding=encoding).split("\n")
+    result = gb.remove_0_str([line.strip() for line in lines])
 
     return [json.loads(item) for item in result]

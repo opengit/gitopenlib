@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.19.0"
+__version__ = "0.21.0"
 
 
 import json
@@ -18,6 +18,25 @@ import time
 from typing import Any, Dict, Iterable, List, Union
 
 from gitopenlib.utils import basics as gb
+
+
+def pt(msg: str, start: str = "# ", end: str = "\n", length: int = 80):
+    """print改写，大于 length 的 msg 拆开换行打印"""
+    msg = start + msg
+    len_ = len(msg)
+    m = int(len_ / length)
+    r = len_ % length
+    for i in range(m):
+        head_idx = length * i
+        foot_idx = head_idx + length
+        ln = msg[head_idx:foot_idx]
+        if i == 0:
+            print(ln)
+        else:
+            print(start + "\t" + ln)
+
+    if r:
+        print(start + "\t" + msg[-r:])
 
 
 def dict2object(adict: dict) -> object:
@@ -286,7 +305,7 @@ def dict2json(data: dict) -> str:
 
 
 def json2dict(astr: str) -> dict:
-    """将json字符串转为dict类型的数据对象
+    """将json字符串转���dict类���的数据对象
 
     Args:
         astr: json字符串转为dict类型的数据对象
@@ -303,8 +322,8 @@ def dict_sorted(data: dict, flag: int = 0, ascending: bool = True) -> dict:
 
     Args:
         data: 目标数据dict类型
-        flag: 默认为0，表示按照字典的key进行排序；1表示按照value进行排序
-        ascending: 默认为True，表示按照升序排序；False表示降序排序
+        flag: 默认为0，表示按照字典的key进行排序；1表示按照value�����行排序
+        ascending: 默认为True，�����示按照升序排序；False表示降序排序
 
     Returns:
         排序后的数据
