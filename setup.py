@@ -27,7 +27,7 @@ URL = "https://github.com/opengit/gitopenlib.git"
 EMAIL = "gitopen@gmail.com"
 AUTHOR = "gitopen"
 REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "0.1.84.05"
+VERSION = "0.1.85.05"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -48,7 +48,8 @@ EXTRAS = {
 # The rest you shouldn't have to touch too much :)
 # ------------------------------------------------
 # Except, perhaps the License and Trove Classifiers!
-# If you do change the License, remember to change the Trove Classifier for that!
+# If you do change the License, remember to change
+# the Trove Classifier for that!
 
 here = os.path.abspath(os.path.dirname(__file__))
 

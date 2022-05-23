@@ -8,16 +8,22 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.21.0"
+__version__ = "0.22.0"
 
 
 import json
 import math
 import random
+import sys
 import time
 from typing import Any, Dict, Iterable, List, Union
 
 from gitopenlib.utils import basics as gb
+
+
+def quit() -> None:
+    """用于临时打断程序，方便调试"""
+    sys.exit(0)
 
 
 def pt(msg: str, start: str = "# ", end: str = "\n", length: int = 80):
