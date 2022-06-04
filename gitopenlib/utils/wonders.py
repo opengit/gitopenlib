@@ -7,7 +7,7 @@
 # @Date   :  2021-02-01 10:25:51
 # @Description :  一些高级功能用法
 
-__version__ = "0.6.3"
+__version__ = "0.6.4"
 
 import asyncio
 import warnings
@@ -31,6 +31,7 @@ def filterwarnings(action="ignore"):
         "once"      输出第一次出现的警告,而不考虑它们的位置
     """
     warnings.filterwarnings(action)
+    warnings.simplefilter(action="ignore", category=FutureWarning)
 
 
 def timing(f: Callable):
