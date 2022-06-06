@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.22.0"
+__version__ = "0.22.1"
 
 
 import json
@@ -328,8 +328,8 @@ def dict_sorted(data: dict, flag: int = 0, ascending: bool = True) -> dict:
 
     Args:
         data: 目标数据dict类型
-        flag: 默认为0，表示按照字典的key进行排序；1表示按照value�����行排序
-        ascending: 默认为True，�����示按照升序排序；False表示降序排序
+        flag: 默认为0，表示按照字典的key进行排序；1表示按照value进行排序
+        ascending: 默认为True，表示按照升序排序；False表示降序排序
 
     Returns:
         排序后的数据
