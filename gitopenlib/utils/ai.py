@@ -7,7 +7,7 @@
 # @Date   :  2021-03-18 10:54:33
 # @Description :  一些常用的有关 机器学习、深度学习 的通用函数
 
-__version__ = "0.2.2"
+__version__ = "0.2.3"
 
 
 import math
@@ -15,6 +15,7 @@ from typing import List
 import matplotlib.pyplot as plt
 import numpy as np
 import itertools
+from sklearn.metrics import confusion_matrix as sk_cm
 
 
 def confusion_matrix(
@@ -42,7 +43,7 @@ def confusion_matrix(
         textsize: 热力图中数值的字体大小。
         cmap: 图片的配色方案。
     """
-    cm = confusion_matrix(y_true, y_pred)
+    cm = sk_cm(y_true, y_pred)
     if normalize:
         print("Normalized confusion matrix")
         cm_norm = cm.astype("float32") / cm.sum(axis=1)[:, np.newaxis]
