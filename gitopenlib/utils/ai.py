@@ -7,7 +7,7 @@
 # @Date   :  2021-03-18 10:54:33
 # @Description :  一些常用的有关 机器学习、深度学习 的通用函数
 
-__version__ = "0.2.3"
+__version__ = "0.2.5"
 
 
 import math
@@ -59,7 +59,7 @@ def confusion_matrix(
     if not classes:
         classes = list(range(cm.shape[0]))
     tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes, rotation=45)
+    plt.xticks(tick_marks, classes, rotation=0 if classes else 45)
     plt.yticks(tick_marks, classes)
 
     thresh = cm.max() / 2.0
