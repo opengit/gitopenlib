@@ -7,7 +7,7 @@
 # @Date   :  2021-03-18 10:54:33
 # @Description :  一些常用的有关 机器学习、深度学习 的通用函数
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 
 
 import math
@@ -28,6 +28,20 @@ def confusion_matrix(
     textsize=12,
     cmap=plt.cm.Blues,
 ):
+    """
+    打印出优化版的混淆矩阵及其可视化。
+
+    Args:
+        y_true: 真实标签。
+        y_pred: 预测结果标签。
+        classes: 类别名（标签名）。
+        normalize: 是否标准化。
+        decimals: 标准化数值小数位数。
+        figsize: 图片大小。
+        fontsize: 图片上的字体大小。
+        textsize: 热力图中数值的字体大小。
+        cmap: 图片的配色方案。
+    """
     cm = confusion_matrix(y_true, y_pred)
     if normalize:
         print("Normalized confusion matrix")
