@@ -7,7 +7,7 @@
 # @Date   :  2021-03-18 10:54:33
 # @Description :  一些常用的有关 机器学习、深度学习 的通用函数
 
-__version__ = "0.2.5"
+__version__ = "0.2.6"
 
 
 import math
@@ -28,6 +28,8 @@ def confusion_matrix(
     fontsize=14,
     textsize=12,
     cmap=plt.cm.Blues,
+    savesvg=False,
+    svgpath="./confusion_matrix.svg",
 ):
     """
     打印出优化版的混淆矩阵及其可视化。
@@ -42,6 +44,8 @@ def confusion_matrix(
         fontsize: 图片上的字体大小。
         textsize: 热力图中数值的字体大小。
         cmap: 图片的配色方案。
+        savesvg: 是否保存可视化结果为svg文件，默认False。
+        svgpath: 文件路径。
     """
     cm = sk_cm(y_true, y_pred)
     if normalize:
@@ -84,7 +88,11 @@ def confusion_matrix(
     plt.xlabel("Predicted label", fontsize=fontsize)
 
     plt.tight_layout()
-    plt.show()
+
+    if savesvg:
+        plt.savefig(svgpath)
+    else:
+        plt.show()
 
 
 def softmax(data: list, decimal: int = None) -> List[float]:
