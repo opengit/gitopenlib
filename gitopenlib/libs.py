@@ -10,7 +10,7 @@
 @Desc    :   用于快捷导入常用的包，注意这个文件不要格式化！
 """
 
-__version__ = "0.2.5"
+__version__ = "0.2.6"
 
 
 # #######################################################
@@ -34,6 +34,7 @@ from gitopenlib.utils import others as go
 from gitopenlib.utils import plot as gp
 from gitopenlib.utils import wonders as gw
 from gitopenlib.utils import crawler as gc
+from gitopenlib.utils import debuger as gdb
 
 # ## 其他常用的包
 import os
