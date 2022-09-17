@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.22.1"
+__version__ = "0.22.2"
 
 
 import json
@@ -92,7 +92,14 @@ def list_item_getter(data: list, index: list):
 def fmt_seconds(seconds: int or float, lang: str = "zh"):
     """把秒转换为年月日小时分钟秒。"""
     if lang == "zh":
-        return time.strftime("%Y年%m月%d日 %H小时%M分钟%S秒", time.gmtime(seconds))
+        return (
+            time.strftime(
+                "%Y年%m月%d日 %H小时%M分钟%S秒".encode("unicode-escape").decode(),
+                time.gmtime(seconds),
+            )
+            .encode()
+            .decode("unicode-escape")
+        )
     else:
         return time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(seconds))
 
