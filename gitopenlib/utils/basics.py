@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.22.2"
+__version__ = "0.22.3"
 
 
 import json
@@ -23,6 +23,8 @@ from gitopenlib.utils import basics as gb
 
 def quit() -> None:
     """用于临时打断程序，方便调试"""
+    lineno = sys._getframe().f_lineno
+    print("---" * 4, "line [{}] quit".format(lineno), "---" * 4)
     sys.exit(0)
 
 
