@@ -7,7 +7,7 @@
 # @Date   :  2021-03-18 10:54:33
 # @Description :  一些常用的有关 机器学习、深度学习 的通用函数
 
-__version__ = "0.2.6"
+__version__ = "0.2.7"
 
 
 import math
@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import itertools
 from sklearn.metrics import confusion_matrix as sk_cm
+from gitopenlib.utils import files as gf
 
 
 def confusion_matrix(
@@ -28,7 +29,7 @@ def confusion_matrix(
     fontsize=14,
     textsize=12,
     cmap=plt.cm.Blues,
-    savesvg=False,
+    svg="save",
     svgpath="./confusion_matrix.svg",
 ):
     """
@@ -44,7 +45,7 @@ def confusion_matrix(
         fontsize: 图片上的字体大小。
         textsize: 热力图中数值的字体大小。
         cmap: 图片的配色方案。
-        savesvg: 是否保存可视化结果为svg文件，默认False。
+        svg: svg的现实方法，'show'表示直接显示；'save'表示只保存不显示；'both'表示既显示又保存。
         svgpath: 文件路径。
     """
     cm = sk_cm(y_true, y_pred)
@@ -89,8 +90,13 @@ def confusion_matrix(
 
     plt.tight_layout()
 
-    if savesvg:
+    if svg == "save":
+        gf.if_path_exist_then_backup(svgpath)
         plt.savefig(svgpath)
+    elif svg == "both":
+        gf.if_path_exist_then_backup(svgpath)
+        plt.savefig(svgpath)
+        plt.show()
     else:
         plt.show()
 
