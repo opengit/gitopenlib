@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "0.7.06"
+__version__ = "0.9.06"
 
 import asyncio
 import json
@@ -18,6 +18,21 @@ from typing import Callable, Iterable, List, Optional, Union
 
 from gitopenlib.utils import basics as gb
 from pandas import DataFrame
+import h5py
+
+
+def save_hdf5(data, path: str):
+    file = h5py.File(path, "w")
+    file.create_dataset("data", data=data)
+    file.close()
+
+
+def read_hdf5(path: str):
+    file = h5py.File(path, "r")
+    data = file["data"]
+    file.close()
+
+    return data
 
 
 def save_df(
