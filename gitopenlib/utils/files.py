@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "0.9.06"
+__version__ = "1.01.06"
 
 import asyncio
 import json
@@ -17,32 +17,46 @@ from pathlib import Path
 from typing import Callable, Iterable, List, Optional, Union
 
 from gitopenlib.utils import basics as gb
+import pandas as pd
 from pandas import DataFrame
-import h5py
 
 
-def save_hdf5(data, path: str):
-    file = h5py.File(path, "w")
-    file.create_dataset("data", data=data)
-    file.close()
+def df_to_json(
+    df: DataFrame,
+    path: str,
+    orient: str = "split",
+    encoding="utf-8",
+):
+    """把 DataFrame 保存为 json 文件。
+
+    Args:
+        df: DataFrame
+        path: 保存路径
+        orient: 保存格式，参考 `pandas.DataFrame.to_json` 的参数说明。
+    """
+    if_path_exist_then_backup(path)
+    df.to_json(path, orient=orient, ensure_ascii=False, encoding=encoding)
 
 
-def read_hdf5(path: str):
-    file = h5py.File(path, "r")
-    data = file["data"]
-    file.close()
-
-    return data
+def df_from_json(
+    path: str,
+    orient: str = "split",
+    encoding="utf-8",
+) -> DataFrame:
+    """将json数据读取为 `pandas.DataFrame` 。"""
+    return pd.read_json(path, orient=orient, encoding=encoding)
 
 
 def save_df(
     df: DataFrame,
     path: str,
-    format: str = "xlsx|pkl",
+    format: str = "xlsx|json",
     encoding="utf-8-sig",
     backup: bool = True,
 ) -> None:
     """把 pandas 的 Dataframe 保存为 xlsx(csv) 和 pkl 。
+
+    注：该方法由于pickle在3.7和3.8以上版本中存在兼容问题，请注意这一点，建议使用``。
 
     Args:
         df: `DataFrame`数据。
