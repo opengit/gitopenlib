@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.01.06"
+__version__ = "1.01.07"
 
 import asyncio
 import json
@@ -30,8 +30,8 @@ def df_to_json(
     """把 DataFrame 保存为 json 文件。
 
     Args:
-        df: DataFrame
-        path: 保存路径
+        df: DataFrame。
+        path: 保存路径。
         orient: 保存格式，参考 `pandas.DataFrame.to_json` 的参数说明。
     """
     if_path_exist_then_backup(path)
@@ -54,23 +54,21 @@ def save_df(
     encoding="utf-8-sig",
     backup: bool = True,
 ) -> None:
-    """把 pandas 的 Dataframe 保存为 xlsx(csv) 和 pkl 。
+    """把 pandas 的 Dataframe 保存为 xlsx(csv) 、json 文件。
 
-    注：该方法由于pickle在3.7和3.8以上版本中存在兼容问题，请注意这一点，建议使用``。
+    注：该方法使用pickle在3.7和3.8两个版本中存在兼容问题，请注意这一点。
 
     Args:
         df: `DataFrame`数据。
         path: 文件路径，给出一个文件路径即可。
-        format: 可选格式包括`xlsx|pkl'、`csv|pkl`、`pkl`、`xlsx`、`csv`；
-            默认为`xlsx|pkl`。
-        encoding: `xlsx(csv)`的编码格式，`utf-8-sig`方便 windows
-            系统打开它时不乱码。
+        format: 可选格式包括`xlsx|json`、`csv|json`、`json`、`xlsx`、`csv`；默认为`xlsx|json`。
+        encoding: `xlsx(csv)`的编码格式，`utf-8-sig`方便windows系统打开它时不乱码；`json`的编码格式为`utf-8`。
         backup: `True`表示文件存在时进行备份(推荐)，`False`表示不备份。
     Returns:
         None.
     """
 
-    path = path.replace(".xlsx", "").replace(".csv", "").replace(".pkl", "")
+    path = path.replace(".xlsx", "").replace(".csv", "").replace(".json", "")
     path = path + ".{}"
 
     def to_file(ft):
@@ -81,8 +79,8 @@ def save_df(
             df.to_excel(file_path, encoding=encoding, index=False)
         if ft == "csv":
             df.to_csv(file_path, encoding=encoding, index=False)
-        if ft == "pkl":
-            save_pkl(df, file_path)
+        if ft == "json":
+            df_to_json(df, file_path)
 
     fts = format.split("|")
     for ft in fts:
