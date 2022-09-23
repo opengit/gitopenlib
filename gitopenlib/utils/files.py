@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.01.07"
+__version__ = "1.01.08"
 
 import asyncio
 import json
@@ -35,7 +35,7 @@ def df_to_json(
         orient: 保存格式，参考 `pandas.DataFrame.to_json` 的参数说明。
     """
     if_path_exist_then_backup(path)
-    df.to_json(path, orient=orient, ensure_ascii=False, encoding=encoding)
+    df.to_json(path, orient=orient, encoding=encoding)
 
 
 def df_from_json(
