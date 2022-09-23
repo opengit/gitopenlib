@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.01.09"
+__version__ = "1.01.10"
 
 import asyncio
 import json
@@ -24,7 +24,6 @@ from pandas import DataFrame
 def df_to_json(
     df: DataFrame,
     path: str,
-    orient: str = "split",
     encoding="utf-8",
     force_ascii=False,
 ):
@@ -37,16 +36,15 @@ def df_to_json(
     """
     if_path_exist_then_backup(path)
     with open(path, "w+", encoding=encoding) as f:
-        df.to_json(f, orient=orient, force_ascii=force_ascii)
+        df.to_json(f, force_ascii=force_ascii)
 
 
 def df_from_json(
     path: str,
-    orient: str = "split",
     encoding="utf-8",
 ) -> DataFrame:
     """将json数据读取为 `pandas.DataFrame` 。"""
-    return pd.read_json(path, orient=orient, encoding=encoding)
+    return pd.read_json(path, encoding=encoding)
 
 
 def save_df(
@@ -78,9 +76,9 @@ def save_df(
         if backup:
             if_path_exist_then_backup(file_path)
         if ft == "xlsx":
-            df.to_excel(file_path, encoding=encoding, index=False)
+            df.to_excel(file_path, encoding=encoding)
         if ft == "csv":
-            df.to_csv(file_path, encoding=encoding, index=False)
+            df.to_csv(file_path, encoding=encoding)
         if ft == "json":
             df_to_json(df, file_path)
 
