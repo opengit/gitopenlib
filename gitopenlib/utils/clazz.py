@@ -7,9 +7,20 @@
 # @Date   :  2021-01-11 18:55:11
 # @Description :  存放常用的工具类
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from functools import partial
+
+
+class AutoVivification(dict):
+    """实现嵌套字典的自动创建"""
+
+    def __getitem__(self, item):
+        try:
+            return dict.__getitem__(self, item)
+        except KeyError:
+            value = self[item] = type(self)()
+            return value
 
 
 class F(partial):
