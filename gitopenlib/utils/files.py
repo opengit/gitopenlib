@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.01.10"
+__version__ = "1.02.10"
 
 import asyncio
 import json
@@ -108,6 +108,16 @@ def save_pkl(obj, path: str, backup: bool = True):
 def read_pkl(path: str):
     """从磁盘读取序列化对象"""
     return pickle.load(open(path, "rb"))
+
+
+def check_path(pathes: Union[str, List[str]]):
+    """检查路径是否存在，不存在则创建。创建时会自动创建父目录。"""
+    if isinstance(pathes, str):
+        pathes = [pathes]
+    for path in pathes:
+        path = Path(path)
+        if not path.exists():
+            path.mkdir(parents=True, exist_ok=True)
 
 
 def if_path_exist_then_backup(pathes: Union[str, List[str]]) -> bool:
