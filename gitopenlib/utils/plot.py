@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.3"
+__version__ = "0.7.4"
 
 
 from matplotlib import ticker
@@ -78,10 +78,22 @@ def set_tick_integer(ax: Axes, axis: str = "both"):
         pass
 
 
-def set_legend_outside(ax: Axes, loc: int = 3, ncol: int = 1, alpha: float = 1.0):
+def set_legend_outside(
+    ax: Axes,
+    title: str = "",
+    loc: int = 3,
+    ncol: int = 1,
+    alpha: float = 1.0,
+):
     """把图例放到图片的右下角；也可以调整一些参数，例如透明度，列数。"""
     ax.legend_.remove()
-    legend = ax.legend(bbox_to_anchor=(1.05, 0), loc=loc, ncol=ncol, borderaxespad=0)
+    legend = ax.legend(
+        title=title,
+        bbox_to_anchor=(1.05, 0),
+        loc=loc,
+        ncol=ncol,
+        borderaxespad=0,
+    )
     legend.get_frame().set_alpha(alpha)
 
 
