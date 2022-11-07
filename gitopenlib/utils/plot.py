@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.4"
+__version__ = "0.7.5.2"
 
 
 from matplotlib import ticker
@@ -20,7 +20,12 @@ from matplotlib.ticker import MaxNLocator
 from gitopenlib.utils import files as gf
 
 
-def save_svg(plt, path: str, dpi: int = 350, backup: bool = True):
+def set_figsize(width: float or int = 4, height: float or int = 3):
+    """设置图片的大小，单位为英寸"""
+    pt.rcParams["figure.figsize"] = (width, height)
+
+
+def save_svg(plt, path: str, dpi: int = 300, backup: bool = True):
     """保存为svg格式的矢量图。
 
     Parameters
@@ -132,9 +137,11 @@ def legend_text(
     return at
 
 
-def set_font(fname: str = "SimHei", fsize: int = 12):
+def set_font(fname: str = "SimSun", fsize: int = 12):
     """
-    设置字体
+    设置字体；
+    若是在windows系统下，可以使用SimSun，SimHei，SimKai，SimFang等字体；
+    若在linux、macOS系统下，可搜索SimSun.ttf字体安装后使用（必要时候需要重启系统）。
 
     Args:
         fname (str): 字体的名称。
