@@ -7,7 +7,7 @@
 # @Date   :  2021-02-01 10:25:51
 # @Description :  一些高级功能用法
 
-__version__ = "0.6.4"
+__version__ = "0.7.4"
 
 import asyncio
 import warnings
@@ -17,6 +17,29 @@ from time import time
 from typing import Callable
 
 from gitopenlib.utils import basics as gb
+
+
+import traceback
+
+
+def catch_exception(f: Callable):
+    """A simple exception catcher.
+
+    装饰器，用于捕获函数的异常信息。
+    """
+
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        try:
+            result = f(*args, **kwargs)
+        except Exception as e:
+            print(f"Error # {f.__name__} # : {e}")
+            print("Traceback: ")
+            traceback.print_exc()
+            result = None
+        return result
+
+    return wrapper
 
 
 def filterwarnings(action="ignore"):
