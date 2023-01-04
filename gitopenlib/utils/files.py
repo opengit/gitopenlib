@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.02.10"
+__version__ = "1.02.11"
 
 import asyncio
 import json
@@ -287,7 +287,6 @@ def read_txt_by_page(
                 print(f"## -{curr_page_id}- page parsed done...{[cost_time]}s")
                 curr_page_id += 1
 
-            pass
         if len(data) > 0:
             parse_func(data)
             end_time = time.time()
@@ -315,8 +314,8 @@ def read_txt_by_page_asyncio(
         parse_func: 每一页数据处理函数，必须定义
         page_size: 每一页数据量
         encoding: 文本文件的编码格式
-        open_async: 是否开启异步io处理数据�������������默认不开启
-        slave_num: �������行�������务的���程数目，默认为4
+        open_async: 是否开启异步io处理数据，默认不开启
+        slave_num: 执行任务的协程数目，默认为4
     """
 
     async def parse_(loop, chunk):
@@ -341,7 +340,6 @@ def read_txt_by_page_asyncio(
                     chunks.clear()
                 else:
                     parse_func(data)
-                # parse_func(data)
                 data.clear()
                 end_time = time.time()
                 cost_time = float(end_time - start_time)
@@ -350,7 +348,6 @@ def read_txt_by_page_asyncio(
                 print(f"## -{curr_page_id}- page parsed done...{[cost_time]}s")
                 curr_page_id += 1
 
-            pass
         if len(data) > 0:
             if open_async:
                 loop = asyncio.get_event_loop()
@@ -361,7 +358,6 @@ def read_txt_by_page_asyncio(
                 chunks.clear()
             else:
                 parse_func(data)
-            # parse_func(data)
             end_time = time.time()
             cost_time = float(end_time - start_time)
             total_time += cost_time

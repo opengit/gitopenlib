@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.22.4"
+__version__ = "0.22.5"
 
 
 import json
@@ -302,7 +302,7 @@ def ele2json(data: list) -> List[str]:
         data: list类型的数据，元素为dict类型
 
     Returns:
-        转换后的list数据
+        转换后的list数�����
     """
     return [dict2json(item) for item in data]
 
@@ -320,7 +320,7 @@ def dict2json(data: dict) -> str:
 
 
 def json2dict(astr: str) -> dict:
-    """将json字符串转���dict类���的数据对象
+    """将json字符串转为dict类型的数据对象
 
     Args:
         astr: json字符串转为dict类型的数据对象
