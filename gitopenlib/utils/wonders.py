@@ -7,7 +7,7 @@
 # @Date   :  2021-02-01 10:25:51
 # @Description :  一些高级功能用法
 
-__version__ = "0.8.4"
+__version__ = "0.8.5"
 
 import asyncio
 import warnings
@@ -127,7 +127,7 @@ def cpu_core_count():
     """
     获取CPU的核数，等于线程数除以2。
     """
-    return multiprocessing.cpu_count() / 2
+    return cpu_count() / 2
 
 
 @timing
