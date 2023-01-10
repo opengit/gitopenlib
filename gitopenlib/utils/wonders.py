@@ -7,16 +7,17 @@
 # @Date   :  2021-02-01 10:25:51
 # @Description :  一些高级功能用法
 
-__version__ = "0.7.4"
+__version__ = "0.8.4"
 
 import asyncio
 import warnings
 from functools import wraps
-from multiprocessing import Process
+from multiprocessing import Process, cpu_count
 from time import time
 from typing import Callable
 
 from gitopenlib.utils import basics as gb
+from gitopenlib.utils import wonders as gw
 
 
 import traceback
@@ -120,6 +121,13 @@ def run_tasks_by_multithread(
     loop = asyncio.get_event_loop()
     chunks = gb.chunks(data, thread_num)
     loop.run_until_complete(asyncio.gather(*[parse_(loop, chunk) for chunk in chunks]))
+
+
+def cpu_core_count():
+    """
+    获取CPU的核数，等于线程数除以2。
+    """
+    return multiprocessing.cpu_count() / 2
 
 
 @timing
