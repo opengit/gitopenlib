@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.5.2"
+__version__ = "0.7.6.2"
 
 
 from matplotlib import ticker
@@ -18,6 +18,14 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 
 from gitopenlib.utils import files as gf
+
+
+def set_spines_line_width(ax: Axes, left, top, right, bottom):
+    """设置坐标轴的粗细"""
+    ax.spines["left"].set_linewidth(left)
+    ax.spines["top"].set_linewidth(top)
+    ax.spines["right"].set_linewidth(right)
+    ax.spines["bottom"].set_linewidth(bottom)
 
 
 def set_figsize(width: float or int = 4, height: float or int = 3):
