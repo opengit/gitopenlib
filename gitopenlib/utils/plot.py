@@ -8,16 +8,18 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.2.2"
+__version__ = "0.7.2.4"
 
 
+import matplotlib
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+from gitopenlib.utils import files as gf
 from matplotlib import ticker
 from matplotlib.axes import Axes
 from matplotlib.offsetbox import AnchoredText
-import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
-
-from gitopenlib.utils import files as gf
 
 
 def heatmap(
@@ -178,9 +180,9 @@ def set_spines_line_width(ax: Axes, left, top, right, bottom):
     ax.spines["bottom"].set_linewidth(bottom)
 
 
-def set_figsize(width: float or int = 4, height: float or int = 3):
+def set_figsize(plt, width: float or int = 4, height: float or int = 3):
     """设置图片的大小，单位为英寸"""
-    pt.rcParams["figure.figsize"] = (width, height)
+    plt.rcParams["figure.figsize"] = (width, height)
 
 
 def save_svg(plt, path: str, dpi: int = 300, backup: bool = True):
@@ -262,7 +264,7 @@ def set_legend_outside(
 
 def set_axis_tick(ax: Axes, axis: str = "y", format="%.2f"):
     """
-    横轴或者纵轴的刻度标签的格式，例如，%.2f 表示两位小数；
+    横轴或者纵轴的����度标签的格式，例如，%.2f 表示两位小数；
     %.2e 科学计数法
     """
     if axis == "x":
