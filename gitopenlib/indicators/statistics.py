@@ -8,7 +8,7 @@
 # @Description :  一系列统计学相关的计算函数
 
 
-__version__ = "0.19.7"
+__version__ = "0.20.7"
 
 import math
 from collections import Counter
@@ -247,7 +247,6 @@ def curve_fit(x: np.array, y: np.array, deg: int) -> tuple:
     print(p)
     aa = ""
     for i in range(deg + 1):
-
         bb = parameter[i]
 
         sup = deg - i
@@ -268,7 +267,9 @@ def curve_fit(x: np.array, y: np.array, deg: int) -> tuple:
     return y_fit, r2, aa
 
 
-def normal_distribution_values(u: Union[int, float], std: Union[int, float]) -> tuple:
+def normal_distribution_values(
+    u: Union[int, float], std: Union[int, float]
+) -> tuple:
     """生成均值为u标准差为std的正态分布数据
 
     用处：当样本数据集确定（list），可以求出均值、标准差，
@@ -286,7 +287,9 @@ def normal_distribution_values(u: Union[int, float], std: Union[int, float]) -> 
 
     """
     x = np.linspace(u - 3 * std, u + 3 * std, 100)
-    y = np.exp(-((x - u) ** 2) / (2 * std ** 2)) / (math.sqrt(2 * math.pi) * std)
+    y = np.exp(-((x - u) ** 2) / (2 * std**2)) / (
+        math.sqrt(2 * math.pi) * std
+    )
     return x, y
 
 
@@ -312,7 +315,9 @@ def Cdf(t, x) -> float:
     return prob
 
 
-def percentile_rank(scores: list, your_score: Union[int, float]) -> Union[int, float]:
+def percentile_rank(
+    scores: list, your_score: Union[int, float]
+) -> Union[int, float]:
     """获取百分等级
 
     百分等级就是原始分数不 高于你的人在全部考试人数中所占的比例再乘以100。
@@ -526,7 +531,14 @@ def calculate_IQR(data: list, k: float = 1.5) -> tuple:
     lower_whisker = lower_quartile - IQR * k
     median = Percentile[2]
 
-    return upper_whisker, upper_quartile, median, lower_quartile, lower_whisker, IQR
+    return (
+        upper_whisker,
+        upper_quartile,
+        median,
+        lower_quartile,
+        lower_whisker,
+        IQR,
+    )
 
 
 def filter_outliers_by_IQR(data: list, k: float = 1.5) -> tuple:
@@ -578,12 +590,16 @@ def remove_outliers_by_IQR(data: list, k: float = 1.5) -> list:
     ) = calculate_IQR(data, k=k)
 
     new_data = [
-        item for item in data if item <= upper_whisker and item >= lower_whisker
+        item
+        for item in data
+        if item <= upper_whisker and item >= lower_whisker
     ]
     return new_data
 
 
-def calculate_list_count_percent(data: list, decimals: Optional[int] = None) -> tuple:
+def calculate_list_count_percent(
+    data: list, decimals: Optional[int] = None
+) -> tuple:
     """计算list中元素的次数和百分比
 
     Args:
@@ -624,7 +640,9 @@ def smooth_ma(data: Optional[list or np.array], window_size=3):
         np.array: 平滑后的数组
     """
     cumsum_vec = np.cumsum(np.insert(data, 0, 0))
-    ma_vec = (cumsum_vec[window_size:] - cumsum_vec[:-window_size]) / window_size
+    ma_vec = (
+        cumsum_vec[window_size:] - cumsum_vec[:-window_size]
+    ) / window_size
     return ma_vec
 
 
@@ -645,14 +663,19 @@ def smooth_matlab(data: Optional[list or np.array], window_size: int = 3):
     # a: NumPy 1-D array containing the data to be smoothed
     # WSZ: smoothing window size needs, which must be odd number,
     # as in the original MATLAB implementation
-    out0 = np.convolve(data, np.ones(window_size, dtype=int), "valid") / window_size
+    out0 = (
+        np.convolve(data, np.ones(window_size, dtype=int), "valid")
+        / window_size
+    )
     r = np.arange(1, window_size - 1, 2)
     start = np.cumsum(data[: window_size - 1])[::2] / r
     stop = (np.cumsum(data[:-window_size:-1])[::2] / r)[::-1]
     return np.concatenate((start, out0, stop))
 
 
-def normalization(data: Optional[list or np.array], decimals: None or int = None):
+def normalization(
+    data: Optional[list or np.array], decimals: None or int = None
+):
     """
     对一系列数据进行归一化处理，对原始数据进行线性变换把数据映射到[0,1]之间。
 
@@ -668,7 +691,9 @@ def normalization(data: Optional[list or np.array], decimals: None or int = None
     return ret if decimals is None else np.around(ret, decimals=decimals)
 
 
-def standardization(data: Optional[list or np.array], decimals: None or int = None):
+def standardization(
+    data: Optional[list or np.array], decimals: None or int = None
+):
     """
     对一系列数据进行标准化处理，常用的方法是z-score标准化，处理后数据均值为0，标准差为1。
 
@@ -685,7 +710,9 @@ def standardization(data: Optional[list or np.array], decimals: None or int = No
     return ret if decimals is None else np.around(ret, decimals=decimals)
 
 
-def zero_centered(data: Optional[list or np.array], decimals: None or int = None):
+def zero_centered(
+    data: Optional[list or np.array], decimals: None or int = None
+):
     """
     对一系列数据进行零均值化，即zero-centered。对数据的平移的一个过程，之后数据的中心点为(0,0)。
 

@@ -96,7 +96,9 @@ def heatmap(
     ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
 
     # Rotate the tick labels and set their alignment.
-    plt.setp(ax.get_xticklabels(), rotation=-30, ha="right", rotation_mode="anchor")
+    plt.setp(
+        ax.get_xticklabels(), rotation=-30, ha="right", rotation_mode="anchor"
+    )
 
     # Turn spines off and create white grid.
     ax.spines[:].set_visible(False)
@@ -300,7 +302,7 @@ def legend_text(
 def set_font(fname: str = "SimSun", fsize: int = 12):
     """
     设置字体；
-    若是在windows系统��，可以使用SimSun，SimHei，SimKai，SimFang等字体；
+    若是在windows系统，可以使用SimSun，SimHei，SimKai，SimFang等字体；
     若在linux、macOS系统下，可搜索SimSun.ttf字体安装后使用（必要时候需要重启系统）。
 
     Args:
