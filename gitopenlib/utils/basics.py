@@ -175,13 +175,17 @@ def split_strip(
     拆分字符串，并对列表中的元素进行 strip、去除空字符串。
     """
     if isinstance(strings, str):
-        return gb.remove_0_str([it.strip() for it in strings.split(sep, maxsplit)])
+        return gb.remove_0_str(
+            [it.strip() for it in strings.split(sep, maxsplit)]
+        )
     elif isinstance(strings, list):
         result = []
         for item in strings:
             item = str(item).strip()
             result.append(
-                gb.remove_0_str([it.strip() for it in item.split(sep, maxsplit)])
+                gb.remove_0_str(
+                    [it.strip() for it in item.split(sep, maxsplit)]
+                )
             )
         return result
 
@@ -196,7 +200,9 @@ def printj(
     把dict类型的数据，格式化为json字符串输出显示。
     """
     print(
-        json.dumps(msg, sort_keys=sort_keys, indent=4, ensure_ascii=ensure_ascii)
+        json.dumps(
+            msg, sort_keys=sort_keys, indent=4, ensure_ascii=ensure_ascii
+        )
         if beautify
         else json.dumps(msg, ensure_ascii=ensure_ascii)
     )
@@ -343,7 +349,9 @@ def dict_sorted(data: dict, flag: int = 0, ascending: bool = True) -> dict:
     Returns:
         排序后的数据
     """
-    return dict(sorted(data.items(), key=lambda x: x[flag], reverse=not ascending))
+    return dict(
+        sorted(data.items(), key=lambda x: x[flag], reverse=not ascending)
+    )
 
 
 def list_deduplicate(data: list) -> List:
@@ -400,7 +408,9 @@ def strips(string: str) -> str:
     """
     去除字符串两端的空格符和换行符，并且去除中间的换行符
     """
-    return string.strip().replace("\n", "").replace("\r", "").replace("\r\n", "")
+    return (
+        string.strip().replace("\n", "").replace("\r", "").replace("\r\n", "")
+    )
 
 
 def remove_0_str(data: list) -> List:
@@ -422,6 +432,20 @@ def chunks(arr, m) -> List[list]:
     """
     n = int(math.ceil(len(arr) / float(m)))
     return [arr[i : i + n] for i in range(0, len(arr), n)]
+
+
+def chunks1(arr, size) -> List[list]:
+    """分割列表，但是子list元素的个数是固定的size个
+
+    Args:
+        arr: 待分割的list
+        size: 每份中的元素个数
+
+    Returns:
+        分割后的每个子list都是返回结果list的一个元素
+    """
+    chunked_list = [arr[i : i + size] for i in range(0, len(arr), size)]
+    return chunked_list
 
 
 def time_formatter(seconds: int, show: bool = True):
