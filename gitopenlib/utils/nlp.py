@@ -6,7 +6,7 @@
 # @Date   :  2022-01-15 22:47:56
 # @Description :  Powered by 存放NLP常用的一些工具函数
 
-__version__ = "0.4.3"
+__version__ = "0.4.4"
 
 import random
 import re
@@ -104,7 +104,9 @@ def is_contains_chinese(text: str):
 
 def generate_random_strs(length: int):
     """生成随机字符串"""
-    return "".join(random.sample(string.digits * 5 + string.ascii_letters * 4, length))
+    return "".join(
+        random.sample(string.digits * 5 + string.ascii_letters * 4, length)
+    )
 
 
 def char_is_emoji(character):
@@ -133,12 +135,13 @@ def chinese_word_cut(
     对一段文本进行切分词。
 
     Args:
-        mytext : 文本内容
+        text : 文本内容
         custom_dict_file : 自定义词典路径
         stop_words : 停用词列表
         word_length : 词汇的最小长度
         top_k : 保留前多少个关键词
         reserved_flags : 切分词后保留哪些词性的词汇
+        remove_punc : 是否去除标点符号
 
     Returns:
         分词列表
@@ -149,7 +152,10 @@ def chinese_word_cut(
 
     token_list, weight_list, flag_list = [], [], []
     tokens, weights, flags = CutTFIDF().extract_tags(
-        sentence=text, topK=top_k, min_length=word_length, allowPOS=reserved_flags
+        sentence=text,
+        topK=top_k,
+        min_length=word_length,
+        allowPOS=reserved_flags,
     )
     for index, token in enumerate(tokens):
         if remove_punc:
