@@ -4,9 +4,10 @@
 # @Author :  GitOPEN
 # @Email  :  gitopen@gmail.com
 # @Date   :  2022-01-15 22:47:56
-# @Description :  Powered by 存放NLP常用的一些工具函数
+# @Description :  Powered by GitOPEN.
+#                 存放NLP常用的一些工具函数。
 
-__version__ = "0.4.4"
+__version__ = "0.4.5"
 
 import random
 import re
@@ -22,7 +23,6 @@ from jieba.analyse import TFIDF
 
 
 class CutTFIDF(TFIDF):
-
     """对 jieba 分词的 TFIDF 类进行优化，去除单个字不能返回权重的限制。
 
     支持返回词汇列表对应的权重值和词性列表。
@@ -34,13 +34,15 @@ class CutTFIDF(TFIDF):
     def extract_tags(self, sentence, topK=100, min_length=2, allowPOS=[]):
         """切分词，并且返回词汇的 tfidf 权重和词性。
 
-        ----------
-        Parameter:
-            - topK: 返回多少个top关键词。 `None` 表示所有。
-            - min_length: 单词或字符的最小长度。设置为 `1` 表示单个字符。
-                            如果词汇的长度小于改值，就会被过滤掉。
-            - allowPOS: 允许的词性列表。例如：['ns', 'n', 'vn', 'v','nr'].
-                            如果词汇的词性不在列表中，就会被过滤掉。
+        Args:
+            topK:
+                返回多少个top关键词。 `None` 表示所有。
+            min_length:
+                单词或字符的最小长度。设置为 `1` 表示单个字符。
+                如果词汇的长度小于改值，就会被过滤掉。
+            allowPOS:
+                允许的词性列表。例如：`['ns', 'n', 'vn', 'v','nr']`。
+                如果词汇的词性不在列表中，就会被过滤掉。
         """
         allowPOS = frozenset(allowPOS)
         words = self.postokenizer.cut(sentence)
@@ -135,16 +137,28 @@ def chinese_word_cut(
     对一段文本进行切分词。
 
     Args:
-        text : 文本内容
-        custom_dict_file : 自定义词典路径
-        stop_words : 停用词列表
-        word_length : 词汇的最小长度
-        top_k : 保留前多少个关键词
-        reserved_flags : 切分词后保留哪些词性的词汇
-        remove_punc : 是否去除标点符号
+        text:
+            文本内容。
+        custom_dict_file:
+            自定义词典路径。
+        stop_words:
+            停用词列表。
+        word_length:
+            词汇的最小长度。
+        top_k:
+            保留前多少个关键词。
+        reserved_flags:
+            切分词后保留哪些词性的词汇。
+        remove_punc:
+            是否去除标点符号。
 
     Returns:
-        分词列表
+        token_list:
+            分词后，由词汇组成的列表。
+        weight_list:
+            分词后，由词汇权重组成的列表。
+        flag_list:
+            分词后，由词汇词性组成的列表。
     """
     if custom_dict_file:
         jieba.load_userdict(custom_dict_file)
@@ -179,7 +193,7 @@ def english_word_cut(
     stop_words: list = [],
     remove_punc: bool = True,
 ) -> list:
-    """对英文句子分词（按照空格）"""
+    """对英文句子分词（按照空格）。"""
     if remove_punc:
         text = gn.remove_punc(text)
     return [word for word in text.split() if word not in set(stop_words)]

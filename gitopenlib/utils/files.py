@@ -7,14 +7,14 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.02.11"
+__version__ = "1.02.12"
 
 import asyncio
 import json
 import pickle
 import time
 from pathlib import Path
-from typing import Callable, Iterable, List, Optional, Union
+from typing import Callable, Iterable, List, Optional, Union, Dict
 
 from gitopenlib.utils import basics as gb
 import pandas as pd
@@ -30,9 +30,12 @@ def df_to_json(
     """把 DataFrame 保存为 json 文件。
 
     Args:
-        df: DataFrame。
-        path: 保存路径。
-        orient: 保存格式，参考 `pandas.DataFrame.to_json` 的参数说明。
+        df:
+            DataFrame数据。
+        path:
+            保存路径。
+        orient:
+            保存格式，参考 `pandas.DataFrame.to_json` 的参数说明。
     """
     if_path_exist_then_backup(path)
     with open(path, "w+", encoding=encoding) as f:
@@ -59,13 +62,16 @@ def save_df(
     注：该方法使用pickle在3.7和3.8两个版本中存在兼容问题，请注意这一点。
 
     Args:
-        df: `DataFrame`数据。
-        path: 文件路径，给出一个文件路径即可。
-        format: 可选格式包括`xlsx|json`、`csv|json`、`json`、`xlsx`、`csv`；默认为`xlsx|json`。
-        encoding: `xlsx(csv)`的编码格式，`utf-8-sig`方便windows系统打开它时不乱码；`json`的编码格式为`utf-8`。
-        backup: `True`表示文件存在时进行备份(推荐)，`False`表示不备份。
-    Returns:
-        None.
+        df:
+            `DataFrame`数据。
+        path:
+            文件路径，给出一个文件路径即可。
+        format:
+            可选格式包括`xlsx|json`、`csv|json`、`json`、`xlsx`、`csv`；默认为`xlsx|json`。
+        encoding:
+            `xlsx(csv)`的编码格式，`utf-8-sig`方便windows系统打开它时不乱码；`json`的编码格式为`utf-8`。
+        backup:
+            `True`表示文件存在时进行备份(推荐)，`False`表示不备份。
     """
 
     path = path.replace(".xlsx", "").replace(".csv", "").replace(".json", "")
@@ -91,9 +97,12 @@ def save_pkl(obj, path: str, backup: bool = True):
     """序列化对象并保存到磁盘。
 
     Args:
-        object: 序列化对象
-        path: 目标路径
-        backup: `True`表示文件存在时进行备份(推荐)，`False`表示不备份。
+        object:
+            序列化对象。
+        path:
+            目标路径。
+        backup:
+            `True`表示文件存在时进行备份(推荐)，`False`表示不备份。
 
     Returns:
         bool: 保存成功，返回 True，保存失败，返回 False，抛出异常。
@@ -106,7 +115,7 @@ def save_pkl(obj, path: str, backup: bool = True):
 
 
 def read_pkl(path: str):
-    """从磁盘读取序列化对象"""
+    """从磁盘读取序列化对象。"""
     return pickle.load(open(path, "rb"))
 
 
@@ -121,14 +130,14 @@ def check_path(pathes: Union[str, List[str]]):
 
 
 def if_path_exist_then_backup(pathes: Union[str, List[str]]) -> bool:
-    """
-    检查路径是否存在，如路径存在，则备份。
+    """检查路径是否存在，如路径存在，则备份。
 
     Args:
-        pathes: 路径，可以是单个字符串或者字符串的列表。
+        pathes:
+            路径，可以是单个字符串或者字符串的列表。
 
     Returns:
-        bool: 如果有文件被备份了，则为True，否则为False
+        bool: 如果有文件被备份了，则为True，否则为False。
     """
     if isinstance(pathes, str):
         pathes = [pathes]
@@ -147,14 +156,15 @@ def if_path_exist_then_backup(pathes: Union[str, List[str]]) -> bool:
 
 
 def new_dirs(dir_paths: Union[str, List[str]]) -> List[str]:
-    """
-    初始化文件夹，检验文件夹的存在状态，并返回准备好的文件夹路径。
+    """初始化文件夹，检验文件夹的存在状态，并返回准备好的文件夹路径。
 
     Args:
-        dir_paths: 字符串类型的全路径，可以为单个路径，也可以放入列表中，批量创建。
+        dir_paths:
+            字符串类型的全路径，可以为单个路径，也可以放入列表中，批量创建。
 
     Returns:
-        包含创建的文件夹路径字符串的list
+        List[str]:
+            包含创建的文件夹路径字符串的list。
     """
     if isinstance(dir_paths, str):
         dir_paths = [dir_paths]
@@ -171,18 +181,20 @@ def get_paths_from_dir(
     types: Optional[Union[str, List[str]]] = None,
     recusive: bool = False,
 ) -> List[str]:
-    """
-    从指定目录下获取所有指定扩展名文件的路径
+    """从指定目录下获取所有指定扩展名文件的路径。
 
     Args:
-        dirs: 文件夹路径（绝对路径），单个用str表示，多个用list
-        types: 指定文件的扩展名，单个用str表示，多个用list，默认为None，表示所有类型文件
-        recusive: 默认为False，不递归子文件夹
+        dirs:
+            文件夹路径（绝对路径），单个用str表示，多个用list。
+        types:
+            指定文件的扩展名，单个用str表示，多个用list，默认为None，表示所有类型文件。
+        recusive:
+            默认为False，不递归子文件夹。
 
     Returns:
-        文件路径字符串列表
+        List[str]:
+            文件路径字符串列表。
     """
-
     if isinstance(dirs, str):
         dirs = [dirs]
     if types is not None:
@@ -212,16 +224,23 @@ def file_writer(
     encoding: str = "utf-8",
     backup: bool = True,
 ) -> None:
-    """向文件中写内容
+    """向文件中写内容。
 
     Args:
-        lines: 可以是单个字符串或者字符串的列表
-        dir_path: 文件的绝对路径
-        file_name: 文件名称，有默认值
-        mode: 写文件的的模式，默认为 a+
-        separator: 每一行末尾的分隔符，有默认值
-        encoding: 文件的编码格式，默认为utf-8
-        backup: 如果文件已经存在，是否对原文件进行备份，默认为True；
+        lines:
+            可以是单个字符串或者字符串的列表。
+        dir_path:
+            文件的绝对路径。
+        file_name:
+            文件名称，有默认值。
+        mode:
+            写文件的的模式，默认为 a+。
+        separator:
+            每一行末尾的分隔符，有默认值。
+        encoding:
+            文件的编码格式，默认为utf-8。
+        backup:
+            如果文件已经存在，是否对原文件进行备份，默认为True；
             如果为False，当文件已经存在的情况下，会追加到存在的文件中。
     """
     dir_path: Path = Path(dir_path) if isinstance(dir_path, str) else dir_path
@@ -260,14 +279,17 @@ def read_txt_by_page(
     page_size: int = 100,
     encoding: str = "utf-8",
 ) -> None:
-    """
-    从文本文件中分页读取内容
+    """从文本文件中分页读取内容。
 
     Args:
-        file_path: 文件路径
-        parse_func: 每一页数据处理函数，必须定义
-        page_size: 每一页数据量
-        encoding: 文本文件的编码格式
+        file_path:
+            文件路径。
+        parse_func:
+            每一页数据处理函数，必须定义。
+        page_size:
+            每一页数据量。
+        encoding:
+            文本文件的编码格式。
     """
     with open(file=file_path, encoding=encoding, mode="r") as file:
         data = list()
@@ -295,7 +317,9 @@ def read_txt_by_page(
             start_time = end_time
             print(f"## -{curr_page_id}- page parsed done...{[cost_time]}s")
             curr_page_id += 1
-    print(f"## All done. Total pages: {curr_page_id}. Elapsed time: {total_time}s")
+    print(
+        f"## All done. Total pages: {curr_page_id}. Elapsed time: {total_time}s"
+    )
 
 
 def read_txt_by_page_asyncio(
@@ -306,16 +330,21 @@ def read_txt_by_page_asyncio(
     open_async: bool = False,
     slave_num: int = 4,
 ) -> None:
-    """
-    从文本文件中分页读取内容，具备异步io处理功能
+    """从文本文件中分页读取内容，具备异步io处理功能。
 
     Args:
-        file_path: 文件路径
-        parse_func: 每一页数据处理函数，必须定义
-        page_size: 每一页数据量
-        encoding: 文本文件的编码格式
-        open_async: 是否开启异步io处理数据，默认不开启
-        slave_num: 执行任务的协程数目，默认为4
+        file_path:
+            文件路径。
+        parse_func:
+            每一页数据处理函数，必须定义。
+        page_size:
+            每一页数据量。
+        encoding:
+            文本文件的编码格式。
+        open_async:
+            是否开启异步io处理数据，默认不开启。
+        slave_num:
+            执行任务的协程数目，默认为4。
     """
 
     async def parse_(loop, chunk):
@@ -335,7 +364,9 @@ def read_txt_by_page_asyncio(
                     loop = asyncio.get_event_loop()
                     chunks = gb.chunks(data, slave_num)
                     loop.run_until_complete(
-                        asyncio.gather(*[parse_(loop, chunk) for chunk in chunks])
+                        asyncio.gather(
+                            *[parse_(loop, chunk) for chunk in chunks]
+                        )
                     )
                     chunks.clear()
                 else:
@@ -371,15 +402,17 @@ def read_content(
     file_path: Union[str, Path],
     encoding: str = "utf-8",
 ) -> List[str]:
-    """
-    从文本文件中读取内容，将内容转换为list，list的元素为每行的字符串
+    """从文本文件中读取内容，将内容转换为list，list的元素为每行的字符串。
 
     Args:
-        file_path : 文件路径
-        encoding : 文件的编码方式
+        file_path:
+            文件路径。
+        encoding:
+            文件的编码方式。
 
     Returns:
-        每行字符串组成的list
+        List[str]:
+            每行字符串组成的list。
     """
     if isinstance(file_path, str):
         file_path = Path(file_path)
@@ -392,15 +425,17 @@ def read_contents(
     file_pathes: List,
     encoding: str = "utf-8",
 ) -> List[str]:
-    """
-    从[多个]文本文件中读取内容，将[所有]内容转换为list，list的元素为每行的字符串
+    """从[多个]文本文件中读取内容，将[所有]内容转换为list，list的元素为每行的字符串。
 
     Args:
-        file_pathes : 文件路径列表
-        encoding : 文件的编码方式
+        file_pathes:
+            文件路径列表。
+        encoding:
+            文件的编码方式。
 
     Returns:
-        每行字符串组成的list
+        List[str]:
+            每行字符串组成的list。
     """
     result = []
     for path in file_pathes:
@@ -411,16 +446,18 @@ def read_contents(
 def read_jsons(
     file_path: Union[str, Path],
     encoding: str = "utf-8",
-) -> List[dict]:
-    """
-    从存放json的文本文件中读取内容，并转化为dict组成的list
+) -> List[Dict]:
+    """从存放json的文本文件中读取内容，并转化为dict组成的list。
 
     Args:
-        file_path: 文件路径
-        encoding: 文件的编码方式
+        file_path:
+            文件路径。
+        encoding:
+            文件的编码方式。
 
     Returns:
-        dict组成的list
+        List[Dict]:
+            dict组成的list
     """
     if isinstance(file_path, str):
         file_path = Path(file_path)
