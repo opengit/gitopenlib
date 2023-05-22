@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.3.4"
+__version__ = "0.7.3.5"
 
 
 import matplotlib
@@ -114,7 +114,9 @@ def heatmap(
     ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
 
     # Rotate the tick labels and set their alignment.
-    plt.setp(ax.get_xticklabels(), rotation=-30, ha="right", rotation_mode="anchor")
+    plt.setp(
+        ax.get_xticklabels(), rotation=-30, ha="right", rotation_mode="anchor"
+    )
 
     # Turn spines off and create white grid.
     ax.spines[:].set_visible(False)
@@ -267,16 +269,27 @@ def set_legend_outside(
     loc: int = 3,
     ncol: int = 1,
     alpha: float = 1.0,
+    fontsize: int = None,
 ):
     """把图例放到图片的右下角；也可以调整一些参数，例如透明度，列数。"""
     ax.legend_.remove()
-    legend = ax.legend(
-        title=title,
-        bbox_to_anchor=(1.05, 0),
-        loc=loc,
-        ncol=ncol,
-        borderaxespad=0,
-    )
+    if fontsize is None:
+        legend = ax.legend(
+            title=title,
+            bbox_to_anchor=(1.05, 0),
+            loc=loc,
+            ncol=ncol,
+            borderaxespad=0,
+        )
+    else:
+        legend = ax.legend(
+            title=title,
+            bbox_to_anchor=(1.05, 0),
+            loc=loc,
+            ncol=ncol,
+            borderaxespad=0,
+            prop={"size": fontsize},
+        )
     legend.get_frame().set_alpha(alpha)
 
 
