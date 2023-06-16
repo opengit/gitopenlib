@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.02.12"
+__version__ = "1.02.13"
 
 import asyncio
 import json
@@ -317,9 +317,7 @@ def read_txt_by_page(
             start_time = end_time
             print(f"## -{curr_page_id}- page parsed done...{[cost_time]}s")
             curr_page_id += 1
-    print(
-        f"## All done. Total pages: {curr_page_id}. Elapsed time: {total_time}s"
-    )
+    print(f"## All done. Total pages: {curr_page_id}. Elapsed time: {total_time}s")
 
 
 def read_txt_by_page_asyncio(
@@ -364,9 +362,7 @@ def read_txt_by_page_asyncio(
                     loop = asyncio.get_event_loop()
                     chunks = gb.chunks(data, slave_num)
                     loop.run_until_complete(
-                        asyncio.gather(
-                            *[parse_(loop, chunk) for chunk in chunks]
-                        )
+                        asyncio.gather(*[parse_(loop, chunk) for chunk in chunks])
                     )
                     chunks.clear()
                 else:
@@ -444,14 +440,14 @@ def read_contents(
 
 
 def read_jsons(
-    file_path: Union[str, Path],
+    file_path: Union[str, Path, List],
     encoding: str = "utf-8",
 ) -> List[Dict]:
     """从存放json的文本文件中读取内容，并转化为dict组成的list。
 
     Args:
         file_path:
-            文件路径。
+            文件路径,可以是str或者Path,也可以是list,每个元素为str或者Path.
         encoding:
             文件的编码方式。
 
@@ -459,9 +455,18 @@ def read_jsons(
         List[Dict]:
             dict组成的list
     """
-    if isinstance(file_path, str):
-        file_path = Path(file_path)
-    lines = file_path.read_text(encoding=encoding).split("\n")
-    result = gb.remove_0_str([line.strip() for line in lines])
+
+    def get_lines(path):
+        if isinstance(path, str):
+            path = Path(path)
+        lines = path.read_text(encoding=encoding).split("\n")
+        return gb.remove_0_str([line.strip() for line in lines])
+
+    if not isinstance(file_path, List):
+        file_path = [file_path]
+
+    result = []
+    for path in file_path:
+        result.extend(get_lines(path))
 
     return [json.loads(item) for item in result]
