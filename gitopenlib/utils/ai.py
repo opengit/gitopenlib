@@ -7,7 +7,7 @@
 # @Date   :  2021-03-18 10:54:33
 # @Description :  一些常用的有关 机器学习、深度学习 的通用函数
 
-__version__ = "0.3.7"
+__version__ = "0.3.8"
 
 
 import math
@@ -28,6 +28,15 @@ def pandas_classification_report(
     """生成优化版的分类报告。
 
     感谢伟大的编程问答社区`stack overflow`提供的答案。
+    生成的结果如下,DataFrame格式:
+
+    ```
+                 precision    recall  f1-score  support
+    0             0.379032  0.470000  0.419643    400.0
+    1             0.579365  0.486667  0.528986    600.0
+    avg / total   0.499232  0.480000  0.485248   1000.0
+    ```
+
     """
     metrics_summary = sk_prfs(y_true=y_true, y_pred=y_pred)
 
