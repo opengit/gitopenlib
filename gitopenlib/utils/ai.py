@@ -7,13 +7,14 @@
 # @Date   :  2021-03-18 10:54:33
 # @Description :  一些常用的有关 机器学习、深度学习 的通用函数
 
-__version__ = "0.3.8"
+__version__ = "0.3.9"
 
 
 import math
 from typing import List
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import itertools
 from sklearn.metrics import confusion_matrix as sk_cm
 from sklearn.metrics import precision_recall_fscore_support as sk_prfs
