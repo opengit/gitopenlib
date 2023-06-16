@@ -7,7 +7,7 @@
 # @Date   :  2021-03-18 10:54:33
 # @Description :  一些常用的有关 机器学习、深度学习 的通用函数
 
-__version__ = "0.2.7"
+__version__ = "0.3.7"
 
 
 import math
@@ -16,7 +16,33 @@ import matplotlib.pyplot as plt
 import numpy as np
 import itertools
 from sklearn.metrics import confusion_matrix as sk_cm
+from sklearn.metrics import precision_recall_fscore_support as sk_prfs
 from gitopenlib.utils import files as gf
+
+
+def pandas_classification_report(
+    y_true: List,
+    y_pred: List,
+    average: str = "weighted",
+):
+    """生成优化版的分类报告。
+
+    感谢伟大的编程问答社区`stack overflow`提供的答案。
+    """
+    metrics_summary = sk_prfs(y_true=y_true, y_pred=y_pred)
+
+    avg = list(sk_prfs(y_true=y_true, y_pred=y_pred, average=average))
+
+    metrics_sum_index = ["precision", "recall", "f1-score", "support"]
+    class_report_df = pd.DataFrame(list(metrics_summary), index=metrics_sum_index)
+
+    support = class_report_df.loc["support"]
+    total = support.sum()
+    avg[-1] = total
+
+    class_report_df["avg / total"] = avg
+
+    return class_report_df.T
 
 
 def confusion_matrix(
