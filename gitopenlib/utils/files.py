@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.03.14"
+__version__ = "1.03.15"
 
 import asyncio
 import json
@@ -44,7 +44,7 @@ def df_to_xlsx_pkl(
         gf.if_path_exist_then_backup(pkl_path)
 
     if index:
-        df.to_excel(xlsx_path, index=True, index_name=index_name)
+        df.to_excel(xlsx_path, index=True, index_label=index_name)
     else:
         df.to_excel(xlsx_path, index=False)
     df.to_pickle(pkl_path)
