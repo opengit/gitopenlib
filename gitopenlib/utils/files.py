@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.02.13"
+__version__ = "1.03.13"
 
 import asyncio
 import json
@@ -17,8 +17,37 @@ from pathlib import Path
 from typing import Callable, Iterable, List, Optional, Union, Dict
 
 from gitopenlib.utils import basics as gb
+from gitopenlib.utils import file as gf
 import pandas as pd
 from pandas import DataFrame
+
+
+def df_to_xlsx_pkl(
+    df: DataFrame,
+    save_path: str,
+    index: bool = True,
+    index_name: str = "index",
+    backup: bool = True,
+):
+    """把 DataFrame 保存为 xlsx 文件和 pkl 文件。"""
+    if save_path.endswith(".xlsx"):
+        xlsx_path = save_path
+        pkl_path = save_path.replace(".xlsx", ".pkl")
+    elif save_path.endswith(".pkl"):
+        xlsx_path = save_path.replace(".pkl", ".xlsx")
+        pkl_path = save_path
+    else:
+        raise Exception("The save_path must end with `.xlsx` or `.pkl`.")
+
+    if backup:
+        gf.if_path_exist_then_backup(xlsx_path)
+        gf.if_path_exist_then_backup(pkl_path)
+
+    if index:
+        df.to_excel(xlsx_path, index=True, index_name=index_name)
+    else:
+        df.to_excel(xlsx_path, index=False)
+    df.to_pickle(pkl_path)
 
 
 def df_to_json(
