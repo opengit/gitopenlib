@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.03.13"
+__version__ = "1.03.14"
 
 import asyncio
 import json
@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Callable, Iterable, List, Optional, Union, Dict
 
 from gitopenlib.utils import basics as gb
-from gitopenlib.utils import file as gf
+from gitopenlib.utils import files as gf
 import pandas as pd
 from pandas import DataFrame
 
