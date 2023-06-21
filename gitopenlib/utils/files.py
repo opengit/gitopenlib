@@ -14,7 +14,7 @@ import json
 import pickle
 import time
 from pathlib import Path
-from typing import Callable, Iterable, List, Optional, Union, Dict
+from typing import Callable, Iterable, List, Optional, Union, Dict, Sequence
 
 from gitopenlib.utils import basics as gb
 from gitopenlib.utils import files as gf
@@ -25,8 +25,8 @@ from pandas import DataFrame
 def df_to_xlsx_pkl(
     df: DataFrame,
     save_path: str,
-    index: bool = True,
-    index_name: str = "index",
+    index: bool = False,
+    index_name: Union[str, Sequence] = None,
     backup: bool = True,
 ):
     """把 DataFrame 保存为 xlsx 文件和 pkl 文件。"""

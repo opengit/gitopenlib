@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.3.5"
+__version__ = "0.7.3.7"
 
 
 import matplotlib
@@ -295,7 +295,7 @@ def set_legend_outside(
 
 def set_axis_tick(ax: Axes, axis: str = "y", format="%.2f"):
     """
-    横轴或者纵轴的����度标签的格式，例如，%.2f 表示两位小数；
+    横轴或者纵轴的刻度标签的格式，例如，%.2f 表示两位小数；
     %.2e 科学计数法
     """
     if axis == "x":
