@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.3.7"
+__version__ = "0.7.3.8"
 
 
 import matplotlib
@@ -22,21 +22,29 @@ from matplotlib.offsetbox import AnchoredText
 from matplotlib.ticker import MaxNLocator
 
 
-def sns_barplot_text(ax: Axes, decimal: float = 2):
+def sns_barplot_text(
+    ax: Axes,
+    decimal: int = 2,
+    fontsize: int = 8,
+    color: str = "black",
+    rotation: int = 90,
+):
     """
     使用seaborn画条形图，给每个bar上添加数值标签。
     如默认字体样式不能满足需求，请copy下面代码自定义。
     """
     for p in ax.patches:
+        height = p.get_height()
+        text = str(round(height, decimal)) if decimal > 0 else str(int(height))
         ax.text(
             p.get_x() + p.get_width() / 2.0,
-            p.get_height(),
-            str(round(p.get_height(), decimal)),
-            # fontsize=8,
-            color="black",
+            height,
+            text,
+            fontsize=fontsize,
+            color=color,
             ha="center",
             va="bottom",
-            rotation=90,
+            rotation=rotation,
         )
 
 
@@ -114,9 +122,7 @@ def heatmap(
     ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
 
     # Rotate the tick labels and set their alignment.
-    plt.setp(
-        ax.get_xticklabels(), rotation=-30, ha="right", rotation_mode="anchor"
-    )
+    plt.setp(ax.get_xticklabels(), rotation=-30, ha="right", rotation_mode="anchor")
 
     # Turn spines off and create white grid.
     ax.spines[:].set_visible(False)
