@@ -7,18 +7,19 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.03.15"
+__version__ = "1.03.16"
 
 import asyncio
 import json
+import os
 import pickle
 import time
 from pathlib import Path
-from typing import Callable, Iterable, List, Optional, Union, Dict, Sequence
+from typing import Callable, Dict, Iterable, List, Optional, Sequence, Union
 
+import pandas as pd
 from gitopenlib.utils import basics as gb
 from gitopenlib.utils import files as gf
-import pandas as pd
 from pandas import DataFrame
 
 
@@ -38,6 +39,10 @@ def df_to_xlsx_pkl(
         pkl_path = save_path
     else:
         raise Exception("The save_path must end with `.xlsx` or `.pkl`.")
+
+    parent_dir = Path(xlsx_path).parent
+    if not parent_dir.exists():
+        gf.new_dirs(str(parent_dir))
 
     if backup:
         gf.if_path_exist_then_backup(xlsx_path)
