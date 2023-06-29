@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.5.3"
+__version__ = "0.7.5.4"
 
 
 import matplotlib
@@ -326,45 +326,30 @@ def set_legend_outside(
 ):
     """把图例放到图片的右下角；也可以调整一些参数，例如透明度，列数。"""
     ax.legend_.remove()
+    handles, original_labels = ax.get_legend_handles_labels()
+    if labels is not None:
+        original_labels = labels
     if fontsize is None:
-        if labels is not None:
-            legend = ax.legend(
-                title=title,
-                labels=labels,
-                bbox_to_anchor=(1.05, 0),
-                loc=loc,
-                ncol=ncol,
-                borderaxespad=0,
-            )
-        else:
-            legend = ax.legend(
-                title=title,
-                bbox_to_anchor=(1.05, 0),
-                loc=loc,
-                ncol=ncol,
-                borderaxespad=0,
-            )
-
+        legend = ax.legend(
+            handles=handles,
+            title=title,
+            labels=original_labels,
+            bbox_to_anchor=(1.05, 0),
+            loc=loc,
+            ncol=ncol,
+            borderaxespad=0,
+        )
     else:
-        if labels is not None:
-            legend = ax.legend(
-                title=title,
-                labels=labels,
-                bbox_to_anchor=(1.05, 0),
-                loc=loc,
-                ncol=ncol,
-                borderaxespad=0,
-                prop={"size": fontsize},
-            )
-        else:
-            legend = ax.legend(
-                title=title,
-                bbox_to_anchor=(1.05, 0),
-                loc=loc,
-                ncol=ncol,
-                borderaxespad=0,
-                prop={"size": fontsize},
-            )
+        legend = ax.legend(
+            handles=handles,
+            title=title,
+            labels=original_labels,
+            bbox_to_anchor=(1.05, 0),
+            loc=loc,
+            ncol=ncol,
+            borderaxespad=0,
+            fontsize=fontsize,
+        )
     legend.get_frame().set_alpha(alpha)
 
 
