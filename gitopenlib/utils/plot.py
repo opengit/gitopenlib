@@ -8,18 +8,54 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.3.8"
+__version__ = "0.7.4.8"
 
 
 import matplotlib
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import seaborn as sns
 import numpy as np
 from gitopenlib.utils import files as gf
 from matplotlib import ticker
 from matplotlib.axes import Axes
 from matplotlib.offsetbox import AnchoredText
 from matplotlib.ticker import MaxNLocator
+import itertools
+
+
+def sns_bar_style(
+    ax: Axes,
+    palette=sns.color_palette(),
+    hatch: bool = True,
+    hatches: list = None,
+):
+    """
+    A function modifies the style of a bar plot in Seaborn.
+    """
+    # set the palette
+    sns.set(palette=palette)
+
+    # set the bar edgecolor
+    for patch in ax.patches:
+        clr = patch.get_facecolor()
+        patch.set_edgecolor(clr)
+
+    # set hatches to each bar
+    if hatch:
+        # set hatch symbol list
+        if hatches is None:
+            hatches = ["///", "*", "\\/", "+", "---", "o", "|||", "x", "O", "."]
+        # get the number of bar in the barplot
+        bar_kind_num = len(ax.containers[0])
+        # get the corresponding number of hatches
+        hatches = itertools.cycle(hatches)
+        hatches = list(itertools.islice(hatches, bar_kind_num))
+        # set hatch for each kind bar.
+        for bars, hatch in zip(ax.containers, hatches):
+            # Set a different hatch for each group of bars
+            for bar in bars:
+                bar.set_hatch(hatch)
 
 
 def sns_barplot_text(
