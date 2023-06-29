@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.4.8"
+__version__ = "0.7.5.1"
 
 
 import matplotlib
@@ -24,22 +24,14 @@ from matplotlib.ticker import MaxNLocator
 import itertools
 
 
-def sns_bar_style(
+def sns_bar_hatch(
     ax: Axes,
-    palette=sns.color_palette(),
     hatch: bool = True,
     hatches: list = None,
 ):
     """
-    A function modifies the style of a bar plot in Seaborn.
+    Set the hatches of a bar plot in Seaborn.
     """
-    # set the palette
-    sns.set(palette=palette)
-
-    # set the bar edgecolor
-    for patch in ax.patches:
-        clr = patch.get_facecolor()
-        patch.set_edgecolor(clr)
 
     # set hatches to each bar
     if hatch:
@@ -60,6 +52,7 @@ def sns_bar_style(
 
 def sns_barplot_text(
     ax: Axes,
+    bar_orient: str = "vertical",
     decimal: int = 2,
     fontsize: int = 8,
     color: str = "black",
@@ -69,19 +62,36 @@ def sns_barplot_text(
     使用seaborn画条形图，给每个bar上添加数值标签。
     如默认字体样式不能满足需求，请copy下面代码自定义。
     """
-    for p in ax.patches:
-        height = p.get_height()
-        text = str(round(height, decimal)) if decimal > 0 else str(int(height))
-        ax.text(
-            p.get_x() + p.get_width() / 2.0,
-            height,
-            text,
-            fontsize=fontsize,
-            color=color,
-            ha="center",
-            va="bottom",
-            rotation=rotation,
-        )
+    if bar_orient == "vertical":
+        for p in ax.patches:
+            height = p.get_height()
+            text = str(round(height, decimal)) if decimal > 0 else str(int(height))
+            ax.text(
+                p.get_x() + p.get_width() / 2.0,
+                height,
+                text,
+                fontsize=fontsize,
+                color=color,
+                ha="center",
+                va="bottom",
+                rotation=rotation,
+            )
+    if bar_orient == "horizontal":
+        for p in ax.patches:
+            width = p.get_width()
+            text = str(round(width, decimal)) if decimal > 0 else str(int(width))
+            ax.text(
+                width,
+                p.get_y() + p.get_height() / 2.0,
+                text,
+                fontsize=fontsize,
+                color=color,
+                # 'center', 'right', 'left'
+                ha="left",
+                # 'top', 'bottom', 'center', 'baseline', 'center_baseline'
+                va="center_baseline",
+                rotation=rotation,
+            )
 
 
 def heatmap(
