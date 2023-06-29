@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.5.1"
+__version__ = "0.7.5.3"
 
 
 import matplotlib
@@ -318,6 +318,7 @@ def set_tick_integer(ax: Axes, axis: str = "both"):
 def set_legend_outside(
     ax: Axes,
     title: str = "",
+    labels: list = None,
     loc: int = 3,
     ncol: int = 1,
     alpha: float = 1.0,
@@ -326,22 +327,44 @@ def set_legend_outside(
     """把图例放到图片的右下角；也可以调整一些参数，例如透明度，列数。"""
     ax.legend_.remove()
     if fontsize is None:
-        legend = ax.legend(
-            title=title,
-            bbox_to_anchor=(1.05, 0),
-            loc=loc,
-            ncol=ncol,
-            borderaxespad=0,
-        )
+        if labels is not None:
+            legend = ax.legend(
+                title=title,
+                labels=labels,
+                bbox_to_anchor=(1.05, 0),
+                loc=loc,
+                ncol=ncol,
+                borderaxespad=0,
+            )
+        else:
+            legend = ax.legend(
+                title=title,
+                bbox_to_anchor=(1.05, 0),
+                loc=loc,
+                ncol=ncol,
+                borderaxespad=0,
+            )
+
     else:
-        legend = ax.legend(
-            title=title,
-            bbox_to_anchor=(1.05, 0),
-            loc=loc,
-            ncol=ncol,
-            borderaxespad=0,
-            prop={"size": fontsize},
-        )
+        if labels is not None:
+            legend = ax.legend(
+                title=title,
+                labels=labels,
+                bbox_to_anchor=(1.05, 0),
+                loc=loc,
+                ncol=ncol,
+                borderaxespad=0,
+                prop={"size": fontsize},
+            )
+        else:
+            legend = ax.legend(
+                title=title,
+                bbox_to_anchor=(1.05, 0),
+                loc=loc,
+                ncol=ncol,
+                borderaxespad=0,
+                prop={"size": fontsize},
+            )
     legend.get_frame().set_alpha(alpha)
 
 
