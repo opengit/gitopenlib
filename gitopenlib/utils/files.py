@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.03.16"
+__version__ = "1.03.17"
 
 import asyncio
 import json
@@ -192,13 +192,15 @@ def if_path_exist_then_backup(pathes: Union[str, List[str]]) -> bool:
 def new_dirs(dir_paths: Union[str, List[str]]) -> List[str]:
     """初始化文件夹，检验文件夹的存在状态，并返回准备好的文件夹路径。
 
+    如果`dir_paths`为`str`类型，则返回值为单个路径；
+    如果为`list`类型，则返回值为列表。
+
     Args:
         dir_paths:
             字符串类型的全路径，可以为单个路径，也可以放入列表中，批量创建。
 
     Returns:
-        List[str]:
-            包含创建的文件夹路径字符串的list。
+        参见函数说明。
     """
     if isinstance(dir_paths, str):
         dir_paths = [dir_paths]
@@ -206,7 +208,8 @@ def new_dirs(dir_paths: Union[str, List[str]]) -> List[str]:
     for dir in dir_paths:
         dir_path = Path(dir)
         dir_path.mkdir(parents=True, exist_ok=True)
-
+    if isinstance(dir_paths, list) and len(dir_paths) == 1:
+        dir_paths = dir_paths[0]
     return dir_paths
 
 
