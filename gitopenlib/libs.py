@@ -10,7 +10,7 @@
 @Desc    :   用于快捷导入常用的包，注意这个文件不要格式化！
 """
 
-__version__ = "0.2.6"
+__version__ = "0.2.7"
 
 
 # #######################################################
@@ -40,7 +40,8 @@ from gitopenlib.utils import debuger as gdb
 import os
 import time
 import sys
-from collections import defaultdict
+import json
+from collections import defaultdict, Counter
 from tqdm import tqdm
 import traceback
 
