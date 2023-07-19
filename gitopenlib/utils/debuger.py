@@ -7,10 +7,16 @@
 # @Date   :  2022-09-17 11:31:23
 # @Description :  Some useful things about debug.
 
-__version__ = "0.2.01"
+__version__ = "0.3.01"
 
 import sys
 import traceback
+
+
+def exception_print():
+    """打印异常信息"""
+    exc_type, exc_value, exc_traceback = sys.exc_info()
+    traceback.print_exception(exc_type, exc_value, exc_traceback)
 
 
 def catch_except_run(func, args):
