@@ -8,20 +8,21 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.5.4"
+__version__ = "0.7.5.5"
 
+
+import itertools
 
 import matplotlib
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import seaborn as sns
 import numpy as np
+import seaborn as sns
 from gitopenlib.utils import files as gf
 from matplotlib import ticker
 from matplotlib.axes import Axes
 from matplotlib.offsetbox import AnchoredText
 from matplotlib.ticker import MaxNLocator
-import itertools
 
 
 def sns_bar_hatch(
@@ -65,7 +66,8 @@ def sns_barplot_text(
     if bar_orient == "vertical":
         for p in ax.patches:
             height = p.get_height()
-            text = str(round(height, decimal)) if decimal > 0 else str(int(height))
+            text = str(f"%.{decimal}f" % height) if decimal > 0 else str(int(height))
+            # text = str(round(height, decimal)) if decimal > 0 else str(int(height))
             ax.text(
                 p.get_x() + p.get_width() / 2.0,
                 height,
@@ -79,7 +81,8 @@ def sns_barplot_text(
     if bar_orient == "horizontal":
         for p in ax.patches:
             width = p.get_width()
-            text = str(round(width, decimal)) if decimal > 0 else str(int(width))
+            text = str(f"%.{decimal}f" % width) if decimal > 0 else str(int(width))
+            # text = str(round(width, decimal)) if decimal > 0 else str(int(width))
             ax.text(
                 width,
                 p.get_y() + p.get_height() / 2.0,
