@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.5.5"
+__version__ = "0.7.6.6"
 
 
 import itertools
@@ -247,7 +247,7 @@ def annotate_heatmap(
     return texts
 
 
-def set_spines_line_width(ax: Axes, left, top, right, bottom):
+def set_spines_line_width(ax: Axes, left=0.5, top=0, right=0, bottom=0.5):
     """设置坐标轴的粗细"""
     ax.spines["left"].set_linewidth(left)
     ax.spines["top"].set_linewidth(top)
@@ -318,42 +318,103 @@ def set_tick_integer(ax: Axes, axis: str = "both"):
         pass
 
 
-def set_legend_outside(
+def set_legend_style(
     ax: Axes,
-    title: str = "",
+    title: str = None,
     labels: list = None,
-    loc: int = 3,
+    loc: int or str = 0,
+    bbox_to_anchor: tuple = None,
     ncol: int = 1,
     alpha: float = 1.0,
     fontsize: int = None,
+    edgecolor: str = "black",
+    facecolor: str = "white",
+    linewidth: float = 0.5,
+    **kws,
 ):
-    """把图例放到图片的右下角；也可以调整一些参数，例如透明度，列数。"""
-    ax.legend_.remove()
-    handles, original_labels = ax.get_legend_handles_labels()
-    if labels is not None:
-        original_labels = labels
-    if fontsize is None:
-        legend = ax.legend(
-            handles=handles,
-            title=title,
-            labels=original_labels,
-            bbox_to_anchor=(1.05, 0),
-            loc=loc,
-            ncol=ncol,
-            borderaxespad=0,
-        )
-    else:
-        legend = ax.legend(
-            handles=handles,
-            title=title,
-            labels=original_labels,
-            bbox_to_anchor=(1.05, 0),
-            loc=loc,
-            ncol=ncol,
-            borderaxespad=0,
-            fontsize=fontsize,
-        )
-    legend.get_frame().set_alpha(alpha)
+    """把图例放到图片的右下角；也可以调整一些参数，例如透明度，列数。
+
+    Parameters
+    ----------
+    ax : Axes
+        轴，可以理解为某个子图存放的地方。
+    title : str
+        图例的标题。默认为None，表示不自定义标题，用默认标题。
+    labels : list
+        图例的标签。默认为None，表示不自定义标签，用默认标签。
+    loc : int
+        图例的位置。默认为0。\n
+        当和bbox_to_anchor一起使用时，loc表示图例身上的哪个点，\n
+        例如“左下”，意味着图例的左下角与bbox_to_anchor指定的位置(x,y)重合。
+        ```
+        0自动，1右上，2左上，3左下，4右下，
+        5右边，6左中，7右中，8中下，9中上，10正中
+        ```
+        也可以使用字符串，
+        ```
+        'best', 'upper right', 'upper left', 'lower left', 'lower right', 'right',
+        'center left', 'center right', 'lower center', 'upper center', 'center'
+        ```
+    bbox_to_anchor : tuple
+        指定图例的锚点位置。
+    ncol : int
+        图例的列数。
+    alpha : float
+        图例的透明度。
+    fontsize : int
+        图例的字体大小。
+    edgecolor : str
+        图例的边框颜色。
+    facecolor : str
+        图例的背景颜色。
+    linewidth : float
+        图例的边框宽度。
+    **kws
+        其他参数。
+    """
+    kwargs = locals()
+    print(kwargs)
+
+    old_legend = ax.legend_
+    old_handles = old_legend.legend_handles
+    old_labels = [t.get_text() for t in old_legend.get_texts()]
+    old_title = old_legend.get_title().get_text()
+
+    if labels is None:
+        kwargs["labels"] = old_labels
+
+    if title is None:
+        kwargs["title"] = old_title
+
+    kwargs["handles"] = old_handles
+    kws = kwargs.pop("kws", {})
+    for k, v in kws.items():
+        kwargs[k] = v
+
+    ax = kwargs.pop("ax", ax)
+    edgecolor = kwargs.pop("edgecolor", "black")
+    facecolor = kwargs.pop("facecolor", "white")
+    linewidth = kwargs.pop("linewidth", 0.5)
+    alpha = kwargs.pop("alpha", 1.0)
+
+    legend = ax.legend(**kwargs)
+    frame = legend.get_frame()
+    frame.set_edgecolor(edgecolor)
+    frame.set_facecolor(facecolor)
+    frame.set_linewidth(linewidth)
+    frame.set_alpha(alpha)
+
+
+def set_legend_outside(ax: Axes, **kws):
+    """设置图例在图片的外侧右下角，没有title，没有边框。"""
+    set_legend_style(
+        ax=ax,
+        title="",
+        loc=3,
+        bbox_to_anchor=(1.0, 0.0),
+        alpha=0.0,
+        **kws,
+    )
 
 
 def set_axis_tick(ax: Axes, axis: str = "y", format="%.2f"):
