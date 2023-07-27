@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.6.6"
+__version__ = "0.7.6.7"
 
 
 import itertools
@@ -373,7 +373,6 @@ def set_legend_style(
         其他参数。
     """
     kwargs = locals()
-    print(kwargs)
 
     old_legend = ax.legend_
     old_handles = old_legend.legend_handles
