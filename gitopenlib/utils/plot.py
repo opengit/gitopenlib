@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.6.7"
+__version__ = "0.7.6.9"
 
 
 import itertools
@@ -332,7 +332,7 @@ def set_legend_style(
     linewidth: float = 0.5,
     **kws,
 ):
-    """把图例放到图片的右下角；也可以调整一些参数，例如透明度，列数。
+    """自定义图例的样式。
 
     Parameters
     ----------
