@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.03.17"
+__version__ = "1.03.19"
 
 import asyncio
 import json
@@ -259,7 +259,7 @@ def file_writer(
     mode: str = "a+",
     separator: str = "\n",
     encoding: str = "utf-8",
-    backup: bool = True,
+    backup: bool = None,
 ) -> None:
     """向文件中写内容。
 
@@ -270,15 +270,14 @@ def file_writer(
             文件的绝对路径。
         file_name:
             文件名称，有默认值。
-        mode:
-            写文件的的模式，默认为 a+。
         separator:
             每一行末尾的分隔符，有默认值。
         encoding:
             文件的编码格式，默认为utf-8。
         backup:
-            如果文件已经存在，是否对原文件进行备份，默认为True；
-            如果为False，当文件已经存在的情况下，会追加到存在的文件中。
+            默认为True，如果文件已经存在，是否对原文件进行备份；
+            如果为False，当文件已经存在的情况下，会覆盖存在的文件。
+            如果为None，当文件已经存在的情况下，什么都不会做；若文件不存在，则会创建并写入文件。
     """
     dir_path: Path = Path(dir_path) if isinstance(dir_path, str) else dir_path
 
@@ -291,6 +290,13 @@ def file_writer(
 
     file_path = dir_path / file_name
 
+    if backup is None:
+        if file_path.exists():
+            print(
+                "# Warning: The file you submit is already exist. So nothing will be done."
+            )
+            return
+
     if backup:
         if file_path.exists():
             file_path.rename(
@@ -302,6 +308,7 @@ def file_writer(
     if isinstance(lines, str):
         lines = [lines]
 
+    mode = "w+"
     with open(file_path, mode=mode, encoding=encoding) as file:
         for line in lines:
             if separator != "":
