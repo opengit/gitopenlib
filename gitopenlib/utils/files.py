@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.03.19"
+__version__ = "1.05.00"
 
 import asyncio
 import json
@@ -256,6 +256,7 @@ def file_writer(
     lines: Union[str, Iterable[str]],
     dir_path: Union[str, Path],
     file_name: str = "file_writer.txt",
+    file_path: str = None,
     mode: str = "a+",
     separator: str = "\n",
     encoding: str = "utf-8",
@@ -267,18 +268,26 @@ def file_writer(
         lines:
             可以是单个字符串或者字符串的列表。
         dir_path:
-            文件的绝对路径。
+            文件目录的绝对路径。
         file_name:
             文件名称，有默认值。
+        file_path:
+            文件绝对路径，包括目录和文件名。
+            默认为None，由dir_path，file_name指定；如果不为None，则以这个为准。
         separator:
             每一行末尾的分隔符，有默认值。
         encoding:
             文件的编码格式，默认为utf-8。
         backup:
-            默认为True，如果文件已经存在，是否对原文件进行备份；
-            如果为False，当文件已经存在的情况下，会覆盖存在的文件。
-            如果为None，当文件已经存在的情况下，什么都不会做；若文件不存在，则会创建并写入文件。
+            如果为True，先备份，再写入文件；
+            如果为False，不备份，覆盖存在的文件。
+            如果为None，若文件存在，则不执行写入；若文件不存在，则会创建并写入文件。
     """
+    if file_path is not None:
+        tmp = file_path.split(os.path.sep)
+        dir_path = os.path.sep.join(tmp[:-1])
+        file_name = tmp[-1]
+
     dir_path: Path = Path(dir_path) if isinstance(dir_path, str) else dir_path
 
     if not dir_path.exists():
@@ -461,6 +470,35 @@ def read_content(
     return result
 
 
+def read_content1(
+    file_path: str,
+    encoding: str = "utf-8",
+) -> List[str]:
+    """从文本文件中读取内容，将内容转换为list，list的元素为每行的字符串。
+
+    当且仅当`read_content`函数报错时，例如`0xfa`错误时，再使用这个函数。\n
+    原因是这个函数比`read_content`函数更加稳定，但是更慢。
+
+    Parameters
+    ----------
+    file_path : str
+        文件路径。
+    encoding : str
+        文件的编码方式。
+
+    Returns
+    -------
+    List[str] :
+        每行字符串组成的list。
+    """
+    lines = []
+    with open(file_path, "rb") as file:
+        for line in file:
+            line = line.decode(encoding, "ignore").strip()
+            lines.append(line)
+    return lines
+
+
 def read_contents(
     file_pathes: List,
     encoding: str = "utf-8",
@@ -489,22 +527,29 @@ def read_jsons(
 ) -> List[Dict]:
     """从存放json的文本文件中读取内容，并转化为dict组成的list。
 
-    Args:
-        file_path:
-            文件路径,可以是str或者Path,也可以是list,每个元素为str或者Path.
-        encoding:
-            文件的编码方式。
+    Parameters
+    ----------
+    file_path : str, Path or List
+        文件路径,可以是str或者Path,也可以是list,每个元素为str或者Path.
+    encoding : str
+        文件的编码方式。
 
-    Returns:
-        List[Dict]:
-            dict组成的list
+    Returns
+    -------
+    List[Dict]:
+        dict组成的list
     """
 
     def get_lines(path):
         if isinstance(path, str):
             path = Path(path)
-        lines = path.read_text(encoding=encoding).split("\n")
-        return gb.remove_0_str([line.strip() for line in lines])
+        lines = []
+        with open(path, "r", encoding=encoding) as file:
+            for line in file:
+                line = line.strip()
+                if line:
+                    lines.append(json.loads(line))
+        return lines
 
     if not isinstance(file_path, List):
         file_path = [file_path]
@@ -513,4 +558,42 @@ def read_jsons(
     for path in file_path:
         result.extend(get_lines(path))
 
-    return [json.loads(item) for item in result]
+    return result
+
+
+def read_jsons1(
+    file_path: Union[str, Path, List],
+    encoding: str = "utf-8",
+) -> List[Dict]:
+    """从存放json的文本文件中读取内容，并转化为dict组成的list。
+
+    Parameters
+    ----------
+    file_path : str, Path or List
+        文件路径,可以是str或者Path,也可以是list,每个元素为str或者Path.
+    encoding : str
+        文件的编码方式。
+
+    Returns
+    -------
+    List[Dict]:
+        dict组成的list
+    """
+
+    def get_lines(path):
+        lines = []
+        with open(path, "rb") as file:
+            for line in file:
+                line = line.decode(encoding, "ignore").strip()
+                if line:
+                    lines.append(json.loads(line))
+        return lines
+
+    if not isinstance(file_path, List):
+        file_path = [file_path]
+
+    result = []
+    for path in file_path:
+        result.extend(get_lines(path))
+
+    return result

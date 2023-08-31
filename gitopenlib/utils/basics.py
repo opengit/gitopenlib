@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.22.6"
+__version__ = "0.22.7"
 
 
 import json
@@ -16,6 +16,7 @@ import math
 import random
 import sys
 import time
+import psutil
 from typing import Any, Dict, Iterable, List, Union, Tuple
 
 from gitopenlib.utils import basics as gb
@@ -28,8 +29,22 @@ def quit() -> None:
     sys.exit(0)
 
 
-def pt(msg: str, start: str = "# ", end: str = "\n", length: int = 80):
+def cpu_mem():
+    """获取CPU和内存使用情况。"""
+    cpu = psutil.cpu_percent()
+    mem = psutil.virtual_memory().percent
+    return int(round(cpu, 0)), int(round(mem, 0))
+
+
+def pt(
+    msg: str,
+    start: str = "# ",
+    length: int = 88,
+    info: bool = False,
+) -> None:
     """print改写，大于 length 的 msg 拆开换行打印。"""
+    if info:
+        start = start + "[{},{}] # ".format(*cpu_mem())
     msg = start + msg
     len_ = len(msg)
     m = int(len_ / length)
@@ -45,6 +60,10 @@ def pt(msg: str, start: str = "# ", end: str = "\n", length: int = 80):
 
     if r:
         print(start + "\t" + msg[-r:])
+
+
+def pts(msg: str):
+    pt(msg, info=True)
 
 
 def dict2object(adict: dict) -> object:
@@ -180,17 +199,13 @@ def split_strip(
 ) -> List[str]:
     """拆分字符串，并对列表中的元素进行 strip、去除空字符串。"""
     if isinstance(strings, str):
-        return gb.remove_0_str(
-            [it.strip() for it in strings.split(sep, maxsplit)]
-        )
+        return gb.remove_0_str([it.strip() for it in strings.split(sep, maxsplit)])
     elif isinstance(strings, list):
         result = []
         for item in strings:
             item = str(item).strip()
             result.append(
-                gb.remove_0_str(
-                    [it.strip() for it in item.split(sep, maxsplit)]
-                )
+                gb.remove_0_str([it.strip() for it in item.split(sep, maxsplit)])
             )
         return result
 
@@ -371,9 +386,7 @@ def dict_sorted(data: dict, flag: int = 0, ascending: bool = True) -> dict:
         dict:
             排序后的数据。
     """
-    return dict(
-        sorted(data.items(), key=lambda x: x[flag], reverse=not ascending)
-    )
+    return dict(sorted(data.items(), key=lambda x: x[flag], reverse=not ascending))
 
 
 def list_deduplicate(data: list) -> List:
@@ -435,9 +448,7 @@ def sort_list(
 
 def strips(string: str) -> str:
     """去除字符串两端的空格符和换行符，并且去除中间的换行符。"""
-    return (
-        string.strip().replace("\n", "").replace("\r", "").replace("\r\n", "")
-    )
+    return string.strip().replace("\n", "").replace("\r", "").replace("\r\n", "")
 
 
 def remove_0_str(data: list) -> List:
