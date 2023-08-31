@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.22.8"
+__version__ = "0.22.9"
 
 
 import json
@@ -36,7 +36,7 @@ def cpu_mem():
     return int(round(cpu, 0)), int(round(mem, 0))
 
 
-def pt(
+def pt1(
     msg: str,
     start: str = "# ",
     length: int = 88,
@@ -62,7 +62,7 @@ def pt(
         print(start + "\t" + msg[-r:])
 
 
-def pt1(
+def pt(
     msg: str,
     start: str = "# ",
     info: bool = False,
