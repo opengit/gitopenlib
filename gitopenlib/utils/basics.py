@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.22.7"
+__version__ = "0.22.8"
 
 
 import json
@@ -44,7 +44,7 @@ def pt(
 ) -> None:
     """print改写，大于 length 的 msg 拆开换行打印。"""
     if info:
-        start = start + "[{},{}] # ".format(*cpu_mem())
+        start = "# [C:{}|M:{}] # ".format(*cpu_mem())
     msg = start + msg
     len_ = len(msg)
     m = int(len_ / length)
@@ -60,6 +60,19 @@ def pt(
 
     if r:
         print(start + "\t" + msg[-r:])
+
+
+def pt1(
+    msg: str,
+    start: str = "# ",
+    info: bool = False,
+) -> None:
+    """print改写。"""
+
+    if info:
+        start = "# [C:{}|M:{}] # ".format(*cpu_mem())
+    msg = start + msg
+    print(msg)
 
 
 def pts(msg: str):
