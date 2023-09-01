@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.05.00"
+__version__ = "1.05.01"
 
 import asyncio
 import json
@@ -254,34 +254,34 @@ def get_paths_from_dir(
 
 def file_writer(
     lines: Union[str, Iterable[str]],
-    dir_path: Union[str, Path],
-    file_name: str = "file_writer.txt",
+    dir_path: Union[str, Path] = None,
+    file_name: str = None,
     file_path: str = None,
-    mode: str = "a+",
     separator: str = "\n",
     encoding: str = "utf-8",
     backup: bool = None,
 ) -> None:
     """向文件中写内容。
 
-    Args:
-        lines:
-            可以是单个字符串或者字符串的列表。
-        dir_path:
-            文件目录的绝对路径。
-        file_name:
-            文件名称，有默认值。
-        file_path:
-            文件绝对路径，包括目录和文件名。
+    Parameters
+    ----------
+    lines: Union[str, Iterable[str]]
+        可以是单个字符串或者字符串的列表。
+    dir_path: Union[str, Path]
+        文件目录的绝对路径。
+    file_name: str
+        文件名称，有默认值。
+    file_path: str
+        文件绝对路径，包括目录和文件名。
             默认为None，由dir_path，file_name指定；如果不为None，则以这个为准。
-        separator:
-            每一行末尾的分隔符，有默认值。
-        encoding:
-            文件的编码格式，默认为utf-8。
-        backup:
-            如果为True，先备份，再写入文件；
+    separator: str
+        每一行末尾的分隔符，有默认值。
+    encoding: str
+        文件的编码格式，默认为utf-8。
+    backup: bool
+        如果为True，先备份，再写入文件；
             如果为False，不备份，覆盖存在的文件。
-            如果为None，若文件存在，则不执行写入；若文件不存在，则会创建并写入文件。
+                如果为None，若文件存在，则不执行写入；若文件不存在，则会创建并写入文件。
     """
     if file_path is not None:
         tmp = file_path.split(os.path.sep)
