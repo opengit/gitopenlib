@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.22.9"
+__version__ = "0.22.10"
 
 
 import json
@@ -36,30 +36,30 @@ def cpu_mem():
     return int(round(cpu, 0)), int(round(mem, 0))
 
 
-def pt1(
-    msg: str,
-    start: str = "# ",
-    length: int = 88,
-    info: bool = False,
-) -> None:
-    """print改写，大于 length 的 msg 拆开换行打印。"""
-    if info:
-        start = "# [C:{}|M:{}] # ".format(*cpu_mem())
-    msg = start + msg
-    len_ = len(msg)
-    m = int(len_ / length)
-    r = len_ % length
-    for i in range(m):
-        head_idx = length * i
-        foot_idx = head_idx + length
-        ln = msg[head_idx:foot_idx]
-        if i == 0:
-            print(ln)
-        else:
-            print(start + "\t" + ln)
+# def pt1(
+#     msg: str,
+#     start: str = "# ",
+#     length: int = 88,
+#     info: bool = False,
+# ) -> None:
+#     """print改写，大于 length 的 msg 拆开换行打印。"""
+#     if info:
+#         start = "# [C:{}|M:{}] # ".format(*cpu_mem())
+#     msg = start + msg
+#     len_ = len(msg)
+#     m = int(len_ / length)
+#     r = len_ % length
+#     for i in range(m):
+#         head_idx = length * i
+#         foot_idx = head_idx + length
+#         ln = msg[head_idx:foot_idx]
+#         if i == 0:
+#             print(ln)
+#         else:
+#             print(start + "\t" + ln)
 
-    if r:
-        print(start + "\t" + msg[-r:])
+#     if r:
+#         print(start + "\t" + msg[-r:])
 
 
 def pt(
@@ -71,6 +71,9 @@ def pt(
 
     if info:
         start = "# [C:{}|M:{}] # ".format(*cpu_mem())
+
+    if not isinstance(msg, str):
+        msg = str(msg)
     msg = start + msg
     print(msg)
 
