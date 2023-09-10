@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.6.9"
+__version__ = "0.7.7.9"
 
 
 import itertools
@@ -260,6 +260,25 @@ def set_figsize(plt, width: float or int = 4, height: float or int = 3):
     plt.rcParams["figure.figsize"] = (width, height)
 
 
+def save_pdf(plt, path: str, dpi: int = 300, backup: bool = True):
+    """保存为PDF格式的文件。
+
+    Parameters
+    ----------
+    plt : pyplot
+        pyplot别名。
+    path : str
+        图片路径。
+    dpi : int
+        dpi大小，默认350。
+    backup : bool
+        默认为True，表示如果path存在，则备份之前的文件。
+    """
+    if backup:
+        gf.if_path_exist_then_backup(path)
+    plt.savefig(path, dpi=dpi, format="pdf")
+
+
 def save_svg(plt, path: str, dpi: int = 300, backup: bool = True):
     """保存为svg格式的矢量图。
 
@@ -276,7 +295,7 @@ def save_svg(plt, path: str, dpi: int = 300, backup: bool = True):
     """
     if backup:
         gf.if_path_exist_then_backup(path)
-    plt.savefig(path, dpi=dpi)
+    plt.savefig(path, dpi=dpi, format="svg")
 
 
 def set_ax_space(plt, w: float = 0.2, h: float = 0.2):
