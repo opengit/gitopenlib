@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.22.12"
+__version__ = "0.22.13"
 
 
 import json
@@ -36,42 +36,16 @@ def cpu_mem():
     return int(round(cpu, 0)), int(round(mem, 0))
 
 
-# def pt1(
-#     msg: str,
-#     start: str = "# ",
-#     length: int = 88,
-#     info: bool = False,
-# ) -> None:
-#     """print改写，大于 length 的 msg 拆开换行打印。"""
-#     if info:
-#         start = "# [C:{}|M:{}] # ".format(*cpu_mem())
-#     msg = start + msg
-#     len_ = len(msg)
-#     m = int(len_ / length)
-#     r = len_ % length
-#     for i in range(m):
-#         head_idx = length * i
-#         foot_idx = head_idx + length
-#         ln = msg[head_idx:foot_idx]
-#         if i == 0:
-#             print(ln)
-#         else:
-#             print(start + "\t" + ln)
-
-#     if r:
-#         print(start + "\t" + msg[-r:])
-
-
 def pt(
     msg: str,
     start: str = "# ",
     info: bool = False,
-    time: bool = False,
+    show_time: bool = False,
 ) -> None:
     """print改写。"""
 
     if info:
-        if time:
+        if show_time:
             current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             start = "# [C:{}|M:{}|T:{}] # ".format(*cpu_mem(), current_time)
         else:
@@ -84,7 +58,7 @@ def pt(
 
 
 def pts(msg: str):
-    pt(msg, info=True, time=True)
+    pt(msg, info=True, show_time=True)
 
 
 def dict2object(adict: dict) -> object:
