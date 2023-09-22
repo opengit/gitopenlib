@@ -8,15 +8,102 @@
 # @Description :  存放一些其他工具函数
 
 
-__version__ = "0.1.5"
+__version__ = "0.2.0"
 
-import sys
+from re import sub
 import time
 import traceback
 from email.mime.text import MIMEText
 from smtplib import SMTP_SSL
 
 from gitopenlib.utils import basics as gb
+
+import os
+import urllib.parse
+import urllib.request
+
+
+def sendTaskMsg(
+    key=None,
+    subject=None,
+    message=None,
+    func_main=None,
+):
+    """
+    发送任务执行完毕的通知到微信。
+
+    Args:
+        key: server酱的key
+        subject: 主题描述
+        message: 通知内容
+        func_main: 回调方法，启用这个功能，可以将任务开始和结束时间都统计
+    """
+    if func_main is None:
+        now_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+
+        # 邮件内容
+        if message is None or len(message) == 0:
+            message = "任务执行完毕....\n\n" + "{}\n\n".format(now_time)
+
+        # 主题描述
+        if subject is None or len(subject) == 0:
+            subject = "【任务执行完毕】({})".format(now_time)
+
+    else:
+        is_success = True
+        start_time = time.time()
+        start_ftime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        # 执行回调主函数，也可能报错，但是报错的话，也算任务执行完毕，因此也要发送邮件，
+        # 不过是通知任务失败的邮件
+        try:
+            func_main()
+        except Exception:
+            is_success = False
+            traceback.print_exc()
+            error_info = traceback.format_exc()
+        spend_time = time.time() - start_time
+        spend_time = round(spend_time, 3)
+        end_ftime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+
+        # 通知内容
+        if message is None or len(message) == 0:
+            message = (
+                "任务成功！\n\n"
+                + "任务开始时间：\n\n"
+                + "{}\n\n".format(start_ftime)
+                + "任务结束时间：\n\n"
+                + "{}\n\n".format(end_ftime)
+                + "任务耗时：\n\n"
+                + "{}\n\n".format(gb.fmt_seconds(spend_time))
+            )
+            if not is_success:
+                message = message.replace(
+                    "任务成功！\n\n",
+                    "任务失败！\n\n错误信息：{}\n\n".format(error_info),
+                )
+
+        # 主题描述
+        if subject is None or len(subject) == 0:
+            #  subject = "【任务执行完毕】({})".format(now_time)
+            subject = "【任务成功】开始：{}".format(start_ftime)
+            if not is_success:
+                subject = subject.replace("成功", "失败")
+
+    # 发送信息到微信
+    def sc_send(text, desp="", key="[SENDKEY]"):
+        postdata = urllib.parse.urlencode({"text": text, "desp": desp}).encode("utf-8")
+        url = f"https://sctapi.ftqq.com/{key}.send"
+        req = urllib.request.Request(url, data=postdata, method="POST")
+        with urllib.request.urlopen(req) as response:
+            result = response.read().decode("utf-8")
+        return result
+
+    ret = sc_send(subject, message, key)
+    if '"code":0' in ret:
+        gb.pts("# Sent to WeChat successfully...")
+    else:
+        gb.pts("# Send to WeChat failed...")
+
 
 
 def sendTaskOK(
