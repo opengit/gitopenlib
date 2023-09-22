@@ -7,10 +7,26 @@
 # @Date   :  2022-09-17 11:31:23
 # @Description :  Some useful things about debug.
 
-__version__ = "0.3.01"
+__version__ = "0.3.02"
 
 import sys
 import traceback
+import warnings
+
+
+def filterwarnings(action="ignore"):
+    """默认忽略警告信息。
+
+    action 的取值如下：
+        "error"     将匹配警告转换为异常
+        "ignore"    忽略匹配的警告
+        "always"    始终输出匹配的警告
+        "default"   对于同样的警告只输出第一次出现的警告
+        "module"    在一个模块中只输出第一次出现的警告
+        "once"      输出第一次出现的警告,而不考虑它们的位置
+    """
+    warnings.filterwarnings(action)
+    warnings.simplefilter(action="ignore", category=FutureWarning)
 
 
 def exception_print():

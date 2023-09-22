@@ -7,10 +7,9 @@
 # @Date   :  2021-02-01 10:25:51
 # @Description :  一些高级功能用法
 
-__version__ = "0.8.5"
+__version__ = "0.8.6"
 
 import asyncio
-import warnings
 from functools import wraps
 from multiprocessing import Process, cpu_count
 from time import time
@@ -41,21 +40,6 @@ def catch_exception(f: Callable):
         return result
 
     return wrapper
-
-
-def filterwarnings(action="ignore"):
-    """默认忽略警告信息。
-
-    action 的取值如下：
-        "error"     将匹配警告转换为异常
-        "ignore"    忽略匹配的警告
-        "always"    始终输出匹配的警告
-        "default"   对于同样的警告只输出第一次出现的警告
-        "module"    在一个模块中只输出第一次出现的警告
-        "once"      输出第一次出现的警告,而不考虑它们的位置
-    """
-    warnings.filterwarnings(action)
-    warnings.simplefilter(action="ignore", category=FutureWarning)
 
 
 def timing(f: Callable):
