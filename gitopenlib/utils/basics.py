@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.22.14"
+__version__ = "0.22.15"
 
 
 import json
@@ -49,7 +49,7 @@ def pt(
             current_time = time.strftime("%Y%m%d %H%M%S", time.localtime())
             current_time = current_time.split()
             start = "# [C:{}|M:{}|D:{}|T:{}] # ".format(
-                *cpu_mem(), current_time[0], current_time[1]
+                *cpu_mem(), current_time[0][2:], current_time[1]
             )
         else:
             start = "# [C:{}|M:{}] # ".format(*cpu_mem())
