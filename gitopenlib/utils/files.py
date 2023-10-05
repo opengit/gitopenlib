@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.05.01"
+__version__ = "1.05.02"
 
 import asyncio
 import json
@@ -18,9 +18,10 @@ from pathlib import Path
 from typing import Callable, Dict, Iterable, List, Optional, Sequence, Union
 
 import pandas as pd
+from pandas import DataFrame
+
 from gitopenlib.utils import basics as gb
 from gitopenlib.utils import files as gf
-from pandas import DataFrame
 
 
 def df_to_xlsx_pkl(
@@ -259,7 +260,7 @@ def file_writer(
     file_path: str = None,
     separator: str = "\n",
     encoding: str = "utf-8",
-    backup: bool = None,
+    backup: bool = True,
 ) -> None:
     """向文件中写内容。
 
