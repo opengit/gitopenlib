@@ -8,16 +8,114 @@
 # @Description :  some useful functions of indexes or indicators that measure
 #                   the degree of diversity.
 
-__version__ = "0.2.1"
+__version__ = "0.2.5"
 
 import math
-from typing import List, Union
+from itertools import combinations
+from typing import List, Tuple, Union
 
 import numpy as np
+from pandas import DataFrame
+
+
+def calculate_DIV(
+    fields: list, cosine: DataFrame, N: int, balance: int or float
+) -> Tuple:
+    """计算跨学科指标 `DIV` 和 `DIV*`.
+
+    Parameters
+    ----------
+    fields : list
+        元祖类型，第一个元素是category name, 第二个元素是次数.
+    cosine : DataFrame
+        余弦相似度矩阵.
+    N : int
+        整个数据中，使用的学科的总的类目数，例如，使用了252个学科类目.
+    balance : int or float
+        均匀度，通常用`1-Gini`的值作为均匀度.
+
+    Returns
+    -------
+    Tuple:
+        (`DIV`, `DIV*`)
+    """
+
+    pairs = combinations(fields, 2)
+
+    dij_list = []
+    for one, two in pairs:
+        # 学科类目的名称
+        idx_one = one[0]
+        idx_two = two[0]
+        # 拿出来相似度，再用1减去，得到不相似度，即学科之间的距离，即dij
+        d = 1 - cosine[idx_one][idx_two]
+        # 计算
+        dij_list.append(d)
+
+    # Variety 就是公式中的nc，学科类目的数目
+    V = len(fields)
+    # Balance
+    # B = 1 - gd.gini_coefficient([it[1] for it in fields])
+    B = balance
+    dij_list_sum = sum(dij_list)
+
+    # div1就是DIV
+    div1 = (V / N) * B * (dij_list_sum / (V * (V - 1)))
+
+    # div2就是改进DIV后得到的DIY*
+    div2 = V * B * dij_list_sum
+
+    return div1, div2
+
+
+def calculate_RS_TD_indicator(
+    fields: List, cosine: DataFrame, cosine_type: str = "s"
+) -> Tuple:
+    """
+    计算 Rao-stirling、True Diversity指标.
+
+    Parameters
+    ----------
+    fields : List
+        元素为tuple [学科类目,百分比]，学科类目用来检索相似度，百分比用来计算指标.
+    cosine : DataFrame
+        余弦距离/余弦相似度矩阵.
+    cosine_type : str
+        默认为's'，表示`cosine`是余弦相似度，'d' 表示余弦距离.
+
+    Returns
+    -------
+    Tuple:
+        (`Rao-stirling`, `True Diversity`)
+    """
+    pairs = combinations(fields, 2)
+
+    RSs = []
+    TDs = []
+    for one, two in pairs:
+        p = one[1] * two[1]
+        idx_one = one[0]
+        idx_two = two[0]
+        if cosine_type == "s":
+            d = 1 - cosine[idx_one][idx_two]
+        elif cosine_type == "d":
+            d = cosine[idx_one][idx_two]
+
+        rs_ = p * d
+        td_ = p * (1 - d)
+        RSs.append(rs_)
+        TDs.append(td_)
+
+    RS = sum(RSs)
+    TDs_sum = sum(TDs)
+
+    TD = 1 / TDs_sum if TDs_sum != 0 else 0
+
+    return RS, TD
 
 
 def gini_coefficient(data: Union[List, np.array]):
-    """计算 Gini Coefficient"""
+    """计算 `Gini Coefficient`."""
 
     sorted_list = sorted(data)
     height, area = 0, 0
@@ -25,11 +123,12 @@ def gini_coefficient(data: Union[List, np.array]):
         height += value
         area += height - value / 2.0
     fair_area = height * len(data) / 2.0
+
     return (fair_area - area) / fair_area
 
 
 def category_count(data: list):
-    """学科数量丰富度variety，即category count（MacArthur 1965）
+    """学科数量丰富度`Variety`，即`category count`（MacArthur 1965）.
 
     Args:
         data(list): 列表中存放不同（物种）分类的出现次数
@@ -40,16 +139,39 @@ def category_count(data: list):
     return len(data)
 
 
-# def disparity(data: list):
-#     """学科差异度，（Weizman(1992a)、Solow & Polasky(1994a)
-#
-#     Args:
-#         data(list): 列表中存放不同（物种）分类的出现次数
-#
-#     Returns:
-#         int: 返回差异性指标
-#     """
-#     pass
+def calculate_disparity(fields: list, cosine: DataFrame, N: int) -> float:
+    """学科差异度：（Weizman(1992a)、Solow & Polasky(1994a).
+
+    Parameters
+    ----------
+    fields : list
+        元素是元祖类型,第一个元素是`category name`, 第二个元素是次数或百分比.
+    cosine : DataFrame
+        余弦相似度矩阵.
+    N : int
+        整个数据中，使用的学科的总的类目数，例如，使用了252个学科类目.
+
+    Returns
+    -------
+    float:
+        差异性指标值.
+    """
+    pairs = combinations(fields, 2)
+    dij_list = []
+    for one, two in pairs:
+        # 学科类目的名称
+        idx_one = one[0]
+        idx_two = two[0]
+        # 拿出来相似度，再用1减去，得到不相似度，即学科之间的距离，即dij
+        d = 1 - cosine[idx_one][idx_two]
+        # 计算
+        dij_list.append(d)
+
+    # 计算 disparity
+    V = len(fields)
+    res = (1 / (V * (V - 1))) * sum(dij_list)
+
+    return res
 
 
 def shannon_evenness(data: list):
