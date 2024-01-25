@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.7.9"
+__version__ = "0.7.8.9"
 
 
 import itertools
@@ -23,6 +23,10 @@ from matplotlib import ticker
 from matplotlib.axes import Axes
 from matplotlib.offsetbox import AnchoredText
 from matplotlib.ticker import MaxNLocator
+
+
+def set_4k_dpi():
+    matplotlib.rcParams["figure.dpi"] = 200
 
 
 def sns_bar_hatch(

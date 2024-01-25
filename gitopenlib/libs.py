@@ -20,6 +20,7 @@ __version__ = "0.2.7"
 
 # ## 精简编程时的麻烦，常用的其他包的导入
 # 画图的包
+import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
