@@ -8,7 +8,7 @@
 # @Description :  存放一些其他工具函数
 
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 from re import sub
 import time
@@ -39,6 +39,7 @@ def sendBotMsg(
         message: 通知内容
         func_main: 回调方法，启用这个功能，可以将任务开始和结束时间都统计
     """
+    spend_time = ""
     if func_main is None:
         now_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
@@ -64,6 +65,7 @@ def sendBotMsg(
             error_info = traceback.format_exc()
         spend_time = time.time() - start_time
         spend_time = round(spend_time, 3)
+        spend_time = gb.fmt_seconds(spend_time)
         end_ftime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
         # 通知内容
@@ -75,7 +77,7 @@ def sendBotMsg(
                 + "任务结束时间：\n\n"
                 + "{}\n\n".format(end_ftime)
                 + "任务耗时：\n\n"
-                + "{}\n\n".format(gb.fmt_seconds(spend_time))
+                + "{}\n\n".format(spend_time)
             )
             if not is_success:
                 message = message.replace(
@@ -107,7 +109,10 @@ def sendBotMsg(
 
     ret = sc_send(key, subject, message)
     if '"errmsg":"ok"' in ret:
-        gb.pts("# Sent to WeChat successfully...")
+        if len(spend_time) > 0:
+            gb.pts(f"# Sent to WeChat successfully ({spend_time})... ")
+        else:
+            gb.pts("# Sent to WeChat successfully...")
     else:
         gb.pts("# Send to WeChat failed...")
 
@@ -263,7 +268,9 @@ def sendTaskOK(
             if not is_success:
                 message = message.replace(
                     "<p><h2>任务成功！</h2></p>",
-                    "<p><h2>任务失败！</h2></p><p><b>错误信息：{}</b></p>".format(error_info),
+                    "<p><h2>任务失败！</h2></p><p><b>错误信息：{}</b></p>".format(
+                        error_info
+                    ),
                 )
 
         msg = MIMEText(message, "html", _charset="utf-8")
