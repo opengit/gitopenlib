@@ -7,7 +7,7 @@
 # @Date   :  2021-04-01 15:01:56
 # @Description :  熵权法，计算指标的权重
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 import math
 
@@ -16,9 +16,57 @@ import pandas as pd
 from pandas import DataFrame
 
 
+class EntropyValueMethod:
+    """使用熵权法计算指标的权重(Method 2)
+
+    example:
+        ```python
+        evm = EntropyValueMethod(df_new.to_numpy())
+        entropy_values = [
+            str(round(it, 5)) for it in list(evm.calculate_entropy())
+        ]
+        weight_values = [
+            str(round(it, 5)) for it in list(evm.calculate_weights())
+        ]
+        scores = evm.calculate_scores()
+        ```
+    """
+
+    def __init__(self, data):
+        self.data = data
+
+    def calculate_entropy(self):
+        m, n = self.data.shape
+        K = 1 / np.log(m)
+        data_p = self.data / self.data.sum(axis=0)
+        self.e_j = -K * (data_p * np.log(data_p)).sum(axis=0)
+        return self.e_j
+
+    def calculate_weights(self):
+        self.e_j = self.calculate_entropy()
+        d_j = 1 - self.e_j
+        W_j = d_j / d_j.sum()
+        return W_j
+
+    def calculate_scores(self):
+        self.W_j = self.calculate_weights()
+        self.scores = (self.data * self.W_j).sum(axis=1)
+        return self.scores
+
+    def show_result(self, lang="en"):
+        if lang == "en":
+            print("Entropy values of indicators: ", self.e_j)
+            print("Weights of indicators: ", self.W_j)
+            print("Efficiency scores of objects: ", self.scores)
+        else:
+            print("各指标的熵值：", self.e_j)
+            print("各指标的权重：", self.W_j)
+            print("各对象的效率得分：", self.scores)
+
+
 def cal_weight(data: DataFrame or list, out_dict: bool = True):
     """
-    使用熵权法计算指标的权重
+    使用熵权法计算指标的权重(Method 1)
 
     Args:
         data (DataFrame or list): 类型为list或者pandas的DataFrame。
