@@ -7,7 +7,7 @@
 # @Date   :  2021-02-01 10:25:51
 # @Description :  一些高级功能用法
 
-__version__ = "0.8.6"
+__version__ = "0.8.7"
 
 import asyncio
 from functools import wraps
@@ -20,6 +20,18 @@ from gitopenlib.utils import wonders as gw
 
 
 import traceback
+
+from sys import getsizeof as getsize
+
+
+def get_variable_size(variable):
+    """get the size of a variable (object)."""
+    size_ = getsize(variable)
+    assert isinstance(size_, int)
+    if size_ <= 1024:
+        return f"{round(size_ / 1024, 2)} KB"
+    else:
+        return f"{round(size_ / (1024 ** 2), 2)} MB"
 
 
 def catch_exception(f: Callable):
