@@ -8,8 +8,12 @@
 **/__pycache__
 output
 
-doc/
-!/doc/build/html/**
+/build
+
+/doc
+!/doc/build
+/doc/build/*
+!/doc/build/html
 
 ####################################
 ############## python ##############
@@ -24,7 +28,6 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
 dist/
 downloads/
