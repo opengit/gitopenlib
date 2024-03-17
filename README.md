@@ -11,7 +11,7 @@ Powered by GitOPEN.
 
 **整个模块的功能**
 
-gitopenlib/utils/ai.py
+点击文件名可以查看源代码以及相关注释。   
 
 .   
 ├── gitopenlib    
