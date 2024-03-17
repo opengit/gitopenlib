@@ -11,7 +11,6 @@ Powered by GitOPEN.
 
 **整个模块的功能**
 
-```bash
 .
 ├── gitopenlib
 │   ├── **helpers**：帮助类的模块。
@@ -40,4 +39,3 @@ Powered by GitOPEN.
 │       └── [wonders.py](./doc/build/html/gitopenlib.helpers.html#module-gitopenlib.utils.wonders)：各种高级有趣的函数，包含多进程执行等等。
 ├────────────────────────────────
 
-```
