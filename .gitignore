@@ -9,8 +9,6 @@
 output
 
 
-!/doc/build/html
-
 ####################################
 ############## python ##############
 ####################################
@@ -25,6 +23,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 develop-eggs/
+build/
 dist/
 downloads/
 eggs/
