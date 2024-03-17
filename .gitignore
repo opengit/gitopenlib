@@ -8,7 +8,6 @@
 **/__pycache__
 output
 
-/build
 
 /doc
 !/doc/build
