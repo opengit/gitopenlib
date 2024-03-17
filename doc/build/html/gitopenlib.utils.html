@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gitopenlib.utils package &mdash; gitopenlib v0.2.28.15 文档</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=25e18054"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=beaddf03"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="prev" title="gitopenlib.indicators package" href="gitopenlib.indicators.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            gitopenlib
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="gitopenlib.html">gitopenlib package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="gitopenlib.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gitopenlib.helpers.html">gitopenlib.helpers package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitopenlib.indicators.html">gitopenlib.indicators package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">gitopenlib.utils package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils.ai">gitopenlib.utils.ai module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils.basics">gitopenlib.utils.basics module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils.clazz">gitopenlib.utils.clazz module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils.comatrix">gitopenlib.utils.comatrix module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils.crawler">gitopenlib.utils.crawler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils.debuger">gitopenlib.utils.debuger module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils.files">gitopenlib.utils.files module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils.get_ip">gitopenlib.utils.get_ip module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils.k_cluster">gitopenlib.utils.k_cluster module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils.nlp">gitopenlib.utils.nlp module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils.others">gitopenlib.utils.others module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils.parser">gitopenlib.utils.parser module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils.plot">gitopenlib.utils.plot module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils.sorts">gitopenlib.utils.sorts module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils.wonders">gitopenlib.utils.wonders module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gitopenlib.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gitopenlib.html#module-gitopenlib.libs">gitopenlib.libs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gitopenlib.html#module-gitopenlib">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gitopenlib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="gitopenlib.html">gitopenlib package</a></li>
+      <li class="breadcrumb-item active">gitopenlib.utils package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/gitopenlib.utils.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gitopenlib-utils-package">
+<h1>gitopenlib.utils package<a class="headerlink" href="#gitopenlib-utils-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-gitopenlib.utils.ai">
+<span id="gitopenlib-utils-ai-module"></span><h2>gitopenlib.utils.ai module<a class="headerlink" href="#module-gitopenlib.utils.ai" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.ai.confusion_matrix">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.ai.</span></span><span class="sig-name descname"><span class="pre">confusion_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classes=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimals=3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize=(10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">10)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize=14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">textsize=12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap=&lt;matplotlib.colors.LinearSegmentedColormap</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">svg='save'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">svgpath='./confusion_matrix.svg'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.ai.confusion_matrix" title="Link to this definition"></a></dt>
+<dd><p>打印出优化版的混淆矩阵及其可视化。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>y_true: 真实标签。
+y_pred: 预测结果标签。
+classes: 类别名（标签名）。
+normalize: 是否标准化。
+decimals: 标准化数值小数位数。
+figsize: 图片大小。
+fontsize: 图片上的字体大小。
+textsize: 热力图中数值的字体大小。
+cmap: 图片的配色方案。
+svg: svg的现实方法，’show’表示直接显示；’save’表示只保存不显示；’both’表示既显示又保存。
+svgpath: 文件路径。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.ai.pandas_classification_report">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.ai.</span></span><span class="sig-name descname"><span class="pre">pandas_classification_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'weighted'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.ai.pandas_classification_report" title="Link to this definition"></a></dt>
+<dd><p>生成优化版的分类报告。</p>
+<p>感谢伟大的编程问答社区`stack overflow`提供的答案。
+生成的结果如下,DataFrame格式:</p>
+<dl class="simple">
+<dt><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a></dt><dd><p>precision    recall  f1-score  support</p>
+</dd>
+</dl>
+<p>0             0.379032  0.470000  0.419643    400.0
+1             0.579365  0.486667  0.528986    600.0
+avg / total   0.499232  0.480000  0.485248   1000.0
+<a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.ai.softmax">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.ai.</span></span><span class="sig-name descname"><span class="pre">softmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitopenlib.utils.ai.softmax" title="Link to this definition"></a></dt>
+<dd><p>归一化指数函数softmax，将一个任意实数的K维向量，压缩到另一个K维向量中，使得每一个元素
+的范围都在(0,1)之间，并且所有元素的和为1。</p>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.utils.basics">
+<span id="gitopenlib-utils-basics-module"></span><h2>gitopenlib.utils.basics module<a class="headerlink" href="#module-gitopenlib.utils.basics" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.chunks">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">chunks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.chunks" title="Link to this definition"></a></dt>
+<dd><p>分割列表，但是子list元素个数尽可能平均。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>arr:</dt><dd><p>待分割的list。</p>
+</dd>
+<dt>m:</dt><dd><p>分成几份。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>List[List]:</dt><dd><p>分割后的每个子list都是返回结果list的一个元素。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.chunks1">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">chunks1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.chunks1" title="Link to this definition"></a></dt>
+<dd><p>分割列表，但是子list元素的个数是固定的size个。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>arr:</dt><dd><p>待分割的list。</p>
+</dd>
+<dt>size:</dt><dd><p>每份中的元素个数。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>List[List]:</dt><dd><p>分割后的每个子list都是返回结果list的一个元素。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.cpu_mem">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">cpu_mem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.basics.cpu_mem" title="Link to this definition"></a></dt>
+<dd><p>获取CPU和内存使用情况。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.dict2json">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">dict2json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.dict2json" title="Link to this definition"></a></dt>
+<dd><p>将dict转为json字符串。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>data:</dt><dd><p>dict类型的数据。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>str:</dt><dd><p>返回json字符串。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.dict2object">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">dict2object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.dict2object" title="Link to this definition"></a></dt>
+<dd><p>把dict转为类对象，实现属性的快速访问。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.dict_extremum">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">dict_extremum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.dict_extremum" title="Link to this definition"></a></dt>
+<dd><p>找到dict中value的极值，并返回由相应key组成的列表。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>data:</dt><dd><p>dict数据，且value必须为数值类型。</p>
+</dd>
+<dt>type:</dt><dd><p>1表示执行最大值操作，0表示最小值操作。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>Union[int, float]:</dt><dd><p>极值。</p>
+</dd>
+<dt>List:</dt><dd><p>极值所在的key组成的List。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.dict_sorted">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">dict_sorted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ascending</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.dict_sorted" title="Link to this definition"></a></dt>
+<dd><p>对dict排序。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>data:</dt><dd><p>目标数据dict类型。</p>
+</dd>
+<dt>flag:</dt><dd><p>默认为0，表示按照字典的key进行排序；1表示按照value进行排序。</p>
+</dd>
+<dt>ascending:</dt><dd><p>默认为True，表示按照升序排序；False表示降序排序。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>dict:</dt><dd><p>排序后的数据。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.ele2dict">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">ele2dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.ele2dict" title="Link to this definition"></a></dt>
+<dd><p>把元素为json字符串的list数据，转为，元素为dict类型的list数据。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>data:</dt><dd><p>list类型的数据，元素为json字符串类型。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>List:</dt><dd><p>转换后的list数据</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.ele2json">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">ele2json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.ele2json" title="Link to this definition"></a></dt>
+<dd><p>把元素为dict类型的list数据，转为，元素为json字符串的list数据。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>data:</dt><dd><p>list类型的数据，元素为dict类型。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>List:</dt><dd><p>转换后的list数据。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.filter_by_thresholds">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">filter_by_thresholds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thresholds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_closed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.filter_by_thresholds" title="Link to this definition"></a></dt>
+<dd><p>依据阈值范围对数据进行过滤。</p>
+<p>依据 threshold 中的规则对 data 数据进行过滤，threshold_closed
+规定区间规则的闭合状态，rl/lr表示区间两端闭合，r表示右闭合，l表示左闭合。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>data:</dt><dd><p>list类型的数据</p>
+</dd>
+<dt>thresholds:</dt><dd><p>list类型的参数，元素为tuple类型。</p>
+</dd>
+<dt>threshold_closed:</dt><dd><p>str类型的参数，rl/lr表示区间两端闭合，r表示右闭合，l表示左闭合，None表示两端开区间。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>List:</dt><dd><p>按照区间保留下来的数据。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.fmt_seconds">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">fmt_seconds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'zh'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.basics.fmt_seconds" title="Link to this definition"></a></dt>
+<dd><p>把秒转换为年月日小时分钟秒。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.get_keys_from_dict">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">get_keys_from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.get_keys_from_dict" title="Link to this definition"></a></dt>
+<dd><p>获取dict中的所有key，包括嵌套dict中的key。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.is_sublist">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">is_sublist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.is_sublist" title="Link to this definition"></a></dt>
+<dd><p>判断a是否是b的子集，顺序敏感。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.is_subset">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">is_subset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.is_subset" title="Link to this definition"></a></dt>
+<dd><p>判断a是否是b的子集，顺序不敏感。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.json2dict">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">json2dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">astr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.json2dict" title="Link to this definition"></a></dt>
+<dd><p>将json字符串转为dict类型的数据对象。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>astr:</dt><dd><p>json字符串转为dict类型的数据对象。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>dict:</dt><dd><p>返回dict类型数据对象。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.list_deduplicate">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">list_deduplicate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.list_deduplicate" title="Link to this definition"></a></dt>
+<dd><p>列表项为dict类型的去重。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>data:</dt><dd><p>目标数据，list类型。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>List:</dt><dd><p>去重后的数据。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.list_extremum">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">list_extremum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.list_extremum" title="Link to this definition"></a></dt>
+<dd><p>找到list中的极值，并返回索引组成的列表。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>data:</dt><dd><p>list数据。</p>
+</dd>
+<dt>type:</dt><dd><p>1表示执行最大值操作，0表示最小值操作。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>Union[int, float]:</dt><dd><p>极值。</p>
+</dd>
+<dt>List:</dt><dd><p>极值的索引组成的List。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.list_intersection">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">list_intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">listA</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">listB</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.basics.list_intersection" title="Link to this definition"></a></dt>
+<dd><p>求两个list的交集，listA中的哪些元素，在listB中出现了。注意，listA和listB的顺序不一样，交集结果不一样。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.list_item_getter">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">list_item_getter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.basics.list_item_getter" title="Link to this definition"></a></dt>
+<dd><p>按照index索引列表从data中拿出相应元素组成新的list。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.printj">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">printj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beautify</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_ascii</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.printj" title="Link to this definition"></a></dt>
+<dd><p>把dict类型的数据，格式化为json字符串输出显示。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.pt">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">pt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'#</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.pt" title="Link to this definition"></a></dt>
+<dd><p>print改写。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.pts">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">pts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.basics.pts" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.quit">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">quit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.quit" title="Link to this definition"></a></dt>
+<dd><p>用于临时打断程序，方便调试。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.random_color">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">random_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.random_color" title="Link to this definition"></a></dt>
+<dd><p>随机生成颜色代码</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>n:</dt><dd><p>生成颜色代码的数目。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>Union[str, List]:</dt><dd><p>n为1时返回一个颜色代码字符串，n不为1时返回颜色代码列表。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.remove_0_str">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">remove_0_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.remove_0_str" title="Link to this definition"></a></dt>
+<dd><p>去除list列表中为长度为0的字符串，用于字符串split后，列表中出现长度为0字符串的去除。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.sort_list">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">sort_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ascending</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.sort_list" title="Link to this definition"></a></dt>
+<dd><p>对 list 进行排序。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>data:</dt><dd><p>list 类型数据，item 为 dict 或者 basic type。</p>
+</dd>
+<dt>ascending:</dt><dd><p>默认为 True，表示升序；False 表示降序。</p>
+</dd>
+<dt>flag:</dt><dd><p>0 表示元素为基本类型，1 表示元素为 dict，2 表示元素为 tuple。</p>
+</dd>
+<dt>position:</dt><dd><p>如果元素为 basic type，position 保持默认即可；
+如果元素为 tuple，position 的数值表示以哪个 index 位置的值排序。</p>
+</dd>
+<dt>key:</dt><dd><p>如果元素为 dict，key 表示按照哪个 key 的 value 进行排序。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>List:</dt><dd><p>排序后的数据。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.split_strip">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">split_strip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxsplit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.split_strip" title="Link to this definition"></a></dt>
+<dd><p>拆分字符串，并对列表中的元素进行 strip、去除空字符串。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.strips">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">strips</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#gitopenlib.utils.basics.strips" title="Link to this definition"></a></dt>
+<dd><p>去除字符串两端的空格符和换行符，并且去除中间的换行符。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.basics.time_formatter">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.basics.</span></span><span class="sig-name descname"><span class="pre">time_formatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.basics.time_formatter" title="Link to this definition"></a></dt>
+<dd><p>将以秒为单位的时间转化为相应的分钟、小时、天。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>seconds:</dt><dd><p>秒数。</p>
+</dd>
+<dt>show:</dt><dd><p>是否打印显示信息，默认为True，那么没有返回值，设置为False，不打印信息，但返回值。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>若show为False，则有返回值，tuple中值的为天，小时，分钟，秒。</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.utils.clazz">
+<span id="gitopenlib-utils-clazz-module"></span><h2>gitopenlib.utils.clazz module<a class="headerlink" href="#module-gitopenlib.utils.clazz" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gitopenlib.utils.clazz.AutoVivification">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.clazz.</span></span><span class="sig-name descname"><span class="pre">AutoVivification</span></span><a class="headerlink" href="#gitopenlib.utils.clazz.AutoVivification" title="Link to this definition"></a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>实现嵌套字典的自动创建</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gitopenlib.utils.clazz.F">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.clazz.</span></span><span class="sig-name descname"><span class="pre">F</span></span><a class="headerlink" href="#gitopenlib.utils.clazz.F" title="Link to this definition"></a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">partial</span></code></p>
+<p>实现管道。</p>
+<dl>
+<dt>examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">|</span> <span class="n">F</span><span class="p">(</span><span class="nb">filter</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">|</span> <span class="n">F</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">your_dict</span> <span class="o">|</span> <span class="n">F</span><span class="p">(</span><span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="p">})</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.utils.comatrix">
+<span id="gitopenlib-utils-comatrix-module"></span><h2>gitopenlib.utils.comatrix module<a class="headerlink" href="#module-gitopenlib.utils.comatrix" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.comatrix.generate_CoMatrix">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.comatrix.</span></span><span class="sig-name descname"><span class="pre">generate_CoMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.comatrix.generate_CoMatrix" title="Link to this definition"></a></dt>
+<dd><p>生成共现矩阵。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dir_path (str): 工作目录，生成文件的位置
+data (list): tags的列表，格式为 [[“abc”,”bcd”,”cde”],[“abc”,”cde”,”def”]]
+filter_num (int): 计算时只包含出现次数大于等于这个数值的tag
+filter_tags (list): 默认为None，只计算列表中包含的tag的共现矩阵；[“abc”, “cde”]表示只计算”abc”,”cde”的矩阵
+save (True): 默认为 False，不把向量保存到文件</p>
+</dd>
+<dt>Returns:</dt><dd><p>(tuple): (tags, frequency_vector, ochiia_correlation_vector, cosine_similarity_vector, cosine_distances_vector)，分别表示：标签list，共现矩阵，相关矩阵，余弦相似度矩阵，余弦距离矩阵</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.utils.crawler">
+<span id="gitopenlib-utils-crawler-module"></span><h2>gitopenlib.utils.crawler module<a class="headerlink" href="#module-gitopenlib.utils.crawler" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.crawler.get_ua">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.crawler.</span></span><span class="sig-name descname"><span class="pre">get_ua</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.crawler.get_ua" title="Link to this definition"></a></dt>
+<dd><p>随机获取一个 User-Agent</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.crawler.update_useragent">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.crawler.</span></span><span class="sig-name descname"><span class="pre">update_useragent</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.crawler.update_useragent" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-gitopenlib.utils.debuger">
+<span id="gitopenlib-utils-debuger-module"></span><h2>gitopenlib.utils.debuger module<a class="headerlink" href="#module-gitopenlib.utils.debuger" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.debuger.catch_except_run">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.debuger.</span></span><span class="sig-name descname"><span class="pre">catch_except_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.debuger.catch_except_run" title="Link to this definition"></a></dt>
+<dd><p>运行指定函数，并捕获异常</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>func (function): 指定函数。
+args (tuple): 函数参数。</p>
+</dd>
+<dt>Returns:</dt><dd><p>function: 若未报错，返回函数执行结果；若报错，返回None。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.debuger.exception_print">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.debuger.</span></span><span class="sig-name descname"><span class="pre">exception_print</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.debuger.exception_print" title="Link to this definition"></a></dt>
+<dd><p>打印异常信息</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.debuger.exit">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.debuger.</span></span><span class="sig-name descname"><span class="pre">exit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.debuger.exit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.debuger.filterwarnings">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.debuger.</span></span><span class="sig-name descname"><span class="pre">filterwarnings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ignore'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.debuger.filterwarnings" title="Link to this definition"></a></dt>
+<dd><p>默认忽略警告信息。</p>
+<dl class="simple">
+<dt>action 的取值如下：</dt><dd><p>“error”     将匹配警告转换为异常
+“ignore”    忽略匹配的警告
+“always”    始终输出匹配的警告
+“default”   对于同样的警告只输出第一次出现的警告
+“module”    在一个模块中只输出第一次出现的警告
+“once”      输出第一次出现的警告,而不考虑它们的位置</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.utils.files">
+<span id="gitopenlib-utils-files-module"></span><h2>gitopenlib.utils.files module<a class="headerlink" href="#module-gitopenlib.utils.files" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.check_path">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">check_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pathes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.files.check_path" title="Link to this definition"></a></dt>
+<dd><p>检查路径是否存在，不存在则创建。创建时会自动创建父目录。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.df_from_json">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">df_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#gitopenlib.utils.files.df_from_json" title="Link to this definition"></a></dt>
+<dd><p>将json数据读取为 <cite>pandas.DataFrame</cite> 。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.df_to_json">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">df_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.files.df_to_json" title="Link to this definition"></a></dt>
+<dd><p>把 DataFrame 保存为 json 文件。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df:</dt><dd><p>DataFrame数据。</p>
+</dd>
+<dt>path:</dt><dd><p>保存路径。</p>
+</dd>
+<dt>orient:</dt><dd><p>保存格式，参考 <cite>pandas.DataFrame.to_json</cite> 的参数说明。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.df_to_xlsx_pkl">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">df_to_xlsx_pkl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.files.df_to_xlsx_pkl" title="Link to this definition"></a></dt>
+<dd><p>把 DataFrame 保存为 xlsx 文件和 pkl 文件。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.file_writer">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">file_writer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lines</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'\n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#gitopenlib.utils.files.file_writer" title="Link to this definition"></a></dt>
+<dd><p>向文件中写内容。</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>lines: Union[str, Iterable[str]]</dt><dd><p>可以是单个字符串或者字符串的列表。</p>
+</dd>
+<dt>dir_path: Union[str, Path]</dt><dd><p>文件目录的绝对路径。</p>
+</dd>
+<dt>file_name: str</dt><dd><p>文件名称，有默认值。</p>
+</dd>
+<dt>file_path: str</dt><dd><dl class="simple">
+<dt>文件绝对路径，包括目录和文件名。</dt><dd><p>默认为None，由dir_path，file_name指定；如果不为None，则以这个为准。</p>
+</dd>
+</dl>
+</dd>
+<dt>separator: str</dt><dd><p>每一行末尾的分隔符，有默认值。</p>
+</dd>
+<dt>encoding: str</dt><dd><p>文件的编码格式，默认为utf-8。</p>
+</dd>
+<dt>backup: bool</dt><dd><dl class="simple">
+<dt>如果为True，先备份，再写入文件；</dt><dd><dl class="simple">
+<dt>如果为False，不备份，覆盖存在的文件。</dt><dd><p>如果为None，若文件存在，则不执行写入；若文件不存在，则会创建并写入文件。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.get_paths_from_dir">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">get_paths_from_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recusive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitopenlib.utils.files.get_paths_from_dir" title="Link to this definition"></a></dt>
+<dd><p>从指定目录下获取所有指定扩展名文件的路径。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>dirs:</dt><dd><p>文件夹路径（绝对路径），单个用str表示，多个用list。</p>
+</dd>
+<dt>types:</dt><dd><p>指定文件的扩展名，单个用str表示，多个用list，默认为None，表示所有类型文件。</p>
+</dd>
+<dt>recusive:</dt><dd><p>默认为False，不递归子文件夹。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>List[str]:</dt><dd><p>文件路径字符串列表。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.if_path_exist_then_backup">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">if_path_exist_then_backup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pathes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#gitopenlib.utils.files.if_path_exist_then_backup" title="Link to this definition"></a></dt>
+<dd><p>检查路径是否存在，如路径存在，则备份。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>pathes:</dt><dd><p>路径，可以是单个字符串或者字符串的列表。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>bool: 如果有文件被备份了，则为True，否则为False。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.new_dirs">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">new_dirs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitopenlib.utils.files.new_dirs" title="Link to this definition"></a></dt>
+<dd><p>初始化文件夹，检验文件夹的存在状态，并返回准备好的文件夹路径。</p>
+<p>如果`dir_paths`为`str`类型，则返回值为单个路径；
+如果为`list`类型，则返回值为列表。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>dir_paths:</dt><dd><p>字符串类型的全路径，可以为单个路径，也可以放入列表中，批量创建。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>参见函数说明。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.read_content">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">read_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitopenlib.utils.files.read_content" title="Link to this definition"></a></dt>
+<dd><p>从文本文件中读取内容，将内容转换为list，list的元素为每行的字符串。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>file_path:</dt><dd><p>文件路径。</p>
+</dd>
+<dt>encoding:</dt><dd><p>文件的编码方式。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>List[str]:</dt><dd><p>每行字符串组成的list。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.read_content1">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">read_content1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitopenlib.utils.files.read_content1" title="Link to this definition"></a></dt>
+<dd><p>从文本文件中读取内容，将内容转换为list，list的元素为每行的字符串。</p>
+<p>当且仅当`read_content`函数报错时，例如`0xfa`错误时，再使用这个函数。</p>
+<p>原因是这个函数比`read_content`函数更加稳定，但是更慢。</p>
+<section id="id9">
+<h3>Parameters<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>file_path<span class="classifier">str</span></dt><dd><p>文件路径。</p>
+</dd>
+<dt>encoding<span class="classifier">str</span></dt><dd><p>文件的编码方式。</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>List[str] :</dt><dd><p>每行字符串组成的list。</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.read_contents">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">read_contents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_pathes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitopenlib.utils.files.read_contents" title="Link to this definition"></a></dt>
+<dd><p>从[多个]文本文件中读取内容，将[所有]内容转换为list，list的元素为每行的字符串。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>file_pathes:</dt><dd><p>文件路径列表。</p>
+</dd>
+<dt>encoding:</dt><dd><p>文件的编码方式。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>List[str]:</dt><dd><p>每行字符串组成的list。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.read_jsons">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">read_jsons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitopenlib.utils.files.read_jsons" title="Link to this definition"></a></dt>
+<dd><p>从存放json的文本文件中读取内容，并转化为dict组成的list。</p>
+<section id="id10">
+<h3>Parameters<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>file_path<span class="classifier">str, Path or List</span></dt><dd><p>文件路径,可以是str或者Path,也可以是list,每个元素为str或者Path.</p>
+</dd>
+<dt>encoding<span class="classifier">str</span></dt><dd><p>文件的编码方式。</p>
+</dd>
+</dl>
+</section>
+<section id="id11">
+<h3>Returns<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>List[Dict]:</dt><dd><p>dict组成的list</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.read_jsons1">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">read_jsons1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitopenlib.utils.files.read_jsons1" title="Link to this definition"></a></dt>
+<dd><p>从存放json的文本文件中读取内容，并转化为dict组成的list。</p>
+<section id="id12">
+<h3>Parameters<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>file_path<span class="classifier">str, Path or List</span></dt><dd><p>文件路径,可以是str或者Path,也可以是list,每个元素为str或者Path.</p>
+</dd>
+<dt>encoding<span class="classifier">str</span></dt><dd><p>文件的编码方式。</p>
+</dd>
+</dl>
+</section>
+<section id="id13">
+<h3>Returns<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>List[Dict]:</dt><dd><p>dict组成的list</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.read_pkl">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">read_pkl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.files.read_pkl" title="Link to this definition"></a></dt>
+<dd><p>从磁盘读取序列化对象。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.read_txt_by_page">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">read_txt_by_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#gitopenlib.utils.files.read_txt_by_page" title="Link to this definition"></a></dt>
+<dd><p>从文本文件中分页读取内容。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>file_path:</dt><dd><p>文件路径。</p>
+</dd>
+<dt>parse_func:</dt><dd><p>每一页数据处理函数，必须定义。</p>
+</dd>
+<dt>page_size:</dt><dd><p>每一页数据量。</p>
+</dd>
+<dt>encoding:</dt><dd><p>文本文件的编码格式。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.read_txt_by_page_asyncio">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">read_txt_by_page_asyncio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">open_async</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slave_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#gitopenlib.utils.files.read_txt_by_page_asyncio" title="Link to this definition"></a></dt>
+<dd><p>从文本文件中分页读取内容，具备异步io处理功能。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>file_path:</dt><dd><p>文件路径。</p>
+</dd>
+<dt>parse_func:</dt><dd><p>每一页数据处理函数，必须定义。</p>
+</dd>
+<dt>page_size:</dt><dd><p>每一页数据量。</p>
+</dd>
+<dt>encoding:</dt><dd><p>文本文件的编码格式。</p>
+</dd>
+<dt>open_async:</dt><dd><p>是否开启异步io处理数据，默认不开启。</p>
+</dd>
+<dt>slave_num:</dt><dd><p>执行任务的协程数目，默认为4。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.save_df">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">save_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'xlsx|json'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8-sig'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#gitopenlib.utils.files.save_df" title="Link to this definition"></a></dt>
+<dd><p>把 pandas 的 Dataframe 保存为 xlsx(csv) 、json 文件。</p>
+<p>注：该方法使用pickle在3.7和3.8两个版本中存在兼容问题，请注意这一点。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df:</dt><dd><p><a href="#id14"><span class="problematic" id="id15">`</span></a>DataFrame`数据。</p>
+</dd>
+<dt>path:</dt><dd><p>文件路径，给出一个文件路径即可。</p>
+</dd>
+<dt>format:</dt><dd><p>可选格式包括`xlsx|json`、<cite>csv|json</cite>、<cite>json</cite>、<cite>xlsx</cite>、<cite>csv</cite>；默认为`xlsx|json`。</p>
+</dd>
+<dt>encoding:</dt><dd><p><cite>xlsx(csv)`的编码格式，`utf-8-sig`方便windows系统打开它时不乱码；`json`的编码格式为`utf-8</cite>。</p>
+</dd>
+<dt>backup:</dt><dd><p><a href="#id16"><span class="problematic" id="id17">`</span></a>True`表示文件存在时进行备份(推荐)，<a href="#id18"><span class="problematic" id="id19">`</span></a>False`表示不备份。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.files.save_pkl">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.files.</span></span><span class="sig-name descname"><span class="pre">save_pkl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.files.save_pkl" title="Link to this definition"></a></dt>
+<dd><p>序列化对象并保存到磁盘。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>object:</dt><dd><p>序列化对象。</p>
+</dd>
+<dt>path:</dt><dd><p>目标路径。</p>
+</dd>
+<dt>backup:</dt><dd><p><a href="#id20"><span class="problematic" id="id21">`</span></a>True`表示文件存在时进行备份(推荐)，<a href="#id22"><span class="problematic" id="id23">`</span></a>False`表示不备份。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>bool: 保存成功，返回 True，保存失败，返回 False，抛出异常。</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.utils.get_ip">
+<span id="gitopenlib-utils-get-ip-module"></span><h2>gitopenlib.utils.get_ip module<a class="headerlink" href="#module-gitopenlib.utils.get_ip" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.get_ip.get_ip">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.get_ip.</span></span><span class="sig-name descname"><span class="pre">get_ip</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.get_ip.get_ip" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.get_ip.get_lan">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.get_ip.</span></span><span class="sig-name descname"><span class="pre">get_lan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.get_ip.get_lan" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.get_ip.get_text">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.get_ip.</span></span><span class="sig-name descname"><span class="pre">get_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.get_ip.get_text" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.get_ip.get_wan">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.get_ip.</span></span><span class="sig-name descname"><span class="pre">get_wan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">html</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.get_ip.get_wan" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-gitopenlib.utils.k_cluster">
+<span id="gitopenlib-utils-k-cluster-module"></span><h2>gitopenlib.utils.k_cluster module<a class="headerlink" href="#module-gitopenlib.utils.k_cluster" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.k_cluster.run_kmeans">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.k_cluster.</span></span><span class="sig-name descname"><span class="pre">run_kmeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">K_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.k_cluster.run_kmeans" title="Link to this definition"></a></dt>
+<dd><p>data 是一个 list 类型，其中的每一个 sublist 都和 labels 中的标签对应</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>max_K (list): K值试验范围
+data (list): 特征数据集，元素是list类型的特征数据
+tags (list): 每一个特征数据对应的标签
+base_dir (str): 工作目录，在该目录下生成一系列的文件和聚类结果</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.k_cluster.sum_of_square_scores">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.k_cluster.</span></span><span class="sig-name descname"><span class="pre">sum_of_square_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predict_labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_centers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.k_cluster.sum_of_square_scores" title="Link to this definition"></a></dt>
+<dd><p>定义between_SS / total_SS 的计算方法</p>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.utils.nlp">
+<span id="gitopenlib-utils-nlp-module"></span><h2>gitopenlib.utils.nlp module<a class="headerlink" href="#module-gitopenlib.utils.nlp" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gitopenlib.utils.nlp.CutTFIDF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.nlp.</span></span><span class="sig-name descname"><span class="pre">CutTFIDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idf_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.nlp.CutTFIDF" title="Link to this definition"></a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">TFIDF</span></code></p>
+<p>对 jieba 分词的 TFIDF 类进行优化，去除单个字不能返回权重的限制。</p>
+<p>支持返回词汇列表对应的权重值和词性列表。</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gitopenlib.utils.nlp.CutTFIDF.extract_tags">
+<span class="sig-name descname"><span class="pre">extract_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topK</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allowPOS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.nlp.CutTFIDF.extract_tags" title="Link to this definition"></a></dt>
+<dd><p>切分词，并且返回词汇的 tfidf 权重和词性。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>topK:</dt><dd><p>返回多少个top关键词。 <cite>None</cite> 表示所有。</p>
+</dd>
+<dt>min_length:</dt><dd><p>单词或字符的最小长度。设置为 <cite>1</cite> 表示单个字符。
+如果词汇的长度小于改值，就会被过滤掉。</p>
+</dd>
+<dt>allowPOS:</dt><dd><p>允许的词性列表。例如：<cite>[‘ns’, ‘n’, ‘vn’, ‘v’,’nr’]</cite>。
+如果词汇的词性不在列表中，就会被过滤掉。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.nlp.char_is_emoji">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.nlp.</span></span><span class="sig-name descname"><span class="pre">char_is_emoji</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">character</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.nlp.char_is_emoji" title="Link to this definition"></a></dt>
+<dd><p>判断字符是否是emoji</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.nlp.chinese_word_cut">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.nlp.</span></span><span class="sig-name descname"><span class="pre">chinese_word_cut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_dict_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reserved_flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_punc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#gitopenlib.utils.nlp.chinese_word_cut" title="Link to this definition"></a></dt>
+<dd><p>对一段文本进行切分词。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>text:</dt><dd><p>文本内容。</p>
+</dd>
+<dt>custom_dict_file:</dt><dd><p>自定义词典路径。</p>
+</dd>
+<dt>stop_words:</dt><dd><p>停用词列表。</p>
+</dd>
+<dt>word_length:</dt><dd><p>词汇的最小长度。</p>
+</dd>
+<dt>top_k:</dt><dd><p>保留前多少个关键词。</p>
+</dd>
+<dt>reserved_flags:</dt><dd><p>切分词后保留哪些词性的词汇。</p>
+</dd>
+<dt>remove_punc:</dt><dd><p>是否去除标点符号。</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>token_list:</dt><dd><p>分词后，由词汇组成的列表。</p>
+</dd>
+<dt>weight_list:</dt><dd><p>分词后，由词汇权重组成的列表。</p>
+</dd>
+<dt>flag_list:</dt><dd><p>分词后，由词汇词性组成的列表。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.nlp.english_word_cut">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.nlp.</span></span><span class="sig-name descname"><span class="pre">english_word_cut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_punc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#gitopenlib.utils.nlp.english_word_cut" title="Link to this definition"></a></dt>
+<dd><p>对英文句子分词（按照空格）。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.nlp.generate_random_strs">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.nlp.</span></span><span class="sig-name descname"><span class="pre">generate_random_strs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.nlp.generate_random_strs" title="Link to this definition"></a></dt>
+<dd><p>生成随机字符串</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.nlp.is_all_chinese">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.nlp.</span></span><span class="sig-name descname"><span class="pre">is_all_chinese</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.nlp.is_all_chinese" title="Link to this definition"></a></dt>
+<dd><p>检验是否全是中文字符（不包含标点）</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.nlp.is_contains_chinese">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.nlp.</span></span><span class="sig-name descname"><span class="pre">is_contains_chinese</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.nlp.is_contains_chinese" title="Link to this definition"></a></dt>
+<dd><p>检验是否含有中文字符（不包含标点）</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.nlp.remove_punc">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.nlp.</span></span><span class="sig-name descname"><span class="pre">remove_punc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.nlp.remove_punc" title="Link to this definition"></a></dt>
+<dd><p>默认去除替换所有半角全角符号，只留字母、数字、中文；</p>
+<p>或者把所有半角全角符号替换为指定的占位符(repl的值)。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.nlp.text_has_emoji">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.nlp.</span></span><span class="sig-name descname"><span class="pre">text_has_emoji</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.nlp.text_has_emoji" title="Link to this definition"></a></dt>
+<dd><p>判断文本中是否包含emoji</p>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.utils.others">
+<span id="gitopenlib-utils-others-module"></span><h2>gitopenlib.utils.others module<a class="headerlink" href="#module-gitopenlib.utils.others" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.others.sendBotMsg">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.others.</span></span><span class="sig-name descname"><span class="pre">sendBotMsg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_main</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.others.sendBotMsg" title="Link to this definition"></a></dt>
+<dd><p>发送任务执行完毕的通知到企业微信群组机器人。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>key: 企业微信机器人的key
+subject: 主题描述
+message: 通知内容
+func_main: 回调方法，启用这个功能，可以将任务开始和结束时间都统计</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.others.sendTaskMsg">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.others.</span></span><span class="sig-name descname"><span class="pre">sendTaskMsg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_main</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.others.sendTaskMsg" title="Link to this definition"></a></dt>
+<dd><p>发送任务执行完毕的通知到微信。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>key: server酱的key
+subject: 主题描述
+message: 通知内容
+func_main: 回调方法，启用这个功能，可以将任务开始和结束时间都统计</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.others.sendTaskOK">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.others.</span></span><span class="sig-name descname"><span class="pre">sendTaskOK</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to_addr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sunjiajiacn&#64;qq.com'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gitopen&#64;sina.cn'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'smtp.sina.cn'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host_port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">465</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_main</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.others.sendTaskOK" title="Link to this definition"></a></dt>
+<dd><p>发送任务执行完毕通知邮件。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>to_addr: 邮件接收地址
+username: 发件人地址
+host: smtp地址（SSL）
+host_port: smtp端口（SSL）
+password: 帐户密码
+subject: 邮件主题描述
+message: 邮件内容
+func_main: 回调方法，启用这个功能，可以将任务开始和结束时间都统计</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.utils.parser">
+<span id="gitopenlib-utils-parser-module"></span><h2>gitopenlib.utils.parser module<a class="headerlink" href="#module-gitopenlib.utils.parser" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.parser.parse_refworks">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.parser.</span></span><span class="sig-name descname"><span class="pre">parse_refworks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.parser.parse_refworks" title="Link to this definition"></a></dt>
+<dd><p>对RefWorks的题录数据进行格式化，保存到json文件中，或者使用parse_func直接处理。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dir_path (str): 存放 txt 文件类型的RefWorks数据目录；
+parse_func (Callable): 处理函数；</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.utils.plot">
+<span id="gitopenlib-utils-plot-module"></span><h2>gitopenlib.utils.plot module<a class="headerlink" href="#module-gitopenlib.utils.plot" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.annotate_heatmap">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">annotate_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valfmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'{x:.2f}'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">textcolors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('black',</span> <span class="pre">'white')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">textkw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.annotate_heatmap" title="Link to this definition"></a></dt>
+<dd><p>A function to annotate a heatmap.</p>
+<section id="id24">
+<h3>Parameters<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>im</dt><dd><p>The AxesImage to be labeled.</p>
+</dd>
+<dt>data</dt><dd><p>Data used to annotate.  If None, the image’s data is used.  Optional.</p>
+</dd>
+<dt>valfmt</dt><dd><p>The format of the annotations inside the heatmap.  This should either
+use the string format method, e.g. “$ {x:.2f}”, or be a
+<cite>matplotlib.ticker.Formatter</cite>.  Optional.</p>
+</dd>
+<dt>textcolors</dt><dd><p>A pair of colors.  The first is used for values below a threshold,
+the second for those above.  Optional.</p>
+</dd>
+<dt>threshold</dt><dd><p>Value in data units according to which the colors from textcolors are
+applied.  If None (the default) uses the middle of the colormap as
+separation.  Optional.</p>
+</dd>
+<dt><a href="#id25"><span class="problematic" id="id26">**</span></a>kwargs</dt><dd><p>All other arguments are forwarded to each call to <cite>text</cite> used to create
+the text labels.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.heatmap">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row_labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cbar_kw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cbarlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.heatmap" title="Link to this definition"></a></dt>
+<dd><p>Create a heatmap from a numpy array and two lists of labels.</p>
+<p>The link of this helper function:
+<cite>https://matplotlib.org/stable/gallery/images_contours_and_fields/image_annotated_heatmap.html</cite></p>
+<dl>
+<dt>Here is the usage example:</dt><dd><dl class="simple">
+<dt>vegetables = [“cucumber”, “tomato”, “lettuce”, “asparagus”,</dt><dd><p>“potato”, “wheat”, “barley”]</p>
+</dd>
+<dt>farmers = [“Farmer Joe”, “Upland Bros.”, “Smith Gardening”,</dt><dd><p>“Agrifun”, “Organiculture”, “BioGoods Ltd.”, “Cornylee Corp.”]</p>
+</dd>
+<dt>harvest = np.array([[0.8, 2.4, 2.5, 3.9, 0.0, 4.0, 0.0],</dt><dd><p>[2.4, 0.0, 4.0, 1.0, 2.7, 0.0, 0.0],
+[1.1, 2.4, 0.8, 4.3, 1.9, 4.4, 0.0],
+[0.6, 0.0, 0.3, 0.0, 3.1, 0.0, 0.0],
+[0.7, 1.7, 0.6, 2.6, 2.2, 6.2, 0.0],
+[1.3, 1.2, 0.0, 0.0, 0.0, 3.2, 5.1],
+[0.1, 2.0, 0.0, 1.4, 0.0, 1.9, 6.3]])</p>
+</dd>
+</dl>
+<p>fig, ax = plt.subplots()
+im, cbar = heatmap(harvest, vegetables, farmers, ax=ax,</p>
+<blockquote>
+<div><p>cmap=”YlGn”, cbarlabel=”harvest [t/year]”)</p>
+</div></blockquote>
+<p>texts = annotate_heatmap(im, valfmt=”{x:.1f} t”)
+fig.tight_layout()
+plt.show()</p>
+</dd>
+</dl>
+<section id="id27">
+<h3>Parameters<a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>data</dt><dd><p>A 2D numpy array of shape (M, N).</p>
+</dd>
+<dt>row_labels</dt><dd><p>A list or array of length M with the labels for the rows.</p>
+</dd>
+<dt>col_labels</dt><dd><p>A list or array of length N with the labels for the columns.</p>
+</dd>
+<dt>ax</dt><dd><p>A <cite>matplotlib.axes.Axes</cite> instance to which the heatmap is plotted.  If
+not provided, use current axes or create a new one.  Optional.</p>
+</dd>
+<dt>cbar_kw</dt><dd><p>A dictionary with arguments to <cite>matplotlib.Figure.colorbar</cite>.  Optional.</p>
+</dd>
+<dt>cbarlabel</dt><dd><p>The label for the colorbar.  Optional.</p>
+</dd>
+<dt><a href="#id28"><span class="problematic" id="id29">**</span></a>kwargs</dt><dd><p>All other arguments are forwarded to <cite>imshow</cite>.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.legend_text">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">legend_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontcolor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'black'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.legend_text" title="Link to this definition"></a></dt>
+<dd><p>在ax上添加一个仅包含文本的legend</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>ax (Axes): 子图的轴
+text (str): 要显示的文字内容
+loc (int): legend的位置，1表示右上角，2表示左上角，3表示左下角，4表示右下角
+fontsize (int): 字体大小
+fontcolor (str): 字体颜色</p>
+</dd>
+<dt>Returns:</dt><dd><p>AnchoredText: 返回AnchoredText实例</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.save_pdf">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">save_pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.save_pdf" title="Link to this definition"></a></dt>
+<dd><p>保存为PDF格式的文件。</p>
+<section id="id30">
+<h3>Parameters<a class="headerlink" href="#id30" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>plt<span class="classifier">pyplot</span></dt><dd><p>pyplot别名。</p>
+</dd>
+<dt>path<span class="classifier">str</span></dt><dd><p>图片路径。</p>
+</dd>
+<dt>dpi<span class="classifier">int</span></dt><dd><p>dpi大小，默认350。</p>
+</dd>
+<dt>backup<span class="classifier">bool</span></dt><dd><p>默认为True，表示如果path存在，则备份之前的文件。</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.save_svg">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">save_svg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.save_svg" title="Link to this definition"></a></dt>
+<dd><p>保存为svg格式的矢量图。</p>
+<section id="id31">
+<h3>Parameters<a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>plt<span class="classifier">pyplot</span></dt><dd><p>pyplot别名。</p>
+</dd>
+<dt>path<span class="classifier">str</span></dt><dd><p>图片路径。</p>
+</dd>
+<dt>dpi<span class="classifier">int</span></dt><dd><p>dpi大小，默认350。</p>
+</dd>
+<dt>backup<span class="classifier">bool</span></dt><dd><p>默认为True，表示如果path存在，则备份之前的文件。</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.set_4k_dpi">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">set_4k_dpi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.set_4k_dpi" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.set_ax_space">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">set_ax_space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.set_ax_space" title="Link to this definition"></a></dt>
+<dd><p>设置子图间距</p>
+<section id="id32">
+<h3>Parameters<a class="headerlink" href="#id32" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>plt<span class="classifier">pyplot</span></dt><dd><p>pyplot别名。</p>
+</dd>
+<dt>w<span class="classifier">float</span></dt><dd><p>横向的间距，值为小数，表示横向间距是子图平均宽度的百分比。</p>
+</dd>
+<dt>h<span class="classifier">float</span></dt><dd><p>纵向的间距，值为小数，表示纵向间距是子图平均高度的百分比。</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.set_axis_tick">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">set_axis_tick</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%.2f'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.set_axis_tick" title="Link to this definition"></a></dt>
+<dd><p>横轴或者纵轴的刻度标签的格式，例如，%.2f 表示两位小数；
+%.2e 科学计数法</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.set_figsize">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">set_figsize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.set_figsize" title="Link to this definition"></a></dt>
+<dd><p>设置图片的大小，单位为英寸</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.set_font">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">set_font</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'SimSun'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.set_font" title="Link to this definition"></a></dt>
+<dd><p>设置字体；
+若是在windows系统，可以使用SimSun，SimHei，SimKai，SimFang等字体；
+若在linux、macOS系统下，可搜索SimSun.ttf字体安装后使用（必要时候需要重启系统）。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>fname (str): 字体的名称。
+fsize (int): 字体的大小。</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.set_legend_outside">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">set_legend_outside</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Axes</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kws</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.set_legend_outside" title="Link to this definition"></a></dt>
+<dd><p>设置图例在图片的外侧右下角，没有title，没有边框。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.set_legend_style">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">set_legend_style</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox_to_anchor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edgecolor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'black'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">facecolor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kws</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.set_legend_style" title="Link to this definition"></a></dt>
+<dd><p>自定义图例的样式。</p>
+<section id="id33">
+<h3>Parameters<a class="headerlink" href="#id33" title="Link to this heading"></a></h3>
+<dl>
+<dt>ax<span class="classifier">Axes</span></dt><dd><p>轴，可以理解为某个子图存放的地方。</p>
+</dd>
+<dt>title<span class="classifier">str</span></dt><dd><p>图例的标题。默认为None，表示不自定义标题，用默认标题。</p>
+</dd>
+<dt>labels<span class="classifier">list</span></dt><dd><p>图例的标签。默认为None，表示不自定义标签，用默认标签。</p>
+</dd>
+<dt>loc<span class="classifier">int</span></dt><dd><p>图例的位置。默认为0。</p>
+<p>当和bbox_to_anchor一起使用时，loc表示图例身上的哪个点，</p>
+<p>例如“左下”，意味着图例的左下角与bbox_to_anchor指定的位置(x,y)重合。
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">0自动，1右上，2左上，3左下，4右下，</span>
+<span class="pre">5右边，6左中，7右中，8中下，9中上，10正中</span>
+<span class="pre">`</span></code>
+也可以使用字符串，
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">'best',</span> <span class="pre">'upper</span> <span class="pre">right',</span> <span class="pre">'upper</span> <span class="pre">left',</span> <span class="pre">'lower</span> <span class="pre">left',</span> <span class="pre">'lower</span> <span class="pre">right',</span> <span class="pre">'right',</span>
+<span class="pre">'center</span> <span class="pre">left',</span> <span class="pre">'center</span> <span class="pre">right',</span> <span class="pre">'lower</span> <span class="pre">center',</span> <span class="pre">'upper</span> <span class="pre">center',</span> <span class="pre">'center'</span>
+<span class="pre">`</span></code></p>
+</dd>
+<dt>bbox_to_anchor<span class="classifier">tuple</span></dt><dd><p>指定图例的锚点位置。</p>
+</dd>
+<dt>ncol<span class="classifier">int</span></dt><dd><p>图例的列数。</p>
+</dd>
+<dt>alpha<span class="classifier">float</span></dt><dd><p>图例的透明度。</p>
+</dd>
+<dt>fontsize<span class="classifier">int</span></dt><dd><p>图例的字体大小。</p>
+</dd>
+<dt>edgecolor<span class="classifier">str</span></dt><dd><p>图例的边框颜色。</p>
+</dd>
+<dt>facecolor<span class="classifier">str</span></dt><dd><p>图例的背景颜色。</p>
+</dd>
+<dt>linewidth<span class="classifier">float</span></dt><dd><p>图例的边框宽度。</p>
+</dd>
+<dt><a href="#id34"><span class="problematic" id="id35">**</span></a>kws</dt><dd><p>其他参数。</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.set_spines_line_width">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">set_spines_line_width</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.set_spines_line_width" title="Link to this definition"></a></dt>
+<dd><p>设置坐标轴的粗细</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.set_tick_integer">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">set_tick_integer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'both'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.set_tick_integer" title="Link to this definition"></a></dt>
+<dd><p>设置横纵轴刻度值为整数</p>
+<section id="id36">
+<h3>Parameters<a class="headerlink" href="#id36" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>ax<span class="classifier">Axes</span></dt><dd><p>轴，可以理解为某个子图存放的位置。</p>
+</dd>
+<dt>axis<span class="classifier">str</span></dt><dd><p>默认值为’both’，表示横纵轴的刻度都设置为整数；可选值维’x’或’y’。</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.sns_bar_hatch">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">sns_bar_hatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hatch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hatches</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.sns_bar_hatch" title="Link to this definition"></a></dt>
+<dd><p>Set the hatches of a bar plot in Seaborn.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.plot.sns_barplot_text">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.plot.</span></span><span class="sig-name descname"><span class="pre">sns_barplot_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bar_orient</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'vertical'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'black'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">90</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.plot.sns_barplot_text" title="Link to this definition"></a></dt>
+<dd><p>使用seaborn画条形图，给每个bar上添加数值标签。
+如默认字体样式不能满足需求，请copy下面代码自定义。</p>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.utils.sorts">
+<span id="gitopenlib-utils-sorts-module"></span><h2>gitopenlib.utils.sorts module<a class="headerlink" href="#module-gitopenlib.utils.sorts" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.sorts.bubble_sort">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.sorts.</span></span><span class="sig-name descname"><span class="pre">bubble_sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.sorts.bubble_sort" title="Link to this definition"></a></dt>
+<dd><p>冒泡排序</p>
+<p>bubble_sort 耗时：284314 毫秒</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.sorts.bucket_sort">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.sorts.</span></span><span class="sig-name descname"><span class="pre">bucket_sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.sorts.bucket_sort" title="Link to this definition"></a></dt>
+<dd><p>桶排序</p>
+<p>bucket_sort 耗时：290 毫秒</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.sorts.count_sort">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.sorts.</span></span><span class="sig-name descname"><span class="pre">count_sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.sorts.count_sort" title="Link to this definition"></a></dt>
+<dd><p>技术排序</p>
+<p>count_sort 耗时：47 毫秒</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.sorts.heap_sort">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.sorts.</span></span><span class="sig-name descname"><span class="pre">heap_sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">heap</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.sorts.heap_sort" title="Link to this definition"></a></dt>
+<dd><p>堆排序，将根节点取出与最后一位对调，对前面len-1个节点继续进行对调过程</p>
+<p>heap_sort 耗时：520 毫秒</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.sorts.insert_sort">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.sorts.</span></span><span class="sig-name descname"><span class="pre">insert_sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.sorts.insert_sort" title="Link to this definition"></a></dt>
+<dd><p>插入排序</p>
+<p>insert_sort 耗时：16 毫秒</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.sorts.merge_sort">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.sorts.</span></span><span class="sig-name descname"><span class="pre">merge_sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.sorts.merge_sort" title="Link to this definition"></a></dt>
+<dd><p>归并排序</p>
+<p>merge_sort 耗时：239 毫秒</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.sorts.quick_sort">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.sorts.</span></span><span class="sig-name descname"><span class="pre">quick_sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">listt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.sorts.quick_sort" title="Link to this definition"></a></dt>
+<dd><p>快速排序</p>
+<p>当left=0, right=1000时，耗时 2 毫秒</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.sorts.radix_sort">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.sorts.</span></span><span class="sig-name descname"><span class="pre">radix_sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.sorts.radix_sort" title="Link to this definition"></a></dt>
+<dd><p>基数排序</p>
+<p>radix_sort 耗时：439 毫秒</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.sorts.select_sort">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.sorts.</span></span><span class="sig-name descname"><span class="pre">select_sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.sorts.select_sort" title="Link to this definition"></a></dt>
+<dd><p>选择排序</p>
+<p>select_sort 耗时：121566 毫秒</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.sorts.shell_sort">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.sorts.</span></span><span class="sig-name descname"><span class="pre">shell_sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.sorts.shell_sort" title="Link to this definition"></a></dt>
+<dd><p>希尔排序</p>
+<p>shell_sort 耗时：150 毫秒</p>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.utils.wonders">
+<span id="gitopenlib-utils-wonders-module"></span><h2>gitopenlib.utils.wonders module<a class="headerlink" href="#module-gitopenlib.utils.wonders" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.wonders.catch_exception">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.wonders.</span></span><span class="sig-name descname"><span class="pre">catch_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.wonders.catch_exception" title="Link to this definition"></a></dt>
+<dd><p>A simple exception catcher.</p>
+<p>装饰器，用于捕获函数的异常信息。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.wonders.cpu_core_count">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.wonders.</span></span><span class="sig-name descname"><span class="pre">cpu_core_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.wonders.cpu_core_count" title="Link to this definition"></a></dt>
+<dd><p>获取CPU的核数，等于线程数除以2。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.wonders.get_variable_size">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.wonders.</span></span><span class="sig-name descname"><span class="pre">get_variable_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.wonders.get_variable_size" title="Link to this definition"></a></dt>
+<dd><p>get the size of a variable (object).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.wonders.run_tasks_by_multiprocess">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.wonders.</span></span><span class="sig-name descname"><span class="pre">run_tasks_by_multiprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.wonders.run_tasks_by_multiprocess" title="Link to this definition"></a></dt>
+<dd><p>使用多进程并行执行。
+<strong>注意</strong>：使用多进程时，parse_func需要放在py文件的顶级缩进（顶着行首），
+即，不能放到任何其他块体内。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data: list类型，需要被处理的数据。
+parse_func: 处理数据的函数，自行定义。
+process_num: 多进程数目。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.wonders.run_tasks_by_multithread">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.wonders.</span></span><span class="sig-name descname"><span class="pre">run_tasks_by_multithread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thread_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.wonders.run_tasks_by_multithread" title="Link to this definition"></a></dt>
+<dd><p>使用多线程并行执行。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data: list类型，需要被处理的数据。
+parse_func: 处理数据的函数，自行定义。
+thread_num: 线程数目。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.wonders.run_tasks_parallel">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.wonders.</span></span><span class="sig-name descname"><span class="pre">run_tasks_parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slave_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.wonders.run_tasks_parallel" title="Link to this definition"></a></dt>
+<dd><p>并行处理数据的函数，加快处理速度。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data: list类型，需要被处理的数据。
+parse_func: 处理数据的函数，自行定义。
+slave_num: 并行任务数目。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.utils.wonders.timing">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.utils.wonders.</span></span><span class="sig-name descname"><span class="pre">timing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.utils.wonders.timing" title="Link to this definition"></a></dt>
+<dd><p>A simple timer decorator.</p>
+<p>装饰器，用于统计函数的运行时间。</p>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-gitopenlib.utils" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="gitopenlib.indicators.html" class="btn btn-neutral float-left" title="gitopenlib.indicators package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, GitOPEN。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

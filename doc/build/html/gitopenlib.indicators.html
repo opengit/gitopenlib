@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gitopenlib.indicators package &mdash; gitopenlib v0.2.28.15 文档</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=25e18054"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=beaddf03"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="gitopenlib.utils package" href="gitopenlib.utils.html" />
+    <link rel="prev" title="gitopenlib.helpers package" href="gitopenlib.helpers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            gitopenlib
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="gitopenlib.html">gitopenlib package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="gitopenlib.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gitopenlib.helpers.html">gitopenlib.helpers package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">gitopenlib.indicators package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.indicators.diversity">gitopenlib.indicators.diversity module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.indicators.entropy_weight_method">gitopenlib.indicators.entropy_weight_method module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.indicators.statistics">gitopenlib.indicators.statistics module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-gitopenlib.indicators">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gitopenlib.utils.html">gitopenlib.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gitopenlib.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gitopenlib.html#module-gitopenlib.libs">gitopenlib.libs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gitopenlib.html#module-gitopenlib">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gitopenlib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="gitopenlib.html">gitopenlib package</a></li>
+      <li class="breadcrumb-item active">gitopenlib.indicators package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/gitopenlib.indicators.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gitopenlib-indicators-package">
+<h1>gitopenlib.indicators package<a class="headerlink" href="#gitopenlib-indicators-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-gitopenlib.indicators.diversity">
+<span id="gitopenlib-indicators-diversity-module"></span><h2>gitopenlib.indicators.diversity module<a class="headerlink" href="#module-gitopenlib.indicators.diversity" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.diversity.brillouin_diversity_index">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.diversity.</span></span><span class="sig-name descname"><span class="pre">brillouin_diversity_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.diversity.brillouin_diversity_index" title="Link to this definition"></a></dt>
+<dd><p>计算布里渊多样性指数。如，计算作者A的BI指数，传入[30,20,10,10]，
+表示该作者在4个学科领域上的reference次数</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data(list): 列表中存放不同（物种）分类的出现次数</p>
+</dd>
+<dt>Returns:</dt><dd><p>float: brillouin index的值</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.diversity.calculate_DIV">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.diversity.</span></span><span class="sig-name descname"><span class="pre">calculate_DIV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cosine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">balance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span></span></span><a class="headerlink" href="#gitopenlib.indicators.diversity.calculate_DIV" title="Link to this definition"></a></dt>
+<dd><p>计算跨学科指标 <cite>DIV</cite> 和 <cite>DIV*</cite>.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>fields<span class="classifier">list</span></dt><dd><p>元祖类型，第一个元素是category name, 第二个元素是次数.</p>
+</dd>
+<dt>cosine<span class="classifier">DataFrame</span></dt><dd><p>余弦相似度矩阵.</p>
+</dd>
+<dt>N<span class="classifier">int</span></dt><dd><p>整个数据中，使用的学科的总的类目数，例如，使用了252个学科类目.</p>
+</dd>
+<dt>balance<span class="classifier">int or float</span></dt><dd><p>均匀度，通常用`1-Gini`的值作为均匀度.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Tuple:</dt><dd><p>(<cite>DIV</cite>, <cite>DIV*</cite>)</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.diversity.calculate_RS_TD_indicator">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.diversity.</span></span><span class="sig-name descname"><span class="pre">calculate_RS_TD_indicator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cosine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cosine_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'s'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span></span></span><a class="headerlink" href="#gitopenlib.indicators.diversity.calculate_RS_TD_indicator" title="Link to this definition"></a></dt>
+<dd><p>计算 Rao-stirling、True Diversity指标.</p>
+<section id="id1">
+<h3>Parameters<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>fields<span class="classifier">List</span></dt><dd><p>元素为tuple [学科类目,百分比]，学科类目用来检索相似度，百分比用来计算指标.</p>
+</dd>
+<dt>cosine<span class="classifier">DataFrame</span></dt><dd><p>余弦距离/余弦相似度矩阵.</p>
+</dd>
+<dt>cosine_type<span class="classifier">str</span></dt><dd><p>默认为’s’，表示`cosine`是余弦相似度，’d’ 表示余弦距离.</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h3>Returns<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Tuple:</dt><dd><p>(<cite>Rao-stirling</cite>, <cite>True Diversity</cite>)</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.diversity.calculate_disparity">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.diversity.</span></span><span class="sig-name descname"><span class="pre">calculate_disparity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cosine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gitopenlib.indicators.diversity.calculate_disparity" title="Link to this definition"></a></dt>
+<dd><p>学科差异度：（Weizman(1992a)、Solow &amp; Polasky(1994a).</p>
+<section id="id3">
+<h3>Parameters<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>fields<span class="classifier">list</span></dt><dd><p>元素是元祖类型,第一个元素是`category name`, 第二个元素是次数或百分比.</p>
+</dd>
+<dt>cosine<span class="classifier">DataFrame</span></dt><dd><p>余弦相似度矩阵.</p>
+</dd>
+<dt>N<span class="classifier">int</span></dt><dd><p>整个数据中，使用的学科的总的类目数，例如，使用了252个学科类目.</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h3>Returns<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>float:</dt><dd><p>差异性指标值.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.diversity.category_count">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.diversity.</span></span><span class="sig-name descname"><span class="pre">category_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.diversity.category_count" title="Link to this definition"></a></dt>
+<dd><p>学科数量丰富度`Variety`，即`category count`（MacArthur 1965）.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data(list): 列表中存放不同（物种）分类的出现次数</p>
+</dd>
+<dt>Returns:</dt><dd><p>int: 学科数量，也可以理解为分类的数量</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.diversity.gini_coefficient">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.diversity.</span></span><span class="sig-name descname"><span class="pre">gini_coefficient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.diversity.gini_coefficient" title="Link to this definition"></a></dt>
+<dd><p>计算 <cite>Gini Coefficient</cite>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.diversity.gini_simpson_index">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.diversity.</span></span><span class="sig-name descname"><span class="pre">gini_simpson_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.diversity.gini_simpson_index" title="Link to this definition"></a></dt>
+<dd><p>考虑了variety/balance，Simpson（1949），即Gini-Simpson Index，
+也称为Simpson Diversity Index，衡量物种多样性的指数。
+指从一个群落中连续两次抽样所得到的个体不属于同一种的概率，该值越大，说明该群落的多样性越高。</p>
+<p>GSI的值域为[0, 1]，值越大，表示多样性越高。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data(list): 列表中存放不同（物种）分类的出现次数</p>
+</dd>
+<dt>Returns:</dt><dd><p>float: Gini-Simpson Index 的数值</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.diversity.inverse_simpson_index">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.diversity.</span></span><span class="sig-name descname"><span class="pre">inverse_simpson_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.diversity.inverse_simpson_index" title="Link to this definition"></a></dt>
+<dd><p>Inverse Simpson Index，即逆辛普森指数，也叫做Simpson’s Reciprocal Index。</p>
+<p>ISI指数的值，最小值为1，表示多样性最小，只有一个物种的群落。
+其最大值为样本中的物种数目。如果样本中有5个物种，则最大值为5。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data(list): 列表中存放不同（物种）分类的出现次数</p>
+</dd>
+<dt>Returns:</dt><dd><p>float: Inverse Simpson Index 的数值</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.diversity.shannon_evenness">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.diversity.</span></span><span class="sig-name descname"><span class="pre">shannon_evenness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.diversity.shannon_evenness" title="Link to this definition"></a></dt>
+<dd><p>学科分布均匀度balance，即Shannon evenness(Pielou 1969)，又称为Shannon’s equitability</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data(list): 列表中存放不同（物种）分类的出现次数</p>
+</dd>
+<dt>Returns:</dt><dd><p>float: Shannon evenness的数值，衡量社区（当前区域/领域)的物种均匀程度</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.diversity.shannon_index">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.diversity.</span></span><span class="sig-name descname"><span class="pre">shannon_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.diversity.shannon_index" title="Link to this definition"></a></dt>
+<dd><p>考虑了variety/balance，Shamono &amp; Weaver（1962）。</p>
+<p>Shannon指数是生态文献中比较流行的多样性指数，
+也叫Shannon Diversity Index、Shannon-Wiener指数、Shannon-Weaver指数和Shannon Entropy。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data(list): 列表中存放不同（物种）分类的出现次数</p>
+</dd>
+<dt>Returns:</dt><dd><p>float: Shannon Diversity Index</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.diversity.simpson_index">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.diversity.</span></span><span class="sig-name descname"><span class="pre">simpson_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.diversity.simpson_index" title="Link to this definition"></a></dt>
+<dd><p>考虑了 variety/balance，Simpson（1949），有关Simpson Index的名称（叫法），
+在不同的地方有不同的形式，请参考链接 <a class="reference external" href="http://www.countrysideinfo.co.uk/simpsons.htm">http://www.countrysideinfo.co.uk/simpsons.htm</a>。</p>
+<p>Simpson Index 衡量个体被分类时的集中程度，描述从一个群落中连续两次抽样所得到的个体属于同一种的概率
+SI 的值域为[0, 1]，0意味着无限多样性，1意味着没有多样性，即值越大，多样性越小。
+由于该形式的定义通常成反比，因此，通常使用 Inverse Simpson Index 和 Gini-Simpson Index。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data(list): 列表中存放不同（物种）分类的出现次数</p>
+</dd>
+<dt>Returns:</dt><dd><p>float: Simpson Index 的数值</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.indicators.entropy_weight_method">
+<span id="gitopenlib-indicators-entropy-weight-method-module"></span><h2>gitopenlib.indicators.entropy_weight_method module<a class="headerlink" href="#module-gitopenlib.indicators.entropy_weight_method" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gitopenlib.indicators.entropy_weight_method.EntropyValueMethod">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.entropy_weight_method.</span></span><span class="sig-name descname"><span class="pre">EntropyValueMethod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.entropy_weight_method.EntropyValueMethod" title="Link to this definition"></a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>使用熵权法计算指标的权重(Method 2)</p>
+<dl>
+<dt>example:</dt><dd><p><a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a>python
+evm = EntropyValueMethod(df_new.to_numpy())
+entropy_values = [</p>
+<blockquote>
+<div><p>str(round(it, 5)) for it in list(evm.calculate_entropy())</p>
+</div></blockquote>
+<p>]
+weight_values = [</p>
+<blockquote>
+<div><p>str(round(it, 5)) for it in list(evm.calculate_weights())</p>
+</div></blockquote>
+<p>]
+scores = evm.calculate_scores()
+<a href="#id9"><span class="problematic" id="id10">``</span></a><a href="#id11"><span class="problematic" id="id12">`</span></a></p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gitopenlib.indicators.entropy_weight_method.EntropyValueMethod.calculate_entropy">
+<span class="sig-name descname"><span class="pre">calculate_entropy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.entropy_weight_method.EntropyValueMethod.calculate_entropy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gitopenlib.indicators.entropy_weight_method.EntropyValueMethod.calculate_scores">
+<span class="sig-name descname"><span class="pre">calculate_scores</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.entropy_weight_method.EntropyValueMethod.calculate_scores" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gitopenlib.indicators.entropy_weight_method.EntropyValueMethod.calculate_weights">
+<span class="sig-name descname"><span class="pre">calculate_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.entropy_weight_method.EntropyValueMethod.calculate_weights" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gitopenlib.indicators.entropy_weight_method.EntropyValueMethod.show_result">
+<span class="sig-name descname"><span class="pre">show_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'en'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.entropy_weight_method.EntropyValueMethod.show_result" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.entropy_weight_method.cal_weight">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.entropy_weight_method.</span></span><span class="sig-name descname"><span class="pre">cal_weight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.entropy_weight_method.cal_weight" title="Link to this definition"></a></dt>
+<dd><p>使用熵权法计算指标的权重(Method 1)</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (DataFrame or list): 类型为list或者pandas的DataFrame。
+out_dict (bool): 若为True，则转化为键值对以dict类型返回；否则，以DataFrame类型返回。</p>
+</dd>
+<dt>return:</dt><dd><p>dict or DataFrame: 返回的权重值。</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.indicators.statistics">
+<span id="gitopenlib-indicators-statistics-module"></span><h2>gitopenlib.indicators.statistics module<a class="headerlink" href="#module-gitopenlib.indicators.statistics" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.Cdf">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">Cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.Cdf" title="Link to this definition"></a></dt>
+<dd><p>累计分布函数，就是值到其在分布中百分等级的映射。</p>
+<p>计算给定x的CDF(x)，就是计算样本中小于等于x的值的比例。
+在画图时，样本的CDF是一个阶跃函数（图形形状类似向上的阶梯）。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>t (list): 样本集
+x (int or float): 给定值</p>
+</dd>
+<dt>Returns:</dt><dd><p>(float): 概率，小于等于x的值的概率</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.JS_divergence">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">JS_divergence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.statistics.JS_divergence" title="Link to this definition"></a></dt>
+<dd><p>计算JS散度，两者越相似，JS散度越小。</p>
+<p>JS散度的取值范围在0-1之间，完全相同时为0
+JS散度是对称的</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.KL_divergence">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">KL_divergence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.statistics.KL_divergence" title="Link to this definition"></a></dt>
+<dd><p>计算KL散度，两者越相似，KL散度越小。</p>
+<p>KL散度满足非负性
+KL散度是不对称的，交换P、Q的位置将得到不同结果。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.calculate_CCDF">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">calculate_CCDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.calculate_CCDF" title="Link to this definition"></a></dt>
+<dd><p>计算 Complementary Cumulative Distribution Function (CCDF)</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data: 数据。</p>
+</dd>
+<dt>Returns:</dt><dd><p>每个key对应计算的互补累计频率。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.calculate_CDF">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">calculate_CDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.calculate_CDF" title="Link to this definition"></a></dt>
+<dd><p>计算 Cumulative Distribution Function (CDF)</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data: 数据。</p>
+</dd>
+<dt>Returns:</dt><dd><p>每个key对应计算的累计频率。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.calculate_IQR">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">calculate_IQR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.calculate_IQR" title="Link to this definition"></a></dt>
+<dd><p>计算四分位距（IQR, Interquartile range）</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (list): list类型的数据，每个元素为 int 或 float 类型。
+k (float): 表示异常系数，k = 1.5表示中度异常，k = 3表示极度异常。</p>
+</dd>
+<dt>Returns:</dt><dd><p>tuple: 顺序为：upper whisker, upper quartile, median, lower quartile, lower whisker, IQR</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.calculate_PMF">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">calculate_PMF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.calculate_PMF" title="Link to this definition"></a></dt>
+<dd><p>计算 Probability Mass Function (PMF)</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data: 数据。</p>
+</dd>
+<dt>Returns:</dt><dd><p>每个key对应计算的单个频率。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.calculate_hist_bins1">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">calculate_hist_bins1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.calculate_hist_bins1" title="Link to this definition"></a></dt>
+<dd><p>计算柱状图的bins，依据 Sturges’ rule 和 Rice’s rule 两种方法。</p>
+<p>参见 <a class="reference external" href="http://onlinestatbook.com/2/graphing_distributions/histograms.html">http://onlinestatbook.com/2/graphing_distributions/histograms.html</a></p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>N (int): 数据的数目
+mode (int): Sturges’ rule 的计算方法选择，0 是 1+log2(N)，1 是 1+3.3log10(N)</p>
+</dd>
+<dt>Returns:</dt><dd><p>两种方法求 hist bins 的值</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.calculate_hist_bins2">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">calculate_hist_bins2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.calculate_hist_bins2" title="Link to this definition"></a></dt>
+<dd><p>求解画柱状图时的 bins 的数值，原理是 Freedman–Diaconis rule。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.calculate_list_count_percent">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">calculate_list_count_percent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.calculate_list_count_percent" title="Link to this definition"></a></dt>
+<dd><p>计算list中元素的次数和百分比</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (list): list类型数据。
+decimals (None or int): 保留的小数位数，默认为None，则不进行位数操作；如果&gt;=0，则保留相应的小数位数。</p>
+</dd>
+<dt>Returns:</dt><dd><p>tuple: 元组第一个元素为次数统计结果，第二个元素为百分比统计结果。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.calculate_percent">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">calculate_percent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gte'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.calculate_percent" title="Link to this definition"></a></dt>
+<dd><p>计算Counter形式的百分比。</p>
+<p>当 mode 为 gte 时，计算 大于等于 key 的占比；
+当 mode 为 lte 时，计算 小于等于 key 的占比。
+将结果打印到控制台。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data: Counter形式的数据；
+mode: 可选值为 gte 和 lte。</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.coefficient_of_variation">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">coefficient_of_variation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.coefficient_of_variation" title="Link to this definition"></a></dt>
+<dd><p>计算变异系数，又称离散系数，是一个衡量数据离散程度的、没有量纲的统计量。</p>
+<p>通常用来比较两组量纲差异明显的数据的离散程度，例如粉丝数量差距显著的社交媒体帐号的推文点赞量的离散程度。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.counter2percenter">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">counter2percenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.counter2percenter" title="Link to this definition"></a></dt>
+<dd><p>convert counter dict to percenter dict.</p>
+<p>将 key/value 分别为数值、数值频次的字典类型数据，
+转换为，key/value 分别为数值、数值频次百分比的字典类型数据。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (dict): dict类型的数据，key/value分别为数值、数值频次。</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: dict类型的数据，key/value分别为数值、数值频次百分比。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.curve_fit">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">curve_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.curve_fit" title="Link to this definition"></a></dt>
+<dd><p>对x,y进行曲线拟合。</p>
+<p>使用方法：
+1. 先画出散点图，观察数据的大致形状（如3次函数）；
+2. 使用该函数进行拟合，deg设置为3；
+3. 得到拟合后的x对应的y_fit值、R^2、已经方程。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>x (np.array): 自变量x的值，可用list数据转为np.array。
+y (np.array): 因变量y的值，可用list数据转为np.array。</p>
+</dd>
+<dt>Returns:</dt><dd><p>y_fit (np.array): 拟合曲线对应的y值。
+r2 (np.float64): 拟合效果评价指标。
+aa (str): 方程的表现形式。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.divide_bins">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">divide_bins</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'count'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.statistics.divide_bins" title="Link to this definition"></a></dt>
+<dd><p>把一个数据列表，分成多少个区间，并统计落在每个区间中的数值数目或百分比。</p>
+<p>主要用于手动画直方图，例如：</p>
+<p><a href="#id13"><span class="problematic" id="id14">``</span></a>`
+color = [“#FFFFFF”] * len(bins)
+plt.bar(</p>
+<blockquote>
+<div><p>[it[0] for it in bins],
+percents,
+width=bins[1][1] - bins[1][0],
+align=”edge”,
+color=color,
+alpha=1,
+edgecolor=”#4D79C8”,</p>
+</div></blockquote>
+<section id="id15">
+<h3>)<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data: 数据列表
+bins: 区间格式
+fmt: count表示统计区间数值的数目，percent表示统计区间数值数目的百分比</p>
+</dd>
+<dt>Returns:</dt><dd><p>返回值有两个，第一个是区间列表，第二个是统计结果列表</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.divide_interval">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">divide_interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.divide_interval" title="Link to this definition"></a></dt>
+<dd><p>把列表中数据，划分为区间</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data: 列表类型数据，元素为整型或者浮点型。
+number: 划分的区间数目，整数类型。
+decimal: 区间端点的小数位数，默认不保留小数。</p>
+</dd>
+<dt>Returns:</dt><dd><p>返回值为列表类型，元素为划分的区间，tuple类型。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.filter_outliers_by_IQR">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">filter_outliers_by_IQR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.filter_outliers_by_IQR" title="Link to this definition"></a></dt>
+<dd><p>使用IQR对异常值进行检测，又称为 Tukey’s test。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (list): list类型的数据，每个元素为 int 或 float 类型。
+k (float): 表示异常系数，k = 1.5表示中度异常，k = 3表示极度异常。</p>
+</dd>
+<dt>Returns:</dt><dd><p>tuple: upper outliers, lower outliers</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.get_extremum">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">get_extremum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'max'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.statistics.get_extremum" title="Link to this definition"></a></dt>
+<dd><p>获取最大值和最小值</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.get_high_low_threshold">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">get_high_low_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minimum_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.get_high_low_threshold" title="Link to this definition"></a></dt>
+<dd><p>获取关键词的高低频临界值。高频低频词界分公式是 Donohue 根据齐普夫第二定律。
+依据的论文：
+Donohue J C. Understanding Scientific Literatures—A Bibliometric Approach [ M] . Cambridge:The MIT Press, 1973 :49 –50 .</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>minimum_count (int): 频次为1的关键词的数量。</p>
+</dd>
+<dt>Returns:</dt><dd><p>float : 临界值是浮点型。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.kurtosis_skewness">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">kurtosis_skewness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.statistics.kurtosis_skewness" title="Link to this definition"></a></dt>
+<dd><p>求一组数据的峰度 kurtosis 和 偏度 Skewness。</p>
+<p>解释：
+如果一个分布服从正态分布，那么说明该分布受到多种因素的影响，
+且影响因素是彼此独立的，对结果的影响是相加的。
+若对结果的影响是相乘的，那么就是对数正态分布。
+如果分布的峰度绝对值小于10，并且偏度绝对值小于3，那么可接受为正态分布。</p>
+<p>正态分布的峰度为3，若峰度大于0，则说明该组数据的分布曲线相较于正态分布更加陡峭；
+若峰度小于0，则说明该组数据的分布曲线相较于正态分布更加平缓。
+换言之，峰度越大，则数据在靠近均值的部分分布得越多，在距离均值较远的部分分布得较少。
+峰度可以用来衡量风险，同样的方差下，峰度越高，越容易取极端值，风险越大。
+峰度可以帮助衡量众数的统计学意义，峰度越高，众数在描述该组数据的集中趋势的作用就越高。</p>
+<p>正态分布的偏度为0，用来衡量数据分布的对称性，
+当偏度小于0时，称为 Negative Skew，出现左侧长尾，
+当偏度大于0时，称为 Positive Skew，出现右侧长尾，
+当偏度的绝对值过大时，长尾一侧出现极端值的可能性较高。</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.normal_distribution_values">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">normal_distribution_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.normal_distribution_values" title="Link to this definition"></a></dt>
+<dd><p>生成均值为u标准差为std的正态分布数据</p>
+<p>用处：当样本数据集确定（list），可以求出均值、标准差，
+生成相应的符合正态分布的y值，画出正态分布曲线，
+用于比较样本集与正态分布的区别，帮助判断</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>u: 平均值。
+std: 标准差。</p>
+</dd>
+<dt>Returns:</dt><dd><p>x (list): x轴的数据
+y (list): y轴的数据</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.normalization">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">normalization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.statistics.normalization" title="Link to this definition"></a></dt>
+<dd><p>对一系列数据进行归一化处理，对原始数据进行线性变换把数据映射到[0,1]之间。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (list or np.array): 需要被归一化的数据。
+decimals (None or int): 归一化后，数值保留的精度（小数位数），默认为None，不开启</p>
+</dd>
+<dt>Returns:</dt><dd><p>np.array: 处理后的数据</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.percentile">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">percentile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prank</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.percentile" title="Link to this definition"></a></dt>
+<dd><p>根据百分等级，找到百分位数</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>scores (list): 分数列表
+prank (list): 百分等级</p>
+</dd>
+<dt>Returns:</dt><dd><p>(int or float): 百分位数</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.percentile2">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">percentile2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prank</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.percentile2" title="Link to this definition"></a></dt>
+<dd><p>根据百分等级，找到百分位数，优化版</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>scores (list): 分数列表
+prank (list): 百分等级</p>
+</dd>
+<dt>Returns:</dt><dd><p>(int or float): 百分位数</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.percentile_rank">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">percentile_rank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scores</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">your_score</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.percentile_rank" title="Link to this definition"></a></dt>
+<dd><p>获取百分等级</p>
+<p>百分等级就是原始分数不 高于你的人在全部考试人数中所占的比例再乘以100。
+如果你 在 90 百分位数，那就是说你比 90% 的人成绩好，或者至少不比 90% 的考试人员差。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>scores (list): 分数列表
+your_score (int or float): 考察对象的分数</p>
+</dd>
+<dt>Returns:</dt><dd><p>(int or float): 百分位数</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.remove_outliers_by_IQR">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">remove_outliers_by_IQR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#gitopenlib.indicators.statistics.remove_outliers_by_IQR" title="Link to this definition"></a></dt>
+<dd><p>使用IQR从数据中移除异常值，返回移除异常值的数据</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (list): list类型的数据，每个元素为 int 或 float 类型。
+k (float): 表示异常系数，k = 1.5表示中度异常，k = 3表示极度异常。</p>
+</dd>
+<dt>Returns:</dt><dd><p>list: 移除异常值后的数据</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.smooth_ma">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">smooth_ma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.statistics.smooth_ma" title="Link to this definition"></a></dt>
+<dd><p>平滑后的数组的长度为：len(data) - window_size + 1</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (list or np.array): 原始数组。
+window_size (int): 窗口大小。</p>
+</dd>
+<dt>Returns:</dt><dd><p>np.array: 平滑后的数组</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.smooth_matlab">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">smooth_matlab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.statistics.smooth_matlab" title="Link to this definition"></a></dt>
+<dd><p>这个方法是matlab中平滑函数的python实现。它的窗口只能为奇数。
+平滑后的数组的长度为：len(data)</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (list or np.array): 原始数组。
+window_size (int): 窗口大小。</p>
+</dd>
+<dt>Returns:</dt><dd><p>np.array: 平滑后的数组。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.standardization">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">standardization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.statistics.standardization" title="Link to this definition"></a></dt>
+<dd><p>对一系列数据进行标准化处理，常用的方法是z-score标准化，处理后数据均值为0，标准差为1。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (list or np.array): 需要被标准化的数据。
+decimals (None or int): 归一化后，数值保留的精度（小数位数），默认为None，不开启</p>
+</dd>
+<dt>Returns:</dt><dd><p>np.array: 处理后的数据</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gitopenlib.indicators.statistics.zero_centered">
+<span class="sig-prename descclassname"><span class="pre">gitopenlib.indicators.statistics.</span></span><span class="sig-name descname"><span class="pre">zero_centered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitopenlib.indicators.statistics.zero_centered" title="Link to this definition"></a></dt>
+<dd><p>对一系列数据进行零均值化，即zero-centered。对数据的平移的一个过程，之后数据的中心点为(0,0)。</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (list or np.array): 需要被零均值化的数据。
+decimals (None or int): 数值保留的精度（小数位数），默认为None，不开启</p>
+</dd>
+<dt>Returns:</dt><dd><p>np.array: 处理后的数据</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-gitopenlib.indicators">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-gitopenlib.indicators" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="gitopenlib.helpers.html" class="btn btn-neutral float-left" title="gitopenlib.helpers package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="gitopenlib.utils.html" class="btn btn-neutral float-right" title="gitopenlib.utils package" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, GitOPEN。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
