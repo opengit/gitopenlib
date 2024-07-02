@@ -42,7 +42,8 @@ def sns_bar_hatch(
     if hatch:
         # set hatch symbol list
         if hatches is None:
-            hatches = ["///", "*", "\\/", "+", "---", "o", "|||", "x", "O", "."]
+            hatches = ["///", "*", "\\/", "+",
+                       "---", "o", "|||", "x", "O", "."]
         # get the number of bar in the barplot
         bar_kind_num = len(ax.containers[0])
         # get the corresponding number of hatches
@@ -58,6 +59,43 @@ def sns_bar_hatch(
 def sns_barplot_text(
     ax: Axes,
     bar_orient: str = "vertical",
+    decimal: int = 3,
+    fontsize: int = 9,
+    color: str = "black",
+    rotation: int = 0,
+):
+    """
+    使用seaborn画条形图，给每个bar上添加数值标签。
+    如默认字体样式不能满足需求，请copy下面代码自定义。
+    """
+    for bars in ax.containers:
+        for bar in bars:
+            if bar_orient == "vertical":
+                x = bar.get_x() + bar.get_width() / 2.0
+                y = bar.get_height()
+                text = str(f"%.{decimal}f" % y) if decimal > 0 else str(int(y))
+                ha = "center"
+                va = "bottom"
+            if bar_orient == "horizontal":
+                x = bar.get_width()
+                y = bar.get_y() + bar.get_height() / 2.0
+                text = str(f"%.{decimal}f" % x) if decimal > 0 else str(int(x))
+                ha = "left"  # 'center', 'right', 'left'
+                va = "center_baseline"  # 'top', 'bottom', 'center', 'baseline', 'center_baseline'
+            ax.text(
+                x, y, text,
+                fontsize=fontsize,
+                color=color,
+                ha=ha,
+                va=va,
+                rotation=rotation,
+            )
+    pass
+
+
+def sns_barplot_text1(
+    ax: Axes,
+    bar_orient: str = "vertical",
     decimal: int = 2,
     fontsize: int = 8,
     color: str = "black",
@@ -70,7 +108,8 @@ def sns_barplot_text(
     if bar_orient == "vertical":
         for p in ax.patches:
             height = p.get_height()
-            text = str(f"%.{decimal}f" % height) if decimal > 0 else str(int(height))
+            text = str(f"%.{decimal}f" %
+                       height) if decimal > 0 else str(int(height))
             # text = str(round(height, decimal)) if decimal > 0 else str(int(height))
             ax.text(
                 p.get_x() + p.get_width() / 2.0,
@@ -85,7 +124,8 @@ def sns_barplot_text(
     if bar_orient == "horizontal":
         for p in ax.patches:
             width = p.get_width()
-            text = str(f"%.{decimal}f" % width) if decimal > 0 else str(int(width))
+            text = str(f"%.{decimal}f" %
+                       width) if decimal > 0 else str(int(width))
             # text = str(round(width, decimal)) if decimal > 0 else str(int(width))
             ax.text(
                 width,
@@ -175,7 +215,8 @@ def heatmap(
     ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
 
     # Rotate the tick labels and set their alignment.
-    plt.setp(ax.get_xticklabels(), rotation=-30, ha="right", rotation_mode="anchor")
+    plt.setp(ax.get_xticklabels(), rotation=-30,
+             ha="right", rotation_mode="anchor")
 
     # Turn spines off and create white grid.
     ax.spines[:].set_visible(False)
