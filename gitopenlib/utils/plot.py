@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.8.9"
+__version__ = "0.7.9.10"
 
 
 import itertools
@@ -23,6 +23,7 @@ from matplotlib import ticker
 from matplotlib.axes import Axes
 from matplotlib.offsetbox import AnchoredText
 from matplotlib.ticker import MaxNLocator
+from typing import Union
 
 
 def set_4k_dpi():
@@ -468,11 +469,19 @@ def set_legend_style(
     frame.set_alpha(alpha)
 
 
-def set_legend_outside(ax: Axes, **kws):
-    """设置图例在图片的外侧右下角，没有title，没有边框。"""
+def set_legend_outside(ax: Union[Axes, np.ndarray], title: str = "", **kws):
+    """设置图例在图片的外侧右下角，默认没有title，没有边框。
+
+    如果ax为Axes，直接设置；
+    如果ax为包含Axes的`numpy.ndarray`，则需要打平后再设置。
+    """
+
+    if isinstance(ax, np.ndarray):
+        ax = ax.flatten()
+        ax = ax[-1]
     set_legend_style(
         ax=ax,
-        title="",
+        title=title,
         loc=3,
         bbox_to_anchor=(1.0, 0.0),
         alpha=0.0,

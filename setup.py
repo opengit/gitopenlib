@@ -27,7 +27,7 @@ URL = "https://github.com/opengit/gitopenlib.git"
 EMAIL = "gitopen@gmail.com"
 AUTHOR = "gitopen"
 REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "0.2.28.16"
+VERSION = "0.2.28.17"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -103,7 +103,8 @@ class UploadCommand(Command):
 
         self.status("Uploading the package to PyPI via Twine…")
         # os.system("twine upload dist/*")
-        os.system("twine upload --repository gitopenlib dist/*")
+        # os.system("twine upload --repository gitopenlib dist/*")
+        os.system("twine upload --repository pypi dist/*")
 
         self.status("Pushing git tags…")
         os.system("git tag v{0}".format(about["__version__"]))
