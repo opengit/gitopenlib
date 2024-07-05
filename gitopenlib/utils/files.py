@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.05.02"
+__version__ = "1.05.03"
 
 import asyncio
 import json
@@ -117,7 +117,7 @@ def save_df(
         if backup:
             if_path_exist_then_backup(file_path)
         if ft == "xlsx":
-            df.to_excel(file_path, encoding=encoding)
+            df.to_excel(file_path)
         if ft == "csv":
             df.to_csv(file_path, encoding=encoding)
         if ft == "json":
@@ -371,7 +371,8 @@ def read_txt_by_page(
             start_time = end_time
             print(f"## -{curr_page_id}- page parsed done...{[cost_time]}s")
             curr_page_id += 1
-    print(f"## All done. Total pages: {curr_page_id}. Elapsed time: {total_time}s")
+    print(
+        f"## All done. Total pages: {curr_page_id}. Elapsed time: {total_time}s")
 
 
 def read_txt_by_page_asyncio(
@@ -400,7 +401,7 @@ def read_txt_by_page_asyncio(
     """
 
     async def parse_(loop, chunk):
-        run_func = lambda: parse_func(chunk)
+        def run_func(): return parse_func(chunk)
         await loop.run_in_executor(None, run_func)
 
     with open(file=file_path, encoding=encoding, mode="r") as file:
@@ -416,7 +417,8 @@ def read_txt_by_page_asyncio(
                     loop = asyncio.get_event_loop()
                     chunks = gb.chunks(data, slave_num)
                     loop.run_until_complete(
-                        asyncio.gather(*[parse_(loop, chunk) for chunk in chunks])
+                        asyncio.gather(*[parse_(loop, chunk)
+                                       for chunk in chunks])
                     )
                     chunks.clear()
                 else:
