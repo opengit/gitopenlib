@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.22.15"
+__version__ = "0.22.16"
 
 
 import json
@@ -203,7 +203,8 @@ def split_strip(
         for item in strings:
             item = str(item).strip()
             result.append(
-                gb.remove_0_str([it.strip() for it in item.split(sep, maxsplit)])
+                gb.remove_0_str([it.strip()
+                                for it in item.split(sep, maxsplit)])
             )
         return result
 
@@ -352,7 +353,13 @@ def dict2json(data: dict) -> str:
         str:
             返回json字符串。
     """
-    return json.dumps(data, ensure_ascii=False, separators=[",", ":"])
+    def set_default(value):
+        if isinstance(value, set):
+            temp = list(value)
+            temp.sort()
+            return temp
+        raise TypeError
+    return json.dumps(data, ensure_ascii=False, separators=[",", ":"], default=set_default)
 
 
 def json2dict(astr: str) -> dict:
@@ -468,7 +475,7 @@ def chunks(arr, m) -> List[List]:
             分割后的每个子list都是返回结果list的一个元素。
     """
     n = int(math.ceil(len(arr) / float(m)))
-    return [arr[i : i + n] for i in range(0, len(arr), n)]
+    return [arr[i: i + n] for i in range(0, len(arr), n)]
 
 
 def chunks1(arr, size) -> List[List]:
@@ -484,7 +491,7 @@ def chunks1(arr, size) -> List[List]:
         List[List]:
             分割后的每个子list都是返回结果list的一个元素。
     """
-    chunked_list = [arr[i : i + size] for i in range(0, len(arr), size)]
+    chunked_list = [arr[i: i + size] for i in range(0, len(arr), size)]
     return chunked_list
 
 

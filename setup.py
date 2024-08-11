@@ -27,14 +27,16 @@ URL = "https://github.com/opengit/gitopenlib.git"
 EMAIL = "gitopen@gmail.com"
 AUTHOR = "gitopen"
 REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "0.2.28.18"
+VERSION = "0.2.28.19"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
     "scikit-learn",
     "pandas",
+    "seaborn",
     "matplotlib",
     "tqdm",
+    "requests",
     "pymongo",
     "emoji",
     "fake_useragent",
