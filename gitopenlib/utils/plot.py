@@ -8,7 +8,7 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.9.10"
+__version__ = "0.7.9.11"
 
 
 import itertools
@@ -43,8 +43,7 @@ def sns_bar_hatch(
     if hatch:
         # set hatch symbol list
         if hatches is None:
-            hatches = ["///", "*", "\\/", "+",
-                       "---", "o", "|||", "x", "O", "."]
+            hatches = ["///", "*", "\\/", "+", "---", "o", "|||", "x", "O", "."]
         # get the number of bar in the barplot
         bar_kind_num = len(ax.containers[0])
         # get the corresponding number of hatches
@@ -84,7 +83,9 @@ def sns_barplot_text(
                 ha = "left"  # 'center', 'right', 'left'
                 va = "center_baseline"  # 'top', 'bottom', 'center', 'baseline', 'center_baseline'
             ax.text(
-                x, y, text,
+                x,
+                y,
+                text,
                 fontsize=fontsize,
                 color=color,
                 ha=ha,
@@ -109,8 +110,7 @@ def sns_barplot_text1(
     if bar_orient == "vertical":
         for p in ax.patches:
             height = p.get_height()
-            text = str(f"%.{decimal}f" %
-                       height) if decimal > 0 else str(int(height))
+            text = str(f"%.{decimal}f" % height) if decimal > 0 else str(int(height))
             # text = str(round(height, decimal)) if decimal > 0 else str(int(height))
             ax.text(
                 p.get_x() + p.get_width() / 2.0,
@@ -125,8 +125,7 @@ def sns_barplot_text1(
     if bar_orient == "horizontal":
         for p in ax.patches:
             width = p.get_width()
-            text = str(f"%.{decimal}f" %
-                       width) if decimal > 0 else str(int(width))
+            text = str(f"%.{decimal}f" % width) if decimal > 0 else str(int(width))
             # text = str(round(width, decimal)) if decimal > 0 else str(int(width))
             ax.text(
                 width,
@@ -216,8 +215,7 @@ def heatmap(
     ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
 
     # Rotate the tick labels and set their alignment.
-    plt.setp(ax.get_xticklabels(), rotation=-30,
-             ha="right", rotation_mode="anchor")
+    plt.setp(ax.get_xticklabels(), rotation=-30, ha="right", rotation_mode="anchor")
 
     # Turn spines off and create white grid.
     ax.spines[:].set_visible(False)
@@ -475,18 +473,23 @@ def set_legend_outside(ax: Union[Axes, np.ndarray], title: str = "", **kws):
     如果ax为Axes，直接设置；
     如果ax为包含Axes的`numpy.ndarray`，则需要打平后再设置。
     """
+    if isinstance(ax, Axes):
+        axes = [ax]
+    else:
+        axes = list(ax)
 
-    if isinstance(ax, np.ndarray):
-        ax = ax.flatten()
-        ax = ax[-1]
-    set_legend_style(
-        ax=ax,
-        title=title,
-        loc=3,
-        bbox_to_anchor=(1.0, 0.0),
-        alpha=0.0,
-        **kws,
-    )
+    for i in range(len(axes)):
+        if i == len(axes) - 1:
+            set_legend_style(
+                ax=axes[i],
+                title=title,
+                loc=3,
+                bbox_to_anchor=(1.0, 0.0),
+                alpha=0.0,
+                **kws,
+            )
+        else:
+            axes[i].legend_.remove()
 
 
 def set_axis_tick(ax: Axes, axis: str = "y", format="%.2f"):

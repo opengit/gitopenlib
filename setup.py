@@ -27,21 +27,21 @@ URL = "https://github.com/opengit/gitopenlib.git"
 EMAIL = "gitopen@gmail.com"
 AUTHOR = "gitopen"
 REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "0.2.28.19"
+VERSION = "0.2.28.20"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    "scikit-learn",
-    "pandas",
-    "seaborn",
-    "matplotlib",
-    "tqdm",
-    "requests",
-    "pymongo",
-    "emoji",
-    "fake_useragent",
-    "lxml",
-    "psutil",
+    # "scikit-learn",
+    # "pandas",
+    # "seaborn",
+    # "matplotlib",
+    # "tqdm",
+    # "requests",
+    # "pymongo",
+    # "emoji",
+    # "fake_useragent",
+    # "lxml",
+    # "psutil",
 ]
 
 # What packages are optional?
@@ -100,8 +100,7 @@ class UploadCommand(Command):
             pass
 
         self.status("Building Source and Wheel (universal) distribution…")
-        os.system(
-            "{0} setup.py sdist bdist_wheel --universal".format(sys.executable))
+        os.system("{0} setup.py sdist bdist_wheel --universal".format(sys.executable))
 
         self.status("Uploading the package to PyPI via Twine…")
         # os.system("twine upload dist/*")
@@ -126,8 +125,7 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=find_packages(
-        exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
+    packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
     # If your package is a single module, use this instead of 'packages':
     # py_modules=['gitopenlib'],
     # entry_points={
