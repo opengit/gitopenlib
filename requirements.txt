@@ -46,7 +46,7 @@ rich==13.7.1
 scikit-learn==1.5.1
 scipy==1.13.1
 seaborn==0.13.2
-setuptools==58.1.0
+setuptools==70.0.0
 six==1.16.0
 threadpoolctl==3.5.0
 tqdm==4.66.4
