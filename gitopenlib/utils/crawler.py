@@ -8,14 +8,22 @@
 # @Description :  有关爬虫的一些工具函数
 
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 
 import random
+import time
 from pathlib import Path
 
 from fake_useragent import UserAgent
 from gitopenlib.utils import files as gf
+
+
+def have_a_sleep(min=1, max=10):
+    """
+    随机睡眠一段时间，小数秒
+    """
+    time.sleep(random.uniform(min, max))
 
 
 def update_useragent():

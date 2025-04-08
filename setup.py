@@ -27,7 +27,7 @@ URL = "https://github.com/opengit/gitopenlib.git"
 EMAIL = "gitopen@gmail.com"
 AUTHOR = "gitopen"
 REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "0.2.28.21"
+VERSION = "0.2.28.22"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -41,6 +41,8 @@ REQUIRED = [
     "scipy",
     "seaborn",
     "fake_useragent",
+    "requests",
+    "lxml",
 ]
 
 # What packages are optional?
