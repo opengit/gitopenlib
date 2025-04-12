@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.22.17"
+__version__ = "0.22.18"
 
 
 import json
@@ -74,7 +74,9 @@ def pt(
     print(msg)
 
 
-def pts(msg: str):
+def pts(msg, *msgs, sep: str = "\n") -> None:
+    """print改写，支持多个msg的打印，以及指定分隔符。"""
+    msg = sep.join([msg] + list(msgs))
     pt(msg, info=True, show_time=True)
 
 
