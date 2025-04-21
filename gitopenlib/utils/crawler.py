@@ -8,7 +8,7 @@
 # @Description :  有关爬虫的一些工具函数
 
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 
 
 import random
@@ -30,7 +30,10 @@ def update_useragent():
     uas = set()
     for i in range(1000):
         ua = UserAgent()
-        uas.add(ua.random)
+        ua1 = ua.getGoogle().strip().strip('"').strip("'")
+        ua2 = ua.getFirefox().strip().strip('"').strip("'")
+        uas.add(ua1)
+        uas.add(ua2)
 
     gf.file_writer(uas, "./ua/", "ua.txt", backup=False)
 
