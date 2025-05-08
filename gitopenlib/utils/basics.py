@@ -8,7 +8,7 @@
 # @Description : 包含基本的文件读写，指定扩展名文件查找等基本工具
 
 
-__version__ = "0.22.19"
+__version__ = "0.22.20"
 
 
 import json
@@ -18,21 +18,33 @@ import sys
 import time
 import psutil
 from typing import Any, Dict, Iterable, List, Union, Tuple
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 from gitopenlib.utils import basics as gb
 
 
-def time_now():
+def time_now(zone="Asia/Shanghai"):
     """获取当前时间，包括时间戳和格式化后的时间。
+
+    Parameters
+    ----------
+    zone : str
+        时区，默认为`Asia/Shanghai`，可以填写`UTC`，获取协调世界时，又称世界统一时间、世界标准时间。
 
     Returns
     -------
     Tuple[int, str]:
         时间戳，格式化后的时间
     """
+    # 时间戳
     time_stamp = time.time()
-    time_local = time.localtime(time_stamp)
-    time_format = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
+    # 获取目标时区
+    target_timezone = ZoneInfo(zone)
+    # 直接生成带时区的当前时间
+    target_time = datetime.now(target_timezone)
+    # 格式化
+    time_format = target_time.strftime("%Y-%m-%d %H:%M:%S")
     return time_stamp, time_format
 
 
