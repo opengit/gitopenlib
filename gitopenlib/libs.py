@@ -10,7 +10,7 @@
 @Desc    :   用于快捷导入常用的包，注意这个文件不要格式化！
 """
 
-__version__ = "0.2.7"
+__version__ = "0.2.8"
 
 
 # #######################################################
@@ -50,3 +50,6 @@ import traceback
 import pandas as pd
 from pandas import DataFrame, Series
 import numpy as np
+
+# ## 数据库的包
+import pymongo

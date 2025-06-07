@@ -8,7 +8,7 @@
 # @Description :  提供一系列的有关操作mongodb/pymongo的工具
 
 
-__version__ = "0.1.2.25"
+__version__ = "0.1.2.26"
 
 
 import asyncio
@@ -31,6 +31,8 @@ class ManageDB:
         self,
         host="127.0.0.1",
         port=27017,
+        username=None,
+        password=None,
         maxIdleTimeMS=30000,
         socketTimeoutMS=30000,
         connectTimeoutMS=30000,
@@ -40,6 +42,8 @@ class ManageDB:
         self._client = pymongo.MongoClient(
             host=self.host,
             port=self.port,
+            username=self.username,
+            password=self.password,
             maxIdleTimeMS=maxIdleTimeMS,
             socketTimeoutMS=socketTimeoutMS,
             connectTimeoutMS=connectTimeoutMS,
