@@ -7,12 +7,13 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.05.03"
+__version__ = "1.06.03"
 
 import asyncio
 import json
 import os
 import pickle
+import shutil
 import time
 from pathlib import Path
 from typing import Callable, Dict, Iterable, List, Optional, Sequence, Union
@@ -22,6 +23,22 @@ from pandas import DataFrame
 
 from gitopenlib.utils import basics as gb
 from gitopenlib.utils import files as gf
+
+
+def get_disk_space(path="/"):
+    """获取磁盘空间信息。
+
+    Args:
+        path: str: 磁盘路径，默认为根目录`/`。
+    Returns:
+        tuple: 返回一个包含总空间、已用空间和可用空间的元组，单位为GB。
+            (total_gb, used_gb, free_gb)
+    """
+    total, used, free = shutil.disk_usage(path)  # 返回字节为单位的元组
+    total_gb = total / (1024**3)  # 转换为GB
+    used_gb = used / (1024**3)
+    free_gb = free / (1024**3)
+    return total_gb, used_gb, free_gb
 
 
 def df_to_xlsx_pkl(
@@ -183,7 +200,9 @@ def if_path_exist_then_backup(pathes: Union[str, List[str]]) -> bool:
         if path.exists():
             path.rename(
                 path.with_suffix(
-                    f'.{str(time.strftime("%Y%m%d_%H%M%S",time.localtime()))}{path.suffix}'
+                    f".{str(time.strftime('%Y%m%d_%H%M%S', time.localtime()))}{
+                        path.suffix
+                    }"
                 )
             )
             has_backup_files = True
@@ -311,7 +330,9 @@ def file_writer(
         if file_path.exists():
             file_path.rename(
                 file_path.with_suffix(
-                    f'.{str(time.strftime("%Y%m%d_%H%M%S",time.localtime()))}{file_path.suffix}'
+                    f".{str(time.strftime('%Y%m%d_%H%M%S', time.localtime()))}{
+                        file_path.suffix
+                    }"
                 )
             )
 
@@ -371,8 +392,7 @@ def read_txt_by_page(
             start_time = end_time
             print(f"## -{curr_page_id}- page parsed done...{[cost_time]}s")
             curr_page_id += 1
-    print(
-        f"## All done. Total pages: {curr_page_id}. Elapsed time: {total_time}s")
+    print(f"## All done. Total pages: {curr_page_id}. Elapsed time: {total_time}s")
 
 
 def read_txt_by_page_asyncio(
@@ -401,7 +421,9 @@ def read_txt_by_page_asyncio(
     """
 
     async def parse_(loop, chunk):
-        def run_func(): return parse_func(chunk)
+        def run_func():
+            return parse_func(chunk)
+
         await loop.run_in_executor(None, run_func)
 
     with open(file=file_path, encoding=encoding, mode="r") as file:
@@ -417,8 +439,7 @@ def read_txt_by_page_asyncio(
                     loop = asyncio.get_event_loop()
                     chunks = gb.chunks(data, slave_num)
                     loop.run_until_complete(
-                        asyncio.gather(*[parse_(loop, chunk)
-                                       for chunk in chunks])
+                        asyncio.gather(*[parse_(loop, chunk) for chunk in chunks])
                     )
                     chunks.clear()
                 else:
