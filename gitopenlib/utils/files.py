@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.06.03"
+__version__ = "1.06.04"
 
 import asyncio
 import json
@@ -198,13 +198,11 @@ def if_path_exist_then_backup(pathes: Union[str, List[str]]) -> bool:
     for path in pathes:
         path = Path(path)
         if path.exists():
-            path.rename(
-                path.with_suffix(
-                    f".{str(time.strftime('%Y%m%d_%H%M%S', time.localtime()))}{
-                        path.suffix
-                    }"
-                )
+            new_suffix = ".{}{}".format(
+                str(time.strftime("%Y%m%d_%H%M%S", time.localtime())),
+                path.suffix,
             )
+            path.rename(path.with_suffix(new_suffix))
             has_backup_files = True
     return has_backup_files
 
