@@ -7,7 +7,7 @@
 # @Date   :  2020-10-29 13:38:36
 # @Description :  有关文件操作的相关工具函数
 
-__version__ = "1.06.05"
+__version__ = "1.06.06"
 
 import asyncio
 import json
@@ -326,11 +326,11 @@ def file_writer(
 
     if backup:
         if file_path.exists():
-            file_path.rename(
-                file_path.with_suffix(
-                    f".{str(time.strftime('%Y%m%d_%H%M%S', time.localtime()))}{file_path.suffix}"
-                )
+            new_suffix = ".{}{}".format(
+                str(time.strftime("%Y%m%d_%H%M%S", time.localtime())),
+                file_path.suffix,
             )
+            file_path.rename(file_path.with_suffix(new_suffix))
 
     if isinstance(lines, str):
         lines = [lines]
