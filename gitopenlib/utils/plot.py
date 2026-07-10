@@ -8,9 +8,10 @@
 # @Description :  一些画图的相关工具函数
 
 
-__version__ = "0.7.9.11"
+__version__ = "0.7.9.14"
 
 
+import os
 import itertools
 
 import matplotlib
@@ -33,7 +34,7 @@ def set_4k_dpi():
 def sns_bar_hatch(
     ax: Axes,
     hatch: bool = True,
-    hatches: list = None,
+    hatches: list = [],
 ):
     """
     Set the hatches of a bar plot in Seaborn.
@@ -42,7 +43,7 @@ def sns_bar_hatch(
     # set hatches to each bar
     if hatch:
         # set hatch symbol list
-        if hatches is None:
+        if len(hatches) == 0:
             hatches = ["///", "*", "\\/", "+", "---", "o", "|||", "x", "O", "."]
         # get the number of bar in the barplot
         bar_kind_num = len(ax.containers[0])
@@ -299,12 +300,34 @@ def set_spines_line_width(ax: Axes, left=0.5, top=0, right=0, bottom=0.5):
     ax.spines["bottom"].set_linewidth(bottom)
 
 
-def set_figsize(plt, width: float or int = 4, height: float or int = 3):
+def set_figsize(plt, width: float = 4.0, height: float = 3.0):
     """设置图片的大小，单位为英寸"""
     plt.rcParams["figure.figsize"] = (width, height)
 
 
-def save_pdf(plt, path: str, dpi: int = 300, backup: bool = True):
+def save_png(plt, path: str, dpi: int = 350, backup: bool = True):
+    """保存为PNG格式的文件。
+
+    Parameters
+    ----------
+    plt : pyplot
+        pyplot别名。
+    path : str
+        图片路径。
+    dpi : int
+        dpi大小，默认350。
+    backup : bool
+        默认为True，表示如果path存在，则备份之前的文件。
+    """
+    if not os.path.exists(os.path.dirname(path)):
+        os.makedirs(os.path.dirname(path))
+        print(f"directory '{os.path.dirname(path)}' does not exist, created it.")
+    if backup:
+        gf.if_path_exist_then_backup(path)
+    plt.savefig(path, dpi=dpi, format="png")
+
+
+def save_pdf(plt, path: str, dpi: int = 350, backup: bool = True):
     """保存为PDF格式的文件。
 
     Parameters
@@ -318,12 +341,15 @@ def save_pdf(plt, path: str, dpi: int = 300, backup: bool = True):
     backup : bool
         默认为True，表示如果path存在，则备份之前的文件。
     """
+    if not os.path.exists(os.path.dirname(path)):
+        os.makedirs(os.path.dirname(path))
+        print(f"directory '{os.path.dirname(path)}' does not exist, created it.")
     if backup:
         gf.if_path_exist_then_backup(path)
     plt.savefig(path, dpi=dpi, format="pdf")
 
 
-def save_svg(plt, path: str, dpi: int = 300, backup: bool = True):
+def save_svg(plt, path: str, dpi: int = 350, backup: bool = True):
     """保存为svg格式的矢量图。
 
     Parameters
@@ -337,6 +363,9 @@ def save_svg(plt, path: str, dpi: int = 300, backup: bool = True):
     backup : bool
         默认为True，表示如果path存在，则备份之前的文件。
     """
+    if not os.path.exists(os.path.dirname(path)):
+        os.makedirs(os.path.dirname(path))
+        print(f"directory '{os.path.dirname(path)}' does not exist, created it.")
     if backup:
         gf.if_path_exist_then_backup(path)
     plt.savefig(path, dpi=dpi, format="svg")
