@@ -31,6 +31,77 @@ def set_4k_dpi():
     matplotlib.rcParams["figure.dpi"] = 200
 
 
+def sns_draw_barplot(
+    data: list[dict],
+    field_name_mapper: dict = {},
+    figsize: tuple = tuple(),
+    title: str = "Bar Plot",
+    save_path: str = "./images/barplot.png",
+):
+    """
+    Draw a bar plot using seaborn, each bar represents a category and annotate with values.
+    """
+    if data is None or len(data) == 0:
+        raise ValueError("Data is empty, cannot draw bar plot.")
+    ncols = 4
+    nrows = len(data) // ncols + (len(data) % ncols > 0)
+    if figsize == tuple():
+        figsize = (ncols * 4, nrows * 3)
+    if os.path.exists(os.path.dirname(save_path)) is False:
+        os.makedirs(os.path.dirname(save_path))
+        print(f"Directory '{os.path.dirname(save_path)}' does not exist, created it.")
+
+    fig, axes = plt.subplots(nrows, ncols, figsize=figsize)
+    axes = axes.flatten()
+
+    for item in data:
+        if not isinstance(item, dict):
+            raise ValueError("Each item in data must be a dictionary.")
+        if len(item) == 0:
+            raise ValueError("Each dictionary in data must not be empty.")
+
+        # Draw the bar plot for the current item
+        ax = axes[0]
+        x_data = list(map(lambda k: field_name_mapper.get(k, k), list(item.keys())))
+        y_data = list(item.values())
+        total = y_data[-1]
+        y_percent_data = [v / total * 100 for v in y_data]
+        bar_colors = list(sns.color_palette("deep", len(y_data) - 1)) + ["#BDBDBD"]
+        sns.barplot(x=x_data, y=y_percent_data, ax=ax, palette=bar_colors)
+        for i, (bar, pct, cnt) in enumerate(zip(ax.patches, y_percent_data, y_data)):
+            x = bar.get_x() + bar.get_width() / 2
+            y = bar.get_height()
+            label_text = f"{pct:.3f}%\n({cnt:,})"
+            if i == len(y_data) - 1:
+                label_text = f"100%\n({cnt:,})"
+            ax.text(
+                x,
+                y + 0.8,
+                label_text,
+                ha="center",
+                va="bottom",
+                fontsize=9,
+                clip_on=False,
+            )
+        # Highlight the Total bar and add visual separation.
+        if ax.patches:
+            total_bar = ax.patches[-1]
+            total_bar.set_edgecolor("#4D4D4D")
+            total_bar.set_linewidth(1.2)
+            total_bar.set_hatch("//")
+            separator_x = total_bar.get_x() - 0.03
+            ax.axvline(separator_x, color="#9E9E9E", linestyle="--", linewidth=1)
+        # Leave room for top annotations to prevent text from being clipped.
+        y_max = max(y_percent_data) if y_percent_data else 100
+        ax.set_ylim(0, max(105, y_max + 10))
+        ax.set_ylabel("Percentage (%)")
+        ax.grid(
+            True, which="both", linestyle="--", linewidth=0.2, alpha=0.2, color="gray"
+        )
+        ax.set_title(title)
+    pass
+
+
 def sns_bar_hatch(
     ax: Axes,
     hatch: bool = True,
