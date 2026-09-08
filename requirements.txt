@@ -9,7 +9,6 @@ docutils
 emoji
 fake-useragent
 fonttools
-gitopenlib
 idna
 importlib_metadata
 importlib_resources
