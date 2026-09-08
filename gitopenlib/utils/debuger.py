@@ -7,11 +7,12 @@
 # @Date   :  2022-09-17 11:31:23
 # @Description :  Some useful things about debug.
 
-__version__ = "0.3.02"
+__version__ = "0.3.01"
 
 import sys
 import traceback
 import warnings
+from typing import Union
 
 
 def filterwarnings(action="ignore"):
@@ -53,5 +54,8 @@ def catch_except_run(func, args):
         return None
 
 
-def exit(status: int = 0):
+def exit(status: int = 0, info: Union[str, None] = None):
+    """退出程序"""
+    if info is not None:
+        print(info)
     sys.exit(status)
